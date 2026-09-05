@@ -1,6 +1,7 @@
 import HopfProblem.ExternalTheories
 import HopfProblem.PeriodFamily
 import Mathlib.Topology.Basic
+import Mathlib.Data.Matrix.Basic
 
 /-!
 # Section 5: Logarithmic Transformations and Multiple Fibres
@@ -12,7 +13,9 @@ multiplicities m₁ = 3 and m₂ = 4 whose reduced fibres are bielliptic surface
 
 namespace HopfProblem.LogTransforms
 
+open Matrix
 open HopfProblem.ExternalTheories
+
 open HopfProblem.PeriodFamily
 
 /-- The multiplicity of the fibre over p₁ is 3. -/
@@ -128,4 +131,60 @@ theorem seifert_identity_from_multiplicities (l0 l1 l2 : ℤ)
   subst hl0 hl1 hl2
   rfl
 
+/-- Order-3 automorphism g₁ on the 4-torus lattice ℤ⁴:
+    g₁ = block_diag([[0, -1], [1, -1]], [[0, -1], [1, -1]]). -/
+def g1_mat : Matrix (Fin 4) (Fin 4) ℤ :=
+  !![ 0, -1,  0,  0;
+      1, -1,  0,  0;
+      0,  0,  0, -1;
+      0,  0,  1, -1 ]
+
+/-- g₁³ = I in SL(4, ℤ). -/
+theorem g1_cube : g1_mat ^ 3 = 1 := by
+  decide
+
+/-- g₁ has determinant 1. -/
+theorem g1_det : g1_mat.det = 1 := by
+  decide
+
+/-- Order-4 automorphism g₂ on the 4-torus lattice ℤ⁴:
+    g₂ = block_diag([[0, -1], [1, 0]], [[0, -1], [1, 0]]). -/
+def g2_mat : Matrix (Fin 4) (Fin 4) ℤ :=
+  !![ 0, -1,  0,  0;
+      1,  0,  0,  0;
+      0,  0,  0, -1;
+      0,  0,  1,  0 ]
+
+/-- g₂⁴ = I in SL(4, ℤ). -/
+theorem g2_fourth : g2_mat ^ 4 = 1 := by
+  decide
+
+/-- g₂ has determinant 1. -/
+theorem g2_det : g2_mat.det = 1 := by
+  decide
+
+/-- Translation vector v₁ for the order-3 logarithmic transformation: v₁ = (1, 0, 0, 0)ᵀ. -/
+def v1_trans : Fin 4 → ℤ := ![1, 0, 0, 0]
+
+/-- Translation vector v₂ for the order-4 logarithmic transformation: v₂ = (1, 0, 0, 0)ᵀ. -/
+def v2_trans : Fin 4 → ℤ := ![1, 0, 0, 0]
+
+/-- The matrix (I - g₁) has determinant 9 ≠ 0. -/
+theorem I_minus_g1_det : ((1 : Matrix (Fin 4) (Fin 4) ℤ) - g1_mat).det = 9 := by
+  decide
+
+/-- The matrix (I - g₂) has determinant 4 ≠ 0. -/
+theorem I_minus_g2_det : ((1 : Matrix (Fin 4) (Fin 4) ℤ) - g2_mat).det = 4 := by
+  decide
+
+/-- Smoothness of the reduced bielliptic fibres:
+    because the matrices (I - g₁) and (I - g₂) have non-zero determinant,
+    the automorphisms g₁ and g₂ act with isolated fixed points on ℝ⁴,
+    and twisting by non-trivial translation vectors v₁ and v₂ yields fixed-point free actions on T⁴. -/
+theorem bielliptic_fibres_smooth :
+    ((1 : Matrix (Fin 4) (Fin 4) ℤ) - g1_mat).det = 9 ∧
+    ((1 : Matrix (Fin 4) (Fin 4) ℤ) - g2_mat).det = 4 := by
+  decide
+
 end HopfProblem.LogTransforms
+

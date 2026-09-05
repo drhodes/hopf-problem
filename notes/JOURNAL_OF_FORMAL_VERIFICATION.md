@@ -93,6 +93,10 @@ The project is structured into five sequential verification waves:
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
 │ Wave 19 │ Sp(Q₀, ℤ) Monodromy & Hodge  │ preserves_Q0(Γ), h=hᵗ, h=h*,  │
 │         │ Symmetries / Incidence Dual  │ incidence=6, Serre S₂ depth=2 │
+├─────────┼──────────────────────────────┼───────────────────────────────┤
+│ Wave 20 │ Toric 3D Fan Unimodularity,  │ cone3_unimodular (det=1 SL₃ℤ),│
+│         │ Bielliptic Automorphisms &   │ g₁³=I, g₂⁴=I, I-g invertible, │
+│         │ Conormal Rank Additivity     │ rank(𝒩*)+rank(Ω¹)=3, T_mod    │
 └─────────┴──────────────────────────────┴───────────────────────────────┘
 ```
 

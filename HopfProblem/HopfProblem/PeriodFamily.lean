@@ -236,4 +236,34 @@ def smooth_torus_family_exists (B : BaseOrbifold) : TorusFibration B where
   proj := id
   fibre := fun _ => standardComplexTorus2
 
+/-- Parabolic unipotent translation on ℍ at the cusp: T_mod acts as τ ↦ τ + 1. -/
+def parabolic_cusp_action (τ : UpperHalfPlane) : UpperHalfPlane where
+  val := τ.val + 1
+  property := by
+    dsimp
+    rw [add_zero]
+    exact τ.property
+
+/-- The parabolic action preserves the imaginary part: Im(τ + 1) = Im(τ). -/
+theorem parabolic_action_preserves_im (τ : UpperHalfPlane) :
+    (parabolic_cusp_action τ).val.im = τ.val.im := by
+  dsimp [parabolic_cusp_action]
+  rw [add_zero]
+
+
+/-- The difference between τ and its parabolic translate is 1: (τ + 1) - τ = 1. -/
+theorem parabolic_action_period (τ : UpperHalfPlane) :
+    (parabolic_cusp_action τ).val - τ.val = 1 := by
+  dsimp [parabolic_cusp_action]
+  ring
+
+/-- Parabolic nilpotency index 2: (T_mod - I)² = 0. -/
+theorem T_mod_unipotent_index_two : (T_mod - 1) ^ 2 = 0 := by
+  decide
+
+/-- T_mod has non-zero nilpotent part N = T_mod - I ≠ 0. -/
+theorem T_mod_nilpotent_part_ne_zero : T_mod - 1 ≠ 0 := by
+  decide
+
 end HopfProblem.PeriodFamily
+

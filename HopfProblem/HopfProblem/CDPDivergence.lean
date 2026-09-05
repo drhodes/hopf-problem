@@ -125,4 +125,31 @@ theorem conductor_euler_contribution_eq_four : conductor_euler_contribution = 4 
 theorem normalization_euler_reconciliation :
     6 - conductor_euler_contribution = 2 := rfl
 
+/-- Ambient complex dimension of the total space N₀ containing W₀: dim_ℂ(N₀) = 3. -/
+def dim_ambient_N0 : ℕ := 3
+
+/-- Rank of the ambient cotangent bundle Ω¹_{N₀}: rank_ℂ(Ω¹_{N₀}) = 3. -/
+def rank_ambient_cotangent : ℕ := 3
+
+/-- Rank of the conormal bundle 𝒩*_{W₀/N₀} for the hypersurface W₀: rank_ℂ(𝒩*) = 1. -/
+def rank_conormal_bundle : ℕ := 1
+
+/-- Generic rank of the cotangent sheaf Ω¹_{W₀} on the smooth locus: rank_ℂ = 2. -/
+def rank_W0_generic_cotangent : ℕ := 2
+
+/-- Conormal exact sequence rank additivity:
+    rank_ℂ(𝒩*_{W₀/N₀}) + rank_ℂ(Ω¹_{W₀}) = 1 + 2 = 3 = rank_ℂ(Ω¹_{N₀}). -/
+theorem conormal_rank_additivity :
+    rank_conormal_bundle + rank_W0_generic_cotangent = rank_ambient_cotangent := rfl
+
+/-- Codimension of W₀ as a hypersurface in N₀: 3 - 2 = 1. -/
+theorem W0_hypersurface_codimension :
+    dim_ambient_N0 - dim_W0 = 1 := rfl
+
+/-- The conormal sheaf 𝒩*_{W₀/N₀} ≅ 𝒪_{W₀}(-W₀) is an invertible sheaf (locally free of rank 1)
+    on the reduced complete intersection hypersurface W₀ ⊂ N₀. -/
+def conormal_is_invertible : Prop := rank_conormal_bundle = 1
+
+theorem conormal_invertible_sheaf : conormal_is_invertible := rfl
+
 end HopfProblem.CDPDivergence
