@@ -57,6 +57,18 @@ theorem ST_cubed : (S_mod * T_mod) ^ 3 = -1 := by
 theorem ST_sixth : (S_mod * T_mod) ^ 6 = 1 := by
   decide
 
+/-- Translation action T: τ ↦ τ + 1 on the upper half plane ℍ preserves Im(τ) > 0. -/
+def modular_T (τ : UpperHalfPlane) : UpperHalfPlane where
+  val := τ.val + 1
+  property := by
+    rw [Complex.add_im, Complex.one_im, add_zero]
+    exact τ.property
+
+/-- The modular translation T preserves the imaginary part: Im(τ + 1) = Im(τ). -/
+theorem modular_T_im (τ : UpperHalfPlane) : (modular_T τ).val.im = τ.val.im := by
+  dsimp [modular_T]
+  rw [add_zero]
+
 /-- The punctured base curve B° = ℂP¹ \ {p₁, p₂, p₀}. -/
 structure BaseOrbifold where
   carrier : Type

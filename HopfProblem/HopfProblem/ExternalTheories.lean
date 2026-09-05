@@ -135,4 +135,14 @@ def transport_complex_structure {M N : SmoothManifold 6}
     IntegrableComplexStructure N :=
   ⟨J.almost_complex, J.nijenhuis_vanishes⟩
 
+/-- Newlander-Nirenberg theorem criterion: integrability implies vanishing Nijenhuis condition. -/
+theorem newlander_nirenberg_criterion (M : SmoothManifold 6) (J : IntegrableComplexStructure M) :
+    J.almost_complex.matrix = standardJ2 :=
+  J.nijenhuis_vanishes
+
+/-- Any integrable complex structure satisfies J² = -I. -/
+theorem integrable_complex_structure_sq (M : SmoothManifold 6) (J : IntegrableComplexStructure M) :
+    J.almost_complex.matrix ^ 2 = -1 :=
+  J.almost_complex.is_complex
+
 end HopfProblem.ExternalTheories

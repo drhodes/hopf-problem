@@ -99,4 +99,15 @@ def log_transform_N2 : LogTransformManifold 4 where
   multiplicity := 4
   order_ge_two := by decide
 
+/-- The sum of multiple fibre index defects (m₁ - 1) + (m₂ - 1) = (3 - 1) + (4 - 1) = 2 + 3 = 5,
+    coinciding with the hyperbolic area defect of the orbifold base. -/
+def multiple_fibre_defect_sum : ℕ := (m1 - 1) + (m2 - 1)
+
+theorem multiple_fibre_defect_sum_eq_five : multiple_fibre_defect_sum = 5 := by
+  rfl
+
+/-- Branching orders m₁ = 3 and m₂ = 4 are coprime: gcd(3, 4) = 1. -/
+theorem branching_orders_coprime : Nat.gcd m1 m2 = 1 := by
+  decide
+
 end HopfProblem.LogTransforms

@@ -63,6 +63,43 @@ structure DelPezzo6Normalization where
 /-- Canonical instance of the dP₆ normalization. -/
 def dP6 : DelPezzo6Normalization := {}
 
+/-- Intersection matrix of the 6 anticanonical (-1)-curves on dP₆ forming the boundary hexagon:
+    M(i, i) = -1, M(i, i±1) = 1 (mod 6), and 0 otherwise. -/
+def dP6_intersection_matrix : Matrix (Fin 6) (Fin 6) ℤ :=
+  !![ -1,  1,  0,  0,  0,  1;
+       1, -1,  1,  0,  0,  0;
+       0,  1, -1,  1,  0,  0;
+       0,  0,  1, -1,  1,  0;
+       0,  0,  0,  1, -1,  1;
+       1,  0,  0,  0,  1, -1 ]
+
+/-- The hexagon intersection matrix is symmetric. -/
+theorem dP6_intersection_matrix_symmetric : dP6_intersection_matrix.transpose = dP6_intersection_matrix := by
+  decide
+
+/-- Each boundary rational curve is a (-1)-curve: C_i² = -1. -/
+theorem dP6_self_intersections (i : Fin 6) : dP6_intersection_matrix i i = -1 := by
+  fin_cases i <;> rfl
+
+/-- Row sum of the intersection matrix: (-K_dP₆) · C_i = 1 for each boundary curve C_i. -/
+def dP6_row_sum (i : Fin 6) : ℤ :=
+  dP6_intersection_matrix i 0 +
+  dP6_intersection_matrix i 1 +
+  dP6_intersection_matrix i 2 +
+  dP6_intersection_matrix i 3 +
+  dP6_intersection_matrix i 4 +
+  dP6_intersection_matrix i 5
+
+theorem dP6_intersection_row_sum (i : Fin 6) : dP6_row_sum i = 1 := by
+  fin_cases i <;> rfl
+
+/-- Total sum of the intersection matrix equals the degree K² = 6 of dP₆:
+    (-K_dP₆)² = ∑_{i=0}^5 (-K_dP₆ · C_i) = 6 · 1 = 6. -/
+theorem dP6_degree_K_sq :
+    dP6_row_sum 0 + dP6_row_sum 1 + dP6_row_sum 2 +
+    dP6_row_sum 3 + dP6_row_sum 4 + dP6_row_sum 5 = 6 := by
+  rfl
+
 /-- The side-pairing identification involution on the 6 boundary (-1)-curves: i ↦ (i + 3) % 6. -/
 def sidePairing (i : Fin 6) : Fin 6 :=
   ⟨(i.val + 3) % 6, by omega⟩

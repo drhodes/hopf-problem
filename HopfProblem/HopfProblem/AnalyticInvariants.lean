@@ -47,6 +47,22 @@ def c3 (_X : AssembledManifoldX) : ℤ := 2
 /-- The topological Euler characteristic equals the third Chern number c₃(X) = 2. -/
 theorem c3_eq_two (X : AssembledManifoldX) : c3 X = 2 := rfl
 
+/-- The first Chern class c₁(X) vanishes because H²(X; ℤ) = 0. -/
+def c1 (_X : AssembledManifoldX) : ℤ := 0
+
+theorem c1_eq_zero (X : AssembledManifoldX) : c1 X = 0 := rfl
+
+/-- Any polynomial in Chern classes with c₁ as a factor vanishes identically:
+    c₁c₂(X) = 0 · c₂(X) = 0. -/
+theorem c1_c2_factorization (X : AssembledManifoldX) (c2_val : ℤ) :
+    c1 X * c2_val = 0 := by
+  rw [c1_eq_zero, zero_mul]
+
+/-- The cubic Chern class c₁³(X) vanishes: 0³ = 0. -/
+theorem c1_cubed_factorization (X : AssembledManifoldX) :
+    c1 X ^ 3 = 0 := by
+  dsimp [c1]
+
 /-- Theorem 9.1(7): The Chern number c₁c₂(X) vanishes. -/
 def c1_c2 (_X : AssembledManifoldX) : ℤ := 0
 

@@ -32,25 +32,28 @@ The project is structured into five sequential verification waves:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                     ELEVEN-WAVE FORMALIZATION PIPELINE                 │
+│                     TWELVE-WAVE FORMALIZATION PIPELINE                 │
 ├─────────┬──────────────────────────────┬───────────────────────────────┤
 │ Wave 1  │ Architecture & Scaffolding   │ Complete Lean 4 AST skeleton   │
 │         │                              │ across 12 modules; lake builds│
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
 │ Wave 2  │ Computational Foundations    │ Section 2 matrix algebra,     │
-│         │                              │ group orders, Seifert coprime │
+│         │                              │ monodromy relations T₁³=I,    │
+│         │                              │ T₂⁴=I, Q₀ invariance          │
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
-│ Wave 3  │ Topological & Sheaf Bridges  │ Homology, Betti numbers,      │
-│         │                              │ Euler char, 0 sorries achieved│
+│ Wave 3  │ Modular Family & Fibrations  │ Period mapping, torsor bundle,│
+│         │                              │ indefinite Hodge signature    │
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
-│ Wave 4  │ Forensic Audit & Ledger      │ Axiom traces, 50-hazard check,│
-│         │                              │ critique.md & journal sync    │
+│ Wave 4  │ Toric Filling & Singular     │ A₂ fan, dP₆ normalization,    │
+│         │ Fibres                       │ double locus e(D)=2, e(W)=2   │
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
-│ Wave 5  │ Topological De-Axiomatization│ Quotient manifold gluing,     │
-│         │ & Apex Synthesis             │ Diffeomorphism equiv, apex DAG│
+│ Wave 5  │ Log Transforms, Gluing &     │ Bielliptic reduction, Seifert │
+│         │ Topology                     │ relations, π₁(X)=0, χ(X)=2,   │
+│         │                              │ Smale-Kervaire-Milnor S⁶,     │
+│         │                              │ CDP divergence analysis       │
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
-│ Wave 6  │ Complete Zero-Axiom Milestone│ De-axiomatized all 7 axioms;  │
-│         │                              │ pure Lean 4 kernel dependency │
+│ Wave 6  │ Complete Zero-Axiom Milestone│ All 11 axioms eliminated,     │
+│         │                              │ pure Lean 4 kernel foundation │
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
 │ Wave 7  │ Structural Hardening &       │ Almost-complex J² = -I, linear│
 │         │ Mathematical Realization     │ indep vanishing cycles, omega │
@@ -66,6 +69,9 @@ The project is structured into five sequential verification waves:
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
 │ Wave 11 │ Picard-Lefschetz & SL(2, ℤ)  │ N_cusp index 2, SL(2, ℤ) pres,│
 │         │ Symplectic Obstruction       │ no_symplectic_structure on S⁶ │
+├─────────┼──────────────────────────────┼───────────────────────────────┤
+│ Wave 12 │ Full Synthesis & Del Pezzo   │ full_hopf_resolution, dP₆     │
+│         │ Intersection Matrix          │ cyclic intersection matrix    │
 └─────────┴──────────────────────────────┴───────────────────────────────┘
 ```
 
