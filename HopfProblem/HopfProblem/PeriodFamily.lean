@@ -11,6 +11,8 @@ import Mathlib.Topology.Order
 
 Formalization of the period map, uniformising parameter τ in the upper half-plane ℍ,
 the period matrix, modular equivariance, and the smooth complex 2-torus family J → B°.
+
+Reference: https://alpo.ge/s6.pdf#page=13
 -/
 
 namespace HopfProblem.PeriodFamily

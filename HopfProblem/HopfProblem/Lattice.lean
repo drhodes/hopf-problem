@@ -12,6 +12,8 @@ the monodromy representation with generators T₁, T₂, T₀,
 the invariant alternating form Q₀, invariant vectors,
 and the toric sublattice Λ_tor.
 
+Reference: https://alpo.ge/s6.pdf#page=8
+
 Matrices are transcribed directly from page 2 and Lemma 2.8 of the paper:
 - T₁ has order 3: T₁³ = I
 - T₂ has order 4: T₂⁴ = I

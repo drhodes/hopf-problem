@@ -10,6 +10,15 @@ open Matrix
 open HopfProblem.Lattice
 open HopfProblem.ExternalTheories
 
+/-!
+# Section 4: The Filling at p₀: A Toric Quotient
+
+Formalization of the Mumford toric degeneration, the A₂ root fan Σ generating dP₆,
+the unipotent cusp filling, and the collapse of vanishing cycles.
+
+Reference: https://alpo.ge/s6.pdf#page=24
+-/
+
 namespace HopfProblem.ToricFilling
 
 /-- A vector in the rank-2 cocharacter lattice N ≅ ℤ². -/

@@ -11,6 +11,8 @@ Formalization of the analytic invariants of the complex 3-fold X:
 - Hodge numbers h^{p,q}(X)
 - Non-Kählerian nature: b₂ = 0 implies no Kähler class exists
 - Canonical bundle non-torsion
+
+Reference: https://alpo.ge/s6.pdf#page=64
 -/
 
 namespace HopfProblem.AnalyticInvariants

@@ -16,6 +16,8 @@ Formalization of:
 3. The homology of the central fibre W₀
 4. The Betti numbers and Euler characteristic χ(X) = 2
 5. The Mayer-Vietoris calculation showing H_*(X; ℤ) ≅ H_*(S⁶; ℤ)
+
+Reference: https://alpo.ge/s6.pdf#page=40
 -/
 
 namespace HopfProblem.TopologyHomology

@@ -10,6 +10,8 @@ Campana-Demailly-Peternell [CDP20] non-existence claim:
 - Explanation of why Hypothesis 1 of CDP fails for X (non-normality of the central fibre W₀).
 - The non-normal conormal sheaf section σ ∈ H⁰(W₀, Ω¹_X|_{W₀} ⊗ A).
 - Mayer-Vietoris sequence on the normal crossings components evading the CDP obstruction.
+
+Reference: https://alpo.ge/s6.pdf#page=84
 -/
 
 namespace HopfProblem.CDPDivergence

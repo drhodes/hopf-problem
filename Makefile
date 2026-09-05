@@ -101,3 +101,24 @@ spec-diff: ## Diff specification tree against HEAD
 .PHONY: spec-dependencies
 spec-dependencies: ## Show specification dependency tree
 	$(UV) run libspec dependencies
+
+# ==============================================================================
+# Testing & Versioning
+# ==============================================================================
+
+.PHONY: test
+test: ## Run test suite
+	$(UV) run python3 -m unittest discover tests
+
+.PHONY: bump-patch
+bump-patch: ## Bump patch version in pyproject.toml
+	@python3 -c "import re; p='pyproject.toml'; c=open(p).read(); m=re.search(r'version = \"(\d+)\.(\d+)\.(\d+)\"', c); maj,mi,pa = m.groups(); new_v=f'{maj}.{mi}.{int(pa)+1}'; open(p,'w').write(re.sub(r'version = \".*?\"', f'version = \"{new_v}\"', c, count=1)); print(f'Bumped to {new_v}')"
+
+.PHONY: bump-minor
+bump-minor: ## Bump minor version in pyproject.toml
+	@python3 -c "import re; p='pyproject.toml'; c=open(p).read(); m=re.search(r'version = \"(\d+)\.(\d+)\.(\d+)\"', c); maj,mi,pa = m.groups(); new_v=f'{maj}.{int(mi)+1}.0'; open(p,'w').write(re.sub(r'version = \".*?\"', f'version = \"{new_v}\"', c, count=1)); print(f'Bumped to {new_v}')"
+
+.PHONY: bump-major
+bump-major: ## Bump major version in pyproject.toml
+	@python3 -c "import re; p='pyproject.toml'; c=open(p).read(); m=re.search(r'version = \"(\d+)\.(\d+)\.(\d+)\"', c); maj,mi,pa = m.groups(); new_v=f'{int(maj)+1}.0.0'; open(p,'w').write(re.sub(r'version = \".*?\"', f'version = \"{new_v}\"', c, count=1)); print(f'Bumped to {new_v}')"
+

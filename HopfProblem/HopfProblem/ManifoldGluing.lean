@@ -13,6 +13,8 @@ import Mathlib.Tactic.IntervalCases
 
 Formalization of the gluing along collar neighborhoods, holomorphic cocycle compatibility,
 and the assembly of the compact smooth complex 3-manifold X fibring over ℂP¹.
+
+Reference: https://alpo.ge/s6.pdf#page=36
 -/
 
 namespace HopfProblem.ManifoldGluing

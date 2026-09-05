@@ -9,6 +9,8 @@ import Mathlib.Data.Matrix.Basic
 Formalization of the logarithmic transformations at the elliptic points p₁ and p₂,
 producing smooth complex 3-folds N₁ → Δ₁ and N₂ → Δ₂ with multiple fibres of
 multiplicities m₁ = 3 and m₂ = 4 whose reduced fibres are bielliptic surfaces S₁, S₂.
+
+Reference: https://alpo.ge/s6.pdf#page=31
 -/
 
 namespace HopfProblem.LogTransforms

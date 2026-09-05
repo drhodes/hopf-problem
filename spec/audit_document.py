@@ -156,13 +156,81 @@ class PaperTranscriptionParityReq(Req):
         ]
 
 
+class PaperUrlDeepLinkingReq(Req):
+    r"""
+    All citations, theorem headers, and mathematical references to paper/s6.pdf
+    across the landscape audit document, the Mathlib frontier dependency trees,
+    and the comparative blocks must be explicitly hyperlinked to the online canonical
+    paper at https://alpo.ge/s6.pdf, parameterized by exact target page fragments
+    (#page=N) matching the 108-page reference PDF.
+    """
+    deps = [CleanAcademicTypographyReq, CoupledTwoColumnLayoutReq]
+
+    def base_url(self):
+        return "https://alpo.ge/s6.pdf"
+
+    def page_url(self, page_num: int):
+        return f"https://alpo.ge/s6.pdf#page={page_num}"
+
+    def canon_page_mapping(self):
+        return {
+            "main_theorem_1_1": 3,
+            "system_of_invariants": 4,
+            "cdp_reconciliation": 84,
+            "triple_route_homology": 40,
+            "lattice_v_lambda": 8,
+            "monodromy_generators": 8,
+            "symplectic_form_q0": 11,
+            "exterior_powers_unipotent": 10,
+            "period_matrix_pi": 13,
+            "indefinite_hodge_signature": 15,
+            "toric_filling_dp6": 24,
+            "vanishing_cycles_collapse": 26,
+            "logarithmic_transforms": 31,
+            "assembled_manifold_x": 36,
+            "sign_lemma_seifert": 55,
+            "integral_homology_s6": 60,
+            "specialisation_map": 59,
+            "sphere_recognition": 63,
+            "algebraic_dimension": 64,
+            "froelicher_non_degeneration": 71,
+            "conductor_sheaf_hartogs": 84,
+        }
+
+
+class LeanSourcePaperDeepLinkingReq(Req):
+    r"""
+    All formal Lean 4 declarations in HopfProblem/ that correspond to definitions,
+    lemmas, propositions, or theorems in s6.pdf must include canonical URL references
+    to https://alpo.ge/s6.pdf#page=N in their docstrings or header comments.
+    """
+    deps = [BijectiveSectionParityReq]
+
+    def base_url(self):
+        return "https://alpo.ge/s6.pdf"
+
+    def target_modules(self):
+        return [
+            "HopfProblem/HopfProblem/Main.lean",
+            "HopfProblem/HopfProblem/Lattice.lean",
+            "HopfProblem/HopfProblem/PeriodFamily.lean",
+            "HopfProblem/HopfProblem/ToricFilling.lean",
+            "HopfProblem/HopfProblem/LogTransforms.lean",
+            "HopfProblem/HopfProblem/ManifoldGluing.lean",
+            "HopfProblem/HopfProblem/TopologyHomology.lean",
+            "HopfProblem/HopfProblem/SphereRecognition.lean",
+            "HopfProblem/HopfProblem/AnalyticInvariants.lean",
+            "HopfProblem/HopfProblem/CDPDivergence.lean",
+        ]
+
+
 class AuditDocumentFeat(Feat):
     r"""
     Synthesis feature specifying the Side-by-Side Landscape Audit Document
     for the machine-checked resolution of the Hopf Problem on S^6.
     Unifies standard mathematical nomenclature, unadorned academic typography,
     Haynes Miller's algebraic topology perspective, row-by-row coupled layout,
-    and complete LaTeX transcription parity.
+    complete LaTeX transcription parity, and canonical paper deep-linking to https://alpo.ge/s6.pdf.
     """
     deps = [
         StandardMathematicalLanguageReq,
@@ -171,6 +239,8 @@ class AuditDocumentFeat(Feat):
         CoupledTwoColumnLayoutReq,
         BijectiveSectionParityReq,
         PaperTranscriptionParityReq,
+        PaperUrlDeepLinkingReq,
+        LeanSourcePaperDeepLinkingReq,
     ]
 
     def document_title(self):

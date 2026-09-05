@@ -15,6 +15,7 @@ import HopfProblem.CDPDivergence
 Synthesis of the full paper:
 "The (3, 4, ∞) modular family of 2-tori, completed at its three special points,
 is a complex structure on S⁶."
+Reference: https://alpo.ge/s6.pdf#page=3
 -/
 
 namespace HopfProblem.Main

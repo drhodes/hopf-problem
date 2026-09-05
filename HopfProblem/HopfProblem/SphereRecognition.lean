@@ -10,6 +10,8 @@ Formalization of the recognition of the assembled manifold X as the standard smo
 2. Exotic 6-spheres vanish: Θ₆ = 0 (Kervaire-Milnor).
 3. X is diffeomorphic to standard S⁶.
 4. Transport of the complex structure confers an integrable complex structure on standard S⁶.
+
+Reference: https://alpo.ge/s6.pdf#page=63
 -/
 
 namespace HopfProblem.SphereRecognition
