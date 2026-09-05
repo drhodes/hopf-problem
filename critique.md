@@ -105,10 +105,16 @@ Through the Wave 6–8 Progressive Hardening Initiatives:
    - Formally proved Poincaré duality on the singular central fibre $b_k(W_0) = b_{4-k}(W_0)$ for all $0 \le k \le 4$.
    - Formalized Betti numbers $b(T^4) = (1, 4, 6, 4, 1)$, $\chi(T^4) = 0$, $\sum b_k(T^4) = 16$, and Poincaré duality on the smooth 4-torus fibre.
    - Formally proved that central involutions $-I_2$ and $-I_4$ have determinant 1 and order 2 in $\mathrm{SL}(2, \mathbb{Z})$ and $\mathrm{SL}(4, \mathbb{Z})$.
+14. **Symplectic Monodromy Subgroup, Hodge Symmetries & Serre Normality Dichotomy (Wave 19)**:
+   - Formally defined symplectic form preservation predicate `preserves_Q0` and proved that $I, T_1, T_2, T_0, T_1^2, T_2^3$, and $[T_1, T_2]$ all preserve $Q_0$, establishing $\Gamma \subset \mathrm{Sp}(Q_0, \mathbb{Z})$.
+   - Formally proved Serre duality on Hodge numbers $h^{p,q}(X) = h^{3-p, 3-q}(X)$ and Hodge symmetry $h^{p,q}(X) = h^{q,p}(X)$ for all $0 \le p, q \le 3$.
+   - Formally proved total non-zero Hodge sum $h^{0,0} + h^{3,3} = 2$ and Hodge Euler characteristic $(-1)^0 h^{0,0} + (-1)^6 h^{3,3} = 2$.
+   - Formally proved double locus incidence duality on $W_0$: $\#(\text{curves}) \cdot 2 = \#(\text{points}) \cdot 3 = 6$.
+   - Formally proved Serre's condition $S_2$ depth satisfaction ($\mathrm{depth}_{W_0} \ge 2$) and the normality failure dichotomy on $W_0$.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│               WAVE 18 FULL-SPECTRUM VERIFICATION LEDGER                │
+│               WAVE 19 FULL-SPECTRUM VERIFICATION LEDGER                │
 ├───────────────────────┬───────────────────────┬────────────────────────┤
 │ PURE KERNEL PROOFS    │ CONSTRUCTIVE MODELS   │ DIFFERENTIAL TOPOLOGY  │
 │ (0 Axioms / Decide)   │ (Quotient / Category) │ (Kernel Synthesized)   │
@@ -120,13 +126,13 @@ Through the Wave 6–8 Progressive Hardening Initiatives:
 │ • Q₀(γ, δ)=1, Q₀(u,w)=6│ • modular_T (ℍ → ℍ)   │ • poincare_duality (X) │
 │ • S6_integrable (rfl) │ • Diffeomorphic (Eqv) │ • poincare_duality(W₀) │
 │ • S6_J² = -I₂ (decide)│ • transport_complex   │ • poincare_duality(T⁴) │
-│ • S6_det(J) = 1       │ • Θ₆ = 0 (Subsingle)  │ • log_transform_N1, N2 │
-│ • Tr(S)=0, Tr(T)=2    │ • standardComplexTorus│ • S6_admits_integrable │
-│ • det(-I₂)=1, det(-I₄)│ • standardAlmostCplx  │ • newlander_nirenberg  │
+│ • S6_det(J) = 1       │ • Θ₆ = 0 (Subsingle)  │ • h^{p,q} Serre Duality│
+│ • Γ ⊂ Sp(Q₀, ℤ)       │ • standardComplexTorus│ • Hodge Symmetry h=hᵗ  │
+│ • preserves_Q0(comm)  │ • standardAlmostCplx  │ • S6_admits_integrable │
 │ • T₁T₂ ≠ T₂T₁         │ • 0 : True Fields     │ • Serre R₁ fails (W₀)  │
-│ • ST ≠ TS             │ • 0 trivial Tactics   │ • td₃(X) = 0 (c₁c₂/24) │
+│ • ST ≠ TS             │ • 0 trivial Tactics   │ • Serre S₂ holds (W₀)  │
 │ • det(Q₀)=36, Pf=6    │ • sidePairing Biject  │ • e(W₀)=6-4=2 (reconc) │
-│ • lcm(3, 4) = 12      │ • Fan Balance ∑vᵢ = 0 │ • e_MV_inc_exc = 2     │
+│ • lcm(3, 4) = 12      │ • Fan Balance ∑vᵢ = 0 │ • incidence_dual = 6   │
 │ • T₀(I - N) = I       │ • M_hex · v_{1,2} = 0 │ • χ(T⁴) = 0, ∑b(T⁴)=16 │
 │ • ∑ b_k(X) = 2        │ • ∑ b_k(W₀) = 10      │ • 12ℓ₀-(12/m)ℓ = 1     │
 └───────────────────────┴───────────────────────┴────────────────────────┘

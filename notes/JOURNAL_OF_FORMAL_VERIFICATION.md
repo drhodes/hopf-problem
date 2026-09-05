@@ -32,7 +32,7 @@ The project is structured into five sequential verification waves:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                    EIGHTEEN-WAVE FORMALIZATION PIPELINE                │
+│                    NINETEEN-WAVE FORMALIZATION PIPELINE                │
 ├─────────┬──────────────────────────────┬───────────────────────────────┤
 │ Wave 1  │ Architecture & Scaffolding   │ Complete Lean 4 AST skeleton   │
 │         │                              │ across 12 modules; lake builds│
@@ -90,6 +90,9 @@ The project is structured into five sequential verification waves:
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
 │ Wave 18 │ Extended Grand Synthesis &   │ full_hopf_res_ext (12 invs),  │
 │         │ Fibre Poincaré Duality       │ S6 J²=-I, det=1, b(T⁴)=(1,4,6)│
+├─────────┼──────────────────────────────┼───────────────────────────────┤
+│ Wave 19 │ Sp(Q₀, ℤ) Monodromy & Hodge  │ preserves_Q0(Γ), h=hᵗ, h=h*,  │
+│         │ Symmetries / Incidence Dual  │ incidence=6, Serre S₂ depth=2 │
 └─────────┴──────────────────────────────┴───────────────────────────────┘
 ```
 

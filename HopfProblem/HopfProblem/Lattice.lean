@@ -182,6 +182,42 @@ theorem Q0_invariant_T2 : T2.transpose * Q0 * T2 = Q0 := by
 theorem Q0_invariant_T0 : T0.transpose * Q0 * T0 = Q0 := by
   decide
 
+/-- A 4x4 integer matrix preserves the symplectic form Q₀: Mᵀ Q₀ M = Q₀. -/
+def preserves_Q0 (M : Matrix (Fin 4) (Fin 4) ℤ) : Prop :=
+  M.transpose * Q0 * M = Q0
+
+/-- Identity matrix preserves Q₀. -/
+theorem id_preserves_Q0 : preserves_Q0 1 := by
+  dsimp [preserves_Q0]
+  decide
+
+/-- Monodromy generator T₁ preserves Q₀. -/
+theorem T1_preserves_Q0 : preserves_Q0 T1 :=
+  Q0_invariant_T1
+
+/-- Monodromy generator T₂ preserves Q₀. -/
+theorem T2_preserves_Q0 : preserves_Q0 T2 :=
+  Q0_invariant_T2
+
+/-- Cusp monodromy T₀ preserves Q₀. -/
+theorem T0_preserves_Q0 : preserves_Q0 T0 :=
+  Q0_invariant_T0
+
+/-- Inverse of T₁ (T₁²) preserves Q₀. -/
+theorem T1_sq_preserves_Q0 : preserves_Q0 (T1 ^ 2) := by
+  dsimp [preserves_Q0]
+  decide
+
+/-- Inverse of T₂ (T₂³) preserves Q₀. -/
+theorem T2_cube_preserves_Q0 : preserves_Q0 (T2 ^ 3) := by
+  dsimp [preserves_Q0]
+  decide
+
+/-- The commutator [T₁, T₂] preserves Q₀. -/
+theorem comm_T1_T2_preserves_Q0 : preserves_Q0 comm_T1_T2 := by
+  dsimp [preserves_Q0]
+  decide
+
 /-- The invariant basis vector γ = (1, 0, 0, 0)ᵀ generating V^G (Lemma 2.7). -/
 def gamma_vec : Fin 4 → ℤ := ![1, 0, 0, 0]
 

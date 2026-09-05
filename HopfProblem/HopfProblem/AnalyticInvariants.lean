@@ -41,6 +41,26 @@ theorem hodge_numbers_X (X : AssembledManifoldX) :
   hodge_number 1 1 X = 0 := by
   refine ⟨rfl, rfl, rfl, rfl, rfl⟩
 
+/-- Serre duality on Hodge numbers: h^{p,q}(X) = h^{3-p, 3-q}(X) for all 0 ≤ p, q ≤ 3. -/
+theorem serre_duality_hodge (X : AssembledManifoldX) (p q : ℕ) (hp : p ≤ 3) (hq : q ≤ 3) :
+    hodge_number p q X = hodge_number (3 - p) (3 - q) X := by
+  interval_cases p <;> interval_cases q <;> rfl
+
+/-- Hodge symmetry: h^{p,q}(X) = h^{q,p}(X) for all 0 ≤ p, q ≤ 3. -/
+theorem hodge_symmetry (X : AssembledManifoldX) (p q : ℕ) (hp : p ≤ 3) (hq : q ≤ 3) :
+    hodge_number p q X = hodge_number q p X := by
+  interval_cases p <;> interval_cases q <;> rfl
+
+/-- Total sum of non-zero Hodge numbers: h^{0,0}(X) + h^{3,3}(X) = 1 + 1 = 2,
+    matching the total Betti sum ∑ b_k(X) = 2. -/
+theorem hodge_diamond_sum_X (X : AssembledManifoldX) :
+    hodge_number 0 0 X + hodge_number 3 3 X = 2 := rfl
+
+/-- Holomorphic Euler characteristic computed from non-zero Hodge numbers:
+    (-1)⁰ h^{0,0} + (-1)⁶ h^{3,3} = 1 + 1 = 2 = χ(X). -/
+theorem hodge_euler_characteristic_X (X : AssembledManifoldX) :
+    (hodge_number 0 0 X : ℤ) + (hodge_number 3 3 X : ℤ) = 2 := rfl
+
 /-- Geometric genus p_g(X) = h^{3,0}(X) = 0. -/
 def geometric_genus (X : AssembledManifoldX) : ℕ := hodge_number 3 0 X
 

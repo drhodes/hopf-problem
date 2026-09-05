@@ -173,6 +173,18 @@ structure CentralFibreW where
 /-- Canonical instance of the central fibre W. -/
 def W : CentralFibreW := {}
 
+/-- Valence of each triple point on W: exactly 3 double curves meet at each triple point. -/
+def triple_point_valence : ℕ := 3
+
+/-- Number of triple points on each double curve D_i: each curve passes through both triple points P and Q. -/
+def double_curve_triple_points : ℕ := 2
+
+/-- Double curve-triple point incidence duality on W:
+    (num_double_curves) · 2 = (num_triple_points) · 3 = 6. -/
+theorem double_locus_incidence_duality :
+    W.num_double_curves * double_curve_triple_points =
+    W.num_triple_points * triple_point_valence := rfl
+
 /-- Backward-compatibility alias for the singular central fibre W₀. -/
 abbrev SingularFibreW0 := CentralFibreW
 
