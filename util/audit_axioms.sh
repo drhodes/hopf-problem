@@ -11,6 +11,7 @@ import HopfProblem.Main
 #print axioms HopfProblem.Main.main_theorem_synthesis
 #print axioms HopfProblem.Main.full_hopf_resolution_complete
 #print axioms HopfProblem.Main.cdp_reconciliation_synthesis
+#print axioms HopfProblem.Main.triple_route_homology_synthesis
 #print axioms HopfProblem.Lattice.T1_cube
 #print axioms HopfProblem.Lattice.T2_fourth
 #print axioms HopfProblem.Lattice.T0_unipotent

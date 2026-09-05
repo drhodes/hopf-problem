@@ -142,6 +142,22 @@ class TriangleGroupOrbifoldReq(LatticeMonodromyProof):
         return "VERIFIED"
 
 
+class UnipotentExteriorPowersReq(LatticeMonodromyProof):
+    r"""
+    In Appendix A.1, the exterior power dimensions \binom{4}{q} = (1, 4, 6, 4, 1),
+    unipotent invariant ranks rk \ker(\bigwedge^q T_0 - I) = (1, 2, 4, 2, 1),
+    Poincaré duality on invariant ranks, Euler characteristic \sum (-1)^q rk = 2 = e(W_0),
+    and the unique G-invariant 2-form q_inv = u \wedge w + 6 \gamma \wedge \delta.
+    """
+    deps = [UnipotentCuspMonodromyReq, InvariantAlternatingFormReq]
+
+    def lean_declaration(self):
+        return "HopfProblem.Lattice.unipotent_invariant_ranks_eq"
+
+    def verification_status(self):
+        return "VERIFIED"
+
+
 class LatticeMonodromyFeat(Feat):
     r"""
     Feature encapsulating the $\mathrm{SL}_4(\mathbb{Z})$ lattice monodromy representation,
@@ -156,4 +172,5 @@ class LatticeMonodromyFeat(Feat):
         MonodromyInvariantsReq,
         InvariantAlternatingFormReq,
         TriangleGroupOrbifoldReq,
+        UnipotentExteriorPowersReq,
     ]

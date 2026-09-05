@@ -163,6 +163,38 @@ class EulerCharacteristicLocalisationReq(MayerVietorisTopologyProof):
         return "VERIFIED"
 
 
+class NearbyCyclesSpecialisationReq(MayerVietorisTopologyProof):
+    r"""
+    In Appendix B.1, the sheaf-theoretic nearby cycles specialization morphism
+    sp_q : H^q(W_0; \mathbb{Z}) \xrightarrow{\sim} (\bigwedge^q V)^{T_0}
+    is an isomorphism in all degrees q \in {0, ..., 4}, matching the singular fibre
+    Betti numbers b_q(W_0) = (1, 2, 4, 2, 1) and e(W_0) = 2.
+    """
+    deps = [SingularFibreHomologyReq, SpecialisationMapReq]
+
+    def lean_declaration(self):
+        return "HopfProblem.TopologyHomology.nearby_cycles_ranks_match_singular_fibre_betti"
+
+    def verification_status(self):
+        return "VERIFIED"
+
+
+class TripleRouteAgreementReq(MayerVietorisTopologyProof):
+    r"""
+    Synthesizes the three independent routes determining the homology and Betti numbers
+    of W_0 and X: Route 1 (Cellular collapse retraction r : N_0' \to W_0),
+    Route 2 (Leray spectral sequence on f : X \to \mathbb{P}^1 with parabolic vanishing),
+    and Route 3 (Sheaf-theoretic nearby cycles specialization sp_q).
+    """
+    deps = [RetractionOntoWReq, IntegralLeraySpectralSequenceReq, NearbyCyclesSpecialisationReq]
+
+    def lean_declaration(self):
+        return "HopfProblem.TopologyHomology.three_independent_routes_agree"
+
+    def verification_status(self):
+        return "VERIFIED"
+
+
 class TopologyHomologyFeat(Feat):
     r"""
     Feature encapsulating the fundamental group calculation, simple connectivity criterion,
@@ -180,4 +212,6 @@ class TopologyHomologyFeat(Feat):
         IntegralHomologyMayerVietorisReq,
         IntegralLeraySpectralSequenceReq,
         EulerCharacteristicLocalisationReq,
+        NearbyCyclesSpecialisationReq,
+        TripleRouteAgreementReq,
     ]

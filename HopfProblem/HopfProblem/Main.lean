@@ -179,4 +179,19 @@ theorem cdp_reconciliation_synthesis :
   refine ⟨cdp20_hypothesis_one_never_satisfied, cdp_c3_claim_refuted, cdp_chi_claim_refuted, ?_⟩
   exact cdp_lemma_4_2_corrected.1
 
+/-- Synthesis of the three independent routes determining the homology and Betti numbers of W₀ and X:
+    Route 1: Cellular Mayer-Vietoris collapse retraction r : N₀' → W₀.
+    Route 2: Leray spectral sequence on f : X → ℙ¹ with parabolic cohomology vanishing.
+    Route 3: Sheaf-theoretic nearby cycles specialization sp_q : H^q(W₀; ℤ) ≅ (⋀^q V)^{T₀}. -/
+theorem triple_route_homology_synthesis :
+    ThreeRoutesAgree assembled_X_exists ∧
+    bettiX 1 = 0 ∧ bettiX 2 = 0 ∧ bettiX 3 = 0 ∧ bettiX 4 = 0 ∧ bettiX 5 = 0 ∧
+    ((bettiX 0 : ℤ) - bettiX 1 + bettiX 2 - bettiX 3 + bettiX 4 - bettiX 5 + bettiX 6 = 2) := by
+  refine ⟨three_independent_routes_agree assembled_X_exists, ?_, ?_, ?_, ?_, ?_, euler_characteristic_X assembled_X_exists⟩
+  · exact bettiX_intermediate_vanishing 1 (by decide) (by decide)
+  · exact bettiX_intermediate_vanishing 2 (by decide) (by decide)
+  · exact bettiX_intermediate_vanishing 3 (by decide) (by decide)
+  · exact bettiX_intermediate_vanishing 4 (by decide) (by decide)
+  · exact bettiX_intermediate_vanishing 5 (by decide) (by decide)
+
 end HopfProblem.Main

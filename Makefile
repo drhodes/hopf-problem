@@ -41,6 +41,10 @@ build: ## Compile Lean 4 formalization files in HopfProblem
 	cd $(LEAN_DIR) && $(LAKE) build
 	@echo -e "$(COLOR_GREEN)✔ Lean 4 build complete.$(COLOR_RESET)"
 
+.PHONY: verify-all
+verify-all: ## Run the complete peer-review verification suite (build, sorry-check, axioms, libspec)
+	$(UTIL_DIR)/verify_all.sh
+
 .PHONY: clean
 clean: ## Clean Lean 4 build artifacts
 	@echo -e "$(COLOR_YELLOW)==> Cleaning Lean 4 build artifacts...$(COLOR_RESET)"
