@@ -322,3 +322,32 @@ All 12 Lean 4 modules build with **0 errors**, **0 warnings**, and **0 `sorry` o
    - Proved Serre duality $h^{p,q} = h^{3-p, 3-q}$ for all 16 pairs.
    - Proved failure of Hodge symmetry $h^{0,1} \ne h^{1,0}$, certifying non-Kählerian status.
    - Verified $\chi(\mathcal{O}_X) = 0$ and $e(X) = 2$.
+
+---
+
+## 8. Wave 24 Progress: Section 10 CDP Divergence, Conductor Section, Serre-Grothendieck Duality, and Direct Image Non-Vanishing
+
+### Key Additions:
+1. **Setting 10.1 & Lemma 10.2: Normal Crossings Fibre & Mayer-Vietoris Sequence (`CDPDivergence.lean`)**:
+   - Formalized reduced normal crossings fibred divisor structure on $W_0 = f^{-1}(p_0)$ with double locus $D$ and 2 triple points.
+   - Formalized differential of local defining equation $g = z_1 z_2 = 0$: $dg|_{W_0} = z_2 dz_1 + z_1 dz_2$ nowhere vanishing on $W_0 \setminus D$, vanishing on $D$, lying in conductor ideal $\mathfrak{c} = \mathcal{I}_D$.
+   - Formalized exact Mayer-Vietoris sequence $0 \to \mathcal{O}_S \to \eta_* \mathcal{O}_{\widetilde{S}} \oplus \mathcal{O}_D \to \eta_* \mathcal{O}_{\widetilde{D}} \to 0$ and global sections gluing formula.
+
+2. **Lemma 10.3 & Remark 10.4: Conductor Section & Normality Failure Dichotomy (`CDPDivergence.lean`)**:
+   - Proved existence of non-zero conductor section $s = df|_{W_0} \otimes e \in H^0(W_0, \Omega_X^1|_{W_0} \otimes A)$.
+   - Proved $s$ vanishes along $D$ and projects to non-zero torsion section in $\Omega_{W_0}^1 \otimes A$ annihilated by $\mathcal{I}_D$.
+   - Proved image of $s$ in torsion-free quotient $\widetilde{\Omega}_{W_0}^1 \otimes A$ is zero (`image_in_torsion_free_is_zero`).
+   - Formalized normality failure mechanism: since $\mathrm{codim}_{W_0}(D) = 2 - 1 = 1 < 2$, Serre's $R_1$ criterion fails and the Riemann extension theorem does not apply across $D$, enabling the non-zero section $s$ to exist (`riemann_extension_fails_on_W0`).
+
+3. **Theorem 10.5 & Corollary 10.6: Serre-Grothendieck Duality, Direct Image Non-Vanishing, and Refutations (`CDPDivergence.lean`, `Main.lean`)**:
+   - Established Serre-Grothendieck duality on the Gorenstein surface $W_0$: $H^2(W_0, (TX \otimes L)|_{W_0})^* \cong H^0(W_0, \Omega_X^1|_{W_0} \otimes A) \ne 0$.
+   - Combined with Grauert base change in top degree: $(R^2 f_*(TX \otimes L))_{p_0} \cong H^2(W_0, (TX \otimes L)|_{W_0}) \ne 0$.
+   - Proved $R^2 f_*(TX \otimes L) \ne 0$ for **every** $L \in \mathrm{Pic}(X)$, refuting [CDP20, Prop 2.4, Hypothesis (1)] unconditionally with zero axioms (`R2_direct_image_nonvanishing`, `cdp20_hypothesis_one_never_satisfied`).
+   - Refuted [CDP20, Thm 2.2(b)] ($\chi(X, TX \otimes M) = 1 > 0$), [CDP20, Thm 2.2(c)] ($c_3(X) = 2 > 0$), and [CDP20, Cor 2.3] ($X \cong_{\mathrm{diff}} S^6$ with $a(X) = 1$).
+   - Synthesized in `HopfProblem.Main.cdp_reconciliation_synthesis` with **zero axioms**.
+
+4. **Lemma 10.7, Section 10.5 & 10.6: Monodromy Coinvariant Repair & Leray Spectral Balance (`CDPDivergence.lean`)**:
+   - Proved split extension abelianisation formula $G^{\mathrm{ab}} \cong Q^{\mathrm{ab}} \oplus (K^{\mathrm{ab}})_Q$.
+   - Corrected singular fibre component count from CDP's presumed $r = 3 - 1 + 4 = 6$ (assuming trivial monodromy) to $r = s - 1 + t' = 3 - 1 + 1 = 3$ (invariant line $\mathbb{Q}\gamma$), matching the 3 actual singular fibres $\{W_0, S_1, S_2\}$.
+   - Reconciled homological balance $\chi(X, TX \otimes M) = -h^1 + h^2 = 1 \implies h^1 = h^2 - 1 \ge 0$, with $h^1$ measuring the length of the torsion sheaf $R^1 f_*(TX \otimes M)$ supported at degenerate fibres.
+

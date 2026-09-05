@@ -9,6 +9,7 @@ import HopfProblem.Main
 
 #print axioms HopfProblem.Main.hopf_complex_structure_on_S6
 #print axioms HopfProblem.Main.main_theorem_synthesis
+#print axioms HopfProblem.Main.cdp_reconciliation_synthesis
 #print axioms HopfProblem.Lattice.T1_cube
 #print axioms HopfProblem.Lattice.T2_fourth
 #print axioms HopfProblem.Lattice.T0_unipotent
@@ -18,6 +19,9 @@ import HopfProblem.Main
 #print axioms HopfProblem.TopologyHomology.fundamental_group_trivial
 #print axioms HopfProblem.SphereRecognition.S6_admits_integrable_complex_structure
 #print axioms HopfProblem.CDPDivergence.cdp_hypothesis_one_fails
+#print axioms HopfProblem.CDPDivergence.R2_direct_image_nonvanishing
+#print axioms HopfProblem.CDPDivergence.cdp_c3_claim_refuted
+#print axioms HopfProblem.CDPDivergence.cdp_lemma_4_2_corrected
 LEAN_EOF
 
 trap 'rm -f "$LEAN_DIR/HopfProblem/AxiomCheck_tmp.lean"' EXIT

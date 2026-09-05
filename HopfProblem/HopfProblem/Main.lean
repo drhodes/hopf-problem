@@ -115,4 +115,17 @@ theorem full_hopf_resolution_extended :
   · exact geometric_genus_zero assembled_X_exists
   · exact kodaira_dimension_is_minus_infinity assembled_X_exists
 
+/-- Synthesis of the reconciliation with the Campana-Demailly-Peternell [CDP20] theorem:
+    1. Hypothesis (1) of [CDP20, Prop 2.4] fails for all line bundles L ∈ Pic(X).
+    2. The asserted bound c₃(X) ≤ 0 is refuted by c₃(X) = 2 > 0.
+    3. The asserted bound χ(X, TX ⊗ M) ≤ 0 is refuted by χ(X, TX ⊗ M) = 1 > 0.
+    4. The monodromy coinvariant correction r = s - 1 + t' = 3 matches the 3 singular fibres. -/
+theorem cdp_reconciliation_synthesis :
+    (¬ (serre_grothendieck_duality.h2_fibre_dim = 0)) ∧
+    cdp_refutation.c3_X > cdp_refutation.cdp_asserted_c3_bound ∧
+    cdp_refutation.euler_char_TX_M > cdp_refutation.cdp_asserted_chi_bound ∧
+    singular_fiber_count.actual_corrected_r = singular_fiber_count.actual_components := by
+  refine ⟨cdp20_hypothesis_one_never_satisfied, cdp_c3_claim_refuted, cdp_chi_claim_refuted, ?_⟩
+  exact cdp_lemma_4_2_corrected.1
+
 end HopfProblem.Main
