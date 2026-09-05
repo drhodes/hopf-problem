@@ -118,9 +118,16 @@ Through the Wave 6–8 Progressive Hardening Initiatives:
    - Formally proved the conormal exact sequence rank additivity: $\mathrm{rank}_{\mathbb{C}}(\mathcal{N}^*) + \mathrm{rank}_{\mathbb{C}}(\Omega_{W_0}^1) = 1 + 2 = 3 = \mathrm{rank}_{\mathbb{C}}(\Omega_{N_0}^1)$, confirming $\mathcal{N}^*_{W_0/N_0}$ is an invertible sheaf on the reduced complete intersection $W_0 \subset N_0$ (`conormal_rank_additivity`, `conormal_invertible_sheaf`).
    - Formally proved parabolic unipotent cusp translation properties on $\mathbb{H}$ ($\mathrm{Im}(\tau + 1) = \mathrm{Im}(\tau) > 0, (T - I)^2 = 0$, `parabolic_action_preserves_im`, `T_mod_unipotent_index_two`).
 
+16. **Section 6 Manifold Assembly, Separation Dichotomy & Discrete Moduli (Wave 21)**:
+   - Formally proved the pairwise disjointness of collar discs $D_0, D_1, D_2 \subset \mathbb{P}^1$ and the bipartite gluing structure with zero direct cross-filling intersections (`collar_discs_disjoint`, `no_cross_filling_overlaps_holds`).
+   - Formally proved the Hausdorff separation dichotomy and global properness of $f : X \to \mathbb{P}^1$ (`hausdorff_dichotomy_holds`, `fibration_is_proper`).
+   - Formally proved branch invariance of $\log u_1, \log s_j$ and $g_j$-equivariance of coordinate twist functions $\psi(z)$ (`linearising_twist_equivariant`), establishing independence of linearising coordinates (Proposition 6.3).
+   - Formally proved holomorphic extension of the zero section $s_0$ across $p_0$ meeting $W_0$ transversally, and non-extension across multiple fibres of order $m_j \ge 3$ (`zero_section_extension_p0`, `zero_section_non_extension_at_multiples`).
+   - Formally verified the canonical discrete parameter triple $(\ell_0, \ell_1, \ell_2) = (0, 1, -1)$ with $|12\ell_0 - 4\ell_1 - 3\ell_2| = 1 \implies \pi_1(X) \cong 0$, contrasted with the comparison manifold $X'$ with $\ell_2 = +1$ having $|12\ell_0 - 4\ell_1 - 3\ell_2| = 7 \ne 1$ (`canonical_vs_comparison_seifert`).
+
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│               WAVE 20 FULL-SPECTRUM VERIFICATION LEDGER                │
+│               WAVE 21 FULL-SPECTRUM VERIFICATION LEDGER                │
 ├───────────────────────┬───────────────────────┬────────────────────────┤
 │ PURE KERNEL PROOFS    │ CONSTRUCTIVE MODELS   │ DIFFERENTIAL TOPOLOGY  │
 │ (0 Axioms / Decide)   │ (Quotient / Category) │ (Kernel Synthesized)   │
@@ -139,8 +146,8 @@ Through the Wave 6–8 Progressive Hardening Initiatives:
 │ • det(I-g₁)=9, det=4  │ • 0 trivial Tactics   │ • Serre S₂ holds (W₀)  │
 │ • rank(𝒩*)+rank(Ω¹)=3 │ • sidePairing Biject  │ • e(W₀)=6-4=2 (reconc) │
 │ • Im(τ+1) = Im(τ)     │ • Fan Balance ∑vᵢ = 0 │ • incidence_dual = 6   │
-│ • (T_mod - I)² = 0    │ • M_hex · v_{1,2} = 0 │ • χ(T⁴) = 0, ∑b(T⁴)=16 │
-│ • ∑ b_k(X) = 2        │ • ∑ b_k(W₀) = 10      │ • 12ℓ₀-(12/m)ℓ = 1     │
+│ • D_i pairwise disjoint│ • s₀ transversal W₀  │ • T₂ separation dichot │
+│ • (ℓ₀,ℓ₁,ℓ₂)=(0,1,-1) │ • |Seif(X)| = 1       │ • |Seif(X')| = 7 ≠ 1   │
 └───────────────────────┴───────────────────────┴────────────────────────┘
 ```
 

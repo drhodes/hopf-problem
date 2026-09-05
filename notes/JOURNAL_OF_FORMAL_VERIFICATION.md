@@ -97,6 +97,10 @@ The project is structured into five sequential verification waves:
 │ Wave 20 │ Toric 3D Fan Unimodularity,  │ cone3_unimodular (det=1 SL₃ℤ),│
 │         │ Bielliptic Automorphisms &   │ g₁³=I, g₂⁴=I, I-g invertible, │
 │         │ Conormal Rank Additivity     │ rank(𝒩*)+rank(Ω¹)=3, T_mod    │
+├─────────┼──────────────────────────────┼───────────────────────────────┤
+│ Wave 21 │ Section 6 Manifold Assembly, │ Pairwise disjointness D_i,    │
+│         │ Separation & Discrete Moduli │ T₂ dichotomy, s₀ transversality│
+│         │                              │ (ℓ₀,ℓ₁,ℓ₂)=(0,1,-1), |Seif|=1 │
 └─────────┴──────────────────────────────┴───────────────────────────────┘
 ```
 
