@@ -115,6 +115,57 @@ theorem full_hopf_resolution_extended :
   · exact geometric_genus_zero assembled_X_exists
   · exact kodaira_dimension_is_minus_infinity assembled_X_exists
 
+/-- The complete synthesis theorem uniting 15 topological, analytic, and differential invariants:
+    1. Diffeomorphism to standard S⁶.
+    2. Threefold algebraic dimension a(X) = 1 (algebraic reduction f : X → ℙ¹).
+    3. General fibre algebraic dimension a(F_b) = 0.
+    4. Third Chern number c₃(X) = 2.
+    5. Second Chern number c₁c₂(X) = 0.
+    6. Cubic Chern number c₁³(X) = 0.
+    7. Tangent bundle index χ(X, TX) = 1.
+    8. Second Betti number b₂(X) = 0 (strictly non-Kählerian).
+    9. Fundamental group triviality π₁(X) ≅ 0 (simply connected).
+    10. Todd genus td₃(X) = 0.
+    11. First Pontryagin class p₁(X) = 0.
+    12. Geometric genus p_g(X) = 0.
+    13. Kodaira dimension κ(X) = -∞.
+    14. Automorphism algebra dimension h⁰(X, TX) = 1 (Aut⁰(X) ≅ ℂ*).
+    15. Irregularity q(X) = h^{0,1}(X) = 1. -/
+theorem full_hopf_resolution_complete :
+  ∃ (X : AssembledManifoldX),
+    Diffeomorphic X.totalSpace StandardS6 ∧
+    algebraic_dimension_threefold X = 1 ∧
+    fibre_algebraic_dimension X = 0 ∧
+    c3 X = 2 ∧
+    c1_c2 X = 0 ∧
+    c1_cubed X = 0 ∧
+    chi_TX X = 1 ∧
+    bettiX 2 = 0 ∧
+    Subsingleton FundamentalGroupX ∧
+    todd_genus X = 0 ∧
+    p1 X = 0 ∧
+    geometric_genus X = 0 ∧
+    kodaira_dimension X = none ∧
+    h0_TX X = 1 ∧
+    irregularity X = 1 := by
+  use assembled_X_exists
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · exact X_diffeomorphic_to_StandardS6 assembled_X_exists
+  · exact algebraic_dimension_threefold_eq_one assembled_X_exists
+  · exact fibre_algebraic_dimension_eq_zero assembled_X_exists
+  · exact c3_eq_two assembled_X_exists
+  · exact c1_c2_eq_zero assembled_X_exists
+  · exact c1_cubed_eq_zero assembled_X_exists
+  · exact chi_TX_eq_one assembled_X_exists
+  · exact non_kaehlerian assembled_X_exists
+  · exact fundamental_group_trivial
+  · exact todd_genus_eq_zero assembled_X_exists
+  · exact p1_eq_zero assembled_X_exists
+  · exact geometric_genus_zero assembled_X_exists
+  · exact kodaira_dimension_is_minus_infinity assembled_X_exists
+  · exact h0_TX_eq_one assembled_X_exists
+  · exact irregularity_one assembled_X_exists
+
 /-- Synthesis of the reconciliation with the Campana-Demailly-Peternell [CDP20] theorem:
     1. Hypothesis (1) of [CDP20, Prop 2.4] fails for all line bundles L ∈ Pic(X).
     2. The asserted bound c₃(X) ≤ 0 is refuted by c₃(X) = 2 > 0.
