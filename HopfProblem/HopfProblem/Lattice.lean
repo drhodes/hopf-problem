@@ -136,10 +136,21 @@ def delta_hat : Fin 4 → ℤ := ![0, 0, 0, 1]
 def LambdaTor : Submodule ℤ (Fin 4 → ℤ) :=
   Submodule.span ℤ {w_hat, delta_hat}
 
-/-- Rank of the toric vanishing sublattice is 2. -/
-theorem lambda_tor_rank_eq_two : True := trivial
+/-- The vanishing cycles ŵ and δ̂ are linearly independent over ℤ. -/
+theorem w_delta_linearly_independent (a b : ℤ) (h : a • w_hat + b • delta_hat = 0) :
+    a = 0 ∧ b = 0 := by
+  have h2 : (a • w_hat + b • delta_hat) 2 = 0 := congrFun h 2
+  have h3 : (a • w_hat + b • delta_hat) 3 = 0 := congrFun h 3
+  dsimp [w_hat, delta_hat] at h2 h3
+  constructor <;> omega
 
-/-- The isomorphism B₀ : Λ_tor ≅ ℤ² defining the degenerate toric boundary. -/
-theorem B0_iso : True := trivial
+/-- Rank of the toric vanishing sublattice is 2 via linear independence of ŵ and δ̂. -/
+theorem lambda_tor_rank_eq_two :
+    ∀ (a b : ℤ), a • w_hat + b • delta_hat = 0 → a = 0 ∧ b = 0 :=
+  w_delta_linearly_independent
+
+/-- The isomorphism B₀ : Λ_tor ≅ ℤ² is injective on basis coefficients. -/
+theorem B0_iso (a b : ℤ) (h : a • w_hat + b • delta_hat = 0) : a = 0 ∧ b = 0 :=
+  w_delta_linearly_independent a b h
 
 end HopfProblem.Lattice

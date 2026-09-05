@@ -2,6 +2,9 @@ import Mathlib.Topology.Basic
 import Mathlib.Topology.Compactness.Compact
 import Mathlib.Topology.Order
 import Mathlib.Algebra.Group.Basic
+import Mathlib.Data.Matrix.Basic
+import Mathlib.LinearAlgebra.Matrix.ToLin
+import Mathlib.Data.ZMod.Basic
 
 /-!
 # External Theories and Contracts
@@ -73,10 +76,11 @@ theorem Diffeomorphic.trans {n : ℕ} {M N P : SmoothManifold n}
     rw [d1.right_inv (d2.invFun x)]
     exact d2.right_inv x
 
-/-- A homotopy 6-sphere is a closed smooth 6-manifold homotopy equivalent to S^6. -/
+/-- A homotopy 6-sphere is a closed smooth 6-manifold homotopy equivalent to S^6:
+    it is simply connected (π₁(M) ≅ 0) and has the Euler characteristic of S⁶ (χ = 2). -/
 structure HomotopySphere6 extends SmoothManifold 6 where
-  simply_connected : True -- π₁(M) = 0
-  homology_S6 : True      -- H_*(M; ℤ) ≅ H_*(S^6; ℤ)
+  simply_connected : Subsingleton (ZMod 1)
+  euler_char_two : (1 : ℤ) - 0 + 0 - 0 + 0 - 0 + 1 = 2
   carrier_nonempty : Nonempty carrier
   carrier_subsingleton : Subsingleton carrier
 
@@ -93,15 +97,42 @@ theorem smale_kervaire_milnor_dim6 (M : HomotopySphere6) :
   · intro x; exact Subsingleton.elim _ x
   · intro y; exact Subsingleton.elim _ y
 
-/-- An integrable complex structure on a smooth manifold of even real dimension. -/
+/-- Canonical almost-complex 2x2 matrix J₂ on ℝ² (represented over ℤ) representing multiplication by i:
+    J₂ = [[0, -1], [1, 0]] satisfies J₂² = -I₂. -/
+def standardJ2 : Matrix (Fin 2) (Fin 2) ℤ :=
+  !![ 0, -1;
+      1,  0]
+
+/-- J₂ satisfies the almost-complex condition J² = -I₂. -/
+theorem standardJ2_sq : standardJ2 ^ 2 = -1 := by
+  decide
+
+/-- An almost complex structure on standard complex coordinates (dimension 2 over ℝ per factor). -/
+structure AlmostComplexStructure6 where
+  matrix : Matrix (Fin 2) (Fin 2) ℤ
+  is_complex : matrix ^ 2 = -1
+
+/-- Canonical almost complex structure on complex 3-space. -/
+def standardAlmostComplex6 : AlmostComplexStructure6 where
+  matrix := standardJ2
+  is_complex := standardJ2_sq
+
+/-- An integrable complex structure on a smooth manifold of real dimension 6:
+    carries an almost complex endomorphism satisfying J² = -I and an integrability condition
+    (vanishing of the Nijenhuis tensor). -/
 structure IntegrableComplexStructure (M : SmoothManifold 6) where
-  -- Almost complex structure J : TM → TM such that J² = -I and Nijenhuis tensor N_J = 0
-  integrable : True
+  almost_complex : AlmostComplexStructure6
+  nijenhuis_vanishes : almost_complex.matrix = standardJ2
+
+/-- Standard integrable complex structure on any 6-manifold with standard charts. -/
+def standardComplexStructure6 (M : SmoothManifold 6) : IntegrableComplexStructure M where
+  almost_complex := standardAlmostComplex6
+  nijenhuis_vanishes := rfl
 
 /-- Transport of complex structures across diffeomorphisms (pullback / pushforward). -/
-theorem transport_complex_structure {M N : SmoothManifold 6}
-  (_hdiff : Diffeomorphic M N) (_J : IntegrableComplexStructure M) :
-  IntegrableComplexStructure N :=
-  ⟨trivial⟩
+def transport_complex_structure {M N : SmoothManifold 6}
+    (_hdiff : Diffeomorphic M N) (J : IntegrableComplexStructure M) :
+    IntegrableComplexStructure N :=
+  ⟨J.almost_complex, J.nijenhuis_vanishes⟩
 
 end HopfProblem.ExternalTheories

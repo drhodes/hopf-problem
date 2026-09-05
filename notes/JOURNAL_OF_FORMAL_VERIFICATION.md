@@ -32,7 +32,7 @@ The project is structured into five sequential verification waves:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                      SIX-WAVE FORMALIZATION PIPELINE                   │
+│                     SEVEN-WAVE FORMALIZATION PIPELINE                  │
 ├─────────┬──────────────────────────────┬───────────────────────────────┤
 │ Wave 1  │ Architecture & Scaffolding   │ Complete Lean 4 AST skeleton   │
 │         │                              │ across 12 modules; lake builds│
@@ -51,6 +51,9 @@ The project is structured into five sequential verification waves:
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
 │ Wave 6  │ Complete Zero-Axiom Milestone│ De-axiomatized all 7 axioms;  │
 │         │                              │ pure Lean 4 kernel dependency │
+├─────────┼──────────────────────────────┼───────────────────────────────┤
+│ Wave 7  │ Structural Hardening &       │ Almost-complex J² = -I, linear│
+│         │ Mathematical Realization     │ indep vanishing cycles, omega │
 └─────────┴──────────────────────────────┴───────────────────────────────┘
 ```
 

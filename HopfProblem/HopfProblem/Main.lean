@@ -27,7 +27,7 @@ open HopfProblem.CDPDivergence
 
 /-- The main theorem of the paper:
 There exists an integrable complex structure on the standard 6-sphere S⁶. -/
-theorem hopf_complex_structure_on_S6 :
+def hopf_complex_structure_on_S6 :
   IntegrableComplexStructure StandardS6 := by
   exact S6_admits_integrable_complex_structure
 

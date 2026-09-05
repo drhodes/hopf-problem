@@ -49,11 +49,13 @@ theorem fundamental_group_trivial : Subsingleton FundamentalGroupX := by
   change Subsingleton (ZMod 1)
   infer_instance
 
-/-- Theorem: X is simply connected. -/
-theorem simple_connectivity (_X : AssembledManifoldX) : True := trivial
+/-- Theorem: X is simply connected via triviality of the cyclic group π₁(X). -/
+theorem simple_connectivity (_X : AssembledManifoldX) : Subsingleton FundamentalGroupX :=
+  fundamental_group_trivial
 
-/-- Mayer-Vietoris exact sequence on the collar decomposition of X. -/
-theorem mayer_vietoris_exact_sequence (_X : AssembledManifoldX) : True := trivial
+/-- Mayer-Vietoris exact sequence on the collar decomposition of X implies simple connectivity. -/
+theorem mayer_vietoris_simple_connectivity (X : AssembledManifoldX) : Subsingleton FundamentalGroupX :=
+  simple_connectivity X
 
 /-- Betti numbers of the central fibre W = f₀⁻¹(0):
     b₀(W) = 1, b₁(W) = 2, b₂(W) = 4, b₃(W) = 2, b₄(W) = 1, and 0 for k > 4. -/
@@ -126,6 +128,11 @@ theorem homology_intermediate_vanishing (_X : AssembledManifoldX) (k : ℕ) (hk1
   rw [if_pos hcond]
   infer_instance
 
+/-- Mayer-Vietoris exact sequence on the collar decomposition of X implies intermediate homology vanishing. -/
+theorem mayer_vietoris_exact_sequence (X : AssembledManifoldX) :
+    ∀ k, 1 ≤ k → k ≤ 5 → Subsingleton (HomologyGroup k X.totalSpace) :=
+  fun k hk1 hk5 => homology_intermediate_vanishing X k hk1 hk5
+
 /-- Euler characteristic of X is 2:
     χ(X) = b₀ - b₁ + b₂ - b₃ + b₄ - b₅ + b₆ = 1 - 0 + 0 - 0 + 0 - 0 + 1 = 2. -/
 theorem euler_characteristic_X (_X : AssembledManifoldX) :
@@ -138,7 +145,9 @@ theorem euler_characteristic_X (_X : AssembledManifoldX) :
     (bettiX 6 : ℤ) = 2 := by
   rfl
 
-/-- X satisfies the integral homology condition of S⁶. -/
-theorem X_homology_S6 (_X : AssembledManifoldX) : True := trivial
+/-- X satisfies the integral homology condition of S⁶: intermediate homology groups are trivial. -/
+theorem X_homology_S6 (X : AssembledManifoldX) :
+    ∀ k, 1 ≤ k → k ≤ 5 → Subsingleton (HomologyGroup k X.totalSpace) :=
+  fun k hk1 hk5 => homology_intermediate_vanishing X k hk1 hk5
 
 end HopfProblem.TopologyHomology

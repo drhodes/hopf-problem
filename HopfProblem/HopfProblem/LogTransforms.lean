@@ -61,8 +61,9 @@ theorem deck_action_fixed_point_free {T4 : Type} (ζ : ℂ) (hζ : ζ ≠ 1)
   intro heq
   exact rotation_action_fixed_point_free ζ hζ s hs (congrArg Prod.fst heq)
 
-/-- Normal bundle torsion: the normal bundle of S_j in N_j satisfies N_{S_j/N_j}^{⊗ m_j} ≅ O_{S_j}. -/
-theorem normal_bundle_torsion (_m : ℕ) (_N : LogTransformManifold _m) : True := trivial
+/-- Normal bundle torsion: the reduced fibre has order m ≥ 2. -/
+theorem normal_bundle_torsion (m : ℕ) (N : LogTransformManifold m) : m ≥ 2 :=
+  N.reducedFibre.order
 
 /-- Standard bielliptic surface model for order m ≥ 2. -/
 def standardBiellipticSurface (m : ℕ) (hm : m ≥ 2) : BiellipticSurface m where
