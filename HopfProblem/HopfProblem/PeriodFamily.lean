@@ -23,6 +23,20 @@ def UpperHalfPlane := {τ : ℂ // τ.im > 0}
 /-- The imaginary part of any parameter in the upper half plane is strictly positive. -/
 theorem tau_im_pos (τ : UpperHalfPlane) : τ.val.im > 0 := τ.property
 
+/-- Any parameter τ in the upper half plane is non-zero. -/
+theorem tau_ne_zero (τ : UpperHalfPlane) : τ.val ≠ 0 := by
+  intro h
+  have him : τ.val.im = 0 := congrArg Complex.im h
+  have hpos := τ.property
+  rw [him] at hpos
+  exact lt_irrefl 0 hpos
+
+/-- Standard basis vector e₁ = (1, 0)ᵀ in ℤ². -/
+def e1_vec : Fin 2 → ℤ := ![1, 0]
+
+/-- Standard basis vector e₂ = (0, 1)ᵀ in ℤ². -/
+def e2_vec : Fin 2 → ℤ := ![0, 1]
+
 /-- Standard generator S = [[0, -1], [1, 0]] of SL(2, ℤ) representing τ ↦ -1/τ. -/
 def S_mod : Matrix (Fin 2) (Fin 2) ℤ :=
   !![ 0, -1;
@@ -55,6 +69,18 @@ theorem ST_cubed : (S_mod * T_mod) ^ 3 = -1 := by
 
 /-- (ST)⁶ = I in SL(2, ℤ). -/
 theorem ST_sixth : (S_mod * T_mod) ^ 6 = 1 := by
+  decide
+
+/-- S maps basis vector e₁ to e₂: S(e₁) = e₂. -/
+theorem S_mul_e1 : Matrix.mulVec S_mod e1_vec = e2_vec := by
+  decide
+
+/-- S maps basis vector e₂ to -e₁: S(e₂) = -e₁. -/
+theorem S_mul_e2 : Matrix.mulVec S_mod e2_vec = -e1_vec := by
+  decide
+
+/-- T maps basis vector e₂ to e₁ + e₂: T(e₂) = e₁ + e₂. -/
+theorem T_mul_e2 : Matrix.mulVec T_mod e2_vec = e1_vec + e2_vec := by
   decide
 
 /-- Translation action T: τ ↦ τ + 1 on the upper half plane ℍ preserves Im(τ) > 0. -/

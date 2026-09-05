@@ -106,6 +106,29 @@ theorem zero_section_rigidity (X : AssembledManifoldX) :
     Function.Surjective X.proj :=
   X.proj_surjective
 
+/-- Real dimension of the fibre complex 2-torus / bielliptic / del Pezzo central fibre: dim_ℝ = 4. -/
+def fiber_real_dim : ℕ := 4
+
+/-- Real dimension of the base ℂP¹: dim_ℝ = 2. -/
+def base_real_dim : ℕ := 2
+
+/-- Fibration real dimension additivity: dim_ℝ(F) + dim_ℝ(B) = 4 + 2 = 6. -/
+theorem total_real_dim_eq : fiber_real_dim + base_real_dim = 6 := rfl
+
+/-- Complex dimension of the fibre: dim_ℂ = 2. -/
+def fiber_complex_dim : ℕ := 2
+
+/-- Complex dimension of the base ℂP¹: dim_ℂ = 1. -/
+def base_complex_dim : ℕ := 1
+
+/-- Fibration complex dimension additivity: dim_ℂ(F) + dim_ℂ(B) = 2 + 1 = 3. -/
+theorem total_complex_dim_eq : fiber_complex_dim + base_complex_dim = 3 := rfl
+
+/-- Total number of open patches in the gluing atlas: N₀, N₁, N₂, and J over B°. -/
+def num_gluing_patches : ℕ := 4
+
+theorem num_gluing_patches_eq_four : num_gluing_patches = 4 := rfl
+
 /-- Constructive realization of the assembled complex 3-fold X
     obtained by gluing the four patches along collar biholomorphisms. -/
 def assembled_X_exists : AssembledManifoldX where

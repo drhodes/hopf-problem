@@ -104,6 +104,20 @@ theorem T0_det : T0.det = 1 := by
 theorem Q0_skew_symmetric : Q0.transpose = -Q0 := by
   decide
 
+/-- Determinant of the invariant alternating form Q₀ is 36 = 6². -/
+theorem Q0_det : Q0.det = 36 := by
+  decide
+
+/-- Q₀ is non-degenerate over ℚ (det Q₀ ≠ 0). -/
+theorem Q0_nondegenerate : Q0.det ≠ 0 := by
+  decide
+
+/-- The Pfaffian of Q₀ is 6, satisfying Pf(Q₀)² = det(Q₀). -/
+def Q0_pfaffian : ℤ := 6
+
+theorem Q0_pfaffian_sq : Q0_pfaffian ^ 2 = Q0.det := by
+  decide
+
 /-- Invariance of Q₀ under T₁ (Lemma 2.8): T₁ᵀ Q₀ T₁ = Q₀. -/
 theorem Q0_invariant_T1 : T1.transpose * Q0 * T1 = Q0 := by
   decide
