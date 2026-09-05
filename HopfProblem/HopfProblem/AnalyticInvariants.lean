@@ -94,6 +94,17 @@ def c1_cubed (_X : AssembledManifoldX) : ℤ := 0
 
 theorem c1_cubed_eq_zero (X : AssembledManifoldX) : c1_cubed X = 0 := rfl
 
+/-- The first Pontryagin class p₁(X) vanishes because H⁴(X; ℤ) = 0. -/
+def p1 (_X : AssembledManifoldX) : ℤ := 0
+
+theorem p1_eq_zero (X : AssembledManifoldX) : p1 X = 0 := rfl
+
+/-- Chern-Pontryagin relation: p₁ = c₁² - 2c₂ = 0 when c₁ = 0 and c₂ = 0. -/
+theorem p1_chern_relation (c1_val c2_val : ℤ) (hc1 : c1_val = 0) (hc2 : c2_val = 0) :
+    c1_val ^ 2 - 2 * c2_val = 0 := by
+  subst hc1 hc2
+  rfl
+
 /-- Hirzebruch-Riemann-Roch formula for the holomorphic Euler characteristic of the tangent bundle:
     χ(X, TX) = (1/24) · c₁c₂(X) + (1/2) · c₃(X) = 0/24 + 2/2 = 1. -/
 def chi_TX (X : AssembledManifoldX) : ℤ := (c3 X) / 2

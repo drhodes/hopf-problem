@@ -83,6 +83,32 @@ theorem S_mul_e2 : Matrix.mulVec S_mod e2_vec = -e1_vec := by
 theorem T_mul_e2 : Matrix.mulVec T_mod e2_vec = e1_vec + e2_vec := by
   decide
 
+/-- Trace of a 2x2 integer matrix. -/
+def tr2 (M : Matrix (Fin 2) (Fin 2) ℤ) : ℤ :=
+  M 0 0 + M 1 1
+
+/-- Tr(S) = 0 (elliptic element of order 4). -/
+theorem S_trace : tr2 S_mod = 0 := rfl
+
+/-- Tr(T) = 2 (parabolic/unipotent element of infinite order). -/
+theorem T_trace : tr2 T_mod = 2 := rfl
+
+/-- Tr(ST) = 1 (elliptic element of order 6). -/
+theorem ST_trace : tr2 (S_mod * T_mod) = 1 := by
+  decide
+
+/-- S is elliptic: |Tr(S)| < 2. -/
+theorem S_is_elliptic : (tr2 S_mod).natAbs < 2 := by
+  decide
+
+/-- ST is elliptic: |Tr(ST)| < 2. -/
+theorem ST_is_elliptic : (tr2 (S_mod * T_mod)).natAbs < 2 := by
+  decide
+
+/-- T is parabolic: |Tr(T)| = 2. -/
+theorem T_is_parabolic : (tr2 T_mod).natAbs = 2 := by
+  decide
+
 /-- Translation action T: τ ↦ τ + 1 on the upper half plane ℍ preserves Im(τ) > 0. -/
 def modular_T (τ : UpperHalfPlane) : UpperHalfPlane where
   val := τ.val + 1

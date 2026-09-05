@@ -128,6 +128,22 @@ theorem T0_sq_ne_one : T0 ^ 2 ≠ 1 := by
 theorem T0_twelfth_ne_one : T0 ^ 12 ≠ 1 := by
   decide
 
+/-- Trace of a 4x4 integer matrix. -/
+def tr4 (M : Matrix (Fin 4) (Fin 4) ℤ) : ℤ :=
+  M 0 0 + M 1 1 + M 2 2 + M 3 3
+
+/-- Trace of T₁ is 1: Tr(T₁) = 1 + (-1) + 0 + 1 = 1. -/
+theorem T1_trace : tr4 T1 = 1 := rfl
+
+/-- Trace of T₂ is 2: Tr(T₂) = 1 + 0 + 0 + 1 = 2. -/
+theorem T2_trace : tr4 T2 = 2 := rfl
+
+/-- Trace of unipotent cusp monodromy T₀ is 4: Tr(T₀) = 1 + 1 + 1 + 1 = 4. -/
+theorem T0_trace : tr4 T0 = 4 := rfl
+
+/-- Trace of the nilpotent operator N_cusp is 0: Tr(N) = 0. -/
+theorem N_cusp_trace : tr4 N_cusp = 0 := rfl
+
 /-- Q₀ is skew-symmetric: Q₀ᵀ = -Q₀. -/
 theorem Q0_skew_symmetric : Q0.transpose = -Q0 := by
   decide

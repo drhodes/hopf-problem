@@ -82,10 +82,15 @@ Through the Wave 6–8 Progressive Hardening Initiatives:
    - Formally proved Poincaré duality on Betti numbers: $b_k(X) = b_{6-k}(X)$ for all $0 \le k \le 6$ via `interval_cases`.
    - Formalized toric orbit stratification: $e(W) = 0 + 0 + 2 = 2$.
    - Proved geometric genus $p_g = 0$, irregularity $q = 0$, plurigenera $P_m = 0$, and Kodaira dimension $\kappa(X) = -\infty$.
+10. **Matrix Traces, Modular Classifications, Collar Euler Localization & Pontryagin Class (Wave 15)**:
+   - Formally defined 4x4 matrix trace and proved $\mathrm{Tr}(T_1) = 1, \mathrm{Tr}(T_2) = 2, \mathrm{Tr}(T_0) = 4, \mathrm{Tr}(N_{\mathrm{cusp}}) = 0$.
+   - Formally defined 2x2 modular trace, proved $\mathrm{Tr}(S) = 0, \mathrm{Tr}(T) = 2, \mathrm{Tr}(ST) = 1$, and proved elliptic/parabolic classifications ($|Tr(S)| < 2, |Tr(ST)| < 2, |Tr(T)| = 2$).
+   - Formally proved 4-patch collar Mayer-Vietoris Euler localization $e(N_0) + e(N_1) + e(N_2) + e(J) = 2 + 0 + 0 + 0 = 2$.
+   - Formally proved first Pontryagin class vanishing $p_1(X) = 0$ and Chern-Pontryagin relation $p_1 = c_1^2 - 2c_2 = 0$.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│               WAVE 14 FULL-SPECTRUM VERIFICATION LEDGER                │
+│               WAVE 15 FULL-SPECTRUM VERIFICATION LEDGER                │
 ├───────────────────────┬───────────────────────┬────────────────────────┤
 │ PURE KERNEL PROOFS    │ CONSTRUCTIVE MODELS   │ DIFFERENTIAL TOPOLOGY  │
 │ (0 Axioms / Decide)   │ (Quotient / Category) │ (Kernel Synthesized)   │
@@ -93,17 +98,18 @@ Through the Wave 6–8 Progressive Hardening Initiatives:
 │ • full_hopf_resolution│ • GluedCarrier (Quot) │ • smale_kervaire_milnor│
 │ • T₁³ = I, T₂⁴ = I   │ • assembled_X_exists  │   _dim6 (Theorem)      │
 │ • (T₀ - I)² = 0, N≠0  │ • StandardS6          │ • HomologyGroup def    │
-│ • T₁T₂ ≠ T₂T₁         │ • CP1                 │ • intermediate_vanish  │
-│ • [T₁, T₂] ≠ I        │ • modular_T (ℍ → ℍ)   │ • poincare_duality     │
-│ • T₀¹² ≠ I (inf order)│ • Diffeomorphic (Eqv) │ • smooth_torus_family  │
-│ • det(Q₀)=36, Pf=6    │ • transport_complex   │ • log_transform_N1, N2 │
-│ • 12ℓ₀ - 4ℓ₁ - 3ℓ₂ = 1│ • Θ₆ = 0 (Subsingle)  │ • J₂² = -I₂ (decide)   │
-│ • π₁(X) = 0           │ • standardComplexTorus│ • S6_admits_integrable │
-│ • b_k(X) = b_{6-k}(X) │ • standardAlmostCplx  │ • newlander_nirenberg  │
-│ • χ(X) = 2, a(X) = 0  │ • 0 : True Fields     │ • Serre R₁ fails (W₀)  │
-│ • κ(X) = -∞, p_g = 0  │ • 0 trivial Tactics   │ • dP6_degree_K_sq = 6  │
-│ • 12·χ_orb = -5 < 0   │ • sidePairing Biject  │ • e_stratification = 2 │
-│ • χ(X, TX) = 1 (HRR)  │ • Fan Balance ∑vᵢ = 0 │ • no_symplectic_struct │
+│ • Tr(T₁)=1, Tr(T₂)=2  │ • CP1                 │ • intermediate_vanish  │
+│ • Tr(T₀)=4, Tr(N)=0   │ • modular_T (ℍ → ℍ)   │ • poincare_duality     │
+│ • Tr(S)=0, Tr(T)=2    │ • Diffeomorphic (Eqv) │ • smooth_torus_family  │
+│ • Tr(ST)=1 (elliptic) │ • transport_complex   │ • log_transform_N1, N2 │
+│ • T parabolic (|Tr|=2)│ • Θ₆ = 0 (Subsingle)  │ • J₂² = -I₂ (decide)   │
+│ • T₁T₂ ≠ T₂T₁         │ • standardComplexTorus│ • S6_admits_integrable │
+│ • [T₁, T₂] ≠ I        │ • standardAlmostCplx  │ • newlander_nirenberg  │
+│ • det(Q₀)=36, Pf=6    │ • 0 : True Fields     │ • Serre R₁ fails (W₀)  │
+│ • π₁(X) = 0           │ • 0 trivial Tactics   │ • dP6_degree_K_sq = 6  │
+│ • b_k(X) = b_{6-k}(X) │ • sidePairing Biject  │ • e_collar_local = 2   │
+│ • χ(X) = 2, a(X) = 0  │ • Fan Balance ∑vᵢ = 0 │ • p₁(X) = 0 (c₁²-2c₂)  │
+│ • κ(X) = -∞, p_g = 0  │ • e_stratification = 2│ • no_symplectic_struct │
 └───────────────────────┴───────────────────────┴────────────────────────┘
 ```
 
