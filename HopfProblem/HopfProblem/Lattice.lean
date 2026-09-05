@@ -186,6 +186,53 @@ def w_vec : Fin 4 → ℤ := ![0, 0, 1, 0]
 /-- Basis vector δ = (0, 0, 0, 1)ᵀ. -/
 def delta_vec : Fin 4 → ℤ := ![0, 0, 0, 1]
 
+/-- The symplectic bilinear pairing evaluated on vectors: v₁ᵀ Q₀ v₂. -/
+def Q0_pairing (v1 v2 : Fin 4 → ℤ) : ℤ :=
+  v1 0 * (mulVec Q0 v2 0) +
+  v1 1 * (mulVec Q0 v2 1) +
+  v1 2 * (mulVec Q0 v2 2) +
+  v1 3 * (mulVec Q0 v2 3)
+
+/-- Q₀ pairing on (γ, δ) is 1: Q₀(γ, δ) = 1. -/
+theorem Q0_pairing_gamma_delta : Q0_pairing gamma_vec delta_vec = 1 := by
+  decide
+
+/-- Skew-symmetry on (δ, γ): Q₀(δ, γ) = -1. -/
+theorem Q0_pairing_delta_gamma : Q0_pairing delta_vec gamma_vec = -1 := by
+  decide
+
+/-- Q₀ pairing on (u, w) is 6: Q₀(u, w) = 6. -/
+theorem Q0_pairing_u_w : Q0_pairing u_vec w_vec = 6 := by
+  decide
+
+/-- Skew-symmetry on (w, u): Q₀(w, u) = -6. -/
+theorem Q0_pairing_w_u : Q0_pairing w_vec u_vec = -6 := by
+  decide
+
+/-- Orthogonality of γ and u: Q₀(γ, u) = 0. -/
+theorem Q0_pairing_gamma_u : Q0_pairing gamma_vec u_vec = 0 := by
+  decide
+
+/-- Orthogonality of γ and w: Q₀(γ, w) = 0. -/
+theorem Q0_pairing_gamma_w : Q0_pairing gamma_vec w_vec = 0 := by
+  decide
+
+/-- Orthogonality of u and δ: Q₀(u, δ) = 0. -/
+theorem Q0_pairing_u_delta : Q0_pairing u_vec delta_vec = 0 := by
+  decide
+
+/-- Orthogonality of w and δ: Q₀(w, δ) = 0. -/
+theorem Q0_pairing_w_delta : Q0_pairing w_vec delta_vec = 0 := by
+  decide
+
+/-- Isotropic self-pairing of γ: Q₀(γ, γ) = 0. -/
+theorem Q0_pairing_gamma_self : Q0_pairing gamma_vec gamma_vec = 0 := by
+  decide
+
+/-- Isotropic self-pairing of u: Q₀(u, u) = 0. -/
+theorem Q0_pairing_u_self : Q0_pairing u_vec u_vec = 0 := by
+  decide
+
 /-- T₁ fixes γ. -/
 theorem T1_fixes_gamma : mulVec T1 gamma_vec = gamma_vec := by
   decide

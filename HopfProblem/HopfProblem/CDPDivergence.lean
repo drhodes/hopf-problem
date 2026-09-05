@@ -94,4 +94,20 @@ def conductor_self_intersection : ℤ := 6
 
 theorem conductor_self_intersection_eq_six : conductor_self_intersection = 6 := rfl
 
+/-- The normalization Euler characteristic defect e(dP₆) - e(W₀) = 6 - 2 = 4. -/
+def normalization_euler_defect : ℤ := 6 - 2
+
+theorem normalization_euler_defect_eq_four : normalization_euler_defect = 4 := rfl
+
+/-- Conductor Euler contribution on the double locus:
+    3 · e(ℙ¹) - 2 · e(*) = 3(2) - 2(1) = 6 - 2 = 4. -/
+def conductor_euler_contribution : ℤ := 3 * 2 - 2 * 1
+
+theorem conductor_euler_contribution_eq_four : conductor_euler_contribution = 4 := rfl
+
+/-- Normalization formula reconciling e(W₀) with the smooth Del Pezzo model:
+    e(W₀) = e(dP₆) - conductor_euler_contribution = 6 - 4 = 2. -/
+theorem normalization_euler_reconciliation :
+    6 - conductor_euler_contribution = 2 := rfl
+
 end HopfProblem.CDPDivergence

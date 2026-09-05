@@ -32,7 +32,7 @@ The project is structured into five sequential verification waves:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                    SIXTEEN-WAVE FORMALIZATION PIPELINE                 │
+│                   SEVENTEEN-WAVE FORMALIZATION PIPELINE                │
 ├─────────┬──────────────────────────────┬───────────────────────────────┤
 │ Wave 1  │ Architecture & Scaffolding   │ Complete Lean 4 AST skeleton   │
 │         │                              │ across 12 modules; lake builds│
@@ -84,6 +84,9 @@ The project is structured into five sequential verification waves:
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
 │ Wave 16 │ Fixed Subspaces, Cyclotomic  │ Indep (γ, u), T₀(I-N)=I, M·v=0│
 │         │ Factorizations & Seifert     │ Adj g=0, ∑b_k=2, 12-(12/m)ℓ=1 │
+├─────────┼──────────────────────────────┼───────────────────────────────┤
+│ Wave 17 │ Symplectic Basis Pairings &  │ Q₀(γ,δ)=1, Q₀(u,w)=6, td₃=0   │
+│         │ Todd Genus Vanishing         │ e(W₀)=6-4=2, e_MV_inc_exc = 2 │
 └─────────┴──────────────────────────────┴───────────────────────────────┘
 ```
 

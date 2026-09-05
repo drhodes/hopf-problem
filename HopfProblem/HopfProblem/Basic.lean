@@ -58,5 +58,20 @@ theorem hyperbolic_defect_eq_five : hyperbolic_defect = 5 := by
 theorem hyperbolic_defect_pos : hyperbolic_defect > 0 := by
   decide
 
+/-- Least common multiple of branching orders: lcm(3, 4) = 12. -/
+def branching_lcm : ℕ := Nat.lcm branching_p1 branching_p2
+
+theorem branching_lcm_eq_twelve : branching_lcm = 12 := rfl
+
+/-- Product of branching orders: 3 · 4 = 12. -/
+theorem branching_mul_eq_twelve : branching_p1 * branching_p2 = 12 := rfl
+
+/-- Branching orders are coprime: gcd(3, 4) = 1. -/
+theorem branching_gcd_eq_one : Nat.gcd branching_p1 branching_p2 = 1 := rfl
+
+/-- The arithmetic identity m₁ · m₂ = gcd(m₁, m₂) · lcm(m₁, m₂) = 1 · 12 = 12. -/
+theorem branching_prod_eq_gcd_mul_lcm :
+    branching_p1 * branching_p2 = Nat.gcd branching_p1 branching_p2 * branching_lcm := rfl
+
 end HopfProblem.Basic
 

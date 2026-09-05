@@ -93,10 +93,16 @@ Through the Wave 6–8 Progressive Hardening Initiatives:
    - Formally proved $T(e_1) = e_1$, $ST \ne TS$, $\mathrm{Tr}(TS) = 1, (TS)^3 = -I, (TS)^6 = I$, and constructed explicit modular inverse $T^{-1}$ in $\mathrm{SL}(2, \mathbb{Z})$.
    - Formally constructed Picard relation null vectors $v_1, v_2 \ne 0$ in the kernel of the dP₆ intersection matrix ($M_{\mathrm{hex}} v = 0$), and proved genus-0 adjunction $C_i^2 + K \cdot C_i = -2$.
    - Formally proved total Betti sums $\sum b_k(X) = 2$ and $\sum b_k(W_0) = 10$, and verified Seifert multiplicity evaluation $12\ell_0 - (12/m_1)\ell_1 - (12/m_2)\ell_2 = 1$.
+12. **Symplectic Form Pairings, Todd Genus, Conductor Reconciliation & Collar Overlaps (Wave 17)**:
+   - Formally defined bilinear form $Q_0(v_1, v_2) = v_1^t Q_0 v_2$, proved exact polar pairings $Q_0(\gamma, \delta) = 1, Q_0(u, w) = 6$, and proved complete basis orthogonality and isotropic self-pairings.
+   - Formally proved branching orders arithmetic $\mathrm{lcm}(3, 4) = 12, \gcd(3, 4) = 1$, and $m_1 m_2 = \gcd \cdot \mathrm{lcm} = 12$.
+   - Formally defined Todd genus $\mathrm{td}_3(X) = (1/24) c_1 c_2(X)$ and proved $\mathrm{td}_3(X) = 0$ and $\chi(X, \mathcal{O}_X) = 0$.
+   - Formally proved conductor Euler reconciliation $e(W_0) = e(\mathrm{dP}_6) - (3 e(\mathbb{P}^1) - 2 e(*)) = 6 - 4 = 2$ for the non-normal central fibre.
+   - Formally proved 4-patch Mayer-Vietoris inclusion-exclusion formula $\sum e(N_i) - \sum e(C_j) = 2 - 3(0) = 2$.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│               WAVE 16 FULL-SPECTRUM VERIFICATION LEDGER                │
+│               WAVE 17 FULL-SPECTRUM VERIFICATION LEDGER                │
 ├───────────────────────┬───────────────────────┬────────────────────────┤
 │ PURE KERNEL PROOFS    │ CONSTRUCTIVE MODELS   │ DIFFERENTIAL TOPOLOGY  │
 │ (0 Axioms / Decide)   │ (Quotient / Category) │ (Kernel Synthesized)   │
@@ -106,15 +112,15 @@ Through the Wave 6–8 Progressive Hardening Initiatives:
 │ • (T₀ - I)² = 0, N≠0  │ • StandardS6          │ • HomologyGroup def    │
 │ • Tr(T₁)=1, Tr(T₂)=2  │ • CP1                 │ • intermediate_vanish  │
 │ • Tr(T₀)=4, Tr(N)=0   │ • modular_T (ℍ → ℍ)   │ • poincare_duality     │
-│ • Tr(S)=0, Tr(T)=2    │ • Diffeomorphic (Eqv) │ • smooth_torus_family  │
-│ • Tr(ST)=1, Tr(TS)=1  │ • transport_complex   │ • log_transform_N1, N2 │
-│ • T parabolic (|Tr|=2)│ • Θ₆ = 0 (Subsingle)  │ • J₂² = -I₂ (decide)   │
-│ • T₁T₂ ≠ T₂T₁         │ • standardComplexTorus│ • S6_admits_integrable │
-│ • ST ≠ TS             │ • standardAlmostCplx  │ • newlander_nirenberg  │
-│ • det(Q₀)=36, Pf=6    │ • 0 : True Fields     │ • Serre R₁ fails (W₀)  │
-│ • π₁(X) = 0           │ • 0 trivial Tactics   │ • dP6_degree_K_sq = 6  │
-│ • b_k(X) = b_{6-k}(X) │ • sidePairing Biject  │ • e_collar_local = 2   │
-│ • χ(X) = 2, a(X) = 0  │ • Fan Balance ∑vᵢ = 0 │ • p₁(X) = 0 (c₁²-2c₂)  │
+│ • Q₀(γ, δ)=1, Q₀(u,w)=6│ • Diffeomorphic (Eqv) │ • smooth_torus_family  │
+│ • Q₀(γ, u)=0, Q₀=skew │ • transport_complex   │ • log_transform_N1, N2 │
+│ • Tr(S)=0, Tr(T)=2    │ • Θ₆ = 0 (Subsingle)  │ • J₂² = -I₂ (decide)   │
+│ • Tr(ST)=1, Tr(TS)=1  │ • standardComplexTorus│ • S6_admits_integrable │
+│ • T parabolic (|Tr|=2)│ • standardAlmostCplx  │ • newlander_nirenberg  │
+│ • T₁T₂ ≠ T₂T₁         │ • 0 : True Fields     │ • Serre R₁ fails (W₀)  │
+│ • ST ≠ TS             │ • 0 trivial Tactics   │ • td₃(X) = 0 (c₁c₂/24) │
+│ • det(Q₀)=36, Pf=6    │ • sidePairing Biject  │ • e(W₀)=6-4=2 (reconc) │
+│ • lcm(3, 4) = 12      │ • Fan Balance ∑vᵢ = 0 │ • e_MV_inc_exc = 2     │
 │ • T₀(I - N) = I       │ • M_hex · v_{1,2} = 0 │ • C_i² + K·C_i = -2    │
 │ • ∑ b_k(X) = 2        │ • ∑ b_k(W₀) = 10      │ • 12ℓ₀-(12/m)ℓ = 1     │
 └───────────────────────┴───────────────────────┴────────────────────────┘

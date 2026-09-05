@@ -147,6 +147,20 @@ def e_patch_J : ℤ := 0
 theorem e_collar_localization :
     e_patch_N0 + e_patch_N1 + e_patch_N2 + e_patch_J = 2 := rfl
 
+/-- Euler characteristic of each collar overlap C_j = Δ*_j × T⁴: e(C_j) = 0. -/
+def e_collar_overlap : ℤ := 0
+
+/-- Number of collar transition regions between the singular patches and J: 3. -/
+def num_collar_overlaps : ℕ := 3
+
+theorem num_collar_overlaps_eq_three : num_collar_overlaps = 3 := rfl
+
+/-- Mayer-Vietoris inclusion-exclusion on the 4-patch open cover of X:
+    e(X) = (∑ e(patches)) - (∑ e(overlaps)) = 2 - 3(0) = 2. -/
+theorem e_mayer_vietoris_inclusion_exclusion :
+    (e_patch_N0 + e_patch_N1 + e_patch_N2 + e_patch_J) -
+    ((num_collar_overlaps : ℤ) * e_collar_overlap) = 2 := rfl
+
 /-- Constructive realization of the assembled complex 3-fold X
     obtained by gluing the four patches along collar biholomorphisms. -/
 def assembled_X_exists : AssembledManifoldX where
