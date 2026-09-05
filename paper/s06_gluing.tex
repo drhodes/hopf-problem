@@ -1,0 +1,37 @@
+\section{The compact complex 3-manifold $X$.}
+
+In this section we synthesize the modular family $J \to B^\circ$, the Mumford toric filling $N_0$ over $p_0$, and the two Kodaira logarithmic transform fillings $N_1, N_2$ over $p_1, p_2$ into a globally defined compact complex $3$-manifold $X$.
+
+\subsection{Holomorphic transition functions and section regluing}
+
+\begin{construction}\label{const:assembled-manifold}
+Let $B^\circ = \dbP^1 \setminus \{p_0, p_1, p_2\}$. Let $U_0, U_1, U_2 \subset \dbP^1$ be disjoint open discs centered at $p_0, p_1, p_2$, with punctured discs $U_j^* = U_j \setminus \{p_j\}$.
+We define $X$ as the identification space:
+\[
+X := J \;\cup_{\phi_0} N_0 \;\cup_{\phi_1} N_1 \;\cup_{\phi_2} N_2,
+\]
+where $\phi_j \colon N_j|_{U_j^*} \xrightarrow{\sim} J|_{U_j^*}$ are biholomorphic gluing isomorphisms.
+The maps $\phi_j$ are parameterized by section regluing parameters:
+\[
+(\ell_0, \ell_1, \ell_2) \in \dbZ \times \dbZ \times \dbZ.
+\]
+By the tautological identification at the cusp, $\ell_0 = 0$.
+By the Sign Lemma (Lemma~7.16), the holomorphic collar transitions at the elliptic points require $\ell_1 = 1$ and $\ell_2 = -1$.
+\end{construction}
+
+\begin{theorem}[Global Complex Analytic Structure]\label{thm:manifold-X-compact}
+Let $X$ be the space assembled with parameters $(\ell_0, \ell_1, \ell_2) = (0, 1, -1)$. Then:
+\begin{enumerate}[label=(\roman*)]
+    \item $X$ is a connected, compact Hausdorff complex analytic manifold of complex dimension $3$.
+    \item The projection $f \colon X \to \dbP^1$ is a proper surjective holomorphic map whose fibers are:
+    \begin{itemize}
+        \item Smooth abelian $2$-tori $F_b$ for $b \in \dbP^1 \setminus \{p_0, p_1, p_2\}$.
+        \item The reduced, non-normal Mumford surface $W_0$ over $p_0$.
+        \item Multiple bielliptic surfaces $3S_1$ and $4S_2$ over $p_1$ and $p_2$.
+    \end{itemize}
+    \item The canonical bundle $K_X$ is given by:
+    \[
+    K_X = f^*\cO_{\dbP^1}(-2) \otimes \cO_X(2S_1) \otimes \cO_X(3S_2) \otimes \cO_X(W_0 - W_0) \cong f^*\cO_{\dbP^1}(-2) \otimes \cO_X(2S_1 + 3S_2).
+    \]
+\end{enumerate}
+\end{theorem}

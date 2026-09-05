@@ -1,7 +1,6 @@
 \documentclass[11pt]{article}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{palatino}
+\usepackage{fontspec}
+\setmainfont{TeX Gyre Pagella}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{mathrsfs}
 \usepackage[mathscr]{eucal}
@@ -9,12 +8,14 @@
 \geometry{letterpaper, margin=1in}
 \usepackage{hyperref}
 \usepackage{enumitem}
+\usepackage{booktabs}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
 \newtheorem{definition}[theorem]{Definition}
+\newtheorem{construction}[theorem]{Construction}
 \newtheorem{remark}[theorem]{Remark}
 \newtheorem{example}[theorem]{Example}
 
@@ -24,24 +25,47 @@
 \newcommand{\dbQ}{\mathbb{Q}}
 \newcommand{\dbP}{\mathbb{P}}
 \newcommand{\hb}{\mathfrak{h}}
+\newcommand{\cO}{\mathcal{O}}
+\newcommand{\cM}{\mathcal{M}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cE}{\mathcal{E}}
+\newcommand{\cT}{\mathcal{T}}
+\newcommand{\GL}{\mathrm{GL}}
+\newcommand{\SL}{\mathrm{SL}}
+\newcommand{\PSL}{\mathrm{PSL}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\Pic}{\mathrm{Pic}}
+\newcommand{\Aut}{\mathrm{Aut}}
+\newcommand{\Ext}{\mathrm{Ext}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\rk}{\operatorname{rk}}
 
-\title{The $(3,4,\infty)$ modular family of 2-tori, completed at its three special points, is a complex structure on $S^6$}
+\title{The $(3,4,\infty)$ Modular Family of 2-Tori Completed at its Three Special Points is a Complex Structure on $S^6$}
 \author{}
 \date{}
 
 \begin{document}
 \maketitle
 
-% ==================== SECTION: Front matter / Abstract-like intro ====================
+% ==================== Front Matter ====================
 \input{s00_front.tex}
 
 \tableofcontents
 
+% ==================== Sections ====================
 \input{s01_intro.tex}
 \input{s02_lattice.tex}
-
-\begin{center}
-\emph{[Remainder of the document (\S\S3--10 and Appendices A--B, pp.\ 13--108) not yet transcribed.]}
-\end{center}
+\input{s03_period.tex}
+\input{s04_toric.tex}
+\input{s05_logtrans.tex}
+\input{s06_gluing.tex}
+\input{s07_topology.tex}
+\input{s08_sphere.tex}
+\input{s09_analytic.tex}
+\input{s10_cdp.tex}
+\input{s11_app_a.tex}
+\input{s12_app_b.tex}
 
 \end{document}

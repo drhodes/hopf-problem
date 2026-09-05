@@ -1,0 +1,23 @@
+\section*{Appendix A: Vanishing cycles and nearby cycle specialization.}
+\addcontentsline{toc}{section}{Appendix A: Vanishing cycles and nearby cycle specialization}
+\renewcommand{\thesection}{A}
+
+In this appendix we review the Clemens--Schmid exact sequence and nearby cycle specialization for the degenerating modular family near the unipotent cusp $p_0$.
+
+\subsection*{A.1 The Clemens--Schmid sequence for unipotent degenerations}
+
+Let $f \colon N_0 \to \Delta$ be the degenerating family over the disc, with smooth fiber $F_t$ ($t \ne 0$) and central fiber $W_0 = f^{-1}(0)$.
+The local monodromy $T_0 = \exp(N)$ is unipotent with $N^2 = 0$.
+The Clemens--Schmid exact sequence relates the global topology of $N_0$ to the monodromy-invariant vanishing cycles:
+\[
+\dots \to H_k(W_0; \dbQ) \xrightarrow{i_*} H_k(N_0; \dbQ) \xrightarrow{\mathrm{sp}_k} H^k(F_t; \dbQ) \xrightarrow{N} H^k(F_t; \dbQ) \to H_{k-2}(W_0; \dbQ) \to \dots
+\]
+
+\begin{theorem}[Specialization Isomorphism]\label{thm:clemens-schmid}
+For the degeneration $f \colon N_0 \to \Delta$ constructed in Section~4:
+\begin{enumerate}[label=(\roman*)]
+    \item The specialization map $\mathrm{sp}_2 \colon H^2(N_0; \dbZ) \to H^2(F_t; \dbZ)^{T_0}$ has image equal to $\ker(N) = \langle \gamma, u \rangle$.
+    \item The quotient $H^2(F_t; \dbZ) / \ker(N)$ is isomorphic to the vanishing cycle space $\operatorname{im}(N)$.
+    \item The retraction $r \colon N_0 \to W_0$ induces an isomorphism on cohomology, confirming that the Mayer--Vietoris and spectral sequence calculations in Section~7 are topologically exact.
+\end{enumerate}
+\end{theorem}

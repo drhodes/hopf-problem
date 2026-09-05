@@ -16,3 +16,9 @@ util/*.sock
 
 # Libspec cache
 .libspec/cache/
+
+# LaTeX build artifacts
+*.aux
+*.log
+*.toc
+*.out

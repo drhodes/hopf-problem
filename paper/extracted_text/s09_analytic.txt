@@ -1,0 +1,1426 @@
+
+=== PAGE 64 ===
+Proof of Theorem 8.1. By Theorem 6.2, X is a compact complex manifold of dimension 3, so its underlying
+smooth manifold is closed of real dimension 6; by Theorem 7.17 and Corollary 7.29 (equivalently The-
+orem 7.22), π1(X) = 1 and H∗(X; Z) ∼= H∗(S6; Z). Lemma 8.2 with n= 6 shows that X is a homotopy
+6-sphere. By Smale’s generalised Poincaré theorem in dimensions ≥ 5 [Sma61, Thm. A], X is homeomor-
+phic to S6 and is a twisted sphere. By the h-cobordism theorem [Mil65], for n≥ 5 the h-cobordism classes of
+oriented homotopy n-spheres coincide with their oriented diffeomorphism classes, and by Kervaire–Milnor
+[KM63, Lem. 4.5, Thm. 1.1] these classes form a finite abelian group Θn under connected sum, with Θ6 = 0
+[KM63, §7]. Hence X is orientation-preservingly diffeomorphic to S6 with one of its two orientations; as S6
+carries an orientation-reversing self-diffeomorphism (a reflection of R7), X is diffeomorphic to S6, and the
+diffeomorphism may be taken orientation-preserving for the complex orientation.
+Remark8.3.The proof uses only π1(X) = 1 (Theorem 7.17) and H∗(X; Z) ∼= H∗(S6; Z) (Corollary 7.29
+or Theorem 7.22); H∗(X; Z) is computed twice in §7: once by the Mayer–Vietoris route, which uses the
+retraction and collapse of §7.2, and once by the Leray route of §7.7 with Appendix B, which together with
+Theorem 7.17 and Corollary 4.8 does not use §7.2; the recognition of X as S6 therefore does not depend on
+Proposition 7.2.
+Remark8.4.It is the diffeomorphism, not merely the homeomorphism of [ Sma61], that is needed for the
+statement of §1: transporting the complex structure of X through any diffeomorphism X→S 6 yields an
+integrable almost complex structure on thestandardsmooth S6 whose complex manifold is biholomorphic
+toX.
+Corollary 8.5. e(X) =2 and c3(X) =⟨c3(TX), [X]⟩= 2, where [X] is the fundamental class for the complex
+orientation.
+Proof. From Corollary 7.29 (or Theorem 7.22), e(X) =∑(−1)ibi(X) =2; equivalently e(X) =e(W) +0 + 0
+as in §7, the multiple fibres 3 S1, 4S2 contributing e(Sj) =0 (Sj bielliptic, Theorem 5.4) and the remaining
+fibres of f being 2-tori. For a compact complex n-fold, cn(TX) is the Euler class of the underlying oriented
+real tangent bundle, so⟨c n(TX),[X]⟩=e(X)[Hir, §4.10]; taken=3.
+Remark8.6.In particular c3(X)̸= 0, and this non-vanishing is what rules out a(X) = 2 in §9, while the
+vanishingb 2(X) =0 obtained in §7 rules outa(X) =3.
+9 Complex-analytic invariants ofX.
+Throughout, f:X→B=P 1 is the map of §6 and the notation is that of §2–§5: Σ={p 0, p1, p2},
+B◦ =B∖Σ , Fb =f −1(b) =C 2/Π(z)Λ for b=π(z)∈B ◦, W=f −1(p0), f ∗pj =m jSj with Sj bielliptic.
+Write σ1 := 6µγ+τu+w , σ2 :=βγ+µu+δ for the rows of Π= [Z|I] , viewed in V⊗C=Hom(Λ , C),
+soσ i(λ) = (Πλ)i and
+F1(z):=⟨σ 1(z),σ 2(z)⟩=H 0(Ω1
+Fπ(z) )⊂H 1(Fπ(z) ,C).
+Put e:=dζ 1 ∧dζ 2, the flat relative 2-form on T . As usual M(Y) denotes the field of meromorphic functions
+of a compact complex spaceY, anda(Y) =trdeg C M(Y).
+Theorem 9.1.LetXandfbe as in §6. Then:
+(i)a(X) = 1, M(X) =f ∗M(B), f is the algebraic reduction of X, and thevery generalfibre of f has
+algebraic dimension 0;
+(ii)f ∗OX =O B,R 1 f∗OX ∼= O ⊕ O(−1),R2 f∗OX ∼= O(−1); henceh 0,0 =h 0,1 =1,h 0,2 =h 0,3 =0;
+(iii)f ∗ωX/B ∼= OB(1)andK X ∼= f ∗O(−1)⊗ O(2S2); in particularK X is not a torsion line bundle;
+(iv)c 1(X) =c2(X) =0 inH ∗(X;Z);c 1c2 =0,c 3 =e(X) =2,χ(O X) =0,χ(Ω 1
+X) =−1,χ(T X) =1;
+64
+=== PAGE 65 ===
+(v)h 0(TX) =1 and Aut0(X) =C∗, acting fibrewise, with fixed locus one of the three double curves of W
+(a smooth rational curve through both triple points) and normal weights(+1,−1);
+(vi)H 0(X,Ω p
+X) =0 forp=1, 2, 3, i.e.
+h1,0 =h 2,0 =h 3,0 =0
+(the case p= 3 being consistent with h0,3 = 0 in (ii) by Serre duality); together with (ii), (iv) and Serre
+duality this determines every Hodge number of X in terms of the single integer h1,2 =h 2,1, namely
+h1,1 =h 2,2 =h 1,2 +1 andh p,0 =h 0,q =0 forp≥1,q≥2.
+Parts (i)–(vi) are proved in §§9.1–9.7. The Hodge number h1,2 =h 2,1 is not computed here; see
+Remark 9.21.
+9.1 The algebraic dimension
+In this subsection we prove Theorem 9.1(i). The argument rests on the period description of the smooth
+fibres (§2, §3) and on elementary facts about complex 2-tori; neither §7 nor [ CDP20] enters (see Remark 9.9).
+Notation.Write V• V for the exterior algebra of V=Hom(Λ , Z), let ( ˆγ, ˆu, ˆw, ˆδ) be the basis of Λ dual
+to the basis(γ,u,w,δ)ofV, and put
+vol :=γ∧u∧w∧δ∈ V4 V ∼= Z.
+For E, E′ ∈ V2 V write E∧E ′ = (E·E ′)vol and E2 :=E·E ; under the marking of §3, V2 V=H 2(Fb; Z)
+for b=π(z)∈B ◦, the product (·) being the cup product evaluated on ± the fundamental class (only
+non-vanishing statements will be used, so the orientation is immaterial). A classE∈ V2 Vis written
+E=E γu γ∧u+E γw γ∧w+E γδ γ∧δ+E uw u∧w+E uδ u∧δ+E wδ w∧δ,E ij ∈Z.
+Finally set
+η:=u∧w+6γ∧δ∈ V2 V.
+We shall use the following specialisations to the generators g0, g2 of ∆ of the laws (τ2), (µ1), (β1) of §2,
+valid on all ofh z:
+τ◦g 0 =τ−1,µ◦g 0 =µ,β◦g 0 =β+1,
+τ◦g 2 =−1/τ,µ◦g 2 =1+µ/τ,β◦g 2 =β−3−6µ 2/τ.
+(9.1)
+Lemma 9.2(Néron–Severi groups of the smooth fibres).Let z∈h ◦
+z , b=π(z) , and E∈ V2 V=H 2(Fb; Z).
+Then
+E∈NS(F b):=H 2(Fb;Z)∩H 1,1(Fb)⇐⇒P E(z) =0,
+whereP E is the holomorphic function onh z
+PE :=E γu −E γw τ−E γδ µ+6E uw µ+E uδ β+E wδ (6µ2 −τβ).
+Proof. For a complex torus H2(Fb; C) =V2(V⊗C) and Hp,q = Vp F1 ∧ Vq F1; in particular H2,0 =Cσ 1 ∧σ 2
+and H0,2 =C ¯σ1 ∧ ¯σ2. Since L(z) =Π(z)Λ is a lattice of full rank (Theorem 3.4), F1 ⊕ F1 =V⊗C , so
+σ1,σ2, ¯σ1, ¯σ2 is a basis ofV⊗Cand
+¯σ1 ∧ ¯σ2 ∧σ 1 ∧σ 2 ̸=0 in V4(V⊗C).
+Let E be real (e.g. integral) and write E=E 2,0 +E 1,1 +E 0,2. As dimF 1 = 2 we have V3 F1 = 0, so
+E2,0 ∧σ 1 ∧σ 2 =0 andE 1,1 ∧σ 1 ∧σ 2 =0; writingE 0,2 =c ¯σ1 ∧ ¯σ2 we get
+E∧σ 1 ∧σ 2 =c ¯σ1 ∧ ¯σ2 ∧σ 1 ∧σ 2.
+HenceEis of type(1, 1)if and only ifE∧σ 1 ∧σ 2 =0.
+Now compute, fromσ 1 =6µγ+τu+wandσ 2 =βγ+µu+δ,
+σ1 ∧σ 2 = (6µ2 −τβ)γ∧u−β γ∧w+6µ γ∧δ−µu∧w+τu∧δ+w∧δ.
+The non-zero products of complementary basis bivectors are
+γu∧wδ=vol,γw∧uδ=−vol,γδ∧uw=vol,
+uw∧γδ=vol,uδ∧γw=−vol,wδ∧γu=vol,
+65
+=== PAGE 66 ===
+(all other products of two distinct basis bivectors vanish), whence
+E∧σ 1 ∧σ 2 =
+
+Eγu ·1−E γw ·τ−E γδ ·µ+E uw ·6µ+E uδ ·β+E wδ(6µ2 −τβ)
+
+vol=P E(z)vol.
+Lemma 9.3(linear independence of the period functions).Ifa,b,c,d,e∈Csatisfy
+a+bτ+cµ+dβ+e(6µ 2 −τβ)≡0 onh z,
+thena=b=c=d=e=0. Consequently, forE∈ V2 V,
+PE ≡0⇐⇒E∈Zη.
+Proof.By (9.1),
+(6µ2 −τβ)◦g 0 =6µ 2 −(τ−1)(β+1) = (6µ 2 −τβ) + (β−τ+1).
+Evaluating the relation atg 0zand subtracting the relation atzgives
+−b+d+e(β−τ+1)≡0.
+If e̸= 0 this makes β−τ constant, which is impossible because (β−τ)◦g 0 =β−τ+ 2. Hence e= 0 and
+d=b, and the relation becomes
+a+b(τ+β) +cµ≡0.
+By (9.1), (τ+β)◦g 2 =− 1/τ+β− 3 − 6µ2/τ and µ◦g 2 = 1 +µ/τ ; evaluating at g2z, subtracting, and
+multiplying by−τwe obtain
+6bµ2 +c(τ−1)µ+b(τ 2 +3τ+1)−cτ≡0. (9.2)
+Evaluating (9.2) at g0z and subtracting (9.2) (use µ◦g 0 =µ , τ◦g 0 =τ− 1, and (τ− 1)2 + 3(τ− 1) +1 =
+τ2 +3τ+1−2(τ+1)) gives
+cµ+2b(τ+1)−c≡0.
+If c̸= 0 this reads µ= 1 − 2b(τ+ 1)/c; applying g0 and using µ◦g 0 =µ , τ◦g 0 =τ− 1 yields 2b/c= 0,
+i.e. b= 0. If c= 0 it gives b= 0 directly. So in both cases b= 0, and (9.2) becomes c(µτ−µ−τ)≡ 0. If
+c̸= 0 then µ=τ/(τ− 1), while applying g0 gives µ= (τ− 1)/(τ− 2); equating, τ(τ− 2) = (τ−1)2, i.e.
+0=1. Hencec=0, and thena=0; finallyd=b=0.
+For the consequence: by Lemma 9.2,
+PE =E γu + (−Eγw)τ+ (6Euw −E γδ)µ+E uδ β+E wδ(6µ2 −τβ),
+so PE ≡ 0 if and only if Eγu =E γw =E uδ =E wδ = 0 and Eγδ = 6Euw, i.e. if and only if E=
+Euw (u∧w+6γ∧δ) =E uw η.
+Lemma 9.4( η is an indefinite (1, 1)-class).For every z∈h ◦
+z one has η∈NS(F π(z) ), η2 = 12, and the
+hermitian form Hη of η on C2 is non-degenerate of signature (1, 1). Consequently, for every integer n̸= 0,
+(nη)2 =12n 2 ̸=0,H nη =n H η is non-degenerate and indefinite.
+Proof.( 1, 1).For E=η one has Euw = 1, Eγδ = 6 and all other Eij = 0, so Pη =− 6µ+ 6µ≡ 0 and
+Lemma 9.2 applies. (This is the Lagrangian relationZ 11 =6µof §2.)
+Self-intersection.η∧η=2·6(u∧w)∧(γ∧δ) =12 vol, sinceu∧w∧γ∧δ=γ∧u∧w∧δ.
+Signature.Regard η as an alternating form on Λ: η( ˆu, ˆw) = 1, η( ˆγ, ˆδ) = 6, and η vanishes on the
+remaining pairs of basis vectors. Its inverseη ∨ is the alternating form onVwith
+η∨(u,w) =−1,η ∨(γ,δ) =− 1
+6 ,
+vanishing on the remaining pairs.
+We first record the exact relation between the hermitian form and the Gram matrix. By Appell–Humbert
+and the Riemann bilinear relations (see e.g. [ BL04, Ch. 2–4]), a class E∈NS is the imaginary part of a
+unique hermitian form HE on C2; write HE(ζ, ζ′) =∑a,b(HE)abζa ¯ζ′
+b in the linear coordinates ζ1, ζ2 on C2
+dual toσ 1,σ2, so thatdζ a =σ a inV⊗C. Put
+GE :=
+ 
+i E∨(σa, ¯σb)
+
+a,b=1,2,E ∨ the inverse ofE.
+66
+=== PAGE 67 ===
+Then, as a 2-form, ImH E = 1
+2i ∑a,b(HE)ab dζa ∧d ¯ζb, i.e.
+E=− i
+2 ∑
+a,b
+(HE)ab σa ∧ ¯σb;
+hence in the basis (σ1, σ2, ¯σ1, ¯σ2) of V⊗C the matrix of E is
+
+0A
+−AT 0
+
+with A=− i
+2 HE, whose inverse is
+0−(A T)−1
+A−1 0
+
+, so thatE ∨(σa, ¯σb) =−2i (H−1
+E )ab. Therefore
+GE =2 H−1
+E , equivalentlyH E =2 GE
+−1
+;
+in particularH E andG E are simultaneously non-degenerate and have the same signature.
+A direct computation withσ 1 =6µγ+τu+w,σ 2 =βγ+µu+δgives
+η∨(σ1, ¯σ1) =−τ+ ¯τ=−2iImτ,η ∨(σ1, ¯σ2) =−µ+ ¯µ=−2iImµ,η ∨(σ2, ¯σ2) =−β− ¯β
+6 =− i
+3 Imβ,
+so that
+Gη =
+ 
+2 Imτ2 Imµ
+2 Imµ 1
+3 Imβ
+!
+, detG η = 2
+3 ImτImβ−4(Imµ) 2 = 2
+3 Imτ·D,
+with D=Imβ− 6(Imµ) 2/ Imτ . By Theorem 3.4, Imτ> 0 and D< 0 on hz, so detG η < 0: the real
+symmetric 2 × 2 matrix Gη is non-degenerate with eigenvalues of opposite signs, i.e. of signature (1, 1),
+and by the relation above the same holds for Hη = 2G−1
+η (Gη being real). For instance at τ=iT , µ= 0,
+β=−iT(soD=−T<0) one findsG η =diag(2T,−T/3)andH η =2G −1
+η =diag(1/T,−6/T).
+Proposition 9.5.The set
+C:={z∈h ◦
+z : NS(F π(z) )̸=Zη}
+is countable, anda(F π(z) ) =0 for everyz∈h ◦
+z ∖C.
+Proof.By Lemmas 9.2 and 9.4,Zη⊆NS(F π(z) )for everyz, and
+C=
+[
+E∈V2 V∖Zη
+{z∈h ◦
+z :P E(z) =0}.
+ForE/∈Zηthe holomorphic functionP E is not identically zero on the connected domainh z (Lemma 9.3),
+so its zero set is discrete, hence countable; and V2 V ∼= Z6 is countable. ThusCis countable.
+Let now z/∈ C, put T:=F π(z) , and suppose a(T)≥ 1. By the structure theory of the algebraic reduction
+of a complex torus ([ LB99, Ch. 2]; see also [ BHPV, Ch. IV ,VI]) there is a subtorus T1 ⊂T such that
+p:T→T a :=T/T 1 is the algebraic reduction andT a is an abelian variety of dimensiona(T).
+• If a(T) = 2 then T=T a is an abelian surface; let h∈NS(T) be the class of an ample line bundle.
+Then Hh is positive definite, whereas h=nη for some n̸= 0 and Hnη is indefinite by Lemma 9.4:
+contradiction.
+• If a(T) = 1 then Ta is an elliptic curve and T1 is a 1-dimensional subtorus; the class φ:=p ∗[pt]∈
+NS(T) of a fibre satisfies φ2 = 0. Moreover φ is the Poincaré dual of the fibre class [T1]∈H 2(T; Z),
+so for a flat Kähler formωonTone has Z
+T
+φ∧ω=
+Z
+T1
+ω>0,
+whenceφ̸=0. Butφ=nηwithn̸=0 forcesφ 2 =12n 2 ̸=0 (Lemma 9.4): contradiction.
+Hencea(T) =0.
+Lemma 9.6.Let g∈ M(X)and suppose that g|Fb is constant for uncountably many b∈B ◦. Then g=f ∗φ
+for a (unique)φ∈ M(B) =C(t).
+Proof. Let |P| ⊂Xbe the polar divisor of g (a hypersurface containing the indeterminacy locus of g) and
+put
+Ω:=f −1(B◦)∖|P|,
+67
+=== PAGE 68 ===
+a connected open subset of X on which g is holomorphic and f is a submersion. Only finitely many fibres
+are contained in |P| (each is then a union of irreducible components of |P|); for every other b∈B ◦ the
+set Fb ∩Ω is a connected 2-dimensional closed submanifold of Ω, dense in Fb, and g|Fb is a well-defined
+meromorphic function onF b.
+Let
+Z:={x∈Ω:(dg∧f ∗dt)(x) =0} ⊂Ω,
+an analytic subset, wheretdenotes a local holomorphic coordinate on B (the condition is independent of
+the choice). Ifg| Fb is constant thenF b ∩Ω⊂Z.
+Assume Z̸=Ω . Then Z is a proper analytic subset of the connected 3-fold Ω, so each of its irreducible
+components has dimension ≤ 2, and there are at most countably many components (Ω is second countable).
+Each Fb ∩Ω contained in Z is an irreducible closed analytic subset of Z of dimension 2, hence is contained
+in, and therefore equal to, one of the (finitely or countably many) 2-dimensional components; distinct b
+give disjoint, hence distinct, components. So only countably many b would have g|Fb constant, contrary to
+hypothesis.
+Hence Z=Ω , i.e. dg annihilates kerd f at every point of Ω; as the sets Fb ∩Ω are connected, g is
+constant on each of them, and g=φ◦f on Ω with φ a function on B◦ minus the finite set of the bad b’s.
+The function φ is holomorphic there: locally φ=g◦s for a holomorphic local section s of the submersion
+f|Ω.
+It remains to see that φ is meromorphic at each of the finitely many remaining points t0 ∈B . Choose
+x∈f −1(t0) and local coordinates centred at x; since the germs of f −1(t0) and of |P| at x are hypersurface
+germs, there is a holomorphic disc κ:(∆ , 0)→(X , x) with κ(∆)̸⊂ |P|and f◦κ non-constant, say f◦κ(s) =
+t0 +s k ·(unit) in a local coordinate at t0. Then g◦κ is meromorphic on ∆, and g◦κ=φ◦(f◦κ) off a
+discrete subset of ∆. Consequently |g◦κ(s)| ≤C|s| −M near 0 for some M, whence |φ(t)| ≤C′|t−t 0|−M/k
+on a punctured neighbourhood of t0; so (t−t 0)N φ is bounded for N≫ 0 and extends holomorphically by
+Riemann’s theorem, i.e. φ is meromorphic at t0. Thus φ∈ M(B) =C(t)and g=f ∗φ on the dense open
+setΩ, hence everywhere.
+Proposition 9.7.a(X) =1,M(X) =f ∗M(B), andfis the algebraic reduction ofX.
+Proof. Let g∈ M(X)with polar divisor |P|. By Proposition 9.5 the set π(C)⊂B ◦ is countable, and only
+finitely many fibres are contained in|P|; sinceBis uncountable, there are uncountably manyb∈B ◦ with
+a(Fb) =0 andF b ̸⊂ |P|.
+For such b the restriction g|Fb is a meromorphic function on the compact connected torus Fb, hence constant.
+By Lemma 9.6,g∈f ∗M(B). Therefore
+M(X) =f ∗M(B) ∼= C(t),
+the pullback f ∗ being injective because f is surjective; in particular a(X) =trdegC C(t) =1. Finally, f is a
+surjective holomorphic map onto the projective curve B with connected fibres and f ∗M(B) =M(X) , i.e.
+fis the algebraic reduction ofX.
+Corollary 9.8.The set of b∈B for which Fb is not a smooth fibre with NS(Fb) =Zη is contained in a
+countable union of proper analytic subsets ofB(i.e. is countable); for all otherb,
+NS(Fb) =Zηanda(F b) =0.
+In particular thevery generalfibre of the algebraic reduction f has algebraic dimension 0, and carries no
+non-constant meromorphic function.
+Proof. Immediate from Proposition 9.5: the exceptional set is Σ∪π(C) , a countable subset of the curve B,
+and proper analytic subsets ofBare exactly the finite sets.
+The statement is independent of the marking used to identify H2(Fb; Z) with V2 V: the class η is
+invariant under the monodromy group of the family over B◦ (Lemma A.1(6) of the Appendix; equivalently,
+the monodromy-invariance lemma of §2), so the subgroup Zη⊂H 2(Fb; Z), and hence the equality
+NS(Fb) =Zη, does not depend on the chosen marking.
+68
+=== PAGE 69 ===
+Remark9.9 (second proof that a(X) =1).We record the route through [ CDP20]. It yields a(X) =1, and
+hence also M(X) =f ∗M(B): indeed M(X) then has transcendence degree 1 over C, so it is algebraic
+over the subfield f ∗M(B), which is algebraically closed in M(X) because f is proper and surjective
+with connected fibres onto the normal curve B [Ue75, §3]; whence M(X) =f ∗M(B). It doesnotyield
+Corollary 9.8, and it uses the topological computations of §7 and §9.4.
+(a) a(X)̸=3.A Moishezon threefold hasb 2 >0 [CDP98, Lemma 1.4], whileb 2(X) =0 by §7.
+(b) If a(Y)≥ 2for a compact connected complex manifold Y, then some non-constant h∈ M(Y) isnot
+holomorphic as a map Y99KP 1.Choose algebraically independent g1, g2 ∈ M(Y). If one of them is already
+non-holomorphic, we are done; otherwise Φ:= (g 1, g2):Y→P 1 ×P 1 is holomorphic, and Φ(Y) is an
+irreducible compact analytic subset (Remmert) of dimension 2 — a point or a curve (algebraic by Chow)
+would give an algebraic relation between g1 and g2 — so Φ is surjective. By upper semicontinuity of
+fibre dimension, S:={q: dimΦ −1(q)≥ 2} is a proper analytic subset, and it is finite: if it contained a
+curve Γ then dimΦ −1(Γ)≥ 3 =dimY , so Φ(Y)⊂Γ . Pick (a1, a2)∈C 2 ∖S and x∈Φ −1(a1, a2), and put
+u:=g 1 −a 1, v:=g 2 −a 2 ∈ OY,x : both vanish at x, and they are coprime in the factorial ring OY,x , since a
+common prime factor p would give a hypersurface germ {p= 0} ⊂(Φ−1(a1, a2), x), which has dimension
+≤1. Then
+h:= 1
+g1 −a 1
++ 1
+g2 −a 2
+= u+v
+uv
+is a reduced fraction at x (a prime dividing uv divides u or v, and if it also divided u+v it would divide
+both), with both u+v and uv vanishing at x; hence x is an indeterminacy point of h. (The choice (a1, a2)/∈S
+is essential: if the level sets shared a component with different multiplicities, such a sum could well be
+holomorphic there.)
+(c) a(X)̸= 2.If a(X) = 2, then by (b) there is a non-constant meromorphic, non-holomorphic map
+X99KP 1, so the hypotheses of [ CDP20, Thm. 2.1] are met. We quote that theorem verbatim [ CDP20,
+Thm. 2.1, p. 679] (in it, B denotes a holomorphic vector bundle, not our base curve, andg is the meromorphic
+map, not a generator of∆):
+2.1. Theorem. Let X be a 3-dimensional compact complex manifold with b 2(X) =0. Assume that there
+exists a non-holomorphic meromorphic non-constant map g:X99KP 1. Let B be a holomorphic vector
+bundle on X. Then
+a) Hi(X,B⊗M) =0for i≥0and M∈Pic ◦(X)generic.
+b)χ(X,B⊗M) =0for all M∈Pic ◦(X).
+c) c3(X) =0; i.e., either b 1(X) =0and b 3(X) =2, or b 1(X) =1and b 3(X) =0.
+followed there by“Another proof has been given in [LSS18].”(loc. cit.’s [LSS18] is our [ LRS]). Our X has
+b2(X) = 0 (§7), so part c) would give c3(X) = 0, contradicting c3(X) =e(X) = 2 (§9.4). (See also [ LRS,
+Thm. 3.1].) With (a) andf ∗M(B)⊂ M(X)this givesa(X) =1.
+(d) A related holomorphic statement.Independently of the above,
+ifh:X→P 1 is holomorphic, thenh=φ◦ffor a (unique) holomorphicφ:B→P 1. (9.3)
+Indeed, L:=h ∗OP1 (1) has c1(L) =0 because H2(X; Z) =0 (§7); if h|Fb were non-constant for some b∈B ◦,
+it would be surjective and D:= (h|Fb )−1(∞) would be a non-empty effective divisor with OFb (D) ∼= L|Fb .
+On a compact complex torus a line bundle with vanishing first Chern class is given by a unitary character
+of the lattice (Appell–Humbert, [ BL04, Ch. 2]), and its sections are the entire functions θ on C2 with
+θ(ζ+ℓ) =χ(ℓ)θ(ζ) , which are bounded, hence constant, and non-zero only for χ≡ 1; so OFb (D) ∼= OFb
+with D≥ 0 forces D= 0, a contradiction. Thus h is constant on the fibres over B◦ and factors through the
+proper mapfwith connected fibres onto the normal curveB[Ue75, §3].
+(e) Caveat. X contradicts [CDP20, Cor. 2.3], the failure being located in [ CDP20, Thm. 2.2] (see §10);
+using [CDP20, Thm. 2.1] is legitimate only insofar as its proof is independent of that step (it is, and [ LRS]
+reproves it). The proof of Proposition 9.7 uses neither §7 nor [CDP20].
+69
+=== PAGE 70 ===
+9.2 Automorphy factors and the canonical bundle
+Recall[P g |R g] =Π(gz)M −1
+g , i.e.
+Rg(z)Π(z)λ=Π(gz)A gλ(λ∈Λ),A g :=M −1
+g . (9.4)
+Lemma 9.10.(i) Rg0 ≡I , detR g1 =− 1/τ, detR g2 = 1/τ; moreover Rgj (zj) fixes e2 =Π(z j) ˆδ and has
+second eigenvalueζ
+aj
+j , with(a 1,a 2) = (2, 1); in particular detRgj (zj) =ζ
+aj
+j and 0<a j <m j.
+(ii) On J′
+j the form s
+kj
+j eφj dsj ∧e , with kj :=m j − 1 −a j (so k1 = 0, k2 = 2) and eφj a suitable unit on
+∆j, is invariant under ⟨ ˜glog
+j ⟩ and descends to asectionof KNj whose divisor is kjSj; it is a generator of
+KNj precisely where it does not vanish, i.e. everywhere if kj = 0 and on Nj ∖S j if kj > 0. Consequently
+KN1
+∼= ON1 ,K N2
+∼= ON2 (2S2), andK N0
+∼= ON0 .
+Proof. (i) By (9.4) the columns of Rg(z) are Π(gz)A g ˆw and Π(gz)A g ˆδ. With A1 ˆw= ˆu− ˆw, A1 ˆδ= ˆδ and
+A2 ˆw=− ˆu+ ˆδ,A 2 ˆδ= ˆδa direct computation gives, writingτ ♯ =τ(g jz),µ ♯ =µ(g jz),
+Rg1 =
+
+τ♯−1 0
+µ♯ 1
+
+,R g2 =
+
+−τ♯ 0
+1−µ♯ 1
+
+,
+so detR g1 = (τ− 1)/τ− 1 =− 1/τ and detR g2 =−τ(g 2z) = 1/τ; for g0, M0 ˆw= ˆw, M0 ˆδ= ˆδ and
+(τ, µ, β)◦g 0 = (τ− 1, µ, β+ 1) give Rg0 =I . As ˆδ is Aj-invariant, Rgj (zj)e2 =e 2; in the basis (e1, e2) =
+(Π ˆw, Π ˆδ) the matrix Rgj (zj) is lower triangular with (2, 2)-entry 1, so its second eigenvalue is its (1, 1)-entry
+— the vector e1 itself need not be an eigenvector — namely τ(z1)− 1 =ρ− 1 =e 2πi/3 =ζ 2
+1 for j= 1 and
+−τ(z2) =−i=ζ 2 for j= 2. Since the (2, 2)-entry is 1, the determinant equals this second eigenvalue ζ
+aj
+j ,
+and(a 1,a 2) = (2, 1)satisfies 0<a j <m j = (3, 4)j.
+(ii) On J′
+j = (∆j ×C 2)/Λ the form dsj ∧e is Λ-invariant and nowhere zero, and since ˜glog
+j (z, ζ) =
+(gjz,R gj (z)ζ+Π(g jz)vj/mj)and theds j-components die againstds j,
+( ˜glog
+j )∗ 
+F dsj ∧e
+
+= (F◦g j)χ(s j)ds j ∧e,χ:=ζ j detR gj .
+Here χ is nowhere zero on ∆j with ∏i<mj χ(ζi
+js) =1; writing χ=χ( 0)eψ, ψ(0) =0, the Z/mj-invariant
+part of ψ vanishes, so φ(s)−φ(ζ js) =ψ(s) is solvable in O(∆j), and F=s keφ satisfies F(ζjs)χ(s) =F(s)
+exactly when ζk
+j χ(0) = 1. By (i) χ(0) =ζ
+1+aj
+j , so k≡k j; the holomorphic invariant forms F dsj ∧e are
+thus exactly those with F∈s kj eφj · O(Dj), O(D j) being the invariant functions. Since ⟨ ˜glog
+j ⟩ acts freely
+(§5), J′
+j →N j is étale, the invariant form descends, and its divisor is kjSj (the reduced divisor {sj = 0}
+on J′
+j being the preimage of Sj). For N0: all rays of F lie at height 1, so t−1(0) =∑v Dv is reduced and
+Ω0 := dx1
+x1
+∧ dx2
+x2
+∧dt generates KYF; it is invariant under torus translations and under the shears Φ¯λ (as
+detφ ¯λ =1), hence under allΨ ¯λ, and descends.
+Proposition 9.11. K:=f ∗ωX/B is invertible of degree 1. The multivalued frame e of K|B◦ has automorphy
+factor detR g, generates K at p0, and vanishes at pj to order aj/mj, i.e. 2 /3 at p1, 1 /4 at p2. Moreover
+KX ∼= f ∗O(−1)⊗ O(2S2), andK X is not a torsion line bundle.
+Proof.K is torsion free of rank 1 on the smooth curve B, hence invertible; e is Λ-invariant with ˜g∗e=
+detR g ·e by (9.4). Near p0, Ω0 = (2πi)2dt∧e under E0 (as xi =e 2πiζi ), so e generates K there by
+Lemma 9.10(ii). Near pj, Lemma 9.15(c) together with the computation in the proof of Lemma 9.10(ii)
+says that the holomorphic ⟨ ˜glog
+j ⟩-invariant 3-forms on J′
+j are the F ds∧e with F∈s kj eφj O(D j); here e
+is unchanged under the regluing map hj of §5, by Lemma 9.16(i) (whose proof is independent of the
+present proposition), so the comparison of the two descriptions over D∗
+j is legitimate, and dividing by
+f ∗dtj =m jsmj−1dsshows that a unit timess −aj egeneratesKatp j, the asserted exponent.
+Degree.LetFbe the function of Lemma 3.10:Fis holomorphic onh z, satisfies the automorphy law
+F(gz) =ȷ g(z)−1 F(z) (g∈∆),
+70
+=== PAGE 71 ===
+is nowhere zero onh ◦
+z , vanishes to ordera j in the linearising coordinates j at the elliptic pointz j (j=1, 2),
+and has a simple pole at the cusp in the coordinate tc. Since ˜g∗e=detR g e=ȷ −1
+g e (Lemma 9.10(i) and
+Lemma 9.14(ii)), the product
+e:=F −1e
+is ∆-invariant, i.e. a section of K over B◦, and it is nowhere vanishing there, both F and e being nowhere
+zero on h◦
+z . Its behaviour at the three remaining points is read off from the frames just determined. At
+pj the frame of K is s−aj e, ande = (saj F−1)·(s −aj e) with saj F−1 a unit at s= 0; soeextends across pj and
+generates K there. At p0 the frame is e, and F−1 is a unit times tc; soeextends across p0 with a simple zero.
+Henceeis a global section ofKwith
+div(e) =p0, soK ∼= OB(p0) =OB(1), degK=1.
+The elliptic-surface reading(not used below).The degree just computed agrees with the elliptic-surface
+reading of the same data, the fibre types being forced by the monodromy together with e(Y) =12. Let
+Y→B be the relatively minimal elliptic surface withthishomological monodromy — of orders 3 and 4 at
+p1, p2 (orders in SL2(Z), the sign of the lift being fixed by Lemma 9.14) and unipotent at p0 — so that its
+j-invariant is jY = 1728 t; its Hodge bundle has degree e(Y)/12. Here jY is holomorphic on B∖{p 0} and τ
+is holomorphic on h◦
+z with Imτ> 0, so the period map does not degenerate over B◦: Y has no singular
+fibres outside Σ={p 0, p1, p2}; the only pole of jY is at p0 and is simple, so the fibre there is of type I1
+or I∗
+1 (n=ord p0 (jY)∞ = 1); and the fibres over p1, p2 are the ones attached to the elliptic points ρ, i with
+monodromy of orders 3 and 4, hence of type IV or IV∗ at p1 and III or III ∗ at p2. The corresponding local
+Euler numbers are 1 or 7, 4 or 8, and 3 or 9, and (1, 8, 3) is the unique choice with e(Y) =12 degK= 12;
+these are precisely the numbers 1 at the cusp and 12a j/mj =8, 3 at the two elliptic points.
+Canonical bundle.Put L:=K X ⊗ O(−2S2). By Lemma 9.10 and KX|Fb
+∼= O for b∈B ◦, L restricts
+trivially to every fibre with its scheme structure; here h0(OmjSj ) =1 because OmjSj is filtered with quotients
+OSj (−kSj), 0 ≤k<m j, and OSj (−Sj) has order exactly mj in Pic0(Sj) (§5). By Grauert’s theorem [ GrRe],
+[BaSt],M:=f ∗Lis invertible andf ∗M→Lan isomorphism. Sincef ∗O(2S2) =OB (0≤2<m 2),
+K=f ∗
+ 
+KX ⊗f ∗K−1
+B
+
+=M(2),
+so degM=−1 andK X =f ∗M⊗ O(2S2).
+Non-torsion.As divisors 4S 2 =f ∗p2, soO(8S 2) ∼= f ∗O(2)and
+K⊗4
+X
+∼= f ∗O(−4)⊗f ∗O(2) =f ∗O(−2).
+If K⊗n
+X
+∼= OX for some n≥ 1, then f ∗O(−2n) ∼= K⊗4n
+X
+∼= OX, whereas h0(X, f ∗O(−2n)) =
+h0(B,O(−2n)) =0 byf ∗OX =O B (Proposition 9.13) andh 0(OX) =1. HenceK X is not torsion.
+9.3 Direct images ofO X and the numbersh 0,q
+We first compute the coherent cohomology of the degenerate fibre W and compare it with constant
+coefficients. Recall from §4 the normalisation ν: dP 6 →W of the (non-simple) normal-crossing surface W:
+dP6 is a smooth rational surface containing the hexagon ∂=C 1 ∪ · · · ∪C6 of (−1)-curves in cyclic order,
+with vertices pi,i+1 :=C i ∩C i+1 (indices mod 6), ν is injective off ∂, and ν identifies Ci with Ci+3; the double
+locus isD=D 1 ∪D 2 ∪D 3 with
+Dk :=ν(C k) =ν(Ck+3) ∼= P1 (k=1, 2, 3),
+andWhas exactly two triple pointsP,Q. Putι k :D k ,→Wand
+ν+
+k :=ν| Ck :C k
+∼− − →Dk,ν −
+k :=ν| Ck+3 :C k+3
+∼− − →Dk.
+We also recall from §4 the combinatorial labelling used below: ρ1, . . ., ρ6 are the six lattice points adjacent
+to the origin in theA 2-triangulationT A2 , taken in cyclic order,
+ρ1 =e 1,ρ 2 =e 1 −e 2,ρ 3 =−e 2,ρ 4 =−e 1,ρ 5 =e 2 −e 1,ρ 6 =e 2
+(indices mod 6, so that ρi+3 =−ρ i and ρi+1 −ρ i =ρ i+2); Ci ⊂dP 6 is the toric curve attached to the cone
+over the edge [0, ρi], and O{0,ρi,ρi+1 } denotes the torus-fixed point attached to the cone over the triangle
+{0,ρ i,ρ i+1}, so thatp i,i+1 =C i ∩C i+1 =O {0,ρi,ρi+1 }.
+71
+=== PAGE 72 ===
+Lemma 9.12.(i) DefineC-linear sheaf maps onWbyν ♯(f) =f◦ν,
+δ0(f) k :=
+ 
+f|Ck
+
+◦(ν +
+k )−1 −
+ 
+f|Ck+3
+
+◦(ν −
+k )−1 onD k (k=1, 2, 3),
+δ1(g1,g 2,g 3):=
+ 
+g1(P)−g 2(P) +g3(P),g 1(Q)−g 2(Q) +g3(Q)
+
+(over an openU⊆WtheP-component is present only ifP∈U, and likewise forQ). Then
+0−→ OW
+ν♯
+− − →ν∗OdP6
+δ0
+− − →
+3M
+k=1
+ιk∗ODk
+δ1
+− − →CP ⊕C Q −→0 (9.5)
+is an exact sequence of sheaves onW, and the same formulas define an exact sequence
+0−→C W −→ν∗CdP6
+δ0
+− − →
+3M
+k=1
+ιk∗CDk
+δ1
+− − →CP ⊕C Q −→0, (9.6)
+the inclusions of constants giving a termwise map (9.6)→(9.5).
+(ii) hq(W, OW ) = 1, 2, 1 for q= 0, 1, 2; more precisely Hq(W, OW ) is the q-th cohomology of the
+simplicial cochain complex C→C 3 →C 2 of the dual complex of W (one vertex, three edgesD 1,D 2,D 3,
+two trianglesP,Q), which is the standard two-triangle CW structure of a real 2-torus.
+(iii) The map H1(W; C)→H 1(W, OW ) induced by CW ⊂ OW is an isomorphism, and H2(W; C)→
+H2(W, OW ) is surjective and injective on ker
+ 
+ν∗ :H 2(W; C)→H 2(dP6; C)
+
+; that is, a class α∈H 2(W; C)
+withν ∗α=0 has zero image inH 2(W,O W )if and only ifα=0.
+(iv) The cup productΛ 2 H1(W,O W )→H 2(W,O W )is an isomorphism.
+Proof. Combinatorics of ν.By §4 the gluing Ci →C i+3 is induced by the shear Ψ¯λ with B0 ¯λ=−ρ i, which
+carries the vertex pi,i+1 =O {0,ρi,ρi+1 } to O{−ρi,0,ρi+1 −ρi} =O {0,ρi+3 ,ρi+2 } =p i+2,i+3 , using ρi+1 −ρ i =ρ i+2 and
+−ρi =ρ i+3. Hence the six vertices fall into two classes according to parity,
+P=ν(p 12) =ν(p34) =ν(p56),Q=ν(p 23) =ν(p45) =ν(p61),
+and these are the two triple points. The three branches of W at P are the germs b1, b2, b3 of dP6 at p12, p34, p56,
+withb 1 ⊃C 1,C 2,b 2 ⊃C 3,C 4,b 3 ⊃C 5,C 6; consequently
+D1 =b 1 ∩b 2 (C1 ⊂b 1,C 4 ⊂b 2),D 2 =b 1 ∩b 3 (C2 ⊂b 1,C 5 ⊂b 3),D 3 =b 2 ∩b 3 (C3 ⊂b 2,C 6 ⊂b 3),
+so that each pair of branches meets along exactly oneD k and the local model of W at P is {xyz= 0} ⊂C3
+(as it must be, since t=z 0z1z2 at the corresponding toric point and the Γ-quotient is a local isomorphism).
+AtQthe branches arec 1,c 2,c 3, the germs atp 23,p 45,p 61, withc 1 ⊃C 2,C 3,c 2 ⊃C 4,C 5,c 3 ⊃C 6,C 1, so that
+D1 =c 3 ∩c 2,D 2 =c 1 ∩c 2,D 3 =c 1 ∩c 3.
+At a point ofD k ∖{P , Q} the model is {xy= 0} ×C, the two branches carrying Ck and Ck+3; elsewhere W
+is smooth.
+(i) δ1δ0 = 0.Let f be a section of ν∗OdP6 near P and let f1, f2, f3 be its values at p12, p34, p56, i.e. on
+the branches b1, b2, b3. By the table above, δ0(f) 1(P) =f 1 −f 2 (the + from C1 ⊂b 1, the − from C4 ⊂b 2),
+δ0(f) 2(P) =f 1 −f 3 andδ 0(f) 3(P) =f 2 −f 3, so
+δ1δ0(f)(P) = (f1 −f 2)−(f 1 −f 3) + (f2 −f 3) =0.
+At Q, with f ′
+i the value on ci, one gets δ0(f) 1(Q) =f ′
+3 −f ′
+2, δ0(f) 2(Q) =f ′
+1 −f ′
+2, δ0(f) 3(Q) =f ′
+1 −f ′
+3,
+and (f ′
+3 −f ′
+2)−(f ′
+1 −f ′
+2) + (f′
+1 −f ′
+3) =0. Thus the single global sign convention (" + on Ck, − on Ck+3",
+and δ1 =g 1 −g 2 +g 3 atbothtriple points) makes (9.5) a complex; it is the ˇCech differential of the
+branch covering in the orderings (b1, b2, b3) at P and (c1, c3, c2) at Q (the sign pattern of δ0 at Q being the
+tournamentc 1 >c 3 >c 2).
+(i) Exactness.This is local, and by the description above there are three kinds of points. (Equivalently,
+one may quote the gluing Lemma of §10, which presents OW as the fibre product of ν∗OdP6 over the ODk ;
+the computations below are its local form, and we give them in full.)
+(a) W smooth at x: ν is biholomorphic near x and the remaining terms of (9.5) vanish near x, so the
+sequence reduces to 0→ O =− − → O →0.
+(b) x∈ Dk ∖{P , Q}:the model is A:=C{x , y, z}/(xy) with branches A1 =C{y , z} (x= 0) and
+72
+=== PAGE 73 ===
+A2 =C{x,z}(y=0) and double curveA 12 =C{z}, and (9.5) becomes
+0→A→A 1 ⊕A 2
+(a,b)7→a| y=0 −b|x=0
+− − − − − − − − − − − →A12 →0.
+Injectivity holds because (x)∩(y) = (xy) in C{x, y, z}. If a(0, z) =b( 0, z), then f:=a(y , z) +b(x, z)−
+a(0, z) lies in C{x, y, z} and restricts to a on {x= 0} and to b on {y= 0}, so the image is the whole kernel;
+and(g(z), 0)7→ggives surjectivity.
+(c) x=P (or Q):the model is A=C{x , y, z}/(xyz) with branches A1 =C{y , z}, A2 =C{x , z},
+A3 =C{x , y}, double curves A12 =C{z} , A13 =C{y} , A23 =C{x} , triple point A123 =C , and by the
+combinatorial table (9.5) becomes (after the relabelling of branches recorded above)
+0→A→
+M
+i
+Ai
+d0
+− − →
+M
+i<j
+Aij
+d1
+− − →C→0,d 0(f) ij =f i| −fj|,d 1(g) =g12(0)−g 13(0) +g23(0).
+Injectivity:(x)∩(y)∩(z) = (xyz). Exactness at L Ai: supposef i =f j on each lineL ij and put
+f:=f 3(x,y) +
+
+f1(y,z)−f 1(y, 0)
+
++
+
+f2(x,z)−f 2(x, 0)
+
+−
+
+f2(0,z)−f 2(0, 0)
+
+.
+Then f|z=0 =f 3; f| x=0 =f 3(0, y) +f1(y, z)−f 1(y, 0) =f 1(y, z) because f3(0, y) =f 1(y, 0) on L13; and
+f|y=0 =f 3(x, 0) +
+
+f1(0, z)−f 1(0, 0)
+
++f 2(x, z)−f 2(x, 0)−
+
+f2(0, z)−f 2(0, 0)
+
+=f 2(x, z), using f3(x, 0) =
+f2(x, 0) on L23 and f1(0, z) =f 2(0, z) on L12. Exactness at L Aij : d1d0 = 0 was checked above; conversely,
+if g12(0)−g 13(0) +g23(0) =0, put f3 := 0, f1(y, z):=g 13(y) +g12(z)−g 12(0), f2(x, z):=g 23(x). Then
+f1| −f3|=g 13 on L13, f2| −f3|=g 23 on L23, and on L12, f1| −f2|=g 13(0) +g12(z)−g 12(0)−g 23(0) =
+g12(z)by the relation. Finally(c, 0, 0)7→cgives surjectivity ofd 1.
+In each of (a), (b), (c) the same computation with O replaced by germs of locally constant functions is
+the statement that 0 →C→C→ 0, 0 →C→C 2 →C→ 0, 0 →C→C 3 →C 3 →C→ 0 are exact, i.e.
+the reduced simplicial cochain complexes of a point, a 1-simplex and a 2-simplex; so (9.6) is exact as well,
+and the termwise inclusions of constants commute withν ♯,δ 0,δ 1 by construction.
+(ii).By (i), OW is quasi-isomorphic to the complex K• :=
+
+ν∗OdP6 → L
+k ιk∗ODk →C P ⊕C Q
+
+placed
+in degrees 0, 1, 2. The maps ν and ιk are finite, so Hq(W, ν∗OdP6 ) =H q(dP6, OdP6 ) = (C, 0, 0) (dP6 is a
+smooth rational surface) and Hq(W, ιk∗ODk ) =Hq(P1, O) = (C, 0). Hence in the hypercohomology spectral
+sequenceE p,q
+1 =H q(W,K p)⇒H p+q (W,O W )all rowsq≥1 vanish and
+Hn(W,O W ) =Hn 
+Γ(W,K •)
+
+,Γ(W,K •):C
+d0=0
+− − − →C3 d1
+− − →C2,d 1(a1,a 2,a 3) = (a1 −a 2 +a 3)(1, 1);
+here d0 = 0 because a constant function on dP6 has equal restrictions to Ck and Ck+3. This complex is
+precisely the simplicial cochain complex of the dual complex described in the statement, and
+h0(OW ) =1,h 1(OW ) =dim kerd1 =2,h 2(OW ) =dim cokerd1 =1,
+soχ(O W ) =0, the same numbers as for a smooth fibre.
+(iii).Run the same spectral sequence for (9.6): its row q= 0 is thesamecomplex Γ(W, K•) (all the pieces
+dP6,D k, {P}, {Q} being compact and connected), its row q= 1 vanishes ( H1(dP6; C) =H 1(P1; C) =0),
+and its row q= 2 is H2(dP6; C) =C 4 → L
+k H2(Dk; C) =C 3 → 0. The comparison map of spectral
+sequences induced byC→ Ois the identity on row 0 and zero on the rowsq≥1 (whose targets vanish).
+In total degree 1 the only surviving term on either side is E1,0
+2 =kerd 1, and the comparison is the
+identity there; hence H1(W; C)→H 1(W, OW ) is an isomorphism (both spaces being kerd 1 ∼= C2). In total
+degree 2, H2(W, OW ) =E2,0
+2 =cokerd 1, while for C-coefficients E2,0
+∞ =cokerd 1 as well (the only possibly
+incoming differential is d2 from E0,1
+2 = 0), E1,1
+∞ = 0, and E0,2
+∞ ⊆H 2(dP6; C) with edge map the restriction ν∗.
+WritingF • for the filtration ofH 2(W;C), we therefore have
+kerν ∗ =F 1 H2(W;C) =F 2 H2(W;C) =E 2,0
+∞ =cokerd 1,
+and the comparison map carries this subspace isomorphically onto E2,0
+2 =H 2(W, OW ). In particular
+H2(W;C)→H 2(W,O W )is surjective and injective on kerν ∗, which is (iii).
+(iv).The sheaf inclusion CW ⊂ OW induces a ring homomorphism H•(W; C)→H •(W, OW ), by
+naturality of the cup product. Let γ, u∈H 1(W; Z) be the basis of Proposition 7.12 (so that sp1(γ, u) =
+(γ, u)∈V T0 ), and let γ0,1, u0,1 be their images in H1(W, OW ); by (iii) these form a basis of H1(W, OW ). By
+Proposition 7.12, γ∪u=T ∨
+B ̸= 0, the class dual to TB in the basis ([D1], [D2], [D3], [TB]) of H2(W). Now
+73
+=== PAGE 74 ===
+H2(dP6; Z) ∼= Z4 is generated by the classes [C1], . . ., [C6] of the six hexagon (−1)-curves alone (they span,
+subject to two relations), and ν∗[Ci] = [Dimod 3 ], on which T∨
+B vanishes; hence, by the projection formula,
+ν∗(T∨
+B ) =0. By (iii), a non-zero class in kerν ∗ has non-zero image inH 2(W,O W ); hence
+γ0,1 ∪u 0,1 =image ofγ∪u̸=0 inH 2(W,O W ).
+As h2(OW ) =1 and Λ2 H1(W, OW ) is spanned by γ0,1 ∧u 0,1, the cup product Λ2 H1(W, OW )→H 2(W, OW )
+is an isomorphism.
+Proposition 9.13. f∗OX =O B, R1 f∗OX ∼= O ⊕ O(−1), R2 f∗OX ∼= O(−1). Consequently h0,0 =h 0,1 = 1,
+h0,2 =h 0,3 =0,h 3,3 =h 3,2 =1,h 3,1 =h 3,0 =0.
+Proof. fis proper with connected fibres onto the normal curveB, sof ∗OX =O B.
+Step 0: flatness, and the topological input.The map f is flat. Indeed, X is a connected complex manifold, B
+a smooth curve and f non-constant, hence open; equivalently, for each x∈X no non-zero germ in OB,f(x)
+vanishes identically near x, so OX,x is torsion free — and therefore flat — over the discrete valuation
+ring OB,f(x) . The same applies to the restrictions f0 :N 0 →D 0 and f| Nj :N j →D j. Moreover the scheme-
+theoretic fibre of f0 over p0 is thereduceddivisor W: all rays of F lie at height 1, so t−1(0) = ∑v Dv is
+reduced (Lemma 9.10(ii)), hence so is its quotientW.
+The following topological fact will be used:
+(T) The inclusion W,→N 0 induces an isomorphism on fundamental groups, both equal to ¯Λ: N0 =Y ε/Γ
+with π1(Yε) =1 (Corollary 4.8), and W=t −1(0)/Γ with t−1(0) simply connected, being a deformation
+retract of a tube {|t|<ρ} ⊂Y (Lemma A.2(6), a statement upstairs) which is simply connected by the
+argument of Corollary 4.8; Γ acts freely on both and the inclusion is Γ-equivariant. Hence restriction
+H1(N0; C)→H 1(W; C) is an isomorphism, both being Hom( ¯Λ, C). Moreover, by Proposition 7.12,
+forb∈D ∗
+0 the restriction
+H1(W;C)
+sp1
+− − →H1(Fb;C) =V⊗C(9.7)
+is injective with image VT0 ⊗C=Cγ⊕Cu , carrying the basis γ, u of H1(W; C) of Lemma 9.12(iv) to
+γ,u∈V.
+Step 1: local freeness and base change.Over B◦ the fibres are complex 2-tori with hq(OFb ) = (1, 2, 1). Near
+p0 the fibre of the proper flat map f0 over p0 is the reduced surface W, again with hq(OW ) = (1, 2, 1) by
+Lemma 9.12(ii). Hence b7→h q(f −1(b), O) is constant on B◦ ∪ {p0} for every q, and Grauert’s theorem
+[GrRe], [BaSt, III.§3] applies there: Rq f∗OX is locally free of rank 1, 2, 1 on B◦ ∪ {p0} andeverybase-change
+map
+Rq f∗OX ⊗k(b)−→H q(f −1(b),O),q=0, 1, 2,
+is an isomorphism, compatibly with cup products. Near pj the scheme fibre is the non-reduced mjSj and we
+argue instead on the cover: Nj =J ′
+j /⟨ ˜glog
+j ⟩ with ˜f:J ′
+j →∆ j smooth and proper, and taking Z/mj-invariants
+is exact, so withπ(s) =s mj ,
+Rq f∗ONj =
+ 
+π∗Rq ˜f∗OJ′
+j
+Z/mj
+;
+decomposing Rq ˜f∗O into eigenframes and using π∗O∆j = L
+r<mj srODj , these invariants are free of ranks
+1, 2, 1. Thus allR q f∗OX are locally free onB, of ranks 1, 2, 1; writeG:=R 1 f∗OX.
+Step 2: R2 f∗OX and degG .Relative duality [ RRV] gives R2 f∗OX ∼= K−1 ∼= O(−1) by Proposition 9.11.
+The hypotheses are met: f is flat (Step 0) and proper, its fibres — including the non-reduced ones mjSj
+— are Gorenstein, since X is smooth and f flat, so that ωX/B =K X ⊗f ∗K−1
+B is invertible and is a relative
+dualising sheaf, and the sheaves Rq f∗OX are locally free by Step 1; hence relative duality applies. We claim
+that the relative cup productΛ 2G→R 2 f∗OX is an isomorphism; as both sides are line bundles it suffices
+to check non-vanishing at each point ofB.
+Over B◦ this is, by the base change of Step 1, the isomorphism Λ2 H1(OFb ) ∼= H2(OFb ) on a complex
+2-torus. At p0 it is, again by base change, the map Λ2 H1(W, OW )→H 2(W, OW ), an isomorphism by
+Lemma 9.12(iv).
+74
+=== PAGE 75 ===
+At pj we work on the cover. Linearise the action of the cyclic group Z/mj on the free O(∆j)-module
+R1 ˜f∗OJ′
+j
+of rank 2 (average over the group) and choose a frame v1, v2 on which the generator acts by
+constants ν1, ν2; then it acts on the frame v1 ∧v 2 of Λ2 by ν1ν2. (Such an eigenframe exists, and may
+be chosen so as to contain a prescribed invariant nowhere-vanishing section v1: after averaging, the
+generator acts semilinearly over s7→ζ js and induces on the fibre at s= 0 a linear map of order dividing
+mj, hence diagonalisable; diagonalise it with first eigenvector the value v1(0)̸= 0, lift the remaining
+eigenvector arbitrarily and average it against its eigenvalue — the resulting eigensections still form a
+frame by Nakayama.) A section c(s)vi is invariant iff c(s) =νic(ζjs), i.e. iff c∈s ri O(D j) with the unique
+ri ∈ {0, . . ., mj − 1} such that νiζ ri
+j = 1; likewise the invariants of Λ2 are generated by sr(v1 ∧v 2) with
+r∈ {0, . . . ,mj −1},r≡r 1 +r 2 (modm j). Now:
+•r 1 = 0 for a suitable v1: by Step 3 below, γ0,1 is an invariant nowhere-zero section of R1 ˜f∗O over ∆j,
+which we take asv 1 (soν 1 =1; this is legitimate by the parenthetical remark above);
+•r=a j: indeed Λ2R1 ˜f∗O ∼= R2 ˜f∗O ∼= ( ˜f∗ωJ′
+j /∆j )−1, and ˜f∗ωJ′
+j /∆j has the frame e on which the generator
+acts by detR gj , of value ζ
+aj
+j at s= 0 (Lemma 9.10(i)); hence the generator acts on the dual frame by
+ζ
+−aj
+j and r is determined by ζ
+−aj
+j ζ r
+j = 1, i.e. r=a j, which lies in {0, . . ., mj − 1} because 0 <a j <m j
+(Lemma 9.10(i)).
+Thereforer 2 ≡r 1 +r 2 =r=a j (modm j)withr 2,a j ∈ {0, . . . ,mj −1}, so
+r1 +r 2 =a j <m j,r 2 =a j =r,
+and v1 ∧(s r2 v2) =sr(v1 ∧v 2): the cup product carries the invariant frame of Λ2 
+R1 f∗ONj
+
+to the invariant
+frame of R2 f∗ONj , i.e. it is an isomorphism at pj (no "carrying" mod mj occurs, precisely because
+r1 +r 2 <m j).
+HenceΛ 2G ∼= R2 f∗OX ∼= O(−1)and degG=−1.
+Step 3: γ0,1 away from p0.The class γ∈V is T1- and T2-invariant, hence a flat section of R1 f∗Z over
+B◦, and its image γ0,1 in G|B◦ = (V⊗ O)/F1 is holomorphic and nowhere zero there, since aσ1 +bσ 2 =γ
+forces a=b= 0 (compare the w- and δ-coefficients). At p1, p2 the local system pulls back to theconstant
+system on the disc ∆j (the monodromy of gj having been unwound there), γ is a constant, hence invariant,
+section of it, and the same comparison of coefficients at z=z j gives γ0,1(zj)̸= 0; as J′
+j →N j is étale, γ0,1 is
+an invariant nowhere-zero section of R1 ˜f∗OJ′
+j
+over ∆j and descends to a nowhere-zero section of G over Dj.
+Step 4:γ 0,1 and u0,1 at p0.The inclusionC⊂ O N0 induces anO-linear map
+R1 f0∗CN0 ⊗ OD0 −→R 1 f0∗ON0 =G| D0 ,
+defined on all of D0, and restriction of cohomology classes to the fibres gives H1(N0; C)→H 0(D0, R1 f0∗C).
+By (T) the restriction H1(N0; C)→H 1(W; C) is an isomorphism, so the basis γ, u of H1(W; C) of
+Lemma 9.12(iv) lifts to classesc γ,c u ∈H 1(N0;C)and produces holomorphic sections
+γ0,1,u 0,1 ∈H 0(D0,G)
+over thewholedisc. Their values at p0 are computed by the base-change isomorphism G⊗k(p 0) ∼=
+H1(W, OW ) of Step 1 together with the functoriality of C⊂ Ofor W⊂N 0: they are the images of cγ|W =γ
+andc u|W =uunder
+H1(W;C)−→H 1(W,O W ),
+which is an isomorphism by Lemma 9.12(iii). Hence γ0,1(p0), u0,1(p0) form a basis of G⊗k(p 0); in
+particular γ0,1(p0)̸= 0, so Oγ0,1 ⊂G is a subbundle near p0, and (γ0,1, u0,1) is a holomorphic frame of G
+on a neighbourhood of p0. Finally, over D∗
+0 the section γ0,1 just constructed coincides with the one of Step
+3: by (9.7) the restriction of cγ to Fb is γ∈V , whose image in (V⊗ O)/F1 is the section of Step 3. So the
+two constructions glue to one global sectionγ 0,1 ofGoverB, nowhere vanishing.
+Step 5: conclusion.By Steps 3 and 4, γ0,1 is a nowhere-vanishing global section of G, so Oγ0,1 ⊂G is a
+subbundle (over B◦ by the chart condition of §3, at pj via the covers, at p0 by Step 4), with quotient the
+75
+=== PAGE 76 ===
+line bundle Λ2G⊗(Oγ 0,1)−1 ∼= Λ2G ∼= O(−1) by Step 2. As Ext1(O(−1), O) =H 1(P1, O(1)) = 0, the
+extension splits:G ∼= O ⊕ O(−1).
+Since dimB= 1, Leray gives 0 →H 1(Rq−1 f∗OX)→H q(OX)→H 0(Rq f∗OX)→ 0, whence h0,0 = 1,
+h0,1 =h 0(G) =1,h 0,2 =h 1(G) +h0(O(−1)) =0,h 0,3 =h 1(O(−1)) =0; Serre duality gives theh 3,q.
+9.4 Chern numbers and Riemann–Roch
+By §7 we have H2(X; Z) =0 and H4(X; Z) =0, so c1(X) =c2(X) =0 integrally, and every Chern number
+involvingc 1 orc 2 vanishes; Gauss–Bonnet and §7 give
+c3(X) =e(X) =e(W) +e(3S 1) +e(4S2) =2+0+0.
+Hirzebruch–Riemann–Roch [ Hir], [ AS] gives χ(OX) = 1
+24 c1c2 = 0, matching 1 − 1 + 0 − 0 = 0 from
+Proposition 9.13; for TX one has ch(TX) = 3 + 1
+2 c3, td(X) = 1, so χ(TX) = 1
+2 c3 = 1. By Serre duality
+χ(Ω3
+X) =−χ(OX) =0 and χ(Ω2
+X) =−χ(Ω1
+X), so 2 =c 3 = ∑p(−1)pχ(Ωp
+X) =−2χ(Ω1
+X), i.e. χ(Ω1
+X) =−1.
+This proves Theorem 9.1(iv).
+9.5 Holomorphic forms onX
+In this subsection we prove Theorem 9.1(vi):
+H0(X,Ω p
+X) =0(p=1, 2, 3).
+The method is elementary and explicit: a holomorphic form on X is pulled back to the three uniformisations
+of §6 — the cover hz ×C2 of J, the étale covers J′
+j →N j of §5, and the toric cover Yε →N 0 of §4 — where its
+coefficients become functions of z alone, subject to an automorphy law under ∆ and to vanishing conditions
+at the three points ofΣ; the resulting objects are sections of negative line bundles onP 1.
+Convention.Throughout §9.5 a dot denotes d/dz on hz (so ˙τ=dτ/dz , ˙Π=dΠ/dz , ˙g(z) the derivative
+of the Möbius transformation g∈∆ ); primes are reserved for derivatives in the base coordinates tc, tj. We
+write ζ= (ζ1, ζ2) for the fibre coordinates on hz ×C 2, c= (c1, c2) and b= (b1, b2) forrowvectors, so that
+c·dζ=c 1dζ1 +c 2dζ2, and
+Tλ(z,ζ):= (z,ζ+Π(z)λ) (λ∈Λ), ˜g(z,ζ):= (gz,R g(z)ζ) (g∈∆),
+so thatT |U = (U×C2)/ΛforU⊆h z open, andJ= (T |h◦z )/∆.
+Step 0: the automorphy factor
+Lemma 9.14.(i) For everyg∈∆the matrixR g(z)is lower triangular with second columne 2:
+Rg(z) =
+
+rg(z)0
+∗1
+
+,r g =detR g,
+andr g1 =−1/τ,r g2 =1/τ,r g0 =1.
+(ii) Putȷ g :=r −1
+g , soȷ g1 =−τ,ȷ g2 =τ,ȷ g0 =1. Thenȷis a cocycle,ȷ gh(z) =ȷg(hz)ȷ h(z), and
+ȷg(z) =cgτ(z) +dg,g7−→
+ ag bg
+cg dg
+
+,g 1 7→
+ −1 1
+−1 0
+
+,g 2 7→
+ 0−1
+1 0
+
+,
+the lift with ȷg2 = +τ of the homomorphism ∆→PSL 2(Z) of §3. Consequently, for the holomorphic
+1-formdτ= ˙τdzonh z,
+g∗(dτ) =ȷ −2
+g dτ(g∈∆).
+(The letterjis reserved for the modular invariant; the automorphy cocycle isȷ.)
+(iii) ˙τ(z)̸= 0 for z∈h ◦
+z ; hence ˙Z(z) =
+6 ˙µ ˙τ
+˙β ˙µ
+
+̸= 0 for z∈h ◦
+z , and { ˙τ= 0} is contained in the discrete
+seth z ∖h ◦
+z of elliptic points.
+Proof. (i) By (9.4) the second column of Rg(z) is Π(gz)A g ˆδ=Π(gz) ˆδ=e 2, because ˆδ spans Λ⟨A1,A2⟩ and
+Π= [Z|I] . Hence Rg is lower triangular with (2, 2)-entry 1, and detR g = (Rg)11 =:r g. The values on
+g0,g 1,g 2 are those of Lemma 9.10(i).
+76
+=== PAGE 77 ===
+(ii) From [Pg |R g] =Π(gz)M −1
+g and (9.4) one gets Rgh(z) =Rg(hz)R h(z), so r and ȷ=r −1 are cocycles.
+A homomorphism ∆→PSL 2(Z) admits several lifts to SL2(Z) (on the free product ∆=Z/ 3 ∗Z/ 4 the
+signs on the two factors may be chosen independently, subject to the orders); we take the lift determined
+by g1 7→
+ −1 1
+−1 0
+
+, g2 7→
+ 0−1
+1 0
+
+, i.e. the one with ȷg2 = +τ. This is a homomorphism on ∆=Z/ 3 ∗Z/ 4
+because the two matrices have orders 3 and 4, and it lifts τ◦g i = (aiτ+b i)/(ciτ+d i). Therefore
+(g, z)7→c gτ(z) +dg is also a cocycle (by the ∆-equivariance of τ), and it agrees with ȷg on the generators
+g1, g2; hence everywhere. The last formula is the usual derivative rule for Möbius transformations:
+g∗(dτ) =d(τ◦g) = (cgτ+d g)−2dτ.
+(iii) Let z∈h ◦
+z . Then π is a local biholomorphism at z and π(z)∈B ◦, so d
+dz (t◦π)(z)̸= 0 and
+1728 t(π(z))/∈ {0, 1728}. By j◦τ= 1728 t◦π (j the modular invariant) the value τ(z) is not PSL2(Z)-
+equivalent to ρ or i, so the standard fact j′(w)̸= 0 off the PSL2(Z)-orbits of ρ, i gives j′(τ(z))̸= 0;
+differentiatingj◦τ=1728t◦πyields ˙τ(z)̸=0.
+Step 1: normal form of invariant forms on the covers
+Lemma 9.15.Let U⊆h z be open and connected and let θ be a holomorphic p-form on T |U, p∈ {1, 2, 3};
+denote again by θ its pullback to U×C 2. We use the following two facts established earlier: L(z) =Π(z)Λ
+is a lattice of full rank in C2 forevery z∈h z (Theorem 3.4), and ˙τ̸= 0 on h◦
+z (Lemma 9.14(iii)). Then there
+are holomorphic functions onUsuch that
+(a)θ=a(z)dz+c(z)·dζ, (b)θ=dz∧
+ 
+b(z)·dζ
+
+, (c)θ=c(z)dz∧dζ 1 ∧dζ 2
+forp=1, 2, 3 respectively; moreover in case (a) one hasc(z) ˙Z(z) =0 for allz∈U.
+If in addition U is invariant under a subgroup ∆′ ⊆∆ and θ is invariant under ˜g for all g∈∆ ′, then for
+g∈∆ ′:
+(a)c(gz)R g(z) =c(z),a(gz) ˙g(z) =a(z),c(gz) ˙Rg(z) =0; (9.8)
+(b)b(gz)R g(z) ˙g(z) =b(z); (9.9)
+(c)c(gz) ˙g(z)detR g(z) =c(z). (9.10)
+Proof.We haveT ∗
+λdz=dzandT ∗
+λdζ=dζ+ ˙Π(z)λdz.
+(a) Write θ=a(z , ζ)dz+c(z , ζ)·dζ . Then T∗
+λθ=
+ 
+a◦T λ + (c◦Tλ) ˙Πλ
+
+dz+ (c◦T λ)·dζ , so Tλ-invariance
+for all λ∈Λ gives first c(z, ζ+Π(z)λ) =c(z , ζ); for fixed z the lattice L(z) =Π(z)Λ⊂C 2 is of full rank
+(Theorem 3.4), so the entire functionsc i(z,·)are constant:c=c(z). Secondly
+a(z,ζ+Π(z)λ)−a(z,ζ) =−c(z) ˙Π(z)λ(λ∈Λ), (9.11)
+whose right-hand side does not depend on ζ; hence each ∂a/∂ζ i is L(z)-periodic, so constant in ζ, and
+a(z,ζ) =a(z) +K(z)·ζwitha,Kholomorphic onU. Then (9.11) reads
+K(z)Π(z)λ=−c(z) ˙Π(z)λ(λ∈Λ),
+an identity between R-linear functions of λ, hence valid for λ∈Λ⊗R . Restrict to Λtor ⊗R : there Π(z)λ
+runs through R2 ⊂C 2 and ˙Π(z)λ= 0, because Π= [Z|I] and Λtor =⟨ ˆw, ˆδ⟩. Thus the C-linear form K(z)
+vanishes onR 2, soK≡0; feeding this back,c(z) ˙Π(z)λ=0 for allλ∈Λ, i.e.c(z) ˙Z(z) =0.
+(b) Write θ=a(z , ζ)dζ 1 ∧dζ 2 +dz∧(b(z , ζ)·dζ) . With p:= ˙Π(z)λ one has T∗
+λ(dζ1 ∧dζ 2) =dζ1 ∧dζ 2 +
+dz∧(−p 2dζ1 +p 1dζ2), so invariance givesa◦T λ =a, hencea=a(z)as in (a), and
+b(z,ζ+Π(z)λ)−b(z,ζ) =−a(z) (−p 2,p 1).
+Exactly as above b is affine in ζ with vanishing linear part (restrict to Λtor ⊗R , where p= 0), and then
+a(z) ˙Z(z) =0. By Lemma 9.14(iii), ˙τ̸=0 off a discrete set, soa≡0 andθ=dz∧(b(z)·dζ).
+(c)T ∗
+λ(dz∧dζ 1 ∧dζ 2) =dz∧dζ 1 ∧dζ 2, so the coefficient isL(z)-periodic, hence a function ofz.
+Finally ˜g∗dz= ˙g(z)dzand ˜g∗dζ=R g(z)dζ+ ˙Rg(z)ζdz. In case (a),
+˜g∗θ=
+ 
+a(gz) ˙g(z) +c(gz) ˙Rg(z)ζ
+
+dz+c(gz)R g(z)·dζ,
+and comparison of the dζ-part, and of the dζ-free part for all ζ, gives (9.8). In case (b), ˜g∗θ= ˙g(z)dz∧ 
+b(gz)R g(z)·dζ
+
+, giving (9.9); in case (c), ˜g∗θ=c(gz) ˙g(z)detR g(z)dz∧dζ 1 ∧dζ 2, giving (9.10).
+77
+=== PAGE 78 ===
+By Lemma 9.14(i), writingc= (c 1,c 2)andb= (b 1,b 2), the relations (9.8)–(9.10) say in coordinates:
+c2 ◦g=c 2,(b 2 dz)is∆ ′-invariant,
+ifc 2 ≡0 :c 1(gz)r g(z) =c1(z),
+ifb 2 ≡0 :g ∗(b1dz) =ȷg b1dz,
+g∗(c dz) =ȷg c dzin case (c).
+(9.12)
+Step 2: matching the charts, and regularity atΣ
+Lemma 9.16.Let θ∈H 0(X, Ωp
+X), p∈ {1, 2, 3}, and let a, c (p= 1), b (p= 2), c (p= 3) be the coefficients on
+h◦
+z of the pullback ofθtoh ◦
+z ×C 2, as in Lemma 9.15 applied toU=h ◦
+z . Then:
+(i)c(p=1),b(p=2) andc(p=3) extend holomorphically to all ofh z, and the relations
+c(gz)R g(z) =c(z),c(gz) ˙Rg(z) =0(from (9.8)), (9.9), (9.10)
+hold on hz for all g∈∆ . If moreover p= 1 and c≡ 0, then a extends holomorphically to hz as well and the
+remaining relation a(gz) ˙g(z) =a(z) of (9.8) holds on all of hz; in general that relation is asserted only on
+h◦
+z , whereais defined.
+(ii) On the cusp neighbourhoodU r with coordinates(t c ◦π=e 2πis ,s◦g 0 =s−1) put
+˜a:=a dz
+ds , ˜b:=b dz
+ds , ˜c:=c dz
+ds (p=3),
+so that θ= ˜a ds+c·dζ , θ=ds∧( ˜b·dζ) , θ= ˜c ds∧dζ 1 ∧dζ 2 respectively. Then c, ˜a, ˜b, ˜c are g0-invariant,
+hence holomorphic functions oft c on 0<|t c|<r, and
+c(tc) =O(tc), ˜a(tc) =O(tc) (p=1);
+˜b(tc) =O(tc) (p=2);
+˜c(tc) =O(tc) (p=3),
+whereO(t c)means: extends holomorphically acrosst c =0 and vanishes there.
+Proof. (i) Regularity at p1, p2.By §5 the quotient map J′
+j =T |∆j →N j by ⟨ ˜glog
+j ⟩ is étale, so θ|Nj pulls back to
+a holomorphicp-form onJ ′
+j and hence to aΛ-invariantp-form on∆ j ×C 2. By Lemma 9.15 (withU=∆ j)
+its coefficients a(j) , c(j) , b(j) are holomorphic on all of ∆j. Over D∗
+j the two descriptions of θ are compared
+by the regluing maph j of §5, translation by the sectionσ j(z) =
+logs j
+2πi Π(z)v j, for which
+h∗
+j dz=dz,h ∗
+j dζ=dζ+ ˙σj(z)dz.
+Hence h∗
+j
+ 
+a dz+c·dζ
+
+= (a+c· ˙σj)dz+c·dζ , h∗
+j
+ 
+dz∧(b·dζ)
+
+=dz∧(b·dζ) and h∗
+j
+ 
+c dz∧dζ 1 ∧dζ 2
+
+=
+c dz∧dζ 1 ∧dζ 2: in all three cases the coefficients c, b, c of Lemma 9.15 are unchanged; in particular h∗
+j e=e
+for the relative 2-form e=dζ 1 ∧dζ 2. Therefore c=c (j) , b=b (j) on ∆∗
+j , and these functions extend
+holomorphically across zj; the same holds at every point of the ∆-orbit of zj by the relations for c, b. If
+p= 1 and c≡ 0, then h∗
+j is the identity on such forms and a=a (j) extends likewise. The stated relations
+persist onh z (resp., forawhenc̸≡0, onh ◦
+z ) by continuity.
+(ii) The cusp.Since Rg0 =I , ȷg0 = 1 and s◦g 0 =s− 1, the relations (9.8)–(9.10) for g=g 0 say precisely
+that c, ˜a, ˜b, ˜c are invariant under s7→s− 1; so they are holomorphic functions of tc =e 2πis on the punctured
+disc. The gluing ofJandN 0 overD ∗
+0 is tautological via
+E0(z,ζ) =
+ 
+e2πiζ1 ,e 2πiζ2 ,e 2πis(z) 
+= (x1,x 2,t),
+dζk = 1
+2πi
+dxk
+xk
+,ds= 1
+2πi
+dt
+t ,
+and Yε →N 0 =Y ε/{Ψ¯λ} is étale; so θ pulls back to a holomorphic p-form Θ on Yε whose restriction to
+Yε ∩T N′ is given by the above substitution.
+Fix a maximal cone σ∈F , the cone over a triangle of TA2 with vertices v0, v1, v2 ∈Z 2. The generators
+uk := (vk, 1) form a Z-basis of N′ (the triangles of TA2 are unimodular), so Uσ ∼= C3 with coordinates
+78
+=== PAGE 79 ===
+wk :=χ mk
+,(m k)the dual basis, andχ m = ∏k w⟨m,uk⟩
+k for allm∈M ′. In particular
+t=w 0w1w2,x i = ∏
+k
+w(vk)i
+k , dt
+t = ∑
+k
+dwk
+wk
+, dxi
+xi
+= ∑
+k
+(vk)i
+dwk
+wk
+.
+Substituting:
+p=1 :Θ= 1
+2πi
+2
+∑
+k=0
+ ˜a(t) +c(t)·v k
+dwk
+wk
+,
+p=2 :Θ= 1
+(2πi)2 ∑
+k<l
+ ˜b(t)·(v l −v k)
+dwk ∧dw l
+wkwl
+,
+p=3 :Θ=± 1
+(2πi)3
+˜c(t)
+t dw0 ∧dw 1 ∧dw 2,
+wherec·v:=c 1v(1) +c 2v(2) and the sign in the last line comes from det(u 0,u 1,u 2) =±1.
+Now use the coordinate lines and planes of Uσ, which lie in Yε where |t|<ε . For p= 1 restrict Θ to
+{wl = 1, l̸=k} , a disc with coordinate wk =t : the restriction is 1
+2πi (˜a(t) +c(t)·v k)dt
+t , holomorphic at
+t= 0, so ˜a+c·v k =O(t) for k= 0, 1, 2. Subtracting, c(t)·(v k −v 0) =O(t) for k= 1, 2; as v1 −v 0, v2 −v 0
+is a Z-basis of Z2, c=O(t) and then ˜a=O(t) . For p= 2 restrict to {wn = 1} for the third index n/∈ {k, l},
+a bidisc with t=w kwl: holomorphy at wk = 0 (with wl = 1, so t=w k) gives ˜b(t)·(v l −v k) =O(t) for
+all pairs, whence ˜b=O(t) as before. For p= 3 no restriction of theformis taken: since dw0 ∧dw 1 ∧dw 2
+is a frame of Ω3 on the chart Uσ ∼= C3 and Θ is holomorphic on Uσ ∩Y ε, the coefficient of Θ relative to
+this frame, namely ±(2πi)−3 ˜c(t)/t with t=w 0w1w2, is a holomorphicfunctionon Uσ ∩Y ε; evaluating this
+function along {w1 =w 2 = 1}, where t=w 0, shows that ˜c(t)/t is holomorphic at t= 0, i.e. ˜c=O(t) .
+Step 3: descent through the elliptic points, and two vanishing lemmas
+Lemma 9.17.Let j∈ {1, 2}, m=m j, ζ=ζ j, and let s=s j be the linearising coordinate on ∆j (s◦g j =ζs ,
+tj ◦π=s m).
+(D0) IfCis holomorphic on∆ j withC◦g j =C, thenCis a holomorphic function oft j.
+(D1) If α=A(s)ds is a holomorphic 1-form on ∆j with g∗
+j α=α , then A= ∑n≡−1(m) Ansn and α=
+∑l≥1
+Alm−1
+m t l−1
+j dtj; in particularαis the pullback of a holomorphic 1-form onD j.
+(D2) If κ=C(s)ds ⊗3 is a holomorphic cubic differential on ∆j with g∗
+j κ=κ , then C= ∑n≡−3(m) Cnsn and
+κis the pullback of a meromorphic cubic differential onD j with a pole of order at most 2 atp j.
+Proof. g ∗
+j ds=ζds , so the three invariance conditions read C(ζs) =C(s) , A(ζs)ζ=A(s) , C(ζs)ζ 3 =C(s) ;
+comparing Taylor coefficients gives n≡ 0, n≡ −1, n≡ −3 (modm) respectively. With t=s m, dt=
+msm−1ds: for (D1), slm−1 ds=t l−1 dt/m; for (D2) with m= 3 and n= 3l, s3l ds⊗3 =t l dt⊗3/(27s6) =
+tl−2 dt⊗3/27; with m= 4 and n= 4l+ 1, s4l+1 ds⊗3 =s 4l+1 dt⊗3/(64s9) =tl−2 dt⊗3/64. In both cases l≥ 0,
+so the order atp j is≥ −2.
+Lemma 9.18(weight 0).Let α be a ∆-invariant holomorphic 1-form on hz such that, on Ur, α= ˜a(s)ds with
+˜a=O(t c)in the sense of Lemma 9.16(ii). Thenα=0.
+Proof. Over B◦ the map π is an unramified ∆-covering, so α descends to a holomorphic 1-form αB on B◦; by
+(D1) applied at z1, z2 (the stabiliser of zj in ∆ being ⟨gj⟩), αB extends holomorphically over p1 and p2. At p0,
+α= ˜a(tc) dtc
+2πi tc
+and ˜a=O(t c), so αB extends holomorphically over p0 as well. Hence αB ∈H 0(P1, Ω1
+P1 ) =0
+andα=π ∗αB =0.
+Lemma 9.19(weight+1).Letψbe a holomorphic 1-form onh z with
+g∗ψ=ȷ g ψ(g∈∆)
+and such that, onU r,ψ= ˜b(s)dswith ˜b=O(t c). Thenψ=0.
+79
+=== PAGE 80 ===
+Proof.Consider the holomorphic cubic differential onh z
+κ:=ψ⊗ψ⊗dτ.
+By Lemma 9.14(ii), g∗κ=ȷ 2
+g ·ȷ −2
+g κ=κ for all g∈∆ , i.e. κ is ∆-invariant. As in Lemma 9.18 it descends
+over B◦ to a holomorphic cubic differential κB on B◦, and by (D2) at z1, z2 it extends meromorphically over
+p1,p 2 with poles of order at most 2.
+Atp 0: writeψ= ˜b ds=t c r(tc) dtc
+2πi tc
+= r(tc)
+2πi dtc withrholomorphic at 0, and (§3)τ=s+h(t c), so
+dτ=ds+h ′(tc)dt c =
+ 1
+2πi tc
++h ′(tc)
+
+dtc.
+Hence
+κB = r(tc)2
+(2πi)2
+ 1
+2πi tc
++h ′(tc)
+
+dt⊗3
+c
+has a pole of order at most 1 atp 0 (recallt c is a local coordinate there). Therefore
+κB ∈H 0 
+P1,(Ω 1
+P1 )⊗3(2p1 +2p 2 +p 0)
+
+=H 0 
+P1,O(−6+5)
+
+=H 0(P1,O(−1)) =0.
+So κ= 0. Writing ψ=b 1(z)dz this means b2
+1 ˙τ≡ 0; since ˙τ̸= 0 on h◦
+z (Lemma 9.14(iii)) we get b1 ≡ 0 on
+h◦
+z , henceψ=0.
+Step 4: the vanishing theorem
+Proposition 9.20.H 0(X,Ω p
+X) =0 forp=1, 2, 3; that is,h 1,0 =h 2,0 =h 3,0 =0.
+Proof. In each case we show that the pullback of the form to h◦
+z ×C 2 vanishes; since J|B◦ is dense in the
+connected manifoldX, the form itself is then 0.
+p= 1.Let ω∈H 0(X, Ω1
+X), with coefficients a, c as in Lemmas 9.15 and 9.16; thus c is holomorphic on
+hz,c(gz)R g(z) =c(z),c(z) ˙Z(z) =0, andc=O(t c)at the cusp.
+By Lemma 9.14(i) the second component of c(gz)R g(z) =c(z) reads c2 ◦g=c 2: the function c2 is
+∆-invariant and holomorphic on hz. By (D0) it is a holomorphic function of tj near pj (j= 1, 2), and it
+is a holomorphic function of t on B◦; hence it descends to a holomorphic function on B∖{p 0} ∼= C. By
+Lemma 9.16(ii) it extends holomorphically across p0 with value 0 there. A global holomorphic function on
+P1 is constant, soc 2 ≡0.
+The second column of c ˙Z= 0 now gives c1 ˙τ+c 2 ˙µ=c 1 ˙τ= 0, and ˙τ̸= 0 on h◦
+z , so c1 ≡ 0 on h◦
+z and
+hence on hz. Thus c≡ 0 and ω=a(z)dz upstairs, with a holomorphic on all of hz by Lemma 9.16(i) and
+a(gz) ˙g(z) =a(z) on hz by the same lemma; i.e. α:=a dz is a ∆-invariant holomorphic 1-form on hz, and
+˜a=O(t c)at the cusp by Lemma 9.16(ii). Lemma 9.18 givesα=0, i.e.ω=0.
+p= 2.Let η∈H 0(X, Ω2
+X); upstairs η=dz∧(b(z)·dζ) with b holomorphic on hz (Lemmas 9.15, 9.16)
+andb(gz)R g(z) ˙g(z) =b(z).
+The second component of this relation is b2(gz) ˙g(z) =b 2(z) (Lemma 9.14(i)), i.e. α:=b 2 dz is a
+∆-invariant holomorphic 1-form on hz; by Lemma 9.16(ii) its cusp coefficient ˜b2 is O(tc). Lemma 9.18 gives
+b2 ≡0.
+The first component then reads b1(gz)r g(z) ˙g(z) =b1(z), i.e. ψ:=b 1 dz satisfies g∗ψ=ȷ gψ for all g∈∆ ;
+and ˜b1 =O(t c)at the cusp. Lemma 9.19 givesψ=0, sob≡0 andη=0.
+p= 3.Let Ω∈H 0(X, Ω3
+X); upstairs Ω=c(z)dz∧dζ 1 ∧dζ 2 with c holomorphic on hz and, by (9.10)
+and detR g =r g,
+c(gz) ˙g(z)r g(z) =c(z), i.e.g ∗ψ=ȷ g ψforψ:=c dz.
+By Lemma 9.16(ii), ˜c=O(t c)at the cusp, so Lemma 9.19 givesψ=0 andΩ=0.
+This proves Theorem 9.1(vi). For p= 3 the vanishing agrees with h3,0 =h 0,3 = 0 from Proposition 9.13
+and Serre duality (equivalently, with the non-effectivity of KX =f ∗O(−1)⊗ O(2S2), Proposition 9.11); the
+casesp=1, 2 are new. The same arguments apply verbatim to the variantX ′ of §6.
+80
+=== PAGE 81 ===
+9.6 The remaining Hodge numbers
+Remark9.21 (What is proved, and the expected values).Combining Proposition 9.13, Proposition 9.20,
+χ(Ω1
+X) =−1,χ(Ω 2
+X) =1 (§9.4) and Serre dualityh p,q =h 3−p,3−q , the Hodge numbers ofXare
+h0,0 =h 3,3 =h 0,1 =h 3,2 =1,h p,0 =0(p≥1),h 0,q =0(q≥2),
+hence alsoh 3,q =0 forq≤1 andh p,3 =0 forp≤2; and
+χ(Ω1
+X) =h1,0 −h 1,1 +h 1,2 −h 1,3 =−h 1,1 +h 1,2 =−1,
+χ(Ω2
+X) =h2,0 −h 2,1 +h 2,2 −h 2,3 =−h 2,1 +h 2,2 =1,
+the two relations being equivalent under Serre duality. ThuseveryHodge number of X is determined by
+the single integer
+h1,2 =h 2,1 ≥0, viah 1,1 =h 2,2 =h 1,2 +1.
+The remaining Hodge numbers are determined byh 1,2, which we do not compute; the expected value is
+h1,2 =h 2,1 =1, whenceh 1,1 =h 2,2 =2.
+(Equivalently: dimC E1 of the Frölicher spectral sequence equals 6 + 4h1,2, expected 10.) A proof of
+h1,2 = 1 would require the direct images Rq f∗Ω1
+X(logD) , D:=W+S 1 +S 2, equivalently those of
+E:=Ω 1
+X(logD)/f ∗Ω1
+B(logΣ), at the three singular fibres, whereΩ 1
+X/B has torsion alongW∪S 1 ∪S 2 and
+the invariant-theoretic description on the covers J′
+j and on YF must be matched with the residue sequences.
+Corollary 9.22.The Frölicher spectral sequence of X does not degenerate at E1. Moreover ∂:H 0,1 →H 1,1
+is injective, soh 1,1 ≥1.
+Proof. By Proposition 9.13, h0,1 = 1, and h1,0 = 0 by Proposition 9.20. If the spectral sequence degenerated
+at E1, then b1(X) =h 1,0 +h 0,1 = 1. But b1(X) = 0: indeed X is simply connected by the van Kampen
+computation of §7 (a computation with the fundamental groups of the four pieces J, N1, N2, N0 and of their
+overlaps). This contradiction proves the first assertion.
+For the second, the generator of H0,1 must die in the spectral sequence, since E0,1
+∞ is a subquotient
+of H1(X; C) = 0. No differential enters E0,1
+r (the groups E−r,r
+r vanish). The differentials leaving it are
+d1 =∂:H 0,1 →H 1,1; d2 :E 0,1
+2 →E 2,0
+2 , whose target is a subquotient of H2,0 = 0 (Proposition 9.20); and dr
+for r≥ 3, with target Er,2−r
+r = 0 since 2 −r< 0. Hence the class must be killed by d1, i.e. ∂ is injective on
+H0,1, andh 1,1 ≥h 0,1 =1.
+9.7 The verticalC ∗-action
+Proposition 9.23. h0(X, TX) = 1 and Aut0(X) =C ∗, generated by the vertical field ξ determined by
+ˆδ∈Λ ⟨A1,A2⟩ =Z ˆδ; every automorphism in Aut0(X)preserves each fibre off.
+Proof. Construction.In the flat coordinates of T let ξ be the constant vertical field e2 =Π(z) ˆδ; it is Λ-
+invariant and, by (9.4) and Ag ˆδ= ˆδ, invariant under all ˜g, so it descends to J. Its flow is translation by
+ςe2 and factors through C/Z ∼= C∗ since e2 ∈L(z) . These translations commute with ˜glog
+j (whose linear
+part fixes e2), so ξ extends to N1, N2; under E0 it is the one-parameter subgroup of TN′ with cocharacter
+ˆδ↔e 2 ∈Λ tor, acting algebraically on YF and commuting with all Ψ¯λ. So ξ generates an effective fibrewise
+C∗-action onX.
+Verticality.For v∈H 0(TX) write d f(v) =φ ∂t with φ∈H 0(O(2)). Over Dj pull v back along the étale
+map qj :J ′
+j →N j of §5; since f◦q j =π j ◦ ˜f with πj(s) =smj =t , the resulting field on ∆j has horizontal
+part
+φ(smj )m −1
+j s1−mj ∂s,
+which is holomorphic only if φ(p j) =0; at a triple point of W, t=z 1z2z3 and d f(v) =∑ aizjzk vanishes, so
+φ(p0) =0. Henceφ∈H 0(O(2)(−p 0 −p 1 −p 2)) =0.
+Uniqueness.Vertical fields are the sections of V:=f ∗TX/B , which we show to be locally free of rank 2
+withOξ⊂ Va subbundle.
+81
+=== PAGE 82 ===
+Over B◦, V consists of the holomorphic v:h ◦
+z →C 2 with v◦g=R gv (the fibrewise-constant fields on a
+torus), and near pj the same description holds on ∆j, the translation part of ˜glog
+j not acting on constant
+fibre fields; so there V=
+ 
+O(∆j)2Z/mj
+for the action v7→R −1
+gj (v◦g j), whose invariants are exactly the v
+withv◦g j =R gj v.
+Near p0 we compute in the toric charts of §4. In Uσ ∼= C3 with coordinates w0, w1, w2 as in the proof
+of Lemma 9.16(ii), the field attached to n∈Z 2 ⊂N ′ is ∂n = ∑k⟨mk, (n, 0)⟩w k∂wk , holomorphic on Uσ
+and annihilating t=w 0w1w2; for n=e 1, e2 these are the fields x1∂x1 , x2∂x2 of the open orbit, and they
+are Ψ¯λ-invariant (the shears act by elements of SL2(Z)⋉Z 2 fixing Λtor up to the translation part, which
+does not act on constant torus fields) — hence they are sections of V over D0. Conversely, a section of
+V over D∗
+0 is fibrewise constant, so of the form a1(t)x1∂x1 +a 2(t)x2∂x2 with ai holomorphic on D∗
+0 ; in
+the chart Uσ it reads ∑k ck(t)w k∂wk with ck :=a 1(mk)1 +a 2(mk)2. Restrict to the line {w1 =w 2 = 1}, on
+which t=w 0: the coefficient of ∂w0 is w0c0(t) =t c0(t), while the coefficients of ∂w1 , ∂w2 are c1(t) and c2(t).
+Holomorphy of the field therefore forces c1 and c2 to extend holomorphically across t= 0 (for k= 0 only
+t c0 is controlled, and we do not use it). Now the restrictions of m0, m1, m2 to Z2 × {0} satisfy the single
+relation m0 +m 1 +m 2|Z2×{0} = 0 (a vector (n, 0) has height-0 coordinates with respect to u0, u1, u2) and
+span the dual of Z2; hence any two of them form a basis, and in particular the two vectors
+ 
+(mk)1, (mk)2
+
+,
+k=1, 2, are linearly independent. Thereforea 1,a 2 themselves extend holomorphically acrossp 0, andVis
+free nearp 0 with framex 1∂x1 ,x 2∂x2 , i.e.(e 1,e 2).
+The line Ce2 is ∆-invariant, so Oξ⊂ V with quotient Q carrying the multivalued frame ¯e1. By
+Lemma 9.10 the e1-component satisfies v1 ◦g= (detR g)v 1, so the frames ¯e1 of Q and e of K have reciprocal
+automorphy factors. Atp 0 both ¯e1 andegenerate, by the previous paragraph and Proposition 9.11. Atp j,
+lifting to ∆j and using s◦g j =ζ js together with detR gj (zj) =ζ
+aj
+j , a holomorphic invariant v1 is scj times
+a unit with cj ∈ {0, . . ., mj − 1}, cj ≡a j (modm j), i.e. (c1, c2) = (2, 1); thus scj ¯e1 is a frame of Q at pj —
+in particular Q is locally free of rank 1 there and Oξ⊂ Vis a subbundle — and ¯e1 has exponent −aj/mj
+whereehas+a j/mj. HenceQ ∼= K−1 ∼= O(−1),h 0(Q) =0, soH 0(V) =Cξandh 0(TX) =1.
+The group Aut0(X).Since h0(TX) =1, the group Aut0(X) is a connected complex Lie group of dimension
+1 with Lie algebra Cξ; hence the flow of ξ gives a surjective homomorphism C→Aut 0(X), ς7→φ ς, and
+Aut0(X) =C/P with P:={ς∈C:φ ς =id X} discrete. A priori P has rank 0, 1 or 2, i.e. Aut0(X) ∼= C,
+C∗ or an elliptic curve; we show P=Z , which excludes both the first case ( P= 0) and the third case ( P
+of rank 2, Aut0(X) compact). Let ς∈P . On the smooth fibre Fπ(z) =C 2/L(z), z∈h ◦
+z , the map φς is the
+translation by ςe2, so ςe2 ∈L(z) =Π(z)Λ for every z∈h ◦
+z ; as Λ is discrete, Π depends continuously on
+z and h◦
+z is connected, there is asingle λ=a ˆγ+b ˆu+c ˆw+d ˆδ∈Λ with Π(z)λ=ςe 2 for all z∈h ◦
+z . Its
+first component gives 6aµ+bτ+c≡ 0 on hz, whence a=b=c= 0 by Lemma 9.3, and the second gives
+ς=d∈Z . Conversely φ1 is the translation by e2 =Π(z) ˆδ∈L(z) on each fibre over B◦, i.e. the identity on
+the dense open set f −1(B◦) of the connected manifold X, hence φ1 =id X and Z⊆P . Therefore P=Z , a
+subgroup of rank 1 contained in a real line — so Aut 0(X)is neitherCnor an elliptic curve — and
+Aut0(X) =C/Z ∼= C∗;
+in particular Aut0(X)is not compact, and theC ∗-action constructed above is effective.
+Proposition 9.24.The fixed locus of Aut0(X) =C∗ is a single double curveD 0 ⊂W ,D 0 ∼= P1, containing
+both triple points of W; in the notation of §4 one hasD 0 =ν(C e2 ), the double curve that is the image of
+the edges of direction e2 ↔ ˆδ —D 2 in the labelling of Proposition 4.6(iii),D 3 in the labelling ρ1, . . ., ρ6 of
+Lemma 9.12. The normal weights are(+1,−1). In particulare(X C∗
+) =2=e(X).
+Proof. Fixed points and étale quotients.Each piece of X is of the form U/Γ with U→U/Γ an étale quotient
+by a group Γ acting freely and properly discontinuously, and with the C-flow Φς of ξ lifted to U and
+commuting withΓ; explicitly the pairs(U,Γ)are
+ 
+h◦
+z ×C 2,Λ⋊∆
+
+,
+ 
+J′
+j ,⟨ ˜glog
+j ⟩
+
+(j=1, 2),
+ 
+Yε,{Ψ ¯λ}
+
+,
+with quotients J, Nj, N0 respectively (recall J′
+j =T |∆j = (∆j ×C 2)/Λ). On h◦
+z ×C 2 only the C-flow lifts,
+82
+=== PAGE 83 ===
+and not a C∗-action: the time-1 map is the translation Tˆδ ∈Λ , not the identity. On J′
+j and on Yε the lifted
+flow does factor through C∗. All that is used below is that Φς commutes with Γ. If [y]∈U/Γ is fixed by
+the whole group, then for each ς∈C there is a unique γς ∈Γ with Φς(y) =γ ς(y); the map ς7→γ ς is
+continuous into the discrete group Γ and γ0 =id , so γς =id for all ς. Hence the fixed locus downstairs is
+exactly the image of the set of points ofUfixed byΦ ς forallς.
+On T and on J′
+j the flow Φς is the translation by ςe2 on each fibre torus. Since e2 ̸= 0 and L(z) is a
+discrete subgroup of C2, the set {ς∈C:ςe 2 ∈L(z)} is a discrete subgroup of C; in particular there are ς
+with ςe2 /∈L(z), for which the translation is fixed-point free. So no point of those pieces is fixed by the flow
+for all ς (for special z one may well have ςe2 ∈L(z) for some ς/∈Z, but never for all ς), whence XC∗
+⊂W .
+The fixed locus in W.On YF the action is the one-parameter subgroup of TN′ with cocharacter e2, and an
+orbit Oσ, σ∈F , is fixed pointwise iff e2 ∈span R(σ). The cone over a vertex v has span R(v, 1)̸∋(e 2, 0);
+the cone over an edge [v, v+d] has span ⟨(v, 1), (d, 0)⟩, containing (e2, 0) iff d=±e 2; and e2 isan edge
+direction of the A2-triangulation (directions ±e1, ±e2, ±(e1 −e 2)). A three-dimensional cone spans R3, so
+its orbit — a point — is fixed; but every triangle of TA2 has an edge of direction e2 (for {v, v+e 1, v+e 2}
+the edge [v, v+e 2], for {v+e 1, v+e 2, v+e 1 +e 2} the edge [v+e 1, v+e 1 +e 2]), so each such point lies in
+the closure of the fixed curve of that edge and contributes nothing new. Hence the fixed locus in t−1(0) is
+the union of the closures of the one-dimensional orbits of the edges [v, v+e 2], v∈Z 2. The shears act on
+the height-1 lattice by the translations B0 ¯λ, which exhaust Z2 as B0 is unimodular; hence these curves form
+one orbit, with image inWa single double curveD 0 ∼= P1 throughPandQ(§4).
+Weights.Forσ=cone{(0, 0, 1),(0, 1, 1)}complete to the basisu 1 = (0, 0, 1),u2 = (0, 1, 1),u3 = (1, 0, 0)
+of N′, with dual vectors m1 = (0, −1, 1), m2 = (0, 1, 0); the normal coordinates of Oσ in Uσ ∼= C2 ×C ∗ are
+m1, m2, on which e2 = (0, 1, 0) acts with weights ⟨m1, e2⟩=− 1, ⟨m2, e2⟩= +1. Finally e(XC∗
+) =e(P1) =
+2=e(X), as must hold for aC ∗-action.
+Remark9.25.For every integer n≥ 2 the finite subgroup µn ⊂C ∗ =Aut 0(X) has the same fixed-point set
+asC ∗ itself,
+Xµn =X C∗
+=D 0 ∼= S2.
+Indeed, off W the circle S1 ⊂C ∗ acts freely: on X◦ by Lemma 7.21, and on the smooth fibres of N0 it acts by
+the translations ςe2 (ς∈R∖Z ), which have no fixed points since ˆδ is primitive in Λ. On W, an element of
+order n in the one-parameter subgroup of TN′ with cocharacter e2 fixes the orbit of a cone ˆσ∈F pointwise
+if and only if 1
+n (e2, 0)∈span R(ˆσ) +N′. For the cone over a vertex v this would force 1
+n e2 ∈Zv+Z 2,
+which is impossible; for the cone over an edge [v, v+ρ] it holds if and only if 1
+n e2 ∈Rρ+Z 2, i.e. if and
+only if n|det(ρ , e2); and the point orbits of the triangles lie on the closures of the edge curves. Since the
+edge directions of TA2 are ±e1, ±e2, ±(e1 −e 2), with det(e1, e2) =det(e 1 −e 2, e2) =1 and det(e2, e2) =0,
+for every n exactly the curves over the edges of direction ±e2 are fixed, and their image in W is the double
+curveD 0 ∋P , Q of Proposition 9.24. In particular Xµp is a mod- p homology 2-sphere for every prime p, as
+P . A. Smith’s theorem requires of aZ/p-action on a mod- p homology 6-sphere [Bre72, Ch. III]; compare
+[HKP, Prop. 2.5].
+Remark9.26.Proposition 9.24 realises the first alternative of [ HKP, Prop. 2.5]: for I ∼= C∗ ⊂Aut(X) with
+fixed set F, either F ∼= P1 or F is two disjoint points; had ˆδ↔e 2 not been an edge direction of the
+triangulation, the computation above would have produced the second alternative, the two triple points
+P, Q with opposite tangent weights. Also h0(TX) =1 is compatible with [ HKP, Cor. 1.3] (h0(TX)≤ 2 for
+any complex structure on S6). The exclusion of a compact Aut0(X) in Proposition 9.23 is obtained directly,
+from the non-constancy of the period matrix (Lemma 9.3).
+9.8 Non-Kählerness
+Remark9.27.Since b2(X) =0 (§7), X carries no Kähler metric, and no Kähler current: by the characterisation
+of the Fujiki class C through the existence of a Kähler current (see [ Ang18]) such a current would make X
+bimeromorphic to a compact Kähler manifold, whence the ∂¯∂-lemma and b2 ≥h 1,1 ≥ 1. Also a(X) =1 < 3
+shows thatXis not Moishezon.
+83

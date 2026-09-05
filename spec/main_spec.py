@@ -3,12 +3,14 @@ from libspec import Spec
 from .err import Feat
 from . import (
     analytic_invariants,
+    audit_document,
     cdp_divergence,
     infoview_util,
     lattice_monodromy,
     lean_project,
     logarithmic_transforms,
     manifold_gluing,
+    mathlib_interface,
     period_family,
     sphere_recognition,
     topology_homology,
@@ -59,4 +61,6 @@ class MainSpec(Spec):
             sphere_recognition,
             analytic_invariants,
             cdp_divergence,
+            audit_document,
+            mathlib_interface,
         ]

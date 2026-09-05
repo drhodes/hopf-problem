@@ -1,0 +1,43 @@
+\section{Complex-analytic invariants of $X$.}
+
+In this section we compute the complete system of complex-analytic and algebraic invariants of the manifold $X$.
+
+\subsection{Algebraic dimension and Kodaira dimension}
+
+\begin{theorem}[Algebraic Invariants]\label{thm:algebraic-invariants}
+Let $X$ be the complex $3$-manifold constructed in Section~6.
+\begin{enumerate}[label=(\roman*)]
+    \item The field of meromorphic functions on $X$ is $\cM(X) = f^*\dbC(t)$, so the algebraic dimension is:
+    \[
+    a(X) = \operatorname{tr.deg}_{\dbC} \cM(X) = 1.
+    \]
+    The algebraic reduction of $X$ is the modular fibration $f \colon X \to \dbP^1$.
+    \item The very general fiber $F_b$ has algebraic dimension $a(F_b) = 0$.
+    \item The Kodaira dimension of $X$ is:
+    \[
+    \kappa(X) = -\infty.
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:hodge-signature}, the period matrix $\Pi(z)$ has indefinite Hodge signature $(1,1)$, so the general torus $F_b$ contains no divisors, proving $a(F_b) = 0$.
+Any meromorphic function on $X$ must restrict to a constant on each general fiber, hence factors through $f \colon X \to \dbP^1$.
+For the Kodaira dimension, $K_X \cong f^*\cO_{\dbP^1}(-2) \otimes \cO_X(2S_1 + 3S_2)$.
+Since the fractional degree $-2 + 2/3 + 3/4 = -2 + 17/12 = -7/12 < 0$ is strictly negative, all pluricanonical sections vanish: $H^0(X, K_X^{\otimes m}) = 0$ for all $m \ge 1$, so $\kappa(X) = -\infty$.
+\end{proof}
+
+\subsection{Chern numbers and Hirzebruch--Riemann--Roch}
+
+\begin{theorem}[Chern Numbers and Index]\label{thm:chern-numbers}
+The Chern classes and characteristic numbers of $X$ are:
+\begin{enumerate}[label=(\alph*)]
+    \item Top Chern class: $c_3(X) = \langle c_3(TX), [X]\rangle = e(X) = 2$.
+    \item Intermediate Chern numbers: $c_1(X)c_2(X) = 0$ and $c_1^3(X) = 0$ (since $H^2(X;\dbZ) = H^4(X;\dbZ) = 0$).
+    \item Todd genus: $\mathrm{td}_3(X) = \frac{1}{24} c_1(X)c_2(X) = 0$.
+    \item First Pontryagin class: $p_1(X) = c_1^2(X) - 2c_2(X) = 0 \in H^4(X;\dbZ)$.
+    \item Tangent bundle index: $\chi(X, TX) = \frac{1}{24} \big( c_1^3 - 2c_1 c_2 + c_3 \big) + \dots = 1$.
+    \item Frölicher spectral sequence: $E_1 \not\cong E_\infty$, since $b_1(X) = 0 < h^{0,1}(X) = 1$.
+    \item Automorphism group: $h^0(X, TX) = 1$, integrating to $\Aut^0(X) \cong \dbC^*$.
+\end{enumerate}
+\end{theorem}

@@ -1,0 +1,1789 @@
+
+=== PAGE 40 ===
+Proof. (i) With Z(s) =sB 0 +C(t c), tc =e 2πis , one has Π(s) ˆu= (s+h , µ)t and Π(s) ˆγ= ( 6µ, b−s−h) t,
+where h, µ, b are holomorphic in tc on {|tc|<r} , hence invariant under s7→s+ 1 (§3). A direct computation
+gives
+z ˆu(s):=
+
+s2+s
+2 +s h,sµ
+
+,z ˆγ(s):=
+
+6sµ,− s2+s
+2 +s(b−h)
+
+,
+z ˆu(s+1)−z ˆu(s) =Π(s+1) ˆu,z ˆγ(s+1)−z ˆγ(s) =Π(s+1) ˆγ;
+so these define σˆu, σˆγ with c(σˆu) = ¯ˆu, c(σˆγ) = ¯ˆγ, which generate Λ. (Alternatively D∗
+0 is Stein, so
+H1(D∗
+0 ,O 2) =0 by Cartan’s Theorem B [GrRe].)
+(ii) Tσ is a biholomorphism over D∗
+0 , so G0 ◦T σ is again a biholomorphism J|D∗
+0 →N 0 ∖W over D∗
+0 and
+the proof of Theorem 6.2 applies verbatim; since γ( ˆγ) =1, (i) gives every integer value. (iii) is immediate
+fromc(0) =0.
+Remark6.8.Thus ℓ0 is a discrete parameter of the p0-gluing with values in γ(Λ) =Z , and it is not a
+function of the transcendental constants µ(p0), b(0), h(0): the filling N0 is manufactured from C(tc) itself,
+and twists with c(σ)∈Λ tor leave ℓ0 unchanged. The triple (ℓ0, ℓ1, ℓ2) = (0, γ(v1), γ(v2)) = (0, 1,−1) is the
+complete list of discrete gluing data ofX, and entersπ 1(X)in §7.
+7 Topology ofX: fundamental group and integral homology.
+7.1 Decomposition, collapse, and the pieces
+The integral homology of X is computed twice on the following pages, by two independent routes: first
+by thecollapse/Mayer–Vietoriscomputation — the collapse of a general fibre onto the central fibre W
+(Proposition 7.2, proved in §7.2), the homology of W and the specialisation maps (§7.3), and Mayer–Vietoris
+for X=N ′
+0 ∪X ◦ (§7.6), culminating in Theorem 7.22; and secondly by theLeraycomputation of §7.7 (“A
+second computation”) (for admissible pairs with 4 |ε 2(v2), in particular for X), which recovers H1, H2, H3
+of X from Ea,b
+2 =H a(B, Rb f∗Z). Neither computation uses the other: the Leray route takes as input
+only the invariants statement at p0 (Theorem B.1, proved in Appendix B by nearby cycles, without §7.2),
+the local data at p1, p2 of §7.4 (Lemma 7.13, Proposition 7.14), the meridian identifications of §7.5 (with
+Lemma 7.16) and Corollary 4.8; it uses neither Proposition 7.2 nor Proposition 7.11 nor §7.6 (Theorem 7.22);
+see Corollary 7.29.
+Throughout, (co)homology has coefficientsZandFdenotes a general fibre off, a real 4-torus; by §2
+H1(F) =Λ,H 1(F) =V,
+Hq(F) =Vq Λ,H q(F) =Vq V,
+in the bases ( ˆγ, ˆu, ˆw, ˆδ), (γ, u, w, δ). All meridians occurring in this section are theclockwiseones of
+Convention 3.17. The monodromy along the (clockwise) meridian aj of pj is Tj on H1 and Aj on H1
+(j=1, 2), alonga 0 := (a1a2)−1 it isT 0, resp.M 0 (§3), and onH q it is Vq Tj, resp. Vq T0.
+Notation 7.1.Fix 0<η≪1 and putN ′
+0 :=f −1{|tc| ≤η},N′
+j :=f −1{|tj| ≤η}(j=1, 2), and
+X◦ := X\N ′
+0 =f −1(D′),D ′ :=B\ {|tc|<η}
+a closed disc containing p1, p2. Write M:=∂N ′
+0, Mj :=∂N ′
+j . The letter X′ is reserved for the comparison
+threefold of §6, built from the same data withv 2 = +ε′.
+By §4 and §5 the maps f0 :N 0 →∆ ε and fj :N j →D j are proper holomorphic, f −1
+0 (0) =W is a reduced
+normal-crossings divisor (t=z 1z2z3 in suitable local coordinates at each point) and f −1
+j (p j) =mjSj with
+Sj smooth. Here W is irreducible, hence normal crossings but not simple normal crossings, whereas
+the retraction and collapse statements of Clemens [ Cle77] and Persson [Per77] are proved for semistable
+degenerations withsimplenormal-crossings central fibre; we quote them for context. The statement used
+below is the following one, read off the toric model of §4 and proved in §7.2.
+40
+=== PAGE 41 ===
+Proposition 7.2.There is η0 > 0 with the following property. Let 0 <η≤η 0 and fix t0 with 0 <|t 0| ≤η;
+put F:=f −1(t0). Then there is a strong deformation retraction r:N ′
+0 →W , induced by a {Ψ¯λ}- and
+Tf -equivariant strong deformation retraction of {|t| ≤η} ⊂Yε onto the central fibre Y0 =t −1(0), such that
+the restriction
+c:=r| F :F−→W
+is described as follows. Write
+F=T B ×T f ,T B = (Λ⊗R)/ Λ,T f = (Λtor ⊗R)/Λ tor,
+for the splitting induced by the toric chart ( Tf the compact torus of (C∗)2, TB the Log-torus carrying the
+induced A2-triangulation), where throughout we identify TB = (Λ⊗R)/ Λ ∼= (Λtor ⊗R)/Λ tor by means of
+the unimodular shear B0 : Λ ∼− →Λtor of §2 (the form in which TB appears in the proof, §7.2, Lemma 7.10),
+and let Θ⊂T B be the dual graph of that triangulation: two vertices (the two triangles of TA2 /Z2) and
+three edgese 1,e 2,e 3, wheree k is dual to the triangulation edge of directionn k ∈Λ tor,
+n1 = ˆw,n 2 = ˆδ− ˆw,n 3 =− ˆδ,
+so that n1 +n 2 +n 3 = 0 and any two of the nk form a basis of Λtor. Then c collapses Tf to a point over
+each vertex of Θ (producing the triple points P, Q of W), collapses S1
+nk ⊂T f over the interior of ek (with
+image the double curve ¯Ck ∼= P1 ofD), and is injective over TB \Θ . For any other t with 0 <|t| ≤η, the
+restrictionr| f −1(t) is homotopic, as a map toW, to a map with the same description.
+Lemma 7.3.Forηsmall:
+(i)W,→N ′
+0 andS j ,→N ′
+j are deformation retracts, soH ∗(N′
+0) ∼= H∗(W)andH ∗(N′
+j ) ∼= H∗(Sj);
+(ii)X=N ′
+0 ∪X ◦ withN ′
+0 ∩X ◦ =M(collars making the pieces open).
+Proof.(ii) is clear. For (i) atp 0 the retraction is the one constructed in Proposition 7.2 (§7.2; the proof uses
+only §4); for Nj none is needed, since smoothly Nj = (A(j)
+0 ×∆ sj )/⟨ ˜glog
+j ⟩ and the radial retraction of ∆sj is
+equivariant.
+Lemma 7.4.Forηsmall:
+(i)f is a locally trivial bundle over {0 <|t c| ≤η}and over {0 <|t j| ≤η}; the geometric monodromies
+are affine with linear parts M0, resp. Aj, hence isotopic to M0, resp. Aj, so that M is diffeomorphic to
+the mapping torus ofM 0 onFandM j to that ofA j.
+Moreoverπ 1(N0) ∼= Λ ∼= Z2 and
+π1(M) =Λ⋊ M0 Z⟨˜a0⟩, ˜a0tλ ˜a−1
+0 =t M0λ,
+where ˜a0 is the class of the circle {x=x 0} ⊂Yε over |t|=η , orientedclockwise, i.e. by s7→s− 1 for s= logt
+2πi
+(the orientation of Convention 3.17, and the one for which the displayed conjugation rule ˜a0tλ ˜a−1
+0 =t M0λ
+holds); we call it thetoric meridian. Furthermore ker(π1(M)→π 1(N0)) is the normal closure of Λtor ∪ {˜a0};
+forj=1, 2
+π1(Nj) ∼= π1(Sj) =
+
+Λ, ˆgj
+ ˆgjλ ˆg−1
+j =A jλ, ˆg
+mj
+j =t vj
+
+,
+π1(Mj) =Λ⋊ Aj Z⟨ ˆgj⟩, and ker(π1(Mj)→π 1(Nj))is the normal closure of the meridian ˆg
+mj
+j t−1
+vj .
+Proof. (i) is Ehresmann’s theorem with the monodromies of §3; an affine diffeomorphism of a torus is
+isotopic to its linear part through the straight-line path on the translation part.
+By Corollary 4.8, Yε is simply connected; as N0 =Y ε/{Ψ¯λ} with a free properly discontinuous Λ-action,
+π1(N0) =Λ. Over 0 <|t|<ε the covering is ((C∗)2 ×∆ ∗)/Λ, with fundamental group the extension of Λ
+by Λtor ⊕Z ˜a0; the map to π1(N0) kills exactly Λtor and ˜a0. The conjugation rule for ˜a0 is the monodromy
+of §3 in the (clockwise) orientation of a0 = (a1a2)−1, since M0 = (A1 A2)−1. For Nj the deck group of
+A(j)
+0 ×∆ sj →N j is ⟨ ˜glog
+j ⟩ ∼= Z/mj, acting freely, and Sj =A (j)
+0 /⟨x7→A jx+v j/mj⟩ (§5), the affine map
+havingm j-th powert vj becausev j ∈Λ Aj .
+41
+=== PAGE 42 ===
+For the kernel at pj we compare presentations; since the fibre is multiple, N′
+j is not a tubular
+neighbourhood of Sj, and the meridian statement for tubular neighbourhoods does not apply. Let
+U:=A (j)
+0 ×∆ sj →N j be theZ/m j-covering with deck group generated by
+˜glog
+j :(x,z)7→(A jx+v j/mj,ζz),ζ=e −2πi/m j ,
+the disc factor being forced by the normalisation sj ◦g j =ζ jsj of §5, and let U∂ :=A (j)
+0 ×∂∆ s′ →M j be
+its restriction over a circle |z|=s ′, again a Z/mj-covering with the same deck group. Then π1(U) =Λ,
+π1(U∂) =Λ×Z⟨σ⟩ with σ the class of {pt} ×∂∆s′, oriented counterclockwise in the z-disc, and π1(U∂)→
+π1(U) is the quotient by the central subgroup ⟨σ⟩ (the circle bounds the disc ∆s′). Since the inclusion
+U∂ ,→Uis equivariant for the same deck group, the induced map of extensions
+1→π 1(U∂)→π 1(Mj)→Z/m j →1, 1→π 1(U)→π 1(Nj)→Z/m j →1
+shows that π1(Mj)→π 1(Nj) is onto with kernel the normal closure of σ. Finally, ˆgj is a lift to π1(Mj)
+of the deck generator ˜glog
+j : it is represented by a path in U∂ from (x0, z0) to ˜glog
+j (x0, z0), along which the
+z-coordinate turns by −2π/mj (the disc factor being ζ=e −2πi/m j ) and the A(j)
+0 -coordinate moves by vj/mj.
+Hence ˆg
+mj
+j is represented by the loop travelling once around ∂∆s′ negativelywhile the A(j)
+0 -coordinate drifts
+by
+ 
+∑i<mj Ai
+j
+
+vj/mj =v j (usingA
+mj
+j =Iandv j ∈Λ Aj ); asσis central inπ 1(U∂)this reads
+ˆg
+mj
+j =t vj σ−1, i.e.σ −1 = ˆg
+mj
+j t−1
+vj ,
+whose normal closure is that of σ, i.e. the asserted generator of the kernel. Killing σ turns the semidirect-
+product presentation ofπ 1(Mj)into the displayed presentation ofπ 1(Sj), with ˆg
+mj
+j =t vj .
+7.2 Proof of Proposition 7.2
+We use the toric model of §4 throughout: Y=Y F with torus TN′ = (C∗)3, coordinates (x1, x2, t), compact
+torus
+Tc :=N ′ ⊗S 1 = (S1)3,T f :=Λ tor ⊗S 1 ={(∗,∗, 1)} ⊂Tc,
+Y≤η :={|t| ≤η}, Y0 =t −1(0) =S
+v∈Z2 Ev with Ev ∼= dP6, and Γ:={Ψ ¯λ}¯λ∈Λ, which by Theorem 4.5 acts
+freely and properly discontinuously on Yε, preserves Y0 and every {|t| ≤η}, and has quotients N′
+0 =Y ≤η /Γ,
+W=Y 0/Γ. Note that Y\Y 0 =T N′, every orbit of dimension < 3 lying in some Ev. For a torus point
+p= (x,t)we writey(p) =log|x|/ log|t| ∈R 2 for its position (§4).
+The proof is broken into six lemmas (Lemmas 7.5–7.10), assembled at the end of the subsection.
+Notation used throughout the subsection.For 0 <|t|<ε put s:= logt
+2πi and Zt :=sB 0 +C(t) , so that on the fibre
+Yt = (C∗)2, in logarithmic coordinates ξ:= 1
+2πi logx∈C 2/Z2, the map Ψ¯λ is the translation ξ7→ξ+Z t ¯λ
+(§4). The branch of logt is immaterial for everything that follows: another branch replaces s by s+n and
+Zt by Zt +nB 0 (n∈Z) , hence the translation vectors Zt ¯λ by Zt ¯λ+nB 0 ¯λ∈Z t ¯λ+Z 2 (B0 : Λ→Λ tor being
+integral), which is the same translation of C2/Z2; and ImZ t, Bt and the map Lt below are unchanged
+outright. Since Imξ=− log|t|
+2π y, setting
+R(t):=−2πImC(t),B t :=B 0 +R(t)/ log|t|
+we get ImZ t =− log|t|
+2π Bt. Write C0 :=C( 0), Z0
+t :=sB 0 +C 0, B0
+t :=B 0 + R(0)/ log|t| , c0
+¯λ :=exp( 2πiC0 ¯λ)
+and
+Ψ0
+¯λ := (c0
+¯λ, 1)·Φ ¯λ,Γ 0 :={Ψ 0
+¯λ}¯λ∈Λ
+(the action with the twist frozen att=0; onY 0 it coincides withΓ, becausec ¯λ(0) =c0
+¯λ).
+Lemma 7.5(Straightening to a constant twist).There is η0 with 0 <η 0 <min(ε , 1) — so that Y≤η0 ⊂Y ε
+and log|t|< 0 for 0 <|t| ≤η0 — such that ∥Bt −B 0∥ ≤1
+2 , hence Bt ∈GL 2(R), and likewise B0
+t ∈GL 2(R),
+for all 0<|t| ≤η 0. Fix 0<η≤η 0 and define
+G(x,t):=
+
+exp
+ 
+−2πi(C(t)−C 0)B −1
+t y(x,t)
+
+·x,t
+
+(t̸=0),G| Y0 :=id.
+42
+=== PAGE 43 ===
+ThenGis a homeomorphism ofY ≤η over{|t| ≤η}with the properties:
+(a)G| Y0 =id;Gpreservestand commutes withT f ;
+(b)G◦Ψ ¯λ =Ψ 0
+¯λ ◦Gfor every ¯λ∈ Λ;
+(c) on each fibre Yt (0 <|t| ≤η), G induces a real-linear isomorphism ¯Gt :Y t/Γ→Y t/Γ0 of the quotient
+4-tori which is the identity on H1 =Λ with respect to the markings Πt = [Zt |I] and Π0
+t = [Z0
+t |I] (it
+fixes e1, e2 and carries Zt ¯λ to Z0
+t ¯λ); here Γ, Γ0 preserve Yt since Ψ¯λ preserves t, and (b) makes ¯Gt well
+defined.
+Consequently, if R is a Γ0- and Tc-equivariant strong deformation retraction of Y≤η onto Y0, then G−1RsG
+is a Γ- and Tf -equivariant strong deformation retraction of Y≤η onto Y0, and it descends to a strong
+deformation retraction ofN ′
+0 =Y ≤η /ΓontoW=Y 0/Γ.
+Proof. By the boundedness of C on {|tc| ≤r/ 2} (§4, the bound ∥R∥∞ of Theorem 4.5) we may fix
+η0 <min(ε , 1) so small that ∥Bt −B 0∥ ≤1
+2 for 0 <|t| ≤η0; then Bt ∈GL 2(R), and the same estimate and
+conclusion hold forB 0
+t =B 0 +R(0)/ log|t|. Fix 0<η≤η 0.
+Inξ-coordinatesG| Yt is induced by theR-linear map
+Lt(ξ) =ξ−(C(t)−C 0)(ImZ t)−1 Imξ,
+which is the unique R-linear map with Lt|R2 =id and Lt(Zt ¯λ) =Z0
+t ¯λ for all ¯λ∈R 2: writing ξ=Z ta+b
+witha= (ImZ t)−1 Imξandb∈R 2, one hasL tξ=Z 0
+t a+b. Consequently:
+(i) Lt carries the R-basis (e1, e2, Zte1, Zte2) of C2 to the R-basis (e1, e2, Z0
+t e1, Z0
+t e2), hence is invertible;
+being the identity onR 2 ⊃Z 2 it descends to a diffeomorphism ofC 2/Z2 =Y t.
+(ii) G◦Ψ ¯λ =Ψ 0
+¯λ ◦G on Y≤η \Y0, because Lt is linear and carries the translation vector Zt ¯λ to Z0
+t ¯λ; on
+Y0 the two actions agree andG=id. This is (b).
+(iii) G preserves t and commutes with Tf , since it multiplies x by a torus element depending only on
+(y,t)andT f does not changey; together withG| Y0 =id this is (a).
+(iv) G and G−1 (given by the same formula with (C(t)−C 0)(B0
+t )−1 in place of −(C(t)−C 0)B−1
+t ) are
+continuous on Y≤η. Away from Y0 this is clear. At p∗ ∈Y 0 continuity is a local statement, so we may first
+shrink: choose a triangle σ with p∗ ∈ Uσ and, by Lemma 4.4(i), a shrunken subchart Uσ(S)∋p ∗ on which
+the positions y(p) of torus points p∈ Uσ(S)∩Y ≤η remain in a fixed bounded set (on all of Uσ ∼= C3 the
+positions are unbounded), while C(t)−C 0 → 0 and B−1
+t stays bounded as t→ 0; hence the acting torus
+element tends to 1 andG(p)→p ∗ =G(p ∗)forp→p ∗ insideU σ(S). Points ofY 0 nearp ∗ are fixed.
+So G is a homeomorphism of Y≤η over {|t| ≤η}with (a), (b); and on each fibre it is induced by the
+real-linear automorphism Lt, whence a real-linear isomorphism ¯Gt :Y t/Γ→Y t/Γ0 of the quotient 4-tori
+which is the identity on H1 =Λ with respect to the markings Πt = [Zt |I] and Π0
+t = [Z0
+t |I] (it fixes e1, e2
+and carries Zt ¯λ to Z0
+t ¯λ); here Γ, Γ0 preserve Yt since Ψ¯λ preserves t, and (b) makes ¯Gt well defined. This is
+(c).
+Finally, let R be a Γ0- and Tc-equivariant strong deformation retraction of Y≤η onto Y0. Then G−1RsG
+is a strong deformation retraction of Y≤η onto Y0 (as G is a homeomorphism fixing Y0 pointwise), it is
+Γ-equivariant by (b) and Tf -equivariant by (a); being Γ-equivariant it descends to the quotients N′
+0 =Y ≤η /Γ
+andW=Y 0/Γ.
+Lemma 7.6(Polar decomposition).Let Y≥0 ⊂Y be the closure of (R>0)3 ⊂T N′ and (Y≤η )≥0 :=Y ≥0 ∩Y ≤η.
+Then:
+(i) the multiplication map m:T c ×Y ≥0 →Y , (ϕ, q)7→ϕ·q , is continuous, surjective and closed, hence a
+quotient map; the same holds for its restrictionT c ×(Y ≤η )≥0 →Y ≤η;
+(ii)ϕ·q=ϕ ′ ·q ′ iffq=q ′ andϕ −1ϕ′ ∈Stab Tc (q); themodulus p7→ |p| ∈Y≥0 is a continuous retraction;
+43
+=== PAGE 44 ===
+(iii) if q lies in the orbit O ˆC of the cone ˆC over a cell C of TA2 , then StabTc (q) =T ˆC, the compact subtorus
+attached to N ˆC :=N ′ ∩span R ˆC= L
+v∈V(C) Z(v, 1) (for the orbit Oσ of a cone σ the stabiliser in
+TN′ of each of its points is the subtorus on Nσ :=N ′ ∩span R σ [Ful93, §3.1]; its intersection with
+Tc =N ′ ⊗S 1 isN σ ⊗S 1, connected becauseN σ is saturated inN ′), and
+T ˆC ∩T f =
+
+
+
+1,C={v}a vertex,
+S1
+v′−v,C={v,v ′}an edge,
+Tf ,Ca triangle.
+(7.1)
+Proof. (i) In the chart Uσ ∼= C3 of a triangle σ (coordinates z0, z1, z2, characters positive on (R>0)3), Y≥0 is
+the orthant [0, ∞)3 and z=ϕ· |z| with |z|= (|z0|, |z1|, |z2|); so m is continuous and surjective. It is closed,
+Tc being compact and Y locally compact Hausdorff; hence it is a quotient map, and likewise after restriction
+over{|t| ≤η}.
+(ii) Again chartwise clear, as is the continuity of the modulus.
+(iii) N ˆC equals L
+v∈V(C) Z(v , 1) because TA2 is unimodular [Ful93, §3.1]. An element ∑v av(v, 1) of its
+Lie algebra lies in Λtor ⊗R iff ∑v av = 0, whence (7.1). The Lie-algebra computation identifies a priori only
+the identity component, and the intersection is connected here. Indeed, both N ˆC and Λtor are saturated in
+N′, and N ˆC +Λ tor =N ′ in each of the three cases (any (v, 1)∈ ˆC together with Λtor =Z 2 × {0} generates
+N′), so in particular N′ ∩(span R ˆC+Λ tor ⊗R) =N ′ is saturated; and for two subtori TL1 , TL2 ⊂N ′ ⊗S 1
+attached to saturated sublattices with L1 +L 2 saturated one has TL1 ∩T L2 =T L1∩L2 , which is connected.
+(If a∈L 1 ⊗R is congruent mod N′ to b∈L 2 ⊗R , then a−b∈N ′ ∩((L 1 +L 2)⊗R) =L 1 +L 2, say
+a−b=n 1 +n 2 withn i ∈L i; thena−n 1 =b+n 2 ∈(L 1 ∩L 2)⊗R, soarepresents a point ofT L1∩L2 .)
+Lemma 7.7(The positive part and the honeycomb).Polar-decompose the constant twist: c0
+¯λ =u ¯λa¯λ with
+u¯λ =exp(2πiRe(C 0 ¯λ))∈T f anda ¯λ =|c 0
+¯λ|=exp(R 0 ¯λ)∈(R >0)2,R 0 :=R(0), and put
+Ψ+
+¯λ := (a¯λ, 1)·Φ ¯λ,Γ + :={Ψ +
+¯λ }.
+Let 0<η≤η 0. Then:
+(i) forϕ∈T c,q∈Y ≥0,
+Ψ0
+¯λ(ϕ·q) =
+ 
+u¯λ φ¯λ(ϕ)
+
+·
+ 
+Ψ+
+¯λ q
+
+,φ ¯λ(ϕ):=Φ ¯λϕΦ−1
+¯λ ∈T c, (7.2)
+where, in the coordinates(ϕ,θ)∈T f ×S 1 ofT c,
+φ¯λ(ϕ,θ) = (ϕ θB0 ¯λ,θ); (7.3)
+in particularφ ¯λ|Tf =id (the levelθ=1);
+(ii)Γ + preserves Y≥0 and acts freely and properly discontinuously on Yε; the quotient Yε/Γ+ is the
+complex manifold N0 of Theorem 4.5 for the constant twist C+ := (2πi)−1R0 (sameR), and the
+induced map Yε/Γ+ →∆ ε is proper (Theorem 4.5(c)); in particular Y≤η /Γ+ is compact for η<ε . It
+acts on the positive slice St1 :={|t|=t 1} ∩Y≥0 ∼= R2
+y (0 <t 1 ≤η) by the translations y7→y+B +
+t1
+¯λ,
+B+
+t1 :=B 0 +R 0/ logt1, and onY 0 cellularly,Ψ +
+¯λ (Ev)≥0 = (Ev+B0 ¯λ)≥0;
+(iii)(Y ≤η )≥0 is a contractible topological 3-manifold with boundary (Y0)≥0 ⊔ {|t|=η}>0, with interior
+{0<|t|<η} >0 ∼= R2
+y ×(0,η)viap7→(y(p),|t(p)|);
+(iv) there is aΓ +-equivariant homeomorphism
+ϑ:R 2 −→(Y0)≥0 (source actiony7→y+B 0 ¯λ)
+with ϑ(Hv) = (Ev)≥0, ϑ(Hv ∩H v′ ) = (Ev ∩E v′ )≥0 and ϑ(vertex dual toσ) =O ˆσ, where H is the
+honeycomb dual toT A2 (hexagonH v centred atv∈Z 2); in particular(Y 0)≥0 ∼= R2 is contractible.
+Proof. (i) Since Φ¯λ is a toric automorphism it normalises Tc, whence (7.2); φ¯λ is induced by the unipotent
+lattice map(y,y 3)7→(y+y 3B0 ¯λ,y 3), which is (7.3).
+44
+=== PAGE 45 ===
+(ii) Thus Γ+ preserves Y≥0; it is the action of Theorem 4.5 for the constant twist C+ := (2πi)−1R0 (which
+has the sameRat t= 0, and ∥R0∥ ≤ ∥R∥∞, so that the hypotheses of that Theorem hold on Yε), hence free
+and properly discontinuous by Theorem 4.5(b), the quotient Yε/Γ+ being the complex manifold N0 of that
+Theorem for the twist C+, with proper induced map Yε/Γ+ →∆ ε by Theorem 4.5(c); in particular Y≤η /Γ+
+is compact forη<ε. The formulas onS t1 and onY 0 are those of Lemma 4.3.
+(iii) In a chart (Y≤η )≥0 is {r∈[ 0, ∞)3 :r 0r1r2 ≤η} ; near a triple point all ri are small and the local
+model is [0, ∞)3 ∼= R2 ×[ 0, ∞); near an interior point of a double arc exactly two of the ri vanish, and the
+local model is [0, ∞)2 ×( 0, ∞) ∼= R2 ×[ 0, ∞); near an interior point of some (Ev)≥0 exactly one ri vanishes,
+giving [0, ∞)×( 0, ∞)2; and near {|t|=η} all ri > 0 and d(r0r1r2)̸= 0. Its boundary is (Y0)≥0 ⊔ {|t|=η}>0
+and its interior is {0 <|t|<η} >0 ∼= R2
+y ×( 0, η) via p7→(y(p) , |t(p)|) . By the collar theorem [ Bro62] the
+inclusion int(Y≤η )≥0 ,→(Y≤η )≥0 is a homotopy equivalence, so(Y ≤η )≥0 is contractible.
+(iv) First, (Y0)≥0 = S
+v(Ev)≥0, and (Ev)≥0, the non-negative real part of the smooth projective toric
+surface Ev ∼= dP6, is homeomorphic to its moment hexagon [ Ful93, §4.1]: the moment map of Ev restricts
+to a homeomorphism of (Ev)≥0 onto the moment polygon, carrying the non-negative part of each orbit
+closure onto the corresponding face; concretely, a closed disc whose boundary is a cycle of six arcs
+(Ev ∩E v′ )≥0 ∼= [0, ∞], v′ running through the six neighbours of v, consecutive arcs meeting at the Tc-fixed
+points Oˆσ, σ∋v . By Lemma 4.2, (Ev)≥0 ∩(E v′ )≥0 = (Ev ∩E v′ )≥0 when v′ −v is an edge direction of
+TA2 and is empty otherwise. Thus the closed cells (Ev)≥0, (Ev ∩E v′ )≥0, Oˆσ have exactly the incidences of
+the hexagons, edges and vertices of the honeycomb H dual to TA2 (hexagon Hv centred at v∈Z 2, edge
+Hv ∩H v′ dual to the triangulation edge{v,v ′}, vertex dual to the triangleσ).
+We construct ϑ by skeleta of H, each step being made on representatives of the (free) Γ+-action on cells
+and propagated equivariantly.
+Vertices. Γ+ permutes the vertices of H freely, with two orbits, dual to the two triangles of TA2 /Λtor. The
+assignment ϑ(vertex dual toσ):=O ˆσ is forced, and it is equivariant because Ψ+
+¯λ Oˆσ =O \σ+B0 ¯λ (Lemma 4.3).
+Edges. Γ+ permutes the edges of H freely, with three orbits, represented by the three edges Av′ of
+∂H0 dual to v′ ∈ {e1, e2, e1 −e 2}. On each Av′ choose a homeomorphism onto the arc (E0 ∩E v′ )≥0 ∼= [0, 1]
+restricting at the two endpoints of Av′ to the two values already fixed (possible, those endpoints being dual
+to the two triangles containing the edge {0, v′}, and their prescribed images the two Tc-fixed points of that
+arc), and propagate by
+ϑ|Ψ+
+¯λ Av′ :=Ψ +
+¯λ ◦ϑ| Av′ ◦(· −B0 ¯λ).
+In particular the three remaining edges of ∂H0, namely A−v′ =A v′ −v ′, receive ϑ|A−v′ = (Ψ+
+¯λ )−1 ◦ϑ| Av′ ◦
+(·+v ′) where B0 ¯λ=v ′ (note (Ψ+
+¯λ )−1(E0 ∩E v′ ) =E−v′ ∩E 0). Since the vertex map of the previous step
+is equivariant, each of the six edge maps so obtained takes at each of its two endpoints exactly the
+prescribed vertex value; hence they agree at the six vertices of ∂H0 and assemble into a homeomorphism
+∂H0 →∂(E 0)≥0 of circles.
+2-cells. Γ+ permutes the closed hexagons freely and transitively ( B0 being unimodular), with repre-
+sentative H0. The above homeomorphism of circles extends to a homeomorphism ϑ|H0 : H0 →(E 0)≥0 of
+the closed discs (Schoenflies/Alexander); put ϑ|Hv :=Ψ +
+¯λ ◦ϑ| H0 ◦(· −v)for B0 ¯λ=v . On an edge shared
+by two closed hexagons the two resulting definitions agree, because each of them is, by construction, the
+equivariant propagation of the map chosen on the corresponding edge representative Av′. Since the closed
+hexagons form a locally finite closed cover of R2 and the map is continuous on each of them, the resulting
+map ϑ is well defined and continuous. It is bijective, because it carries the open hexagons, the open edges
+and the vertices bijectively onto the pairwise disjoint strata (Oˆv)>0, (O\{v,v′})>0, Oˆσ, whose union is (Y0)≥0.
+It is proper: a compact K⊂(Y 0)≥0 meets only finitely many (Ev)≥0 — the family {Ev} is locally finite in Y,
+since Ev ⊂ S
+σ∋v Uσ and each chart Uσ meets only the three Ev attached to the vertices of σ — so ϑ−1(K) is a
+closed subset of a finite union of compact hexagons, hence compact. A continuous proper bijection between
+locally compact Hausdorff spaces is a homeomorphism; thus ϑ is a Γ+-equivariant homeomorphism. In
+particular(Y 0)≥0 ∼= R2 is contractible.
+45
+=== PAGE 46 ===
+Lemma 7.8(Retracting the positive quotient).Let 0<η≤η 0 and put
+Q+ := (Y≤η )≥0/Γ+,H:= (Y 0)≥0/Γ+ ⊂Q +.
+Then Q+ is a compact topological 3-manifold with boundaryH ⊔T 2
+η , where T2
+η :={|t|=η} ≥0/Γ+ ∼=
+R2
+y/B+
+η Λ is a 2-torus ( Γ+ acts on the slice by y7→y+B +
+η ¯λ, Lemma 7.7(ii), and B+
+η ∈GL 2(R), Lemma 7.5),
+the boundary componentHis a 2-torus, and there exists
+¯P:Q + ×[0, 1]→Q +, ¯P0 =id, ¯Ps|H =id, ¯P1(Q+) =H.
+Proof. The action of Γ+ on (Y≤η )≥0 is free and properly discontinuous, being the restriction to the closed
+invariant subset (Y≤η )≥0 ⊂Y ε of the free properly discontinuous action of Theorem 4.5 for the data (B0, C+)
+(Lemma 7.7(ii)); and it preserves the boundary (Y0)≥0 ⊔ {|t|=η} >0 of the manifold-with-boundary
+(Y≤η )≥0 (Lemma 7.7(iii)), since it preserves Y0 and the function |t|. Hence Q+ is a topological 3-manifold
+with boundaryH ⊔T 2
+η . It is compact: A:= (Y ≤η )≥0 is closed and Γ+-invariant, i.e. saturated for the
+open quotient map q:Y ≤η →Y ≤η /Γ+; hence q(A) is closed (its complement is the image of the invariant
+open set Y≤η \A ), so compact, Y≤η /Γ+ being compact (Lemma 7.7(ii)); and the restriction of a quotient
+map to a saturated closed subset is a quotient map onto its image, so Q+ =A/Γ + ∼= q(A). Its universal
+cover (Y≤η )≥0 is contractible (Lemma 7.7(iii)); andH ∼= R2/B0Λ (via ϑ, Lemma 7.7(iv)) is a 2-torus with
+contractible universal cover (Y0)≥0. Thus Q+ andHare both K(Z2, 1)’s, and the inclusionH ,→Q +, being
+covered by the Γ+-equivariant inclusion of the two contractible covers, induces the identity of Γ+ on π1
+and isomorphisms on all πk. Compact manifolds are ANRs, hence of CW homotopy type, soH ,→Q + is
+a homotopy equivalence (Whitehead, [Hat02, Thm. 4.5]). AsHis a boundary component of the compact
+manifold-with-boundary Q+ it has a collar [ Bro62], so the inclusion is a cofibration, and a homotopy
+equivalence which is a cofibration is the inclusion of a strong deformation retract [ Hat02, Prop. 0.19,
+Cor. 0.20]: such a ¯Pexists.
+Lemma 7.9(Spreading by phases).Let 0 <η≤η 0 and let P:(Y ≤η )≥0 ×[ 0, 1]→(Y ≤η )≥0 be continuous
+with
+(P1)P 0 =id;
+(P2)P s|(Y0)≥0 =id for alls;
+(P3)P 1
+ 
+(Y≤η )≥0
+
+⊂(Y 0)≥0;
+(P4) everyP s isΓ +-equivariant.
+Then
+Rs(ϕ·q):=ϕ·P s(q) (ϕ∈T c,q∈(Y ≤η )≥0)
+is a well-defined, continuous, Γ0- and Tc-equivariant strong deformation retraction of Y≤η onto Y0; con-
+sequently (Lemma 7.5) G−1RsG is a Γ- and Tf -equivariant strong deformation retraction of Y≤η onto Y0,
+which descends to a strong deformation retraction rs of N′
+0 onto W. Moreover such a P exists: the lift of the
+retraction ¯Pof Lemma 7.8 through the universal covering(Y ≤η )≥0 →Q + withP 0 =id satisfies (P1)–(P4).
+Proof. Existence.Lift ¯P through the universal covering (Y≤η )≥0 →Q + to the unique homotopy Ps with
+P0 =id . By uniqueness of lifts, Ps is Γ+-equivariant, Ps|(Y0)≥0 =id , and P1 is a retraction onto (Y0)≥0; i.e.
+(P1)–(P4) hold.
+The construction.Let now P satisfy (P1)–(P4). Then Rs is well defined: if ϕ·q=ϕ ′ ·q then ϕ−1ϕ′ ∈
+StabTc (q) (Lemma 7.6(ii)), and either q lies in the interior, where the stabiliser is trivial, or q∈∂ ; on
+{|t|=η} >0 the stabiliser is again trivial, and on (Y0)≥0 we have Ps(q) =q by (P2), so ϕ·P s(q) =ϕ′ ·P s(q).
+It is continuous because Rs ◦m=m◦(id×P s) and m×id [0,1] is a quotient map (m is closed by Lemma 7.6(i)
+and [0, 1] is compact; the product of a closed quotient map with the identity of a locally compact space is
+again a quotient map). By constructionRcommutes withT c, and by (7.2)
+Rs
+ 
+Ψ0
+¯λ(ϕ·q)
+
+=R s
+ 
+u¯λ φ¯λ(ϕ)·Ψ +
+¯λ q
+
+=u ¯λ φ¯λ(ϕ)·Ψ +
+¯λ Ps(q) =Ψ0
+¯λ
+ 
+Rs(ϕ·q)
+
+,
+46
+=== PAGE 47 ===
+using (P4). Finally R0 =id by (P1), Rs|Y0 =id by (P2) (as Y0 =T c ·(Y 0)≥0) and R1(Y≤η )⊂T c ·(Y 0)≥0 =Y 0
+by (P3). So R is a Γ0- and Tc-equivariant strong deformation retraction of Y≤η onto Y0, and the last assertion
+is the final clause of Lemma 7.5.
+Lemma 7.10(The collapse on the fixed fibre).Let 0<η≤η 0, fixt 0 with 0<|t 0| ≤ηand put
+ρ0 :=|t 0|,S:=S ρ0 ,Y t0 :={t=t 0},F:=f −1(t0) =π(Yt0 ),
+π:Y ≤η →N ′
+0 =Y ≤η /Γ being the quotient map. Let ℓt0 :R 2 →R 2, y7→B 0(B+
+ρ0 )−1y, and let ˜c:Y t0 →Y 0,
+cϑ :F 0
+t0 :=Y t0 /Γ0 →W be as defined in the proof below. Let P satisfy (P1)–(P4) of Lemma 7.9 and let rs be
+the resulting strong deformation retraction ofN ′
+0 ontoW. Then:
+(i) there is a splitting F0
+t0
+∼= TB ×T f , TB :=S/Γ +, under which cϑ collapses Tf to a triple point of W over
+each vertex of Θ=H/B 0Λ, collapses S1
+nk over the interior of ek onto the double curve ¯Ck ∼= P1, and
+is injective overT B \Θ, where it is ontoW\D;
+(ii) there is a homotopy P′ again satisfying (P1)–(P4) and with P′
+1|S =ϑ◦ℓ t0 ◦y ; for the corresponding
+strong deformation retractionr ′
+s ofN ′
+0 ontoWfurnished by Lemma 7.9 and forr:=r ′
+1 one has
+r|F =c ϑ ◦ ¯G,
+where ¯G:F→F 0
+t0 , ¯G(πp) =π 0(Gp) , is the homeomorphism of tori induced by G, the identity on
+theΛ-markings;
+(iii) for everytwith 0<|t| ≤η, the same construction carried out at the level|t|gives
+r|f −1(t) ≃c (t)
+ϑ ◦ ¯Gt
+as maps to W, where ¯Gt :f −1(t)→F 0
+t :=Y t/Γ0 is the level-|t| analogue of ¯G, with c(t)
+ϑ :F 0
+t →W the
+map of the same shape as in (i), built at level|t|.
+Proof.Write elements ofT c as(ϕ,θ),ϕ∈T f ,θ∈S 1, and putθ 0 :=e iargt 0 . Then
+Yt0 ={t=t 0}= (Tf , argt0)·S ∼= Tf ×R 2
+y,
+the stabilisers of points of S being trivial. The map ℓt0 :y7→ ˜y:=B 0(B+
+|t0|)−1y is a linear isomorphism
+intertwining theΓ +-actiony7→y+B +
+|t0|
+¯λonSwith the action ˜y7→ ˜y+B 0 ¯λon the source ofϑ. Define
+˜c:Y t0 →Y 0, ˜c
+ 
+(ϕ, argt 0)·q
+
+:= (ϕ, argt0)·ϑ
+ 
+ℓt0 (y(q))
+
+(ϕ∈T f ,q∈S).
+As in Lemma 7.9 this is well defined — every point of S (indeed of (Y≤η )>0) has trivial Tc-stabiliser,
+so no compatibility condition arises — and continuous (by the quotient map m), Tf -equivariant, and
+Γ0-equivariant (by the one-line computation of Lemma 7.9 with Ps replaced by the Γ+-equivariant map
+ϑ◦ℓ t0 ◦y, using (7.2)); it therefore descends to
+cϑ :F 0
+t0 =Y t0 /Γ0 −→W.
+Cell description; proof of(i).By Lemma 7.6, two points (ϕ, y), (ϕ′, y) of Yt0
+∼= Tf ×R 2 have the same
+image iff ϕ−1ϕ′ ∈Stab Tc (ϑ( ˜y))∩T f , which is given by (7.1). Hence: over the open hexagon H◦
+v the map ˜c is
+injective, with image (Tf , argt 0)·(O ˆv)>0, and this is all of the open orbit Oˆv ∼= (C∗)2 of Ev: every point of Oˆv
+has stabiliser Tˆv =S 1
+(v,1) and Tc =T f ·T ˆv (because Λtor +Z(v , 1) =N′), so Oˆv =T c ·(O ˆv)>0 =T f ·(O ˆv)>0.
+Over the interior of the honeycomb edge dual to the triangulation edge {v, v′} exactly the circle S1
+v′−v ⊂T f
+is collapsed, the image being the 1-dimensional orbit whose closure is the curve Ev ∩E v′ ∼= P1; over a
+honeycomb vertex all ofT f is collapsed to the triple pointO ˆσ.
+Passing to the quotient by Γ0: the slice torus is TB :=S/Γ + ∼= R2
+˜y/B0Λ= (Λtor ⊗R)/Λ tor, on which
+the honeycomb descends to the graph Θ=H/B 0Λ with two vertices (the two triangles of TA2 /Z2) and
+three edges e1, e2, e3, the edge ek being dual to the triangulation edge of direction nk, i.e. n1 = ˆw, n2 = ˆδ− ˆw,
+n3 =− ˆδ with ˆw↔e 1, ˆδ↔e 2. On the Tf -factor Γ0 acts by phases only: by (7.2) and (7.3), Ψ0
+¯λ multiplies the
+Tc-coordinate by u¯λ φ¯λ(ϕ, θ), and since all points of Yt0 are written (ϕ, argt 0)·q , the relevant level is θ=θ 0,
+47
+=== PAGE 48 ===
+at which theT f -component of the action is multiplication by
+u¯λ θB0 ¯λ
+0 =exp
+ 
+2πi Kt0
+¯λ
+
+,K t0 :=Re(C 0) +argt 0
+2π B0
+(φ¯λ|Tf =id only at θ= 1; the element θB0 ¯λ
+0 is well defined because B0 ¯λ∈Λ tor is integral, so the choice of
+argt 0 is immaterial). Thus theΓ 0-action onY t0
+∼= Tf ×R 2
+y is
+¯λ·(ϕ,y) =
+ 
+ϕe 2πiKt0
+¯λ,y+B +
+|t0|
+¯λ
+
+.
+Since ¯λ7→K t0
+¯λisR-linear, the map
+Ξ(ϕ,y):=
+ 
+ϕ·exp(−2πi K t0 (B+
+|t0|)−1y),y
+
+conjugates the Γ0-action to the product action (ϕ, y)7→(ϕ , y+B +
+|t0|
+¯λ): indeed, writing K:=K t0 , B+ :=B +
+|t0|,
+Ξ
+ ¯λ·(ϕ,y)
+
+=
+ 
+ϕe 2πiK ¯λ e−2πiK(B +)−1y e−2πiK ¯λ,y+B + ¯λ
+
+= ¯λ· prod Ξ(ϕ,y).
+This yields the splitting F0
+t0
+∼= TB ×T f of the Proposition; Ξ alters ϕ by a translation depending on y only,
+so the above cell description descends verbatim. Thus cϑ collapses Tf over each vertex of Θ to a triple point
+of W, collapses S1
+nk over the interior of ek onto the double curve ¯Ck ∼= P1, and is injective over TB \Θ , where
+it is ontoW\D. This is (i).
+Two coordinate facts and an interpolation lemma.We first record two coordinate facts, both contained in
+Lemma 7.7, and an elementary interpolation lemma. Write
+(Y≤η )>0 := (Y≤η )≥0 \(Y 0)≥0.
+(F1) The map κ:q7→(y(q) , |t(q)|) is a homeomorphism of (Y≤η )>0 onto R2 ×( 0, η], in which
+Ψ+
+¯λ (y,ρ) = (y+B +
+ρ ¯λ,ρ)withB +
+ρ =B 0 +R 0/ logρ, andS=κ −1(R2 × {ρ0}).
+(F2) ϑ:R 2 →(Y 0)≥0 is a homeomorphism with ϑ( ˜y+B 0 ¯λ) =Ψ +
+¯λ ϑ( ˜y). Consequently, for a Γ+-
+invariant subset U⊂(Y ≤η )≥0, a continuous map a:U→(Y 0)≥0 is Γ+-equivariant if and only if
+ˆa:=ϑ −1 ◦a:U→R 2 satisfies
+ˆa
+ 
+Ψ+
+¯λ q
+
+= ˆa(q) +B0 ¯λ( ¯λ∈ Λ). (7.4)
+Setting ℓρ(y):=B 0(B+
+ρ )−1y (so that ℓρ0 =ℓ t0 ), one has ℓρ(y+B +
+ρ ¯λ) =ℓρ(y) +B0 ¯λ; hence q7→ℓ |t(q)| (y(q))
+is a continuous map (Y≤η )>0 →R 2 satisfying (7.4), the map ρ7→B +
+ρ being continuous on (0, η] with values
+inGL 2(R)(Lemma 7.5).
+Interpolation lemma.If ˆa, ˆb:U→R 2 are continuous and satisfy (7.4), and w:U→[ 0, 1] is continuous
+and Γ+-invariant, then ˆh:= (1 −w) ˆa+w ˆb is continuous and satisfies (7.4); hence h:=ϑ◦ ˆh:U→(Y 0)≥0
+is continuous andΓ +-equivariant. Indeed
+ˆh
+ 
+Ψ+
+¯λ q
+
+= (1−w(q))
+ ˆa(q) +B0 ¯λ
+
++w(q)
+ ˆb(q) +B0 ¯λ
+
+= ˆh(q) +B0 ¯λ.
+(In words: ϑ conjugates Γ+ to a group of translations of R2, and affine combinations of translation-
+equivariant maps are translation-equivariant.)
+The homotopy.On U=S take ˆa:=ϑ −1 ◦P1|S — continuous and satisfying (7.4), since P1 is Γ+-equivariant
+with values in(Y 0)≥0 by (P3), (P4) — and ˆb:=ℓ ρ0 ◦y, and put, foru∈[0, 1],
+hu :=ϑ◦
+
+(1−u)ϑ −1P1|S +uℓ ρ0 ◦y
+
+:S−→(Y 0)≥0. (7.5)
+By the interpolation lemma (constant weight w≡u ) every hu is Γ+-equivariant; (u, q)7→h u(q) is
+continuous; and
+h0 =P 1|S,h 1 =ϑ◦ℓ t0 ◦y.
+Then Hu
+ 
+(ϕ, argt 0)·q
+
+:= (ϕ, argt 0)·h u(q) (ϕ∈T f , q∈S) is well defined (points of S have trivial
+stabiliser), continuous (via the quotient map m), Tf - and Γ0-equivariant (by (7.2) and the Γ+-equivariance of
+hu), and is a homotopy fromR 1|Yt0
+to ˜cthrough mapsY t0 →Y 0; descending moduloΓ 0, the mapF 0
+t0 →W
+induced byR 1|Yt0
+is homotopic toc ϑ (theH u beingΓ 0-equivariant andY 0/Γ0 =W).
+The explicit modification: equality for the fixed t0.We modify the given P itself, on a band of positive torus
+points aroundS. Fixδwith 0<δ<ρ 0/2 and let
+χ(ρ):=max
+ 
+0, 1− |ρ−ρ0|/δ
+
+(0<ρ≤η),
+48
+=== PAGE 49 ===
+a tent function defined on (0, η] (one-sided if ρ0 =η , which is all that is needed), so that χ(ρ0) = 1
+and χ(ρ) = 0 for |ρ−ρ 0| ≥δ; explicitly χ≡ 0 on (0, ρ0 −δ] , so that the function w below extends by 0
+continuously to(Y 0)≥0 (i.e. ast→0). Put
+Uδ :=κ −1
+
+R2 ×
+ 
+(ρ0 −δ,ρ 0 +δ)∩(0,η]
+
+⊂(Y ≤η )>0,
+an openΓ +-invariant set containingSand disjoint from(Y 0)≥0 (on it|t|>ρ 0/2), and let
+w(q):=χ(|t(q)|)
+ 
+q∈(Y ≤η )>0
+
+,w:=0 on(Y 0)≥0 :
+a continuous, Γ+-invariant function on (Y≤η )≥0 (the maps Ψ+
+¯λ preserve t), equal to 1 on S and to 0 outside
+Uδ. DefineK:(Y ≤η )≥0 ×[0, 1]→(Y 0)≥0 by
+Ku(q):=
+
+
+
+ϑ
+ 
+1−u w(q)
+
+ϑ−1 
+P1(q)
+
++u w(q)ℓ |t(q)|
+ 
+y(q)
+
+,q∈U δ,
+P1(q),q/∈U δ.
+(7.6)
+This is well defined and continuous. Indeed, the first-line formula is defined and continuous on all of the
+open set (Y≤η )>0 — there ϑ−1P1 and q7→ℓ |t(q)| (y(q)) are continuous R2-valued maps by (F1), (F2), and w
+is continuous — and it equals P1 wherever w= 0, in particular on (Y≤η )>0 \U δ. Together with the open set
+{|t|<ρ 0 −δ} ⊃(Y0)≥0, on which the second line gives Ku =P 1, this is an open cover of (Y≤η )≥0 on whose
+overlap the two formulas agree; hence K is well defined and continuous. (Equivalently: w vanishes on
+{
+|t| −ρ0
+ ≥δ} ⊃∂Uδ, and the closure Uδ lies in {|t| ≥ρ0 −δ} ⊂(Y≤η )>0, so that the first-line formula is
+defined on Uδ; hence K is continuous by pasting along the closed cover Uδ ∪
+ 
+(Y≤η )≥0 \U δ
+
+.) Its properties
+are:
+(K1)K 0 =P 1 (putu=0);
+(K2)K u|(Y0)≥0 =P 1|(Y0)≥0 =id for allu, since(Y 0)≥0 ∩U δ =∅;
+(K3)K u takes values in(Y 0)≥0, so eachK u is a retraction of(Y ≤η )≥0 onto(Y 0)≥0;
+(K4) each Ku is Γ+-equivariant: outside Uδ it is P1, and on Uδ this is the interpolation lemma applied with
+ˆa=ϑ −1P1, ˆb=ℓ |t| ◦yand theΓ +-invariant weightu w;
+(K5)K 1|S =ϑ◦ℓ ρ0 ◦y=ϑ◦ℓ t0 ◦y, becausew≡1 onS.
+Now put
+P′
+s :=
+(
+P2s, 0≤s≤ 1
+2 ,
+K2s−1, 1
+2 ≤s≤1,
+continuous since P1 =K 0 at s= 1
+2 . Then P′
+0 =id , i.e. (P1); P′
+s |(Y0)≥0 =id for all s, i.e. (P2) ((P2) for P when
+s≤ 1
+2 , (K2) when s≥ 1
+2 ); P′
+1 =K 1 maps (Y≤η )≥0 into (Y0)≥0 by (K3), i.e. (P3); every P′
+s is Γ+-equivariant by
+(P4) and (K4), i.e. (P4); and, by (K5),
+P′
+1|S =ϑ◦ℓ t0 ◦y. (7.7)
+Thus P′ again satisfies (P1)–(P4); what has been changed is only the end map P1, only on the band
+Uδ ={
+|t| −ρ0
+ <δ} around S, a set disjoint from (Y0)≥0, and only by the straight-line homotopy in the
+ϑ-chartR 2 ∼= (Y0)≥0, damped by the bumpχ(|t|).
+Applying Lemma 7.9 to P′.Since P′ satisfies (P1)–(P4), Lemma 7.9 applies to it verbatim and yields a Γ0-
+andT c-equivariant strong deformation retraction
+R′
+s(ϕ·q):=ϕ·P ′
+s (q) (ϕ∈T c,q∈(Y ≤η )≥0)
+of Y≤η onto Y0, and a strong deformation retraction r′
+s of N′
+0 onto W induced by G−1R′
+sG; the descent is
+continuous because the quotient map Y≤η ×[ 0, 1]→N ′
+0 ×[ 0, 1] is again a quotient map, being the product
+of the quotient mapY ≤η →N ′
+0 — which is open,Γacting properly discontinuously, so that the orbit map
+is open — with the identity of the locally compact space[0, 1]. Putr:=r ′
+1.
+49
+=== PAGE 50 ===
+Equality on Yt0 .Every point of Yt0 is p= (ϕ, argt 0)·q with ϕ∈T f , q∈S . Hence, by the definition of R′,
+by (7.7) and by the definition of ˜c,
+R′
+1(p) = (ϕ, argt0)·P ′
+1(q) = (ϕ, argt0)·ϑ
+ 
+ℓt0 (y(q))
+
+= ˜c(p), (7.8)
+i.e.R ′
+1|Yt0
+= ˜cexactly.
+Equality on F; proof of(ii).Let π:Y ≤η →N ′
+0 =Y ≤η /Γ and π0 :Y ≤η →Y ≤η /Γ0 be the quotient maps,
+so that F=π(Y t0 ) and F0
+t0 =π 0(Yt0 ); on W=π(Y 0) =π0(Y0) the two agree, and G=id there. Since G
+preservesY t0 and satisfiesGΨ ¯λ =Ψ 0
+¯λG(Lemma 7.5(b)), it induces a homeomorphism
+¯G:F→F 0
+t0 , ¯G(πp) =π 0(Gp),
+of tori, the identity on the Λ-markings (Lemma 7.5(c)). By definition r(πp) =π
+ 
+G−1R′
+1G(p)
+
+. For p∈Y t0
+we haveG(p)∈Y t0 , henceR ′
+1G(p) = ˜c(Gp)∈Y 0 by (7.8), andG −1 is the identity onY 0; therefore
+r(πp) =π
+ ˜c(Gp)
+
+=π 0 ˜c(Gp)
+
+=c ϑ
+ 
+π0(Gp)
+
+=c ϑ
+  ¯G(πp)
+
+,
+usingπ| Y0 =π 0|Y0 and the definition ofc ϑ as the map induced by ˜c. That is,r| F =c ϑ ◦ ¯G, which is (ii).
+Other levels; proof of(iii).The above can be arranged for one level |t0| at a time, or for any finite set
+of levels simultaneously by using disjoint bands Uδ; but not for all levels at once, since ϑ◦ℓ |t| ◦y has
+no continuous extension by the identity over (Y0)≥0 (near the interior of (Ev)≥0 one has y→v ), and the
+Proposition accordingly fixes t0. For any other t with 0 <|t| ≤η, the homotopy (7.5), built at the level |t|
+with P′ in place of P (legitimate since P′ satisfies (P1)–(P4)), shows that r|f −1(t) is homotopic to c(t)
+ϑ ◦ ¯Gt,
+where c(t)
+ϑ :F 0
+t →W and ¯Gt :f −1(t)→F 0
+t are defined as cϑ, ¯G with |t| in place of ρ0; this is what the
+applications below, all homological, require.
+Proof of Proposition 7.2. Let η0 be the constant of Lemma 7.5, let 0 <η≤η 0 and fix t0 with 0 <|t 0| ≤η; put
+F=f −1(t0).
+By Lemmas 7.7 and 7.8 the quotient Q+ admits a strong deformation retraction ¯P ontoH; by Lemma 7.9
+its lift P satisfies (P1)–(P4) and produces a Γ0- and Tc-equivariant strong deformation retraction R of Y≤η
+onto Y0, whence, by Lemma 7.5, a {Ψ¯λ}- and Tf -equivariant strong deformation retraction G−1RsG of
+Y≤η onto Y0 descending to a strong deformation retraction of N′
+0 onto W. This is the first assertion of the
+Proposition (and re-proves Lemma 7.3(i)).
+Apply now Lemma 7.10 to this P: part (ii) produces a modified P′, again satisfying (P1)–(P4), hence
+again — by Lemma 7.9 and Lemma 7.5 — a {Ψ¯λ}- and Tf -equivariant strong deformation retraction of Y≤η
+onto Y0 descending to a strong deformation retraction r′
+s of N′
+0 onto W, and the retraction r:=r ′
+1 satisfies
+r|F =c ϑ ◦ ¯G. By Lemma 7.10(i) (whose ingredients are the stabiliser computation (7.1) of Lemma 7.6 and
+the honeycomb homeomorphism ϑ of Lemma 7.7) the map cϑ, read in the splitting F0
+t0
+∼= TB ×T f , collapses
+Tf over each vertex of Θ, collapses S1
+nk over the interior of ek onto ¯Ck and is injective over TB \Θ ; since ¯G is
+an isomorphism of tori which is the identity on the Λ-markings, the composite c=r| F =c ϑ ◦ ¯G has exactly
+the description stated in the Proposition. Finally, the last assertion of the Proposition is Lemma 7.10(iii).
+7.3 The homology ofWand the specialisation maps
+Proposition 7.11. H∗(W) = (Z, Z2, Z4, Z2, Z), torsion free, with H2(W) =⟨[ ¯C1], [ ¯C2], [ ¯C3], [TB]⟩, TB :=
+c(TB × {pt}). Moreoverπ1(W) ∼= Z2 ande(W) =2.
+Proof. Let ν: dP 6 →W be the normalisation (§4);D = ¯C1 ∪ ¯C2 ∪ ¯C3, three copies of P1 meeting pairwise
+exactly atP,Q, soH ∗(D) = (Z,Z2,Z3, 0, 0)ande(D) =2.
+Let ∂⊂dP 6 be the hexagonal cycle of six (−1)-curves C1, . . ., C6. It isnodal(six nodes), hence not a
+submanifold, and we use instead aregular (plumbing) neighbourhood N of ∂ in dP6: the plumbing of six disc
+bundles according to the hexagonal cycle, a compact 4-manifold with boundary which deformation retracts
+onto ∂ and whose interior is an open neighbourhood of ∂. Any such N will do: since ν is injective off ∂,
+and the identifications Ci →C i+3 by which ν glues the six curves in opposite pairs take place inside ∂⊂ N,
+the set N is ν-saturated, and a strong deformation retraction of N onto ∂ fixing ∂ pointwise is compatible
+50
+=== PAGE 51 ===
+with those identifications; hence bothNand the retraction descend underν. Put
+P0 :=dP 6 \intN,
+a compact oriented 4-manifold with boundary. Now ν identifies dP6 \∂ ∼= W\ D ∼= (C∗)2 and restricts
+to a homeomorphism of P0 onto W\intN W, where NW :=ν(N) is, by the preceding remark, a regular
+neighbourhood ofDinWdeformation retracting ontoD; moreoverP 0 ,→dP6 \∂is a deformation retract,
+soP 0 ≃(C ∗)2 ≃T 2.
+We compare the pairs homologically, by homotopy equivalence and excision. SinceD ,→ NW is a
+deformation retract, the five lemma gives Hk(W,D ) ∼= Hk(W, NW ); excising the interior of a smaller regular
+neighbourhoodN ′
+W ⊂intN W ofDgives
+Hk(W,N W ) ∼= Hk
+ 
+W\intN ′
+W,N W \intN ′
+W
+ ∼= Hk(P0,∂P 0),
+the last isomorphism because the collar between the two neighbourhoods deformation retracts the pair
+onto(P 0,∂P 0). Hence
+Hk(W,D) ∼= Hk(P0,∂P 0) ∼= H4−k (P0) =H4−k  
+(C∗)2
+=Z,Z 2,Z, 0
+for k= 4, 3, 2 and k≤ 1, the middle isomorphism being Lefschetz duality for the manifold with boundary
+P0. Thus(W,D)has one relative 2-cell, two relative 3-cells and one relative 4-cell, dual to the cells ofT 2.
+Both boundary maps of the pair vanish, because the generators of Hk(W,D ) lift to absolute cycles.
+Indeed, by Proposition 7.2, TB =c(T B × {pt})meets W\ Din (TB \Θ)× {pt}, which represents the
+generator of H2(W,D ) ∼= H2(P0): under the Lefschetz duality H2(P0, ∂P0) ∼= H2(P0) the pairing with
+H2(P0) ∼= H2(T2) =Z is the intersection pairing, the generator of H2(P0) is the compact torus Tf ⊂W\ D ∼=
+(C∗)2, and in (C∗)2 ∼= (TB \Θ)×T f the "Log-section” (TB \Θ)× {pt}meets the level torus {y=y 0}
+transversally in one point, so the intersection number is ±1; as the pairing H2(P0, ∂P0)×H 2(P0)→Z
+is perfect between free groups of rank 1, a class pairing to ±1 is a generator. Likewise the two 3-cycles
+c(TB ×S 1
+ˆw), c(TB ×S 1
+ˆδ) meet W\ Din the relative cycles (TB \Θ)×S 1
+ν (ν= ˆw, ˆδ), whose intersection
+numbers with the circles {y0} ×S1
+µ generating H1(P0) =H1(Tf ) are ±det(ν , µ), a unimodular matrix; so
+they represent a basis ofH 3(W,D) ∼= H1(P0) =H1(T2). Hence
+H1(W) ∼= H1(D) =Z2, 0→H 2(D)→H 2(W)→Z→0,
+H3(W) ∼= Z2,H 4(W) =Z,
+all extensions being of free groups, which gives the stated groups and generators.
+Finally π1(W) ∼= π1(N′
+0) =Λ. By Lemma 7.3(i) the inclusion W,→N ′
+0 is a deformation retract, and
+the computation of π1 in Lemma 7.4 is stated for N0, so we argue with N′
+0 directly: N′
+0 =Y ≤η /Γ is a free
+properly discontinuous quotient, and its covering space Y≤η is simply connected, as follows. By Lemma 7.9
+the inclusion Y0 ,→Y≤η′ is that of a strong deformation retract forevery0 <η ′ ≤η 0. Shrinking ε so that
+ε≤η 0 (this leaves N′
+0, W and the statement unchanged, and Corollary 4.8 holds for every ε), we may
+write Yε = S
+η′<ε Y≤η′ as an increasing union of closed subspaces, each containing Y0 and retracting onto
+it; consequently each inclusion Y≤η′ ,→Y≤η′′ (η′ ≤η ′′) induces an isomorphism on π1, both composites
+with Y0 ,→(·) being isomorphisms. Since π1 commutes with such increasing unions, the inclusions induce
+isomorphisms
+π1(Y≤η ) ∼= π1(Y0) ∼= π1(Yε) =1
+by Corollary 4.8. (Equivalently, N′
+0 ,→N 0 is a homotopy equivalence and one may quote Lemma 7.4.) And
+e(W) =e(dP 6)−e(∂) +e(D) =6−6+2=2.
+Proposition 7.12.For every q the map c∗ :H q(F)→H q(W) is surjective with kernel (Vq M0 −I) Vq Λ;
+dually
+spq :=c ∗ :H q(W)−→H q(F) =Vq V
+is injective with image( Vq V)T0 . Explicitly
+VT0 =⟨γ,u⟩,( V3 V)T0 =⟨γuw,γuδ⟩,
+(V2 V)T0 =⟨γu,γδ,uw,γw−uδ⟩,
+and sp2(T∨
+B ) =γ∧u , sp2( ¯C∨
+k ) =±
+ 
+b2
+k γδ−a 2
+k uw+a kbk(γw−uδ)
+
+, where νk :=det(n k, ·) = (ak, bk) in
+51
+=== PAGE 52 ===
+the basis (w, δ) of Λ∨
+tor. In degree 2 the two factors of the splitting F0
+t0
+∼= TB ×T f of Proposition 7.2 have
+H1(Tf ) =Λ tor =⟨ ˆw, ˆδ⟩ and H1(TB × {pt}) =⟨ˆγ, ˆu⟩ ⊂Λexactly (not merely modulo Λtor). Indeed, in
+the coordinates (ϕ, y) of Yt0
+∼= Tf ×R 2 the section TB × {ϕ0} is the graph ϕ=ϕ 0 exp(2πiKt0 (B+
+|t0|)−1y)
+(Lemma 7.10, the map Ξ), and along the loop y7→y 0 +sB +
+|t0|
+¯λ, s∈[ 0, 1], which represents ¯λ∈ Λ=H 1(TB),
+the phase advances by exactly Kt0
+¯λ=Re(Z 0
+t0
+¯λ); so the lift of this loop to the universal cover of F0
+t0
+has displacement Z0
+t0
+¯λ with no Λtor-component (compare the formula for the Γ0-action, ¯λ·(ϕ , y) =
+(ϕe2πiKt0
+¯λ, y+B +
+|t0|
+¯λ)), and in the marking Π0
+t0 = [Z0
+t0 |I] its class is the basis vector ¯λ∈ ⟨ˆγ, ˆu⟩. We orient
+the factors so that [TB × {pt}] =ˆγ∧ ˆu and [Tf ] = ˆw∧ ˆδ in ∧2Λ=H 2(F); these classes are transported
+to F by ¯G−1, which is the identity on H1 =Λ (Lemma 7.5(c)). With this choice of orientation the image
+in H2(W,D ) ∼= Z of the class [TB] =c∗[TB × {pt}]∈H2(W) is a generator (Proposition 7.11), and with
+respect to it the mixed classes β⊗v(β∈H 1(TB), v∈H 1(Tf )) have vanishing TB-component in H2(W):
+they are carried intoD.
+Proof.SinceT 0 =I+NwithNγ=Nu=0,Nw=−u,Nδ=γ, direct computation on V2 Vgives
+γu7→γu,γw7→γw−γu,γδ7→γδ,
+uw7→uw,uδ7→uδ−γu,wδ7→wδ−γw−uδ+γu,
+whence the stated invariants and (V2 T0 −I) V2 V=⟨γu , γw+uδ⟩ ; degrees 1, 3 are similar. The invariant
+lattices have ranks 2, 4, 2 in degrees 1, 2, 3, i.e. exactlyb q(W).
+Now c∗ in the model of Proposition 7.2. In degree 1 every circle of Tf can be pushed into a vertex of Θ,
+where it collapses, whileT B
+∼− →TB; thusc ∗ :Λ→H 1(W) =Λis the projection.
+In degree 2, the splitting identifies H2(F) =V2 Λ with V2 Λ⊕( Λ⊗Λ tor)⊕ V2 Λtor, the outer summands
+being generated by [TB × {pt}] =ˆγ∧ ˆu and [Tf ] = ˆw∧ ˆδ as stated. One has c∗[Tf ] =0 (the fibre torus
+collapses to a point over a vertex of Θ) and c∗[TB × {pt}] = [TB] by definition. For β∈H 1(TB) =Λ and
+v∈H 1(Tf ) =Λtor we claim
+c∗(β⊗v) =
+3
+∑
+k=1
+νk(B0β)ν k(v) [¯Ck], (7.9)
+B0 : Λ ∼− →Λtor being the unimodular shear of §2; in particular the mixed classes have no [TB]-component,
+as asserted. This is read off the cell description of Proposition 7.2, using a cellular representative of β (the
+edges ek are not cycles, so a cellular representative, rather than a count of transversal crossings of Θ, is
+what computes the class). Give TB the CW structure with 1-skeleton Θ (two vertices, the three edges ek,
+each oriented from the first vertex to the second) and a single 2-cell, namely the open hexagon TB \Θ dual
+to the unique vertex of TA2 /Λtor; its attaching word traverses each ek twice with opposite signs, so the
+cellular∂ 2 vanishes and
+H1(TB) =H1(Θ) =
+n
+∑k mkek : ∑k mk =0
+o
+.
+Thus β is represented by a unique cellular cycle ∑k mk(β)ek. To identify mk(β), let fk ⊂T B be the image of
+a triangulation edge of direction nk; it is aclosedloop (all vertices of TA2 are identified in TB), of homology
+class nk ∈Λ tor =H 1(TB), and by duality it meets Θ transversally in exactly one point, an interior point of
+ek. Intersecting the two cyclesβandf k inT B therefore gives
+mk(β) =±β·f k =±det(B 0β,n k) =±νk(B0β),
+the class of β in H1(TB) =Λtor being B0β and the intersection form being det in a basis of Λtor; orienting
+the edges ek suitably (the coefficient functional mk, like νk =det(n k, ·), is defined only up to the sign
+fixed by an orientation of ek, resp. of nk) we may and do take mk(β) =ν k(B0β). Consequently β⊗v is
+represented by the 2-cycle ∑k νk(B0β) (ek ×S 1
+v) in F=T B ×T f , a cycle supported over Θ and hence carried
+by c intoD(this is the vanishing of its [TB]-component). By Proposition 7.2, c maps ek ×T f onto ¯Ck,
+collapsing S1
+nk over e◦
+k and all of Tf over the two endpoints; so the annulus ek ×S 1
+v is carried onto ¯Ck ∼= S2
+by a map which collapses both boundary circles to the triple points P, Q and equals, over e◦
+k , the product of
+ide◦
+k with S1
+v ,→T f →T f /S1
+nk . Since H1(Tf /S1
+nk ) =Λtor/Znk ∼= Z via det(nk, ·) =νk, that map has degree
+52
+=== PAGE 53 ===
+±νk(v) with respect to the complex orientation of ¯Ck, with a sign depending only on k, which we absorb
+into the orientation of[ ¯Ck]; thusc ∗[ek ×S 1
+v] =νk(v)[ ¯Ck], and (7.9) follows.
+Surjectivity in degree 2: as B0 is unimodular it suffices that Λtor ⊗Λ tor →Z 3, x⊗v7→(ν k(x)νk(v))k,
+be onto: with n1 = ˆw, n2 = ˆδ− ˆw, n3 =− ˆδ we get ν1 = (0, 1), ν2 = (−1, −1), ν3 = (1, 0), and (x, v) =
+( ˆw, ˆw), ( ˆδ, ˆδ), ( ˆw, ˆδ) give (0, 1, 1), (1, 1, 0), (0, 1, 0), of determinant ±1; together with c∗[TB × {pt}] = [TB]
+this gives all of H2(W). In degree 3, c∗[TB ×S 1
+v] =v∈Λ tor ∼= H3(W) and classes containing [Tf ] die, so c∗
+is onto; degrees 0, 4 are clear.
+Finally c∗ ◦ Vq M0 =c ∗: the geometric monodromy h of f over ∆∗
+ε becomes homotopic to the identity
+after inclusion into N′
+0. Indeed, the fibre transport of F once around the circle |t|=|t 0| inside N′
+0 is a
+homotopy F×[ 0, 1]→N ′
+0 from the inclusion F,→N ′
+0 to its composite with h (it is a homotopy inside
+N′
+0 ≃W , not an isotopy of F, and no flow on all of N′
+0 is claimed); composing with the retraction r of N′
+0
+onto W gives c≃c◦h . Hence (Vq M0 −I) Vq Λ⊆kerc ∗; both are saturated (the first by the computation
+above, the second because Hq(W) is free) of rank (4
+q) −b q(W), hence equal. Dualising (all groups free)
+gives the statements for sp q, the displayed formulas being the transposes.
+A second proof of the injectivity of spq and of im spq = (∧qV)T0 , independent of the retraction of §7.2,
+by nearby cycles on W, is given in Appendix B (Theorem B.1); the identification spq =c ∗, the generators of
+H2(W)and the degree-2 normalisations above are not re-proved there.
+7.4 The multiple fibres, and the index2atp 2
+Recall ΛA1 =⟨ε , ˆδ⟩, ε= ˆγ+ 2 ˆu− 4 ˆw, ΛA2 =⟨ε ′, ˆδ⟩, ε′ = ˆγ+ 3 ˆu− 3 ˆw. Call (v1, v2)∈Λ A1 ×Λ A2 admissible
+if 3 ∤ℓ 1 and ℓ2 is odd, ℓj :=γ(v j); by §5 this is exactly freeness of ⟨ ˜glog
+j ⟩. Our data (v1, v2) = (ε, −ε′) give
+(ℓ1,ℓ 2) = (1,−1). Note that admissibility says exactly gcd(ℓj,m j) =1.
+Lemma 7.13.Let(v 1,v 2)be admissible. Then
+(A1 −I)Λ={a ˆγ+b ˆu+c ˆw+d ˆδ:a=0, 2b+c+3d=0},
+(A2 −I)Λ={a ˆγ+b ˆu+c ˆw+d ˆδ:a=0,b+c+2d=0},
+both saturated of rank 2, and ΛAj :=Λ/(A j −I)Λ ∼= Z2 via λ7→(γ(λ) , ψj(λ)) with ψ1 = 2u+w+ 3δ,
+ψ2 =u+w+2δ. Consequently
+H1(Sj) =
+ 
+ΛAj ⊕Z ˆgj
+
+/
+ 
+mj ˆgj −[v j]
+ ∼= Z2
+is torsion free, H∗(Sj) = (Z, Z2, Z2, Z2, Z), and H2(Sj) ∼= Z2 carries a unimodular even form of determi-
+nant−1.
+Proof. The descriptions of (Aj −I)Λ follow by direct computation from A1 ˆγ= ˆγ+ 6 ˆu− 6 ˆw− 2 ˆδ, A1 ˆu=
+− ˆw+ ˆδ, A1 ˆw= ˆu− ˆw, A1 ˆδ= ˆδ and the analogous formulas for A2 (§2); the annihilator of (Aj −I)Λ is
+⟨γ, ψj⟩ and (γ, ψj):Λ→Z 2 is onto. The presentation of H1(Sj) is the abelianisation of π1(Sj) (Lemma 7.4);
+it is torsion free iff gcd(ℓj, ψj(vj), mj) = 1, which holds since 3 ∤ℓ 1, ℓ2 odd. As Sj is bielliptic (§5),
+b1 =b 2 = 2, e= 0 [ BHPV, Ser]; the torsion of H2(Sj) equals that of H1(Sj) = 0, so H2(Sj) ∼= Z2 is
+unimodular, and even, since KSj is numerically trivial and x2 ≡x·K Sj (mod 2) by Wu’s formula; an even
+unimodular lattice of rank 2 is the hyperbolic plane, hence of signature 0 and determinant −1. By universal
+coefficientsH q(Sj)is torsion free for allq.
+Proposition 7.14.Let πj :F→S j be the mj-fold covering. Then π∗
+j :H q(Sj)→H q(F) is injective with
+image of finite indexk (q)
+j in( Vq V)Tj , where
+k(1)
+1 =3,k (2)
+1 =1,k (3)
+1 =1,k (4)
+1 =3,
+k(1)
+2 =4,k (2)
+2 =2,k (3)
+2 =2,k (4)
+2 =4.
+The cokernels in degrees 1, 2 are cyclic, generated by the classes of γ and of q:=uw+ 6γδ; the cokernel in
+degree 3 is cyclic generated by the class of γuw whenever 4 |ε 2(v2), in particular for our data v2 =−ε ′.
+53
+=== PAGE 54 ===
+Explicitly, withε 1 =2u+w+3δ,ε 2 =u+w+2δ,
+π∗
+1 H1(S1) =⟨3γ,ε 1⟩,
+π∗
+2 H1(S2) ={xγ+yε 2 : 4|xℓ 2 +yε 2(v2)}.
+Proof. Injectivity holds as πj∗π∗
+j =m j and Hq(Sj) is torsion free (Lemma 7.13); the image lies in the
+invariants by equivariance.
+Degree1.A homomorphism π1(Sj)→Z is a pair (ξ, n), ξ∈V Tj , mjn=ξ(v j), pulling back to ξ; so
+π∗
+j H1(Sj) ={ξ∈V Tj :m j |ξ(v j)}, with VT1 =⟨γ , ε1⟩, VT2 =⟨γ , ε2⟩ (§2). As ε1(ε) = 0, ε1( ˆδ) = 3, for
+v1 =aε+b ˆδ one has (xγ+yε 1)(v1) =xℓ1 + 3yb, and 3 |ξ(v 1)⇐⇒ 3 |x since 3 ∤ℓ 1: index 3, cokernel
+[γ]. Similarly ε2(ε′) =0, ε2( ˆδ) =2 give the stated sublattice, of index 4 with cokernel [γ] since ℓ2 is a unit
+mod 4.
+Degree2.With values in V4 V=Zvol , vol=γuwδ , one has (V2 V)T1 =⟨γε 1, q⟩, (V2 V)T2 =⟨γε 2, q⟩
+with γε1 ∧q= 3 vol, γε2 ∧q= 2 vol, q∧q= 12 vol: Gram matrices
+ 0 3
+3 12
+
+,
+ 0 2
+2 12
+
+, determinants −9, −4.
+Since ⟨π∗
+j a, π∗
+j b⟩=m j⟨a, b⟩ and H2(Sj) is unimodular, (k(2)
+j )2 =m 2
+j /|det|, i.e. 9 /9 = 1 and 16 /4 = 4. If
+q=π ∗
+2 a then 12 =q∧q= 4(a·a) , so a·a= 3, contradicting evenness (Lemma 7.13); hence the cokernel
+Z/2 is generated by[q].
+Degrees3, 4.In degree 4, π∗
+j is multiplication by mj. In degree 3 use the perfect pairing H1 ×H 3 →Z :
+(V3 V)T1 =⟨γuw , ζ1⟩, ζ1 =−uwδ+ 2γwδ+ 4γuδ; (V3 V)T2 =⟨γuw , ζ2⟩, ζ2 =−uwδ+ 3γwδ+ 3γuδ; the
+pairings with (γ, εj) have matrices
+  0−1
+−3 0
+
+,
+  0−1
+−2 0
+
+, determinants −3, −2, so k(1)
+j k(3)
+j |det|=m 2
+j gives
+k(3)
+1 = 1, k(3)
+2 = 2. For the generator of the degree-3 cokernel at p2 assume 4 |ε 2(v2); then ε2 ∈π ∗
+2 H1(S2)
+by the degree-1 description (for v2 =−ε ′ one has ε2(v2) =0, so this holds). All pairings of π∗
+2 H1(S2) with
+π∗
+2 H3(S2) lie in 4Z, being m2 = 4 times pairings on S2, while ⟨ε2, γuw⟩=− 2 /∈4Z; hence γuw/∈π∗
+2 H3(S2)
+and the cokernelZ/2 is generated by[γuw].
+Remark7.15.For a map φ of free finitely generated abelian groups, coker(φ∨) ∼= Ext(cokerφ , Z)⊕
+Hom(kerφ , Z); so π2∗ :H 2(F)→H 2(S2) has image of index 2, whereas π1∗ is onto. This produces
+H0(B,R 2 f∗Z) =Z·2qrather thanZ·qin Proposition 7.26.
+7.5 The fundamental group
+By §6, X=J∪N 0 ∪N 1 ∪N 2. Write π1(B◦) =F(a1, a2), a0 := (a1a2)−1 (the ai being the clockwise meridians
+of Convention 3.17), and let ˆρi ∈π 1(J)be the lift ofa i along the holomorphic zero-section, so
+π1(J) =Λ⋊F( ˆρ1, ˆρ2), ˆρiλ ˆρ−1
+i =A iλ, ˆρ1 ˆρ2 ˆρ0 =1.
+Two identifications enter below, one at p1, p2 and one at p0. Both are computed from the gluings of
+§6, and a different answer would change the homotopy type: altering a gluing by a fibrewise translation
+tλ (λ∈Λ) changes ℓj by mjγ(λ) (with m0 := 1), hence changes p= 12ℓ0 − 4ℓ1 − 3ℓ2 of Theorem 7.17 by
+±12γ(λ). The computations are the following.
+At p j.LetU=A (j)
+0 ×∆ sj →N j be the covering of Lemma 7.4, with deck generator
+˜glog
+j (x,z) = (Ajx+v j/mj,ζz),ζ=e −2πi/m j
+(the disc factor as forced by sj ◦g j =ζ jsj, §5), and ˆgj ∈π 1(Mj) the lift of ˜glog
+j fixed there, so that ˆg
+mj
+j =t vj in
+π1(Sj) (Proposition 5.6: ( ˜glog
+j )mj =t vj ). By Lemma 6.5(ii) the holomorphic zero-section ςj is ˜glog
+j -invariant;
+consequently the transport of ςj once around the meridian of pj is agenerator of the deck group, with no
+residual fibre translation, so that the gluingG j carries ˆρj to ˆg ε
+j withε∈ {±1}. The relation is
+ˆρ
+mj
+j =t εvj (j=1, 2)
+with ε=± 1 a global sign fixed by Convention 3.17; no further fibre translation enters, by Lemma 6.5(ii).
+Here ε records onlywhichgenerator, and is determined by the orientation of the meridians: the meridians
+used here and in §3 are theclockwiseones. With those meridians one has ε1 =ε 2 = +1; and — this is
+54
+=== PAGE 55 ===
+the point — the equality ε1 =ε 2 is not a convention at all, but is forced simultaneously at p1 and at p2
+by Lemma 7.16 below. Consequently the relative sign of ℓ1 and ℓ2 in p is fixed once and for all, and
+|p|=| 12ℓ0 − 4ℓ1 − 3ℓ2| is independent of every orientation convention. The same convention orients the
+toric meridian at p0, so ε enters ℓ0, ℓ1, ℓ2 by one and the same global sign: passing from the clockwise to the
+counterclockwise meridians replaces (ℓ0, ℓ1, ℓ2) by (−ℓ0, −ℓ1, −ℓ2) and p by −p. This changes neither |p|
+nor any statement below, Theorems 7.17 and 7.22 depending on p only through |p|. With Convention 3.17,
+then,
+ˆρ
+mj
+j =t vj (j=1, 2),
+consistently with the presentation of Lemma 7.4. The content of the preceding paragraph is that no further
+fibre translation tλ intervenes, and that therelativesigns of ℓ0, ℓ1, ℓ2 are those displayed; this is what fixes
+ℓ1,ℓ 2, hence|p|below.
+At p0.The toric meridian differs from ˆρ0 by a fibre translation, ˜a0 =t µ ˆρ0 with µ∈Λ/Λ tor unique; set
+ℓ0 :=γ(µ) (well defined, as γ vanishes on Λtor). For the tautological gluing G0 of §6 one has µ= 0, i.e.
+ℓ0 = 0. Indeed, by Proposition 4.7(iv) together with Lemma 6.5(i), the holomorphic zero-section over the
+punctured disc at p0 corresponds, under the toric description of §4, to the closed disc through the point
+(1, 1), i.e. to {x= (1, 1), |t| ≤η} ⊂Yε; its boundary circle over |t|=η is precisely the toric meridian ˜a0
+of Lemma 7.4 (oriented clockwise, by the same Convention 3.17), whence ˆρ0 = ˜a0 and µ= 0. A general
+fibrewise affine regluing atp 0 shiftsℓ 0 as described above and so realises everyℓ 0 ∈Z.
+Thus, inside the common groupπ 1(J) =Λ⋊F( ˆρ1, ˆρ2), the three meridians ofp 1,p 2,p 0 are
+m1 = ˆρ1,m 2 = ˆρ2,m 0 = ˜a0 =t µ ˆρ0 =t µ ˆρ−1
+2 ˆρ−1
+1 , (7.10)
+the gluings G1, G2, G0 identifying them with ˆg1 ∈π 1(M1), ˆg2 ∈π 1(M2) and the toric meridian of π1(M)
+respectively.
+Lemma 7.16(Sign lemma).For j= 1, 2 let εj ∈ {±1} be defined by the relation that the filling Nj imposes
+on the zero-section lift ˆρj of theclockwisemeridian ofp j,
+ˆρ
+mj
+j =t εjvj inπ 1(Nj ∖m jSj)→π 1(Nj),m 1 =3,m 2 =4.
+Then ε1 =ε 2, and with the conventions of this paper ε1 =ε 2 = +1. Consequently, for the tautological
+gluing atp 0 (ℓ0 =0),
+|π1(X)|=|H 1(X)|=
+4γ(v1) +3γ(v2)
+
+independently of every orientation convention: for our data (v1, v2) = (ε, −ε′) this is |4 − 3|= 1, and for
+the comparison threefoldX ′ with(v 1,v 2) = (ε,+ε′)it is|4+3|=7.
+Proof. A sign could enter at four places: (S1) the rotation sense of gj at zj; (S2) the translation part +vj/mj
+of ˜glog
+j ; (S3) the regluing section ςj and its drift; (S4) the identification of the meridian lift with a power of
+the deck generator. We show that at each place thesamesign enters for j= 1 and for j= 2; only (S1) has
+mathematical content, (S2)–(S4) being the observation that §5–§7.5 apply one formula with j as a parameter.
+(S1) The two elliptic generators rotate in the same sense, and this is forced.By Proposition 2.11(ii), ∆ is
+the orientation-preserving subgroup of the reflection group of the hyperbolic triangle ABC with angles
+π/3, π/4, 0 and vertices in counterclockwise order; x=σ bσc and y=σ cσa are thecounterclockwiserotations
+about A and B by 2π/3 and 2 π/4, z=σ aσb is parabolic, xyz= 1, and ∆=⟨x⟩ ∗ ⟨y⟩∼= Z/3 ∗Z/ 4. The
+paper sets g1 :=x −1, g2 :=y −1 — the two rotations are reversed simultaneously — so that g′
+1(z1) =
+e−2πi/3 =ζ 1,g ′
+2(z2) =e−2πi/4 =ζ 2 andg 0 := (g1g2)−1 is parabolic (conjugate toz −1).
+That “simultaneously” is forced. Since the quotient has exactly one cusp (Proposition 2.11(iii); cf. [ Bea83,
+Ch. 10]), the parabolic elements of ∆ are exactly the conjugates of the non-zero powers of z= (xy)−1, i.e. of
+the cyclically reduced words (xy)n and (y−1x−1)n = (y3x2)n (n≥ 1); and two cyclically reduced words in
+a free product are conjugate if and only if they are cyclic permutations of one another. Suppose one tried
+the mixed assignment (g1, g2) = (x−1, y). Then g0 = (g1g2)−1 =y −1x=y 3x, a cyclically reduced word of
+syllable length 2, which is not a cyclic permutation of xy (permutations xy, yx) nor of y3x2 (permutations
+y3x2, x2y3), hence not conjugate to any (xy)±n: g0 is not parabolic. The symmetric mixed assignment
+(g1, g2) = (x, y−1) is excluded in the same way: there g0 = (xy−1)−1 =yx −1 =yx 2, again cyclically reduced
+55
+=== PAGE 56 ===
+of syllable length 2 and not a cyclic permutation of xy or of y3x2, hence not conjugate to any (xy)±n.
+(Conjugates hy±1h−1 are not at issue here, since g1 and g2 are the rotations about the vertices A and B of the
+fixedfundamental triangle, not arbitrary conjugates of them.) Geometrically, rot(A, −2π/3)◦rot(B , +2π/4)
+is hyperbolic. Since §3 needs g0 parabolic — τ◦g 0 =τ− 1, and g0 generates the cusp stabiliser used to
+build the coordinatesatp 0 (Proposition 2.11(iii)) — the rotation senses ofg 1 andg 2 must agree.
+Which sense is then fixed at z1. The law τ◦g 1 =R 1 ◦τ with R1(τ) =1 −1/τ, τ a local biholomorphism
+at z1 with τ(z1) =ρ=e iπ/3 (Proposition 3.6: τ−ρ has order 1 at z1), gives on differentiating g′
+1(z1) =
+R′
+1(ρ) =ρ −2 =e −2πi/3 : clockwise. At z2 no independent check is available from τ alone: there τ−i
+vanishes to order 2, so from τ◦g 2 =S◦τ with S(τ) =−1/τ one obtains, comparing the quadratic terms,
+only
+g′
+2(z2)2 =S ′(i) =−1, i.e.g ′
+2(z2) =±i,
+both signs being compatible with the order-2 vanishing of τ−i ; this is exactly why the coupling through
+g0 matters. Hence within the paper there is precisely one consistent choice, the printed one: ζ1 =e −2πi/3 ,
+ζ2 =e −2πi/4 , both clockwise, which is Convention 3.17.
+(S2) The deck transformation.For bothjone and the same formula is used (§5),
+˜glog
+j (z,ζ) =
+ 
+gjz,R gj (z)ζ+Π(g jz)v j/mj
+
+,
+i.e. (z, x)7→(g jz, Ajx+v j/mj) in flat coordinates, with translation part +vj/mj; and ( ˜glog
+j )mj =t vj
+(Proposition 5.6), because ∑i<mj Ai
+j(vj/mj) =vj forv j ∈Λ Aj — the same computation for bothj.
+(S3) Regluing and the zero section.The regluing is by the translation σj = +
+logs j
+2πi Π(z)v j, so that the zero
+section of J appears in Nj-coordinates as ςj =−σ j =−
+logs j
+2πi Π(z)v j; it is ˜glog
+j -invariant (Lemma 6.5(ii))
+precisely because logs j ◦g j =logs j −2πi/m j, i.e. becauseζ j =e −2πi/m j by (S1):
+Rgj ςj(z) +Π(gjz)
+vj
+mj
+=−
+logs j(z)
+2πi Π(gjz)vj + 1
+mj
+Π(gjz)vj =−
+logs j(z)−2πi/m j
+2πi Π(gjz)vj =ς j(gjz).
+Had ζj been e+2πi/m j for one j, this identity would fail for that j with the printed σj — one would need σj of
+the opposite sign there — and the drift below would flip for that j alone; this is the mechanism by which
+(S1) propagates. The drift is the one computed in Lemma 6.5(ii): along sj =ϱe iθ, θ: 0 → 2π (so that tj runs
+mj times counterclockwise),ς j changes by−Π(z)v j, i.e. the section drifts by−v j inH 1 =Λ— for bothj.
+(S4) From the drift to the relation.In U=A (j)
+0 ×∆ sj →N j the disc {x0} ×∆sj is a normal disc to Sj, so
+its boundary — the loop “ sj once around counterclockwise at constant flat coordinate x0” — is trivial in
+π1(Nj). By (S3) the zero-section lift of the mj-fold counterclockwise meridian equals (constant- x0 loop)·t−vj ;
+hence ˆρ
+mj
+j,ccw =t −vj , and for the clockwise meridian of Convention 3.17
+ˆρ
+mj
+j =t +vj (j=1, 2), i.e.ε 1 =ε 2 = +1.
+Equivalently, in the phrasing used above: through z7→z mj the clockwise base meridian lifts to a path along
+which sj turns by −2π/mj, ending at ˜glog
+j (x0, z0) because ˜glog
+j multiplies sj by ζj =e −2πi/m j ; so ˆρj 7→ ˆg+1
+j
+and ˆρ
+mj
+j 7→ ˆg
+mj
+j =t vj — the exponent +1 being the same for both j precisely because ζ1 and ζ2 arebothof
+the forme −2πi/m j , by (S1).
+From ε1 =ε 2 to |p|.With x= ˆρ1, y= ˆρ2 and c the image of ˆγ, the relations imposed in Theorem 7.17
+readx 3 =c γ(ε1v1),y 4 =c γ(ε2v2),xy=c ℓ0 , whence
+|π1(X)|=
+det
+3−ε 1γ(v1)
+4ε 2γ(v2)−4ℓ 0
+ =
+12ℓ0 −4ε 1γ(v1)−3ε 2γ(v2)
+.
+For the tautological gluing at p0 one has ℓ0 = 0, and with ε1 =ε 2 =:ε this is |ε| · |4γ(v1) +3γ(v2)|=
+|4γ(v1) +3γ(v2)|, independently of every orientation convention (reversing the global Convention 3.17
+replaces (ℓ0, ℓ1, ℓ2) by (−ℓ0, −ℓ1, −ℓ2) and leaves |p| unchanged; no convention changes one of ε1, ε2 without
+the other, (S2)–(S4) being one formula and (S1) coupling the two rotation senses through g1g2g0 = 1). Since
+γ(ε) =γ(ε′) =1 (§2), the data (v1, v2) = (ε, −ε′) give (γ(v1), γ(v2)) = (1, −1) and |p|=| 4 − 3|= 1, while
+(v1, v2) = (ε, +ε′) gives (1, 1) and |p|= 7. Had one instead ε1 =−ε 2, the two roles would simply swap;
+56
+=== PAGE 57 ===
+this is excluded by the above.
+Theorem 7.17.Let(v 1,v 2)be admissible,ℓ j =γ(v j),ℓ 0 as above. Then
+π1(X) =
+
+c,x,y
+ ccentral,xy=c ℓ0 ,x 3 =c ℓ1 ,y 4 =c ℓ2
+
+,
+this group is abelian, and π1(X) ∼= Z/|p| with p:= 12ℓ0 −4ℓ1 −3ℓ2; moreover gcd(p, 12) =1, in particular
+p̸= 0. For (ℓ0, ℓ1, ℓ2) = (0, 1,−1) one has p=− 1 and π1(X) =1; for comparison, the threefold X′ with
+v2 = +ε′ has(ℓ 0,ℓ 1,ℓ 2) = (0, 1, 1),p=−7 andπ 1(X′) ∼= Z/7.
+Proof. Van Kampen applied to X=J∪N 0 ∪N 1 ∪N 2 (thickened; all intersections are connected, being
+T4-bundles over annuli). By Lemma 7.4 and (7.10), attaching Nj imposes ˆρ
+mj
+j =t vj (j= 1, 2), and attaching
+N0 imposesλ=1 forλ∈Λ tor together with ˜a0 =1, i.e. ˆρ1 ˆρ2 =t µ. Thus
+π1(X) =
+
+Λ, ˆρ1, ˆρ2
+ ˆρjλ ˆρ−1
+j =A jλ, ˆρ
+mj
+j =t vj , ˆρ1 ˆρ2 =t µ,Λ tor =1
+
+.
+The normal closure of Λtor under ⟨A1, A2⟩ is kerγ=⟨ ˆu, ˆw, ˆδ⟩ (by A1 ˆw= ˆu− ˆw), so the image of Λ is
+Zc, c the image of ˆγ, central because γ is ⟨T1, T2⟩-invariant; with x:= ˆρ1, y:= ˆρ2 this is the displayed
+presentation.
+From y=x −1cℓ0 the group is generated by the commuting x, c, hence abelian, with relation matrix in
+the basis(x,c)
+R=
+3−ℓ 1
+4ℓ 2 −4ℓ 0
+
+, detR=−p
+(second row: x4 =c 4ℓ0−ℓ2 ). The first elementary divisor is gcd(3, 4,. . .) =1, so the group is Z/|p|. Finally
+p≡ −(4ℓ1 +3ℓ 2) (12)with 3∤4ℓ 1 +3ℓ 2 (as 3∤ℓ 1) and 2∤4ℓ 1 +3ℓ 2 (asℓ 2 is odd), so gcd(p, 12) =1.
+7.6 Integral homology by Mayer–Vietoris
+We useX=N ′
+0 ∪X ◦,N ′
+0 ∩X ◦ =M, and setK k :=ker
+ 
+Hk(M)→H k(N′
+0) =Hk(W)
+
+.
+Lemma 7.18. Hk(M)→H k(W) is surjective for all k, and with j:M,→X ◦ there are short exact sequences
+0→H k(X◦)/j∗Kk →H k(X)→ker
+ 
+j∗|Kk−1
+
+→0.
+MoreoverK 1 =Z[ ˜a0]andK 2 =⟨ξ ˆw,ξ ˆδ⟩, where forν∈Λ tor
+ξν :=a ∗
+ 
+[S1
+ν]×[ ˜a0]
+
+∈H 2(M)
+is the 2-torus swept byS 1
+ν along thetoricmeridian ˜a0 of Lemma 7.4 (athe fibrewise translation action).
+Proof. The composite Hk(F)→H k(M)→H k(W) is c∗, surjective by Proposition 7.12; hence the second
+map is surjective and Mayer–Vietoris for (N′
+0, X◦) splits as displayed. By the Wang sequence of M→S 1,
+Hk(M) is an extension of ker(M0 −I)| Vk−1 Λ by coker(M0 −I)| Vk Λ, so H∗(M) is free of ranks (1, 3, 6, 6, 3, 1);
+againstb ∗(W) = (1, 2, 4, 2, 1)this gives rkKk =1, 2, 4, 2 fork=1, 2, 3, 4.
+[˜a0] maps to the generator of ker(M0 −I)| H0(F) =Z , hence spans a saturated rank-one subgroup, and
+it bounds inN ′
+0 since the disc{x=x 0,|t| ≤η} ⊂Y≤η descends (§4); soK 1 =Z[ ˜a0].
+For K2, note first that the classes ξν depend on the chosen lift of the base circle: replacing ˜a0 by ˜a0tλ
+changes ξν by the image of ν∧λ∈ V2 Λ=H 2(F), i.e. by an element of coker(V2 M0 −I) . We always use
+the toric meridian. A direct computation fromM 0 ˆγ= ˆγ− ˆδ,M 0 ˆu= ˆu+ ˆw,M 0 ˆw= ˆw,M 0 ˆδ= ˆδgives
+(V2 M0 −I) V2 Λ=⟨ ˆw∧ ˆδ, ˆγ∧ ˆw+ ˆu∧ ˆδ⟩,
+so in particular ˆw∧ ˆδ∈im(∧ 2 M0 −I) : the fibre torus Tf is null-homologous already in M (a fortiori in
+N′
+0).
+Now work in the toric chartU σ0
+∼= C3 ofY F attached to the triangle
+σ0 =cone
+ 
+(0, 1),(e 1, 1),(e 2, 1)
+
+,
+i.e. we take v= 0: this is what makes the identification of the boundary torus belowliteral, the second
+generator being then the toric meridian on the nose (for a general v it would be the toric meridian composed
+57
+=== PAGE 58 ===
+with the translation tv, which changes the class only by an element of im(V2 M0 −I) ). With t=z 1z2z3,
+consider the solid torus
+Σ1 :={|z 1| ≤ρ,|z2|=r,z 3 =c},ρr|c|=η,
+so that |t|=|z 1|r|c| ≤η on Σ1, with equality exactly on ∂Σ1 ={|z 1|=ρ , |z2|=r , z3 =c} . Thus Σ1
+lies in Y≤η and descends into N′
+0, with ∂Σ1 ⊂ {|t|=η} descending into M. Its boundary is the 2-torus
+spanned by (0, 1) and (e1, 1), i.e. by ˆw=e 1 and the toric meridian: this is ξ ˆw, and it bounds in N′
+0; the pair
+(0, 1), (e2, 1) gives ξ ˆδ in the same way. Under the Wang surjection H2(M)→ker(M 0 −I)| Λ =Λ tor one has
+ξν 7→ν, so⟨ξ ˆw,ξ ˆδ⟩is saturated of rank 2=rkK 2.
+Cover D′ by two closed discs D′
+1, D′
+2 with D′
+j ∩Σ={p j} and {|tj| ≤η} ⊂intD′
+j, meeting in a band
+disjoint fromΣ, and putX j :=f −1(D′
+j), so that
+X◦ =X 1 ∪X 2,X 1 ∩X 2 =f −1(band)≃F,
+the band being contractible and missing Σ. Since f is a fibre bundle over D′
+j \ {pj} ⊃D′
+j \ {|tj|<η}
+(Lemma 7.4(i)), the radial retraction of D′
+j onto {|tj| ≤η}lifts to a deformation retraction of Xj onto the
+tubeN ′
+j , hence ontoS j by Lemma 7.3(i); soH ∗(Xj) ∼= H∗(Sj). Put
+αk : Vk Λ=H k(F)→H k(S1)⊕H k(S2),x7→(π 1∗x,−π 2∗x).
+Lemma 7.19.Let(v 1,v 2)be admissible. Then:
+(a)H 1(X◦) =cokerα 1 ∼= Z, generated by c (the common image of ˆγ) and ¯g1, ¯g2 with 3 ¯g1 =ℓ 1c, 4 ¯g2 =ℓ 2c;
+an isomorphism isΦ 1 :(c, ¯g1, ¯g2)7→(12, 4ℓ 1, 3ℓ2), andj ∗[˜a0] =ℓ0c− ¯g1 − ¯g2, soΦ 1(j∗[˜a0]) =p.
+(b) kerα 1 =Zν 0,ν 0 :=− ˆu− ˆw+ ˆδ.
+(c) cokerα 2 ∼= Z, and a generator of Hom(cokerα 2, Z) is Φ:=⟨A , ·⟩ for a class A ∈H2(X◦) restricting
+to 2qonF.
+(d)H 5(X◦) =0.
+Proof.(a)H 1(Sj)is given by Lemma 7.13. The composite
+Λ→Λ A1 ⊕Λ A2
+∼= Z4,λ7→(γλ,ψ 1λ,−γλ,−ψ 2λ)
+has image ⟨(1, 0,−1, 0), (0, 1, 0, 0), (0, 0, 0, 1)⟩ (use ˆu− ˆw7→( 0, 1, 0, 0), ˆw7→( 0, 1, 0,−1)), with cokernel Z
+generated by c, and mj ¯gj = [vj] reads 3 ¯g1 =ℓ 1c, 4 ¯g2 =ℓ 2c. The relation matrix
+
+−ℓ1 3 0
+−ℓ2 0 4
+
+has 2 × 2 minors
+3ℓ2, −4ℓ1, 12 of gcd 1 by admissibility, so the quotient is Z; and Φ1 = (12, 4ℓ1, 3ℓ2) kills both relations and
+isontobecause gcd(12, 4ℓ1, 3ℓ2) =1: 3 ∤ℓ 1 gives gcd(12, 4ℓ1) =4, and ℓ2 odd gives gcd(4, 3ℓ2) =1. Finally
+˜a0 =t µ ˆρ−1
+2 ˆρ−1
+1 givesj ∗[˜a0] =ℓ0c− ¯g1 − ¯g2 andΦ 1(j∗[˜a0]) =12ℓ0 −4ℓ 1 −3ℓ 2 =p.
+(b) ΛAj ,→H 1(Sj) is injective, so kerα 1 = (A1 −I)Λ∩(A 2 −I)Λ={a= 0, 2 b+c+ 3d= 0 =
+b+c+2d}=Z·(0,−1,−1, 1)by Lemma 7.13.
+(c) For the perfect pairings, α2 is the transpose of ψ:H 2(S1)⊕H 2(S2)→ V2 V, (a, b)7→π ∗
+1 a−π ∗
+2 b;
+hence by Remark 7.15
+cokerα 2 ∼= Ext(cokerψ,Z)⊕Hom(kerψ,Z).
+By Lemma A.4 (which computes the sublattices themselves), L1 :=π ∗
+1 H2(S1) =⟨γε 1, q⟩ and L2 :=
+π∗
+2 H2(S2) ={aγε 2 +bq:a≡b( 2)}. That Lemma is stated there for v2 =−ε ′; its proof uses v2 only
+through the differential
+d2(γ∧η 2) =ℓ2[η2]−2c 2[γ]̸=0,
+written in the notation of Lemma A.4, where η2 is the class fixed by (A.6) (Lemma A.1) and c2 de-
+notes the ˆδ-coefficient c of v2 of Proposition 5.6, so that η2(v2) = 2c2; the non-vanishing holds for
+every admissible v2 because ℓ2 is odd, so the description of L2 is valid for every admissible pair. Then
+kerψ ∼= L1 ∩L 2 ⊆( V2 V)G =Zq , and q/∈L 2, 2 q∈L 2, so kerψ ∼= Z, generated by the pair (a, b)
+with π∗
+1 a=π ∗
+2 b= 2q. Also L1 +L 2 =⟨γε 1, γε2, q⟩, spanned in the basis (γu, γw, γδ, uw, uδ, wδ) by
+58
+=== PAGE 59 ===
+(1, 0, 1, 0, 0, 0), (0, 1, 1, 0, 0, 0), (0, 0, 6, 1, 0, 0), saturated (minor on columns 1, 2, 4 equals 1); so cokerψ is
+torsion free and cokerα 2 ∼= Z. By Mayer–Vietoris (a, b) comes from A ∈H2(X◦) with A|F = 2q, whose
+functional on cokerα 2 ⊆H 2(X◦)generates the dual.
+(d) In the Mayer–Vietoris sequence of X◦ =X 1 ∪X 2 the term H5(X1)⊕H 5(X2) =H5(S1)⊕H 5(S2) =0
+vanishes (Sj being a closed 4-manifold, Lemma 7.13), and α4 :[F]7→( 3[S1], −4[S2]) is injective; hence
+H5(X◦) =0.
+Remark7.20.Concretely, in the basis (θj, ηj) of H2(Sj) with intersection form
+ 0 1
+1 0
+
+coming from the Gysin
+sequence of the freeS 1
+ˆδ-action,α 2 has columns
+(2,−4,−2, 3),(1,−2,−2, 3),(3, 0,−4, 0),(0, 1, 0,−1), 0, 0,
+of rank 3, with two 3 × 3 minors 2 and −3, confirming cokerα 2 ∼= Z; Φ= (4, 2, 3, 2) annihilates all columns,
+andπ 2∗H2(F) =⟨2θ2,η 2⟩has index 2.
+Lemma 7.21(sweeping).Let S1 act smoothly and freely on a smooth manifold Z (possibly with boundary),
+so that p:Z→Z/S 1 is a smooth principal S1-bundle, oriented along its fibres by the orbit direction, i.e.
+by the standard generator [S1]∈H 1(S1), and let p! :H k+1(Z)→H k(Z/S1) be integration over the fibre for
+that orientation. Normalise the slant product by
+[S1]\α,y
+
+=
+
+α,[S 1]×y
+  
+α∈H k+1(S1 ×Z),y∈H k(Z)
+
+.
+Witha:S 1 ×Z→Zthe action map, define
+sw :H k(Z)→H k+1(Z), sw(y):=a ∗
+ 
+[S1]×y
+
+.
+Then ⟨A, sw(y)⟩=⟨ιA , y⟩ for A ∈Hk+1(Z), where ιA:=p ∗p!A. Moreover the fibrewise translation by
+ˆδ∈Λ ⟨A1,A2⟩ defines such a smooth free S1-action on the compact manifold with boundary X◦, whose
+restriction to F is translation, so that ι|H∗(F) =ι ˆδ, contraction with ˆδ. (The opposite choice of generator [S1]
+reverses the fibre orientation and changesιby a global sign, immaterial below.)
+Proof.First, by naturality and the above normalisation of the slant product,
+⟨A,a ∗([S1]×y)⟩=⟨a ∗A,[S 1]×y⟩=⟨[S 1]\a∗A,y⟩.
+Next, [S1]\a∗A=p ∗p!A. Indeed, for a free action the map S1 ×Z→Z× Z/S1 Z, (θ, z)7→(θz , z), is a
+diffeomorphism, so (pr2, a) identifies the trivial circle bundle pr2 :S 1 ×Z→Z with the pullback of
+the oriented principal circle bundle p:Z→Z/S 1 along p, the map a covering p; the fibre orientations
+correspond (both are the orbit direction, oriented by [S1]). Integration over the fibre commutes with such
+base change, whence (pr2)! a∗A=p ∗p!A; and for the product bundle pr2, integration over the fibre is, with
+the above normalisation of the slant product and of the fibre orientation, precisely [S1]\(·). This proves the
+first assertion.
+Since ˆδ is ⟨A1, A2⟩-invariant and the transition maps Rg are linear, translation by t ˆδ(t∈R/Z) is well
+defined and smooth on J and on N1, N2. On J it is translation by t ˆδ in the fibre torus (Λ⊗R)/Λ , free
+because ˆδ is primitive. On Nj it suffices to check freeness on Sj =A (j)
+0 /⟨α⟩, α(x) =A jx+v j/mj: the image
+ofxis fixed byt ˆδiff
+(Ak
+j −I)x+
+ 
+∑i<k Ai
+j
+ vj
+mj
++t ˆδ∈Λfor some 0≤k<m j.
+Applying the Aj-invariant form γ, which kills ˆδ, gives kℓj/mj ∈Z ; as gcd(ℓj, mj) =1 by admissibility this
+forces k= 0, and then t ˆδ∈Λ , i.e. t= 0. The same computation applies on the nearby fibres of Nj, so the
+action is smooth and free onX ◦, which is a compact manifold with boundaryM.
+Finally, the inclusion i:F,→X ◦ of a smooth fibre is S1-equivariant, and both a∗ and the slant product
+are natural, so i∗(ιA) =ιF(i∗A), where ιF =p ∗
+F pF! is the corresponding operator for the translation action
+on F. On the torus F= (Λ⊗R)/Λ this action is that of the subcircle Rˆδ/Z ˆδ; pF :F→F/S 1
+ˆδ is a torus
+quotient, H∗(F) = V∗ V is computed by translation-invariant forms, p∗
+F is the inclusion of V∗( ˆδ⊥), and
+integration of an invariant form over the (oriented) orbit circles is contraction with ˆδ. Hence ιF =p ∗
+F pF! =ι ˆδ
+onH ∗(F). For the fixed points of the finite subgroupsµ n ⊂S 1
+ˆδ see Remark 9.25.
+59
+=== PAGE 60 ===
+Theorem 7.22.For every admissible(v 1,v 2)and everyℓ 0, withp=12ℓ 0 −4ℓ 1 −3ℓ 2,
+H∗(X;Z) =
+ 
+Z,Z/p,Z/p,Z/p,Z/p, 0,Z
+
+,e(X) =e(W) =2.
+In particular (ℓ0, ℓ1, ℓ2) = (0, 1,−1) gives |p|= 1 and H∗(X; Z) ∼= H∗(S6; Z), while for comparison the
+threefoldX ′ withv 2 = +ε′ has all groups in degrees 1, . . . , 4 equal toZ/7.
+Proof. Degree1. H1(X) =π 1(X)ab =Z/|p| by Theorem 7.17; consistently, Lemma 7.18 gives H1(X) =
+H1(X◦)/j∗K1 =Z/Φ 1(j∗[˜a0])and ker(j ∗|K1 ) =0 sincep̸=0.
+Degree2.HenceH 2(X) =H2(X◦)/j∗K2. Mayer–Vietoris forX ◦ =X 1 ∪X 2 gives
+0→cokerα 2 →H 2(X◦) ∂− →kerα1 →0, cokerα 2 ∼= Z, kerα 1 =Zν 0.
+Forν∈Λ tor the torusξ ν is cut byX 1 ∩X 2 ≃Finto two cylinders, and transporting them gives
+∂(j∗ξν) =±(I−A −1
+1 )ν=±(I−A 2)ν
+(the two agree on Λtor because A1 A2 =M −1
+0 acts trivially there). Since A2 ˆw=− ˆu+ ˆδ, ∂(j∗ξ ˆw) =∓ν 0
+generates kerα 1, while ∂(j∗ξ ˆδ) =0; so j∗ξ ˆδ ∈cokerα 2, and since j∗ξ ˆw maps onto a generator of kerα 1, the
+quotient
+H2(X) =H2(X◦)/j∗K2 =cokerα 2
+
+Zj ∗ξ ˆδ
+iscyclic, of order |Φ(j∗ξ ˆδ)|, cokerα 2 ∼= Z being infinite cyclic with Φ generating its dual (Lemma 7.19(c)).
+Nowξ ˆδ =sw([ ˜a0]), soΦ(j ∗ξ ˆδ) =⟨ιA,j ∗[˜a0]⟩by Lemma 7.21. The classιA ∈H 1(X◦)restricts onFto
+ι ˆδ(2q) =∓12γ
+(with q=uw+ 6γδ: ι ˆδ(uw) = 0 and ι ˆδ(γ∧δ) =∓γ , the sign depending only on the convention
+for contracting a 2-form, and being immaterial below since Φ is anyhow defined up to sign). But
+H1(X◦) =Hom(H1(X◦), Z) =ZΘ with Θ=Φ 1 and Θ|F = 12γ (since λ7→γ(λ)c on H1). As restriction
+toFis injective onH 1(X◦),ιA=∓Θand
+Φ(j∗ξ ˆδ) =∓Φ1(j∗[˜a0]) =∓p,
+soH 2(X) ∼= Z/|p|(cyclic by the preceding display) andj ∗|K2 is injective.
+Degrees3, 4, 5. H1(X), H2(X) are finite, so b1 =b 2 = 0, and Poincaré duality with universal coefficients
+on the closed oriented 6-manifoldXgives
+H1(X) =Hom(H 1,Z) =0,
+H5(X) ∼= H1(X) =0,
+H4(X) ∼= H2(X) ∼= Ext(H1,Z) =Z/p.
+Moreover X\W→B\ {p 0} is proper with all fibres of Euler number 0 (smooth 2-tori and the bielliptic
+S1, S2), so e(X) =e(W) = 2 by Proposition 7.11; then 2 = 1 + 0 + 0 −b 3 + 0 + 0 + 1 gives b3 = 0 and
+H3(X) ∼= H3(X) ∼= Ext(H2,Z) =Z/p.
+Remark7.23.Degree 4 also follows from Lemma 7.18: K4 is generated by the 3-tori Tˆγ ˆw ˆδ, Tˆu ˆw ˆδ swept
+along the toric meridian, ∂(T ˆγ ˆw ˆδ) generates kerα 3, and pairing the second generator against cokerα 4 =
+(Z[S1]⊕Z[S 2])/(3,−4)
+(4,3)
+− − →Zgives again∓p.
+7.7 A second computation: the integral Leray spectral sequence
+Remark7.24. H∗(X; Z) is computed twice. The second computation — Theorem 7.17 (with Lemma 7.16),
+§7.4, §7.7 and Appendix B, together with Corollary 4.8 — (for admissible pairs with 4 |ε 2(v2), in particular
+for X) does not use §7.2 (Proposition 7.2) or Proposition 7.11; §7.2 is used by the first computation (§§7.3–
+7.6), for the explicit collapse map c and the degree-2 normalisations of Proposition 7.12, and, through
+Proposition 7.12 and Lemma A.2(6), in §9 (Proposition 9.13, Lemma 9.12(iv)); the recognition of X as S6
+(Theorem 7.17, Corollary 7.29, §8) does not use it. The description of H∗(W) and of the collapse in the
+Main Theorem still rests on §7.2.
+60
+=== PAGE 61 ===
+We recompute H∗(X; Z) from Ea,b
+2 =H a(B, Rb f∗Z), independently of §7.6. Near p0 this subsection
+uses exactly one thing: that Rq f∗Z→j ∗j∗Rq f∗Z is an isomorphism near p0, i.e. that spq :H q(W; Z) =
+(Rq f∗Z)p0 →H q(F; Z) is injective with image (∧qV)T0 . This is Theorem B.1 of Appendix B, proved
+there from the toric local models by nearby cycles, without the retraction of §7.2 (it is also the invariants
+statement of Proposition 7.12). The other inputs — the local data at p1, p2 (Lemma 7.13, Proposition 7.14),
+the meridian relations (7.10) of §7.5, and Lemma 7.25 together with the Mayer–Vietoris computation of
+kerf ∗ inside Proposition 7.27 (both proved in this subsection) — are independent of the Mayer–Vietoris
+computation of §7.6, so that the conclusion H2(X; Z) ∼= H3(X; Z) ∼= Z/|p|, and with it H2(X; Z) =0 when
+|p|= 1 (by universal coefficients: Hom(H2, Z) is a summand of H2(X) =0 and Ext(H2, Z) a summand of
+H3(X) =0), is obtained without any appeal to §7.6. By proper base change (Rq f∗Z)p =H q(f −1(p); Z);
+the specialisation map at p0 is the sheaf map spq of Appendix B, and at pj it is π∗
+j , since N′
+j retracts
+radially onto Sj (Lemma 7.3(i) for Nj, which does not involve §7.2). Write Lq := Vq R1 f∗Z|B◦, j:B ◦ ,→B ,
+G:=⟨T 1, T2⟩, and Hk(Rq):=H k(B, Rq f∗Z). In this subsection (v1, v2) denotes an admissible pair with
+4 |ε 2(v2) — in particular the pair (ε, −ε′) of §6, for which ε2(−ε′) =0 —, this being the hypothesis under
+which Proposition 7.14 identifies the degree-3 cokernel at p2; Propositions 7.26 and 7.27 are stated for such
+pairs.
+Lemma 7.25.Let L be a local system of free finitely generated Z-modules on B◦ =B\Σ , with monodromy
+groupGacting on the stalkM.
+(i)H 2(B,j ∗L) ∼= MG, the coinvariants.
+(ii) These isomorphisms are compatible with cup products: if L′, L′′ are two such local systems with
+stalks M′, M′′ and L′ ⊗ L′′ has stalk M′ ⊗M ′′, then under H0(B, j∗L′) = (M′)G, H2(B, j∗L′′) ∼= (M′′)G
+and H2(B, j∗(L′ ⊗ L′′)) ∼= (M′ ⊗M ′′)G the cup product is x⌣[y] = [x⊗y] , and symmetrically for
+H2 ⊗H 0.
+Proof. (i) From 0 →j !L →j∗L →L
+p∈Σ MGp → 0 (skyscrapers, which have no higher cohomology) one
+gets H2(B, j!L) ∼= H2(B, j∗L), and H2(B, j!L) =H 2
+c (B◦, L) ∼= H0(B◦, L) =M G by Poincaré duality with
+local coefficients on the oriented surfaceB ◦ [Hat02, §3.H] (see also [Bre97, Ch. V]).
+(ii) Each step of the composite in (i) — restriction to B◦, the duality isomorphism H2
+c (B◦, L) ∼= H0(B◦, L),
+and the identification H0(B◦, L) =M G — is natural in L and compatible with coefficient pairings.
+Concretely, the duality isomorphism is cap product with the fundamental class [B◦]∈H lf
+2 (B◦), and cap
+product with a fixed class is natural in the coefficient system and satisfies the projection formula
+(x⌣α)⌢[B ◦] =x⌢
+ 
+α⌢[B ◦]
+
+,x∈H 0(B◦,L ′),α∈H 2
+c (B◦,L ′′),
+the right-hand operation being the coefficient action y7→x⊗y on H0 (for cup/cap products with
+coefficient pairings and for Poincaré duality with local coefficients see [ Hat02, §3.H], [ Bre97, Ch. V]).
+Passing to H0(B◦, L′′) = (M′′)G, the action of a G-invariant x∈M ′ is [y]7→[x⊗y] , which is well defined
+precisely becausexisG-invariant. This is the asserted compatibility.
+Proposition 7.26. Rq f∗Z is the subsheaf of j∗Lq determined by the three specialisation lattices; near p0 the
+inclusion is an equality for allq, and the quotientQ q is the skyscraper
+Q1 =Z/3⊕Z/4(atp 1,p 2, generated by[γ]),
+Q2 =Z/2,Q 3 =Z/2(atp 2, generated by[q],[γuw]),
+Q4 =Z/3⊕Z/4.
+Consequently
+H0(B,R 1) =12Zγ,H 0(B,R 2) =Z·2q,
+H0(B,R 3) =Z·2γuw,H 0(B,R 4) =12Z·vol,
+H2(B,R q) = (Vq V)G =Z[ ¯δ],Z[γδ],Z[uwδ],Z(q=1, 2, 3, 4),
+61
+=== PAGE 62 ===
+and H1(B, R1) =H1(B, R2) =0. The isomorphisms H2(B, Rq) ∼= (Vq V)G are compatible with cup products
+in the sense of Lemma 7.25(ii) — that is, they are induced by the naturality of Poincaré duality H2
+c ∼= H0
+with respect to coefficient pairings; this is what is used in Proposition 7.27.
+Proof. The sheaves and cokernels are described by Theorem B.1 (at p0; in particular Qq
+p0 = 0) and Propo-
+sition 7.14 (at p1, p2); the generator [γuw] of Q3 is the one of Proposition 7.14, stated there under the
+hypothesis 4|ε 2(v2), which holds for ourv 2 =−ε ′. From 0→R q →j ∗Lq →Q q →0,
+0→H 0(Rq)→( Vq V)G → ⊕iQq
+i →H 1(Rq)→H 1(j∗Lq)→0,
+and H2(Rq) ∼= H2(B, j∗Lq) ∼= (Vq V)G by Lemma 7.25(i), the skyscraper quotient having no H2; the
+cup-product compatibility is Lemma 7.25(ii), the inclusion Rq ⊂j ∗Lq being a map of sheaves of rings
+up to the evident pairings. Here (Vq V)G =Zγ , Zq, Zγuw, Zvol , and the coinvariants are VG =Z ¯δ
+(as (T1 −I)V+ (T 2 −I)V=⟨γ , u, w⟩), (V2 V)G =Z[γδ] with [uw] = 6[γδ] (the sum of the images is
+the saturated lattice ⟨γu, γw, uδ, wδ, uw− 6γδ⟩), (V3 V)G =Z[uwδ] ; all torsion free. For q= 1 the map
+Zγ→Z/ 3 ⊕Z/ 4 is onto with kernel 12 Zγ, for q= 2 the map Zq→Z/ 2 is onto; hence H1(Rq) ∼=
+H1(B, j∗Lq) =:Kq (parabolic cohomology). Normalising a cocycle on π1(B◦) =F(t1, t2) so that c(t2) =0
+(possible asc(t 2)∈(T 2 −I)M), with residual freedomM T2 , and usingc(t 0) =−T0c(t1), one finds
+Kq ∼= (T1 −I)M∩(T 0 −I)M
+(T1 −I)M T2
+,M= Vq V.
+For q= 1: (T1 −I)V=⟨ 2γ+u+w , 2 γ−u⟩ and (T0 −I)V=⟨γ , u⟩ meet in Z(2γ−u) =Z(T 1 −I)ε 2, so
+K1 = 0. For q= 2: (V2 T1 −I) V2 V=⟨γu , γw, 2 uδ+wδ , uw+uδ−wδ− 6γδ⟩ while (V2 T0 −I) V2 V=
+⟨γu, γw+uδ⟩ ; an element aγu+b(γw+uδ) lies in the former only if b= 0 (compare the uw, uδ, wδ
+coefficients), so the intersection isZγu=Z( V2 T1 −I)(γε 2)andK 2 =0.
+Proposition 7.27. d0,1
+2 (12γ) =±pω , d0,2
+2 (2q) =±pω ¯δ, d0,3
+2 (2γuw) =±pω[γδ] , with one and the same
+sign in the three formulas andωgeneratingH 2(B;Z). Consequently
+H1(X;Z) =0,H 2(X;Z) ∼= H3(X;Z) ∼= Z/|p|,
+in agreement with Theorems 7.17 and 7.22.
+Proof. d 0,1
+2 (12γ) is the obstruction to lifting the section 12 γ to H1(X; Z). Over N0 a lift exists since γ∈V T0
+(Theorem B.1, together with the Leray sequence of f over D0, H2(D0; f∗Z) =0); over Nj one exists since
+12γ∈π ∗
+j H1(Sj) (Proposition 7.14), and any lift Θj satisfies mjΘj( ˆgj) =12ℓj, i.e. Θj( ˆρj) =12ℓj/mj, equal to
+4ℓ1, 3ℓ2, while Θ0(˜a0) =0 because ˜a0 is null-homotopic in N0 (Corollary 4.8(ii)). Evaluating the discrepancy
+on ˜a0 =t µ ˆρ−1
+2 ˆρ−1
+1 givesd 0,1
+2 (12γ) =±(12ℓ0 −4ℓ 1 −3ℓ 2)ω.
+Two remarks on this computation. First, E2,0
+2 =H 2(B; Z) =Zω and, since only d0,•
+2 can be nonzero,
+E2,0
+∞ =E 2,0
+3 =cokerd 0,1
+2 =im
+ 
+f ∗ :H 2(B)→H 2(X)
+
+; equivalently
+imd 0,1
+2 =ker
+ 
+f ∗ :H 2(B;Z)→H 2(X;Z)
+
+.
+Second, this kernel is computed by Mayer–Vietoris, as follows (no ˇCech computation on a cover of B
+by non-acyclic pieces is involved). Let U:=D 0 ⊔D 1 ⊔D 2 be the disjoint union of small open discs
+around p0, p1, p2 and let V be a neighbourhood of B\ S
+i D′
+i (with D′
+i ⋐D i), so that B=U∪V , U∩V is
+a disjoint union of three annuli and V is homotopy equivalent to a pair of pants. Since H1(U) =0 and
+H2(U) =H 2(V) =0, Mayer–Vietoris gives an isomorphism
+H1(U∩V)/ imH 1(V) ∼− − →H2(B;Z) =Zω;
+evaluating on the three (clockwise) meridians identifies H1(U∩V) =Z 3, and H1(V)→Z 3 is injective
+with image the sum-zero sublattice (the three boundary meridians of the pair of pants compose to 1), so the
+class of (n0, n1, n2) is ±(n0 +n 1 +n 2)ω. Now the section 12 γ lifts over f −1(V) to a class ΘV (possible since
+H2(V) =0) and over f −1(Di) to the Θi above, and d0,1
+2 (12γ) is the class of the triple of differences Θi −Θ V
+on the three annuli. Writing αi :=Θ V ( ˆρi) and using ˜a0 =t µ ˆρ−1
+2 ˆρ−1
+1 , whence ΘV (˜a0) =12ℓ0 −α 1 −α 2, the
+three meridian values of the differences are
+4ℓ1 −α 1, 3ℓ 2 −α 2,−(12ℓ 0 −α 1 −α 2),
+62

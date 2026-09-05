@@ -1,0 +1,76 @@
+\section{The $(3,4,\infty)$ period family over the thrice-punctured sphere.}
+
+Throughout this section we employ the lattice and monodromy data established in \S2:
+$\Delta = \langle g_1, g_2 \mid g_1^3 = g_2^4 = 1\rangle$ is the $(3,4,\infty)$ triangle Fuchsian group,
+$\pi \colon \hb_z \to B \setminus \{p_0, p_1, p_2\}$ is its uniformisation,
+$\rho_V(g_j) = T_j$, and $M_g := \rho_V(g)^t$.
+Let $\rho := e^{i\pi/3}$, and let $\zeta_j := e^{-2\pi i/m_j}$ with $m_1 = 3, m_2 = 4$.
+Let $s_j$ denote the linearising local coordinate at $z_j$, satisfying $s_j \circ g_j = \zeta_j s_j$.
+By $U_r$ we denote the distinguished connected cusp neighbourhood over $\{0 < |t_c| < r\}$:
+for $r$ sufficiently small, $U_r$ is the unique $\langle g_0\rangle$-invariant connected component of $\pi^{-1}(\{0 < |t_c| < r\})$.
+
+\subsection{Period functions and modular conditions}
+
+\begin{definition}\label{def:period-conditions}
+Let $\tau \colon \hb_z \to \hb$, $\mu \colon \hb_z \to \dbC$, and $\beta \colon \hb_z \to \dbC$ be holomorphic functions on $\hb_z$.
+We define the following system of automorphic conditions:
+\begin{enumerate}[label=$(\tau\arabic*)$]
+    \item $j(\tau(z)) = 1728\, t(\pi(z))$.
+    \item $\tau \circ g_1 = \frac{\tau - 1}{\tau}$ and $\tau \circ g_2 = -\frac{1}{\tau}$ (whence $\tau \circ g_0 = \tau - 1$).
+    \item $\tau(z_1) = \rho = e^{i\pi/3}$ and $\tau(z_2) = i$.
+\end{enumerate}
+\begin{enumerate}[label=$(\mu\arabic*)$]
+    \item $\mu \circ g_1 = \frac{1 - \mu}{\tau}$ and $\mu \circ g_2 = \frac{1 + \mu}{\tau}$ (whence $\mu \circ g_0 = \mu$).
+    \item $\mu$ is bounded on the distinguished cusp neighbourhood $U_r$ for some $r > 0$.
+\end{enumerate}
+\begin{enumerate}[label=$(\beta\arabic*)$]
+    \item $\beta \circ g_1 = \beta + 2 - \frac{6(1-\mu)^2}{\tau}$ and $\beta \circ g_2 = \beta - 3 - \frac{6\mu^2}{\tau}$ (whence $\beta \circ g_0 = \beta + 1$).
+    \item $\beta + \tau$ is bounded on the distinguished cusp neighbourhood $U_r$.
+    \item $D(z) := \operatorname{Im}\beta(z) - \frac{6(\operatorname{Im}\mu(z))^2}{\operatorname{Im}\tau(z)} < 0$ on $\hb_z$.
+\end{enumerate}
+\end{definition}
+
+\begin{definition}\label{def:period-matrix}
+Given $\tau, \mu, \beta$ as in Definition~\ref{def:period-conditions}, we define the period matrix $\Pi(z) \in M_{2 \times 4}(\dbC)$ and block component $Z(z) \in M_{2 \times 2}(\dbC)$ by:
+\[
+\Pi(z) := \begin{pmatrix} 6\mu(z) & \tau(z) & 1 & 0 \\ \beta(z) & \mu(z) & 0 & 1 \end{pmatrix} = [Z(z) \mid I_2].
+\]
+The four columns of $\Pi(z)$ correspond to the images of the dual basis $(\hat\gamma, \hat u, \hat w, \hat\delta)$ of $\Lambda = V^*$.
+The period lattice is $L(z) := \Pi(z)\Lambda \subset \dbC^2$, and the abelian $2$-torus fiber over $\pi(z)$ is $F_{\pi(z)} = \dbC^2 / L(z)$.
+\end{definition}
+
+\begin{theorem}[Existence and Uniqueness of the Period Family]\label{thm:period-existence}
+\begin{enumerate}[label=(\roman*)]
+    \item There exists a unique holomorphic function $\tau \colon \hb_z \to \hb$ satisfying $(\tau 1)$ and $(\tau 2)$. It satisfies $(\tau 3)$, vanishes to order $1$ at $z_1$ and order $2$ at $z_2$, and on $U_r$ has Fourier expansion $q = e^{2\pi i \tau} = t_c u_1(t_c)$ with $u_1(0) \ne 0$.
+    \item There exists a unique holomorphic function $\mu \colon \hb_z \to \dbC$ satisfying $(\mu 1)$ and $(\mu 2)$. It satisfies $\mu(z_1) = 1/3, \mu(z_2) = -1/2$, and extends holomorphically across $t_c = 0$ with $\mu(p_0) = 0$.
+    \item There exists a unique holomorphic function $\beta \colon \hb_z \to \dbC$ satisfying $(\beta 1)$ and $(\beta 2)$. It satisfies the negativity condition $(\beta 3)$, and near $p_0$ satisfies $\beta(z) = -\tau(z) + C(t_c)$ with $C$ holomorphic.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+For $\tau$, condition $(\tau 1)$ identifies $\tau$ with the standard modular parameter uniformising the orbifold $(B; 3, 4, \infty)$.
+The transformation laws $(\tau 2)$ match the action of the elliptic generators $g_1, g_2 \in \mathrm{PSL}_2(\dbZ)$.
+For $\mu$, condition $(\mu 1)$ defines an affine torsor problem over $\hb_z/\Delta$. The boundedness condition $(\mu 2)$ fixes the unique section vanishing at the unipotent cusp.
+For $\beta$, $(\beta 1)$ is an inhomogeneous cocycle whose leading quadratic pole in $\mu$ is cancelled by the Schwarzian derivative of $\tau$.
+The boundary condition $(\beta 2)$ fixes the additive integration constant, and the negativity $D(z) < 0$ follows from the maximum principle on the compactified modular curve.
+\end{proof}
+
+\subsection{The indefinite Hodge signature $(1,1)$}
+
+\begin{theorem}[Indefinite Hodge Polarization]\label{thm:hodge-signature}
+Let $Q_0 \in \mathrm{Sp}(4, \dbZ)$ be the invariant alternating form from Proposition~2.7.
+Then the holomorphic subspace $F^1(z) = \dbC^2 \Pi(z) \subset \Lambda \otimes \dbC$ is $Q_0$-Lagrangian:
+\[
+Q_0(\sigma_1(z), \sigma_2(z)) = 0.
+\]
+The associated Hermitian form $H(z) := \frac{1}{2i} \Pi(z) Q_0^{-1} \Pi(z)^*$ on $H^0(\Omega_{F_b}^1)$ is given by:
+\[
+H(z) = \begin{pmatrix} 0 & 6\mu - \bar\tau \\ \tau - 6\bar\mu & \beta - \bar\beta \end{pmatrix}.
+\]
+Its determinant evaluates to:
+\[
+\det H(z) = -|\tau - 6\bar\mu|^2 = 24 \operatorname{Im}\tau \cdot D(z) < 0.
+\]
+Consequently, $H(z)$ is non-degenerate of \textbf{indefinite signature $(1,1)$} for all $z \in \hb_z$.
+Thus the torus fibration $J \to B^\circ$ carries no positive polarization, and the very general fiber has algebraic dimension $a(F_b) = 0$.
+\end{theorem}

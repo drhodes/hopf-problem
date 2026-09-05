@@ -238,6 +238,52 @@ is the component of $\pi^{-1}(\{0<|t_c|<r\})$ accumulating at $*$: it is the pre
 \begin{remark}[The translation sign at the cusp]
 The normalisation $g_0(\zeta) = \zeta+\epsilon_0$, $\epsilon_0 \in \{\pm1\}$, of the proof of Proposition~\ref{prop:uniformisation}(iii) concerns the uniformising coordinate $\zeta$ on $\hb_z$, whereas the relation $\tau \circ g_0 = \tau-1$ of \S3 concerns the period map $\tau\colon \hb_z \to \hb$ and expresses its equivariance along $\rho_\Lambda$, i.e.\ $\rho_\Lambda(g_0) = M_0$. The two maps are distinct, but the second relation determines the first sign: we show that $\epsilon_0 = -1$.
 
-Indeed, $\tau$ is equivariant along the surjection $\Delta \to \mathrm{PSL}_2(\dbZ)$ of Remark~2.13, so $j\circ\tau = 1728\,t\circ\pi$ on $\hb_z$; equivalently, on $U_r$ the function $e^{2\pi i\tau}$ is, through the identifications of Proposition~\ref{prop:uniformisation}(iii), the local coordinate $q$ up to a unit \emph{(rest of argument continues on p.\,13 of the source, not yet transcribed)}.
+Indeed, $\tau$ is equivariant along the surjection $\Delta \to \mathrm{PSL}_2(\dbZ)$ of Remark~2.13, so $j\circ\tau = 1728\,t\circ\pi$ on $\hb_z$; equivalently, on $U_r$ the function $e^{2\pi i\tau}$ is, through the identifications of Proposition~\ref{prop:uniformisation}(iii), the local parameter of the cusp of $X(1)$ pulled back along the map $\psi$, which has a simple zero at $0$. Writing $q := e^{2\pi i\zeta}$, this means that there are a holomorphic unit $u_1$ near $0$ (the ratio of the two local cusp parameters, coming from the local biholomorphism $j$-chart versus $t_c$-chart at the cusp) and the expansion $\psi(\upsilon) = \upsilon w(\upsilon)$ with $w(0) \ne 0$, such that
+\[
+e^{2\pi i\tau} = u_1(\psi(q)) \psi(q),
+\]
+so
+\[
+e^{2\pi i(\tau-\zeta)} = V(q), \qquad V(\upsilon) := u_1(\psi(\upsilon)) w(\upsilon),
+\]
+where $V$ is holomorphic and nowhere zero on a neighbourhood of $0$ in $V_r$; in particular $e^{2\pi i(\tau-\zeta)}$ extends across $q = 0$ as a non-vanishing holomorphic function, of winding number $0$ around small loops $|q| = \text{const}$.
+
+Now shrink $r$ so that $V$ is holomorphic and non-vanishing on the simply connected domain $V_r$, and fix there a branch of
+\[
+F_0 := \frac{1}{2\pi i}\log V, \qquad e^{2\pi i F_0} = V;
+\]
+this is possible because $V_r$ is simply connected and $V$ is non-vanishing, equivalently because the winding number is $0$. Put $F := F_0(q)$, a holomorphic function on $U_r$. Since $q = e^{2\pi i\zeta}$ is $\langle g_0\rangle$-invariant, $F$ is $g_0$-invariant. Moreover $e^{2\pi i(\tau-\zeta)} = V(q) = e^{2\pi i F}$, so $(\tau-\zeta)-F$ is a continuous integer-valued function on the connected set $U_r$, hence a constant $k \in \dbZ$. Therefore $\tau-\zeta = F+k$ is single-valued and $g_0$-invariant:
+\[
+(\tau-\zeta)\circ g_0 = (\tau-\zeta).
+\]
+It is the single-valuedness of the chosen logarithm on the simply connected $V_r$ that yields this; boundedness of $\operatorname{Im}(\tau-\zeta)$ alone would still allow a non-zero integer period. Consequently
+\[
+\zeta\circ g_0 - \zeta = \tau\circ g_0 - \tau = -1,
+\]
+i.e.\ $\epsilon_0 = -1$.
+
+The value of $\epsilon_0$ is thus determined by the data rather than chosen. It is in any case not needed elsewhere: \S3 uses only the $\langle g_0\rangle$-invariance of $q = e^{2\pi i\zeta}$ together with the quoted equivariance, and an asymptotic comparison of $\tau$ with $\zeta$ at the cusp, should one be needed, may be made with $\epsilon_0 = -1$ and $\tau-\zeta$ bounded.
 \end{remark}
-\newpage
+
+\begin{remark}\label{rem:triangle-group-not-modular}
+$\Delta \cong \dbZ/3 * \dbZ/4$ is the $(3,4,\infty)$ triangle group, not $\mathrm{PSL}_2(\dbZ) \cong \dbZ/2 * \dbZ/3$; the modular group enters only through the orbifold morphism $(\dbP^1; 3,4,\infty) \to (\dbP^1; 3,2,\infty) = X(1)$, $t \mapsto 1728\,t$, which induces the surjection $\Delta \to \mathrm{PSL}_2(\dbZ)$ along which $\tau$ is equivariant in \S3.
+\end{remark}
+
+\begin{definition}[Linearising coordinates]\label{def:linearising-coords}
+For $j=1,2$ let $s_j(z) := (z-z_j)/(z-\bar z_j)$ be the Cayley coordinate at $z_j$ of Lemma~2.10, so $s_j(z_j) = 0$ and
+\begin{equation}
+s_j \circ g_j = \zeta_j s_j. \tag{2.4}
+\end{equation}
+By proper discontinuity and Proposition~\ref{prop:uniformisation}(i) we may choose $r_j>0$ so small that $\Delta_j := s_j^{-1}(\{|s|<r_j\})$ satisfies $g\Delta_j \cap \Delta_j = \emptyset$ for $g \in \Delta \setminus \langle g_j\rangle$. By (2.4) $\Delta_j$ is $g_j$-invariant and $\pi$ induces a biholomorphism $\Delta_j/\langle g_j\rangle \xrightarrow{\sim} D_j := \pi(\Delta_j)$, an open neighbourhood of $p_j$; since $s_j$ is $\langle g_j\rangle$-invariant and induces $\Delta_j/\langle g_j\rangle \cong \{|s|<r_j^{m_j}\}$, there is a unique holomorphic $t_j$ on $D_j$ with $t_j \circ \pi = s_j^{m_j}$ on $\Delta_j$, and $t_j$ is a coordinate centred at $p_j$. Put $D_j^* := D_j \setminus \{p_j\}$, $\Delta_j^* := \Delta_j \setminus \{z_j\}$.
+\end{definition}
+
+\begin{definition}[The representation]\label{def:representation}
+Since $\Delta = \langle g_1\rangle * \langle g_2\rangle$ with $g_j$ of order $m_j$ and $T_1^3 = T_2^4 = I$, the universal property of the free product gives a unique homomorphism
+\[
+\rho_V \colon \Delta \to \mathrm{GL}(V), \qquad \rho_V(g_1) = T_1, \qquad \rho_V(g_2) = T_2,
+\]
+with image $G$ and $\rho_V(g_0) = T_0$. Put $\rho_\Lambda := \mathfrak A \circ \rho_V$, so $\rho_\Lambda(g_j) = A_j$, $\rho_\Lambda(g_0) = M_0$ (consistently with $A_1A_2M_0 = I$). For $g \in \Delta$ write $M_g := \rho_V(g)^t$ for the matrix acting on $\Lambda$-coordinates in \S3; thus $g \mapsto M_g$ is an anti-homomorphism and $M_{g^{-1}} = \rho_\Lambda(g)$, so $M_{g_j}^{-1} = A_j$ and $M_{g_0}^{-1} = M_0$.
+
+By Lemma~2.4 the functional $\gamma$ is $\Delta$-invariant for $\rho_\Lambda$, so the integers $\ell_j = \gamma(v_j)$ are well-defined invariants of the twisting data, used in \S6 and \S7; $\Lambda^\Delta = \dbZ\hat\delta$ by Lemma~2.7(ii) generates the vertical field $\xi$ of \S9, and Lemma~2.7(iv) is the input to the van Kampen computation of \S7.
+\end{definition}
+
