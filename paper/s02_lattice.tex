@@ -1,0 +1,243 @@
+\noindent combinatorial input used here is the $A_2$-triangulation of the plane. What is specific to the present situation is that the two mechanisms are used simultaneously, over a base $\dbP^1$ with exactly three critical points, for a representation $\rho_V$ of the $(3,4,\infty)$ triangle group whose local monodromies have orders $3,4$ and $\infty$, and that the resulting central fibre $W$ at the unipotent point is non-normal, with $e(W) = 2$ accounting for the whole Euler characteristic of $X$.
+
+\section{Lattice and monodromy data.}
+
+\subsection{The lattices $V$ and $\Lambda$}
+
+As on page 1 (Setup), $V$ is free of rank $4$ with ordered basis $(\gamma,u,w,\delta)$ and $\Lambda := V^*$ carries the dual basis $(\hat\gamma,\hat u,\hat w,\hat\delta)$; we write $\langle \lambda, x\rangle := \lambda(x)$, elements are columns, matrices act on columns from the left, and the columns of a matrix are the images of the basis vectors. Evaluation at $\gamma$ is the functional
+\[
+\gamma \colon \Lambda \to \dbZ, \qquad \gamma(a\hat\gamma + b\hat u + c\hat w + d\hat\delta) = a, \qquad \ker\gamma = \langle \hat u,\hat w,\hat\delta\rangle.
+\]
+For $T \in \mathrm{GL}(V)$ put
+\begin{equation}
+\mathfrak A(T) := (T^{-1})^t \in \mathrm{GL}(\Lambda) \tag{2.1}
+\end{equation}
+(matrix in the dual basis): the unique element of $\mathrm{GL}(\Lambda)$ with $\langle \mathfrak A(T)\lambda, Tx\rangle = \langle \lambda,x\rangle$ for all $\lambda,x$, i.e.\ the contragredient $(T^t)^{-1}$ of $T$.
+
+\subsection{The monodromy matrices}
+
+\begin{definition}
+In the basis $(\gamma,u,w,\delta)$ set
+\[
+T_1 := \begin{pmatrix} 1 & 0 & -6 & 2 \\ 0 & -1 & 1 & 1 \\ 0 & -1 & 0 & 1 \\ 0 & 0 & 0 & 1 \end{pmatrix}, \qquad
+T_2 := \begin{pmatrix} 1 & 6 & 0 & -3 \\ 0 & 0 & -1 & 1 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix},
+\]
+that is,
+\begin{equation}
+\begin{aligned}
+T_1\gamma &= \gamma, & T_1 u &= -u-w, & T_1 w &= -6\gamma+u, & T_1\delta &= 2\gamma+u+w+\delta, \\
+T_2\gamma &= \gamma, & T_2 u &= 6\gamma+w, & T_2 w &= -u, & T_2\delta &= -3\gamma+u+\delta.
+\end{aligned} \tag{2.2}
+\end{equation}
+Let $G := \langle T_1, T_2\rangle \subset \mathrm{GL}(V)$.
+\end{definition}
+
+\begin{lemma}
+(i) $\det T_1 = \det T_2 = 1$. (ii) $T_1^3 = I \ne T_1$ and $T_2^4 = I \ne T_2^2$, so $T_1, T_2$ have exact orders $3,4$. (iii) Put $T_0 := (T_1T_2)^{-1}$ and $N := T_0 - I$. Then $T_0 = I+N$, $N^2 = 0$, $T_1T_2T_0 = I$, and
+\[
+N\gamma = Nu = 0, \qquad Nw = -u, \qquad N\delta = \gamma, \qquad \ker N = \operatorname{im} N = \langle \gamma,u\rangle;
+\]
+explicitly
+\[
+T_0 = \begin{pmatrix} 1 & 0 & 0 & 1 \\ 0 & 1 & -1 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{pmatrix}.
+\]
+\end{lemma}
+
+\begin{proof}
+Direct computation from (2.2):
+\[
+\begin{aligned}
+T_1^2 &\colon \gamma\mapsto\gamma,\ u\mapsto 6\gamma+w,\ w\mapsto -6\gamma-u-w,\ \delta\mapsto -2\gamma+u+\delta, \\
+T_2^2 &\colon \gamma\mapsto\gamma,\ u\mapsto 6\gamma-u,\ w\mapsto -6\gamma-w,\ \delta\mapsto u+w+\delta, \\
+T_1T_2 &\colon \gamma\mapsto\gamma,\ u\mapsto u,\ w\mapsto u+w,\ \delta\mapsto -\gamma+\delta,
+\end{aligned}
+\]
+whence $T_1^2 \ne I \ne T_2^2$, $T_1^3 = I$, $T_2^4 = I$, and $T_1T_2 = I-N$ with $N$ as stated. Both $T_j$ fix $\gamma$, preserve $\langle \gamma,u,w\rangle$ and act trivially on $V/\langle\gamma,u,w\rangle$, and on $\langle\gamma,u,w\rangle/\langle\gamma\rangle$ by $\bar u \mapsto -\bar u - \bar w$, $\bar w \mapsto \bar u$ resp.\ $\bar u \mapsto \bar w$, $\bar w \mapsto -\bar u$, of determinant $1$; this gives (i). Since $N$ maps $w,\delta$ into $\ker N = \langle\gamma,u\rangle = \operatorname{im} N$ we get $N^2 = 0$, hence $(I-N)(I+N) = I$ and $T_0 = I+N$.
+\end{proof}
+
+\subsection{The dual matrices and the distinguished sublattices of $\Lambda$}
+
+\begin{definition}
+Put $A_j := \mathfrak A(T_j)$ ($j=1,2$) and $M_0 := \mathfrak A(T_0)$.
+\end{definition}
+
+\begin{lemma}
+$\mathfrak A \colon \mathrm{GL}(V) \to \mathrm{GL}(\Lambda)$ is a group homomorphism, and in the dual basis
+\[
+A_1 = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 6 & 0 & 1 & 0 \\ -6 & -1 & -1 & 0 \\ -2 & 1 & 0 & 1 \end{pmatrix}, \qquad
+A_2 = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 0 & -1 & 0 \\ -6 & 1 & 0 & 0 \\ 3 & 0 & 1 & 1 \end{pmatrix}, \qquad
+M_0 = I - N^t,
+\]
+that is,
+\begin{equation}
+\begin{aligned}
+A_1\hat\gamma &= \hat\gamma+6\hat u-6\hat w-2\hat\delta, & A_1\hat u &= -\hat w+\hat\delta, & A_1\hat w &= \hat u-\hat w, & A_1\hat\delta &= \hat\delta, \\
+A_2\hat\gamma &= \hat\gamma-6\hat w+3\hat\delta, & A_2\hat u &= \hat w, & A_2\hat w &= -\hat u+\hat\delta, & A_2\hat\delta &= \hat\delta, \\
+M_0\hat\gamma &= \hat\gamma-\hat\delta, & M_0\hat u &= \hat u+\hat w, & M_0\hat w &= \hat w, & M_0\hat\delta &= \hat\delta.
+\end{aligned} \tag{2.3}
+\end{equation}
+Moreover $A_1A_2M_0 = I$ and $\gamma\circ A_j = \gamma \circ M_0 = \gamma$.
+\end{lemma}
+
+\begin{proof}
+$\mathfrak A(ST) = ((ST)^{-1})^t = \mathfrak A(S)\mathfrak A(T)$. By Lemma 2.2(ii), $A_1 = (T_1^2)^t$ and $A_2 = (T_2^3)^t$, and $T_2^3\colon \gamma\mapsto\gamma$, $u\mapsto -w$, $w\mapsto -6\gamma+u$, $\delta\mapsto 3\gamma+w+\delta$; transposing gives the displayed $A_1, A_2$. From $T_0^{-1} = I-N$ we get $M_0 = I-N^t$, and $N^t\hat\gamma = \hat\delta$, $N^t\hat u = -\hat w$, $N^t\hat w = N^t\hat\delta = 0$ by Lemma 2.2(iii), which is (2.3). Then $A_1A_2M_0 = \mathfrak A(T_1T_2T_0) = I$, and $\gamma(A_j\lambda) = \langle \mathfrak A(T_j)\lambda, T_j\gamma\rangle = \gamma(\lambda)$ since $T_j\gamma = \gamma$; likewise for $M_0$.
+\end{proof}
+
+\begin{definition}
+Put $\Lambda_{\mathrm{tor}} := \langle \hat w,\hat\delta\rangle \subset \Lambda$ and $\bar\Lambda := \Lambda/\Lambda_{\mathrm{tor}}$ with basis $(\bar{\hat\gamma},\bar{\hat u})$; identify $\bar\Lambda \cong \dbZ^2$ by $a\bar{\hat\gamma}+b\bar{\hat u} \mapsto (a,b)^t$ and $\Lambda_{\mathrm{tor}} \cong \dbZ^2$ by $c\hat w+d\hat\delta \mapsto (c,d)^t$. Set $\varepsilon := \hat\gamma+2\hat u-4\hat w$ and $\varepsilon' := \hat\gamma+3\hat u-3\hat w$.
+\end{definition}
+
+\begin{lemma}\label{lem:B0}
+$\Lambda_{\mathrm{tor}} = \ker(M_0-I) = \operatorname{im}(M_0-I)$, and $M_0-I$ induces
+\[
+B_0 \colon \bar\Lambda \to \Lambda_{\mathrm{tor}}, \qquad B_0\bar{\hat\gamma} = -\hat\delta, \qquad B_0\bar{\hat u} = \hat w,
+\]
+with matrix $\left(\begin{smallmatrix} 0 & 1 \\ -1 & 0\end{smallmatrix}\right)$ in the above identifications; in particular $\det B_0 = 1$, so $B_0$ is unimodular. Moreover $\Lambda^{A_1} := \ker(A_1-I) = \langle \varepsilon,\hat\delta\rangle$ and $\Lambda^{A_2} := \ker(A_2-I) = \langle \varepsilon',\hat\delta\rangle$ are saturated, $\gamma(\varepsilon) = \gamma(\varepsilon') = 1$, and with the twist vectors
+\[
+v_1 := \varepsilon \in \Lambda^{A_1}, \qquad v_2 := -\varepsilon' \in \Lambda^{A_2}
+\]
+one has $(\ell_0,\ell_1,\ell_2) := (0,\gamma(v_1),\gamma(v_2)) = (0,1,-1)$.
+\end{lemma}
+
+\begin{proof}
+By (2.3), for $\lambda = a\hat\gamma+b\hat u+c\hat w+d\hat\delta$,
+\[
+(M_0-I)\lambda = -N^t\lambda = -a\hat\delta+b\hat w.
+\]
+Hence $(M_0-I)\lambda = 0$ if and only if $a=b=0$, i.e.\ $\lambda \in \Lambda_{\mathrm{tor}}$; and the image is exactly $\langle \hat w,\hat\delta\rangle = \Lambda_{\mathrm{tor}}$, the pair $(a,b)$ ranging over all of $\dbZ^2$. Thus $M_0-I$ kills $\Lambda_{\mathrm{tor}}$ and the induced map $B_0$ sends $\bar{\hat\gamma}\mapsto -\hat\delta$, $\bar{\hat u}\mapsto \hat w$, i.e.\ $(a,b)^t \mapsto (b,-a)^t$ in the chosen coordinates, of determinant $1$.
+
+For $\lambda$ as above, (2.3) gives
+\[
+(A_1-I)\lambda = a(6\hat u-6\hat w-2\hat\delta)+b(-\hat u-\hat w+\hat\delta)+c(\hat u-2\hat w),
+\]
+\[
+(A_2-I)\lambda = a(-6\hat w+3\hat\delta)+b(-\hat u+\hat w)+c(-\hat u-\hat w+\hat\delta),
+\]
+so $(A_1-I)\lambda = 0$ reads $6a-b+c = -6a-b-2c = -2a+b = 0$, i.e.\ $b=2a$, $c=-4a$, $d$ free, and $(A_2-I)\lambda = 0$ reads $b+c = -6a+b-c = 3a+c = 0$, i.e.\ $b=3a$, $c=-3a$, $d$ free. These kernels are saturated, being kernels of endomorphisms of the torsion-free group $\Lambda$, and $\gamma(\varepsilon) = \gamma(\varepsilon') = 1$ by definition of $\gamma$.
+\end{proof}
+
+\begin{lemma}
+Let $G$ act on $V$ tautologically and on $\Lambda$ through $\mathfrak A$. Then:
+\begin{enumerate}[label=(\roman*)]
+\item $V^{T_1} = \langle \gamma, 2u+w+3\delta\rangle$, $V^{T_2} = \langle \gamma, u+w+2\delta\rangle$, $V^G = \dbZ\gamma$;
+\item $\Lambda^G = \Lambda^{A_1} \cap \Lambda^{A_2} = \dbZ\hat\delta$;
+\item every $g \in G$ preserves $\langle \gamma,u,w\rangle$ and acts trivially on $V/\langle\gamma,u,w\rangle$, and every $\mathfrak A(g)$ satisfies $\gamma \circ \mathfrak A(g) = \gamma$; with $\Sigma_V := \sum_{g\in G}\operatorname{im}(g-I)$ and $\Sigma_\Lambda := \sum_{g\in G}\operatorname{im}(\mathfrak A(g)-I)$,
+\[
+\Sigma_V = \langle \gamma,u,w\rangle, \qquad \Sigma_\Lambda = \ker\gamma,
+\]
+so the coinvariants $V_G \cong \dbZ$ (generated by the class of $\delta$) and $\Lambda_G \cong \dbZ$ (via $\gamma$) are free of rank $1$; equivalently $[(T_1-I)\mid (T_2-I)]$ and $[(A_1-I)\mid (A_2-I)]$ have Smith normal form $\mathrm{diag}(1,1,1,0)$;
+\item the smallest $\langle A_1,A_2\rangle$-invariant subgroup of $\Lambda$ containing $\Lambda_{\mathrm{tor}}$ is $\ker\gamma$.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) For $x = a\gamma+bu+cw+d\delta$, (2.2) gives
+\[
+T_1 x = (a-6c+2d)\gamma+(-b+c+d)u+(-b+d)w+d\delta,
+\]
+\[
+T_2 x = (a+6b-3d)\gamma+(-c+d)u+bw+d\delta,
+\]
+so $T_1x = x$ iff $d=3c$, $b=2c$, and $T_2x = x$ iff $d=2b$, $c=b$. Comparing $a\gamma+c(2u+w+3\delta) = a'\gamma+b(u+w+2\delta)$ forces $b=c=0$, so $V^G = \dbZ\gamma$.
+
+(ii) By Lemma~\ref{lem:B0} an element of the intersection is $a\varepsilon+d\hat\delta = a'\varepsilon'+d'\hat\delta$; the $\hat\gamma$- and $\hat u$-coefficients give $a=a'$ and $2a=3a'$, so $a=0$.
+
+(iii) By (2.2) each generator $T_j$ preserves $U := \langle \gamma,u,w\rangle$ and acts trivially on $V/U$; these two properties are stable under composition and inversion, hence hold for every $g \in G$, so $\operatorname{im}(g-I) \subseteq U$ and $\Sigma_V \subseteq U$. Likewise $\gamma \circ A_j = \gamma$ (Lemma 2.4) gives $\gamma \circ \mathfrak A(g) = \gamma$ for every $g \in G$, whence $\operatorname{im}(\mathfrak A(g)-I) \subseteq \ker\gamma$ and $\Sigma_\Lambda \subseteq \ker\gamma$. For the reverse inclusions it suffices to use the generators: $\Sigma_V$ contains the images of the basis vectors under $T_j-I$, namely
+\[
+-2u-w, \quad -6\gamma+u-w, \quad 2\gamma+u+w, \quad 6\gamma-u+w, \quad -u-w, \quad -3\gamma+u,
+\]
+and $(-2u-w)-(-u-w) = -u$, then $w$, then $2\gamma$ and $3\gamma$, hence $\gamma$, lie in $\Sigma_V$; while $(A_1-I)\hat w+(A_2-I)\hat u = -\hat w$, then $\hat u$, then $\hat\delta = (A_1-I)\hat u+\hat u+\hat w$ lie in $\Sigma_\Lambda$. Both $\Sigma_V$ and $\Sigma_\Lambda$ are spanned by parts of the bases, hence are direct summands with free rank-$1$ quotients.
+
+(iv) Such a subgroup contains $\hat w$ and $A_1\hat w = \hat u-\hat w$, hence $\hat u$ and $\hat\delta$, i.e.\ $\ker\gamma$; and $\ker\gamma$ is invariant since $\gamma \circ A_j = \gamma$.
+\end{proof}
+
+\subsection{The invariant alternating form}
+
+\begin{lemma}\label{lem:Q0}
+The group of $G$-invariant alternating forms on $V$ is infinite cyclic, generated by $Q_0$ with
+\[
+Q_0(\gamma,\delta) = 1, \qquad Q_0(u,w) = 6, \qquad Q_0(\gamma,u) = Q_0(\gamma,w) = Q_0(u,\delta) = Q_0(w,\delta) = 0;
+\]
+thus $Q_0$ is, up to sign, the unique primitive invariant alternating form. Moreover $b(x,y) := Q_0(x,Ny)$ is symmetric and descends to $V/\ker N \cong \dbZ^2$; in the basis given by the classes of $w,\delta$ its Gram matrix is
+\[
+\mathrm{diag}(6,-1),
+\]
+so $b$ is nondegenerate of signature $(1,1)$ and discriminant $-6$.
+\end{lemma}
+
+\begin{proof}
+Write $q_{xy} := Q(x,y)$ for an invariant alternating $Q$. By (2.2), $T_1$-invariance on the pairs $(\gamma,u)$ and $(\gamma,w)$ reads
+\[
+-q_{\gamma u}-q_{\gamma w} = q_{\gamma u}, \qquad q_{\gamma u} = q_{\gamma w},
+\]
+i.e.\ $2q_{\gamma u}+q_{\gamma w} = 0$ and $q_{\gamma u} = q_{\gamma w}$, whence $3q_{\gamma u} = 0$ and
+\[
+q_{\gamma u} = q_{\gamma w} = 0.
+\]
+Using these first two equations to drop all terms in $q_{\gamma u}, q_{\gamma w}$ from the remaining expansions, $T_1$-invariance on the pairs $(u,\delta)$ and $(w,\delta)$ reads
+\[
+-q_{u\delta}-q_{w\delta} = q_{u\delta}, \qquad -6q_{\gamma\delta}+q_{uw}+q_{u\delta} = q_{w\delta},
+\]
+and, in the same way (again using the first two equations), $T_2$-invariance on the same four pairs reads
+\[
+q_{\gamma w} = q_{\gamma u}, \qquad -q_{\gamma u} = q_{\gamma w}, \qquad -q_{u\delta} = q_{w\delta}, \qquad 6q_{\gamma\delta}-q_{uw}+q_{w\delta} = q_{u\delta};
+\]
+the remaining pairs give no condition. Hence $q_{\gamma u} = q_{\gamma w} = q_{u\delta} = q_{w\delta} = 0$ and $q_{uw} = 6q_{\gamma\delta}$, i.e.\ $Q \in \dbZ Q_0$, and $Q_0$ is invariant. For $b$: $\ker N = \operatorname{im} N = \langle \gamma,u\rangle$ and $Q_0$ vanishes on $\langle\gamma,u\rangle \times \langle\gamma,u\rangle$, so $b(x,y) = 0$ whenever $x$ or $y$ lies in $\ker N$, and $b$ descends; finally
+\[
+b(w,w) = Q_0(w,-u) = 6, \qquad b(\delta,\delta) = Q_0(\delta,\gamma) = -1, \qquad b(w,\delta) = Q_0(w,\gamma) = 0 = Q_0(\delta,-u) = b(\delta,w). \qedhere
+\]
+\end{proof}
+
+\begin{remark}
+In \S4 it is the unimodularity of $B_0$ that is used: the lattice $B_0\bar\Lambda$ of cocharacter translations is all of $\Lambda_{\mathrm{tor}}$, and this is what makes the toric filling have an irreducible central fibre $W$ containing a single copy of $\mathrm{dP}_6$; for $|\det B_0| = k > 1$ the same construction would produce $k$ such pieces. The form $Q_0$ is used again in Remark 3.23, in \S7 through the invariant bivector $\eta = u\wedge w+6\,\gamma\wedge\delta$ dual to $Q_0$, and in Appendix A. It is recorded here already in order to place the present data in context: for a one-parameter degeneration of polarized abelian varieties with unipotent monodromy $\exp N$ and polarization $Q$ the form $x \mapsto Q(x,Nx)$ on $V/\ker N$ is definite (\cite{Cle77}, \cite{Mum72}), whereas by Lemma~\ref{lem:Q0} the pair $(Q_0,N)$ has signature $(1,1)$.
+\end{remark}
+
+\subsection{The base orbifold, the group $\Delta$, and the representation $\rho_V$}
+
+With the conventions of page 1 (Setup): $B = \dbP^1$ with coordinate $t$, $p_1\colon t=0$, $p_2\colon t=1$, $p_0\colon t=\infty$ with $t_c = 1/t$, $B^\circ = B \setminus \{p_0,p_1,p_2\}$, $m_1=3$, $m_2=4$, $\zeta_j = e^{-2\pi i/m_j}$. Let $\mathcal O$ be the orbifold with underlying space $B$, cone points of orders $3$ at $p_1$ and $4$ at $p_2$, and a puncture at $p_0$, i.e.\ of signature $(0;3,4,\infty)$.
+
+\begin{lemma}
+Let $g \in \mathrm{PSL}_2(\dbR)$ be elliptic of order $m < \infty$ with fixed point $z_0 \in \hb$, and $c(z) := (z-z_0)/(z-\bar z_0)$. Then $c$ maps $\hb$ biholomorphically onto the unit disc with $c(z_0) = 0$, and $c \circ g \circ c^{-1}$ is the rotation $s \mapsto \zeta s$ with $\zeta = g'(z_0)$ a primitive $m$-th root of unity; in particular $c \circ g = \zeta \cdot c$.
+\end{lemma}
+
+\begin{proof}
+$c$ is a M\"obius map carrying $\dbR \cup \{\infty\}$ to the unit circle and $z_0$ to $0$; the disc automorphism $c\circ g \circ c^{-1}$ fixes $0$, hence is $s \mapsto \zeta s$ with $\zeta$ its derivative at $0$, equal to $g'(z_0)$, of order $m$.
+\end{proof}
+
+\begin{proposition}\label{prop:uniformisation}
+There exist a copy $\hb_z$ of the upper half-plane, a Fuchsian group $\Delta \subset \mathrm{PSL}_2(\dbR)$ and a holomorphic surjection $\pi \colon \hb_z \to B \setminus \{p_0\}$ such that:
+\begin{enumerate}[label=(\roman*)]
+\item $\Delta$ acts properly discontinuously, $\pi$ induces $\hb_z/\Delta \cong B\setminus\{p_0\}$, $\pi$ is a local biholomorphism off $\pi^{-1}\{p_1,p_2\}$ and has local degree $m_j$ at each point of $\pi^{-1}(p_j)$; the stabiliser of such a point is cyclic of order $m_j$ and all other stabilisers are trivial;
+\item there are $z_j \in \pi^{-1}(p_j)$ and $g_1,g_2 \in \Delta$ with $g_j(z_j) = z_j$, $g_j$ of order $m_j$ and $g_j'(z_j) = \zeta_j$, such that
+\[
+\Delta = \langle g_1,g_2 \mid g_1^3 = g_2^4 = 1\rangle \cong \dbZ/3 * \dbZ/4,
+\]
+and such that $g_0 := (g_1g_2)^{-1}$ is parabolic; by construction $g_1g_2g_0 = 1$;
+\item if $* \in \partial\hb_z$ is the fixed point of $g_0$, its stabiliser in $\Delta$ is exactly $\langle g_0\rangle$, and for all small $r>0$ the component $U_r$ of $\pi^{-1}(\{0<|t_c|<r\})$ whose closure contains $*$ is a $\langle g_0\rangle$-invariant, connected and simply connected cusp neighbourhood of $*$ squeezed between two horodiscs at $*$, i.e.\ $H'' \subseteq U_r \subseteq H'$ for suitable horodiscs $H'', H'$ at $*$; shrinking $r$ so that $U_r$ lies in a strictly smaller horodisc at $*$, the set $U_r$ is closed in $\pi^{-1}(\{0<|t_c|<r\})$ and hence is a connected component of it, every other component lying in a translate $gH'$ with $g \in \Delta \setminus \langle g_0\rangle$; it satisfies $gU_r \cap U_r = \emptyset$ for $g \in \Delta \setminus \langle g_0\rangle$, and $\pi$ induces a biholomorphism $U_r/\langle g_0\rangle \cong \{0<|t_c|<r\}$.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+Since $\tfrac13+\tfrac14 < 1$, $\mathcal O$ is hyperbolic, hence uniformised by a Fuchsian group of signature $(0;3,4,\infty)$ (\cite[Ch.\ 13]{Thu97}, \cite[Ch.\ 10]{Bea83}); explicitly, $\Delta$ is the orientation-preserving subgroup of the group generated by the reflections $\sigma_a,\sigma_b,\sigma_c$ in the sides $a=BC$, $b=CA$, $c=AB$ of the hyperbolic triangle $T$ with vertices $A,B,C$ counterclockwise and angles $\pi/3,\pi/4,0$ (Poincar\'e's theorem; \cite[Ch.\ 7, 9--10]{Bea83}). The quotient surface is a once-punctured sphere, i.e.\ $\dbC$; composing with the affine automorphism carrying the order-$3$ cone point to $0=p_1$ and the order-$4$ one to $1=p_2$ yields $\pi$, and (i) is the standard description of a Fuchsian group by its signature (\cite[Ch.\ 10]{Bea83}).
+
+(ii) Put $x := \sigma_b\sigma_c$, $y := \sigma_c\sigma_a$, $z := \sigma_a\sigma_b$, so $xyz=1$ and $\Delta = \langle x,y,z \mid x^3=y^4=1, xyz=1\rangle$ (\cite[Ch.\ 10]{Bea83}). The relevant rule is: if two geodesics $\alpha,\beta$ meet at $P$ and $\theta$ denotes the angle from $\alpha$ to $\beta$ measured counterclockwise, then the product $\sigma_\beta\sigma_\alpha$ (reflect in $\alpha$ first, then in $\beta$) is the counterclockwise rotation about $P$ through $2\theta$ (\cite[Ch.\ 7]{Bea83}). Since the vertices $A,B,C$ are counterclockwise, the counterclockwise angle at $A$ from $c=AB$ to $b=CA$ is the interior angle $\pi/3$, and that at $B$ from $a=BC$ to $c=AB$ is $\pi/4$; hence $x=\sigma_b\sigma_c$ is the counterclockwise rotation about $A$ through $2\pi/3$, $y=\sigma_c\sigma_a$ the counterclockwise rotation about $B$ through $2\pi/4$, and $z$ is parabolic, fixing the ideal vertex $C$; by the previous lemma, $x'(A) = e^{2\pi i/3}$ and $y'(B) = e^{2\pi i/4}$. With
+\[
+z_1 := A, \qquad z_2 := B, \qquad g_1 := x^{-1}, \qquad g_2 := y^{-1}
+\]
+the two rotations are reversed simultaneously, so that $g_1'(z_1) = \zeta_1$ and $g_2'(z_2) = \zeta_2$, of orders $3,4$. Inverting $xyz=1$ gives $g_2g_1 = z$, so $g_1g_2 = g_1zg_1^{-1}$ is parabolic, hence so is $g_0$; eliminating $z$ gives the stated presentation.
+
+(iii) The stabiliser of $*$ is $\langle g_0\rangle$. By the standard description of a cusp (\cite[Ch.\ 10]{Bea83}) the stabiliser $\Delta_*$ of the fixed point of a parabolic element of a Fuchsian group is infinite cyclic, generated by a primitive parabolic $h$, and there is a horodisc $H'$ at $*$ with $gH' \cap H' = \emptyset$ for $g \notin \Delta_*$. Write $g_0 = h^n$ with $n \ge 1$; we claim $n=1$, i.e.\ that $g_0$, equivalently $g_0 = g_1^{-1}g_2^{-1}$, is not a proper power in $\Delta$. Indeed, in the free product $\Delta = \langle g_1\rangle * \langle g_2\rangle$ the element $g_1g_2$ is cyclically reduced of length $2$, and cyclically reduced length is a conjugacy invariant. An element $h \in \Delta$ of finite order is conjugate into a free factor, so all its powers have finite order and cannot be parabolic; hence $h$ has infinite order and is conjugate to a cyclically reduced word $h_0$ of even length $\ell \ge 2$, so that $h^n$ is conjugate to the cyclically reduced word $h_0^n$ of length $n\ell$. If $n \ge 2$ this length is $\ge 4 > 2$, a contradiction. Thus $n=1$ and $\Delta_* = \langle g_0\rangle$, and $H'/\langle g_0\rangle$ embeds in $\hb_z/\Delta$ as a punctured-disc neighbourhood of the puncture.
+
+\emph{The cusp coordinate.} Conjugate in $\mathrm{PSL}_2(\dbR)$ so that $* = \infty$ and $H' = \{\operatorname{Im}\zeta > C\}$; then $g_0(\zeta) = \zeta+\epsilon_0$ with $\epsilon_0 \in \dbR^\times$, and after the further conjugation $\zeta \mapsto \zeta/|\epsilon_0|$ we may assume $\epsilon_0 \in \{+1,-1\}$. The sign $\epsilon_0$ is intrinsic, the elements of $\mathrm{PSL}_2(\dbR)$ fixing $\infty$ being the maps $\zeta \mapsto a\zeta+c$ with $a>0$, whose conjugation action preserves it. Its value plays no role in the present proof, since $q := e^{2\pi i\zeta}$ is $\langle g_0\rangle$-invariant for either sign and identifies $H'/\langle g_0\rangle$ with a punctured disc $D^*$; the value is determined once the period map $\tau$ is taken into account, and Remark~2.12 gives $\epsilon_0 = -1$. Thus $\pi$ induces an injective holomorphic map $\psi\colon D \to B$ with $\psi(0) = p_0$, where we read $B$ near $p_0$ in the coordinate $t_c$ and set $\psi(0)=0$. Choose $r_0>0$ with $\{|t_c|<r_0\} \subseteq \psi(D)$, and let $0<r<r_0$. Then $V_r := \psi^{-1}(\{|t_c|<r\})$ is a simply connected neighbourhood of $0$ in $D$, biholomorphic to a disc, and
+\[
+U_r = \{\zeta \in H' : e^{2\pi i\zeta} \in V_r \setminus\{0\}\}
+\]
+is the component of $\pi^{-1}(\{0<|t_c|<r\})$ accumulating at $*$: it is the preimage under $\zeta \mapsto e^{2\pi i\zeta}$ of a punctured simply connected domain around $0$, hence connected, simply connected and $\langle g_0\rangle$-invariant, and $\pi$ induces $U_r/\langle g_0\rangle \cong \{0<|t_c|<r\}$; disjointness of its $\Delta$-translates off $\langle g_0\rangle$ follows from that of $H' \supseteq U_r$. It is moreover the only component accumulating at $*$: since $\pi$ is the quotient by $\Delta$ and $U_r$ is a component of $\pi^{-1}(\{0<|t_c|<r\})$ with trivial setwise stabiliser outside $\langle g_0\rangle$, every component of $\pi^{-1}(\{0<|t_c|<r\})$ is a translate $gU_r$ with $g \in \Delta$, and every component other than $U_r$ is such a translate with $g \notin \langle g_0\rangle$, hence lies in $gH'$; since $U_r \subseteq H'$ is contained in a horodisc at $*$, the closure of $gU_r$ meets $\partial\hb_z$ only at $g*$, and $g* \ne *$ because the stabiliser of $*$ is exactly $\langle g_0\rangle$. Hence no other component accumulates at $*$. Finally, choosing $0<\varrho<\varrho'$ with $\{|q|<\varrho\} \subseteq V_r \subseteq \{|q|<\varrho'\}$ gives horodiscs $H'' = \{\operatorname{Im}\zeta > \log(1/\varrho)/2\pi\} \subseteq U_r$ and $U_r \subseteq \{\operatorname{Im}\zeta > \log(1/\varrho')/2\pi\} \cap H'$, as claimed.
+\end{proof}
+
+\begin{remark}[The translation sign at the cusp]
+The normalisation $g_0(\zeta) = \zeta+\epsilon_0$, $\epsilon_0 \in \{\pm1\}$, of the proof of Proposition~\ref{prop:uniformisation}(iii) concerns the uniformising coordinate $\zeta$ on $\hb_z$, whereas the relation $\tau \circ g_0 = \tau-1$ of \S3 concerns the period map $\tau\colon \hb_z \to \hb$ and expresses its equivariance along $\rho_\Lambda$, i.e.\ $\rho_\Lambda(g_0) = M_0$. The two maps are distinct, but the second relation determines the first sign: we show that $\epsilon_0 = -1$.
+
+Indeed, $\tau$ is equivariant along the surjection $\Delta \to \mathrm{PSL}_2(\dbZ)$ of Remark~2.13, so $j\circ\tau = 1728\,t\circ\pi$ on $\hb_z$; equivalently, on $U_r$ the function $e^{2\pi i\tau}$ is, through the identifications of Proposition~\ref{prop:uniformisation}(iii), the local coordinate $q$ up to a unit \emph{(rest of argument continues on p.\,13 of the source, not yet transcribed)}.
+\end{remark}
+\newpage

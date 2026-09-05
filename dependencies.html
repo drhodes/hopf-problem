@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>libspec - Component Dependency Graph</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --prereq-color: #38bdf8;
+      --rdep-color: #f59e0b;
+      --wave-bg: rgba(30, 41, 59, 0.5);
+      --wave-border: #334155;
+      --edge-color: #475569;
+      --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      user-select: none;
+    }
+    header {
+      background: #1e293b;
+      border-bottom: 1px solid #334155;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      z-index: 10;
+    }
+    .title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .title-group h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+    .stats-badge {
+      background: #0f172a;
+      border: 1px solid #334155;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .stats-badge span {
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    input[type="search"] {
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: var(--text);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      width: 220px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    input[type="search"]:focus {
+      border-color: var(--accent);
+    }
+    button {
+      background: #334155;
+      color: var(--text);
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 500;
+      transition: background 0.15s;
+    }
+    button:hover {
+      background: #475569;
+    }
+    button.primary {
+      background: var(--accent);
+      color: #0f172a;
+      font-weight: 600;
+    }
+    button.primary:hover {
+      background: var(--accent-hover);
+    }
+    main {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+    }
+    #viewport {
+      flex: 1;
+      height: 100%;
+      cursor: grab;
+    }
+    #viewport:active {
+      cursor: grabbing;
+    }
+    #dag-svg {
+      width: 100%;
+      height: 100%;
+    }
+    /* Side Inspector Drawer */
+    #inspector {
+      width: 380px;
+      background: #1e293b;
+      border-left: 1px solid #334155;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.2s ease;
+      z-index: 20;
+    }
+    #inspector.hidden {
+      display: none;
+    }
+    .inspector-header {
+      padding: 16px;
+      border-bottom: 1px solid #334155;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .inspector-header h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent);
+      word-break: break-all;
+    }
+    .inspector-body {
+      padding: 16px;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      user-select: text;
+    }
+    .prop-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .prop-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+    .prop-val {
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+    .doc-box {
+      background: #0f172a;
+      padding: 10px;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 0.78rem;
+      line-height: 1.4;
+      white-space: pre-wrap;
+      max-height: 200px;
+      overflow-y: auto;
+      border: 1px solid #334155;
+    }
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .link-item {
+      background: #0f172a;
+      padding: 6px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: 1px solid #334155;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .link-item:hover {
+      border-color: var(--accent);
+      background: #1e293b;
+    }
+    /* SVG Styling */
+    .wave-column {
+      fill: var(--wave-bg);
+      stroke: var(--wave-border);
+      stroke-dasharray: 4,4;
+      rx: 8;
+    }
+    .wave-label {
+      fill: var(--text-muted);
+      font-size: 13px;
+      font-weight: 700;
+      text-anchor: middle;
+      letter-spacing: 0.05em;
+    }
+    .comp-node {
+      cursor: pointer;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+    .comp-node rect {
+      fill: var(--card-bg);
+      stroke: var(--card-border);
+      stroke-width: 1.5;
+      rx: 6;
+      transition: stroke 0.15s, fill 0.15s;
+    }
+    .comp-node:hover rect {
+      stroke: var(--accent);
+      fill: #26354a;
+    }
+    .comp-node.selected rect {
+      stroke: #ffffff;
+      stroke-width: 2.5;
+      fill: #1e3a8a;
+    }
+    .comp-node.is-prereq rect {
+      stroke: var(--prereq-color);
+      stroke-width: 2;
+      fill: #0c4a6e;
+    }
+    .comp-node.is-rdep rect {
+      stroke: var(--rdep-color);
+      stroke-width: 2;
+      fill: #78350f;
+    }
+    .comp-node.dimmed {
+      opacity: 0.2;
+    }
+    .node-title {
+      fill: var(--text);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .node-sub {
+      fill: var(--text-muted);
+      font-size: 10px;
+    }
+    .edge-line {
+      fill: none;
+      stroke: var(--edge-color);
+      stroke-width: 1.5;
+      transition: stroke 0.15s, stroke-width 0.15s, opacity 0.15s;
+    }
+    .edge-line.active-prereq {
+      stroke: var(--prereq-color);
+      stroke-width: 2.5;
+      opacity: 1;
+    }
+    .edge-line.active-rdep {
+      stroke: var(--rdep-color);
+      stroke-width: 2.5;
+      opacity: 1;
+    }
+    .edge-line.dimmed {
+      opacity: 0.1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title-group">
+      <h1>libspec graph</h1>
+      <div class="stats-badge">Components: <span>115</span></div>
+      <div class="stats-badge">Waves: <span>17</span></div>
+      <div class="stats-badge">Edges: <span>152</span></div>
+    </div>
+    <div class="controls">
+      <input type="search" id="search-input" placeholder="Filter component..." />
+      <button id="btn-reset">Reset View</button>
+      <button id="btn-clear-selection">Clear Selection</button>
+    </div>
+  </header>
+  <main>
+    <div id="viewport">
+      <svg id="dag-svg">
+        <defs>
+          <marker id="arrow-default" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <polygon points="0 0, 8 4, 0 8" fill="#475569" />
+          </marker>
+          <marker id="arrow-prereq" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <polygon points="0 0, 8 4, 0 8" fill="#38bdf8" />
+          </marker>
+          <marker id="arrow-rdep" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+            <polygon points="0 0, 8 4, 0 8" fill="#f59e0b" />
+          </marker>
+        </defs>
+        <g id="canvas-content"></g>
+      </svg>
+    </div>
+    <aside id="inspector" class="hidden">
+      <div class="inspector-header">
+        <h2 id="insp-name">Component Details</h2>
+        <button id="btn-close-insp">&times;</button>
+      </div>
+      <div class="inspector-body">
+        <div class="prop-group">
+          <span class="prop-label">Full Reference</span>
+          <span class="prop-val" id="insp-ref"></span>
+        </div>
+        <div class="prop-group">
+          <span class="prop-label">Topological Wave</span>
+          <span class="prop-val" id="insp-wave"></span>
+        </div>
+        <div class="prop-group">
+          <span class="prop-label">Source Location</span>
+          <span class="prop-val" id="insp-loc"></span>
+        </div>
+        <div class="prop-group">
+          <span class="prop-label">Docstring</span>
+          <pre class="doc-box" id="insp-doc"></pre>
+        </div>
+        <div class="prop-group">
+          <span class="prop-label">Direct Prerequisites (<span id="insp-deps-count">0</span>)</span>
+          <div class="link-list" id="insp-deps-list"></div>
+        </div>
+        <div class="prop-group">
+          <span class="prop-label">Downstream Dependents / Blast Radius (<span id="insp-rdeps-count">0</span>)</span>
+          <div class="link-list" id="insp-rdeps-list"></div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script id="dag-data" type="application/json">
+    {"components": [{"ref": "libspec.spec.BaseSpec", "name": "BaseSpec", "module": "libspec.spec", "wave": 1, "is_template": false, "docstring": "Base specification class for interfaces, mixins, and abstract specs.\n\nClasses that set `__is_base_spec__ = True` or inherit from BaseSpec without\nimplementing concrete specification methods serve as template interfaces\nfor inheritance. They are excluded from standalone component listings and diffs.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "libspec.spec_types.Component", "name": "Component", "module": "libspec.spec_types", "wave": 1, "is_template": false, "docstring": "Base specification class for all architectural components.\nDeclares logical component prerequisites via the `deps` class attribute.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "libspec.spec_types.Feature", "name": "Feature", "module": "libspec.spec_types", "wave": 1, "is_template": true, "docstring": "Feature Specification: Feature", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "libspec.spec_types.Hazard", "name": "Hazard", "module": "libspec.spec_types", "wave": 1, "is_template": true, "docstring": "HAZARD-ID: libspec.spec_types.Hazard\nTITLE: Hazard\nCATEGORY: Ctx\n\nDESCRIPTION:\nHAZARD-ID: {{hazard_id}}\nTITLE: {{title}}\nCATEGORY: {{category}}\n\nDESCRIPTION:\n{{description}}\n\nHARNESS-INSTRUCTION:\n{{harness_instruction}}\n\nHARNESS-INSTRUCTION:\nVerify system defends against this hazard signature and recovers gracefully.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "libspec.spec_types.Requirement", "name": "Requirement", "module": "libspec.spec_types", "wave": 1, "is_template": true, "docstring": "Requirement\nTITLE: Requirement\nREQUIREMENT-ID: libspec.spec_types.Requirement\n\nInsert REQUIREMENT-ID into any source code for cross reference purposes.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.analytic_invariants.AlgebraicDimensionReq", "name": "AlgebraicDimensionReq", "module": "spec.analytic_invariants", "wave": 12, "is_template": false, "docstring": "In Proposition 9.7 and Theorem 9.1(3), the algebraic dimension of $X$ is:\n$$a(X) = \\mathrm{tr.deg}_{\\mathbb{C}} \\mathcal{M}(X) = 1,$$\nwhere $\\mathcal{M}(X) = f^* \\mathbb{C}(t)$. Every meromorphic function on $X$ is constant\nalong the fibres of $f$, making $f : X \\to \\mathbb{P}^1$ the algebraic reduction.", "deps": ["spec.manifold_gluing.CollarTransitionGluingReq"], "rdeps": ["spec.analytic_invariants.AnalyticInvariantsFeat"], "loc": "unknown"}, {"ref": "spec.analytic_invariants.AnalyticInvariantsFeat", "name": "AnalyticInvariantsFeat", "module": "spec.analytic_invariants", "wave": 15, "is_template": false, "docstring": "Feature encapsulating the complex-analytic invariants of X, sheaf cohomology direct images,\nnon-torsion canonical bundle, and Fr\u00f6licher non-degeneration.", "deps": ["spec.analytic_invariants.AlgebraicDimensionReq", "spec.analytic_invariants.DirectImageSheavesReq", "spec.analytic_invariants.HodgeNumbersReq", "spec.analytic_invariants.FroelicherNonDegenerationReq", "spec.analytic_invariants.CanonicalBundleNonTorsionReq", "spec.analytic_invariants.ChernNumbersRiemannRochReq", "spec.analytic_invariants.VerticalAutomorphismGroupReq", "spec.analytic_invariants.NonKaehlernessReq"], "rdeps": [], "loc": "unknown"}, {"ref": "spec.analytic_invariants.CanonicalBundleNonTorsionReq", "name": "CanonicalBundleNonTorsionReq", "module": "spec.analytic_invariants", "wave": 12, "is_template": false, "docstring": "In Proposition 9.11 and Theorem 9.1(7), the canonical line bundle is:\n$$K_X \\cong f^* \\mathcal{O}_{\\mathbb{P}^1}(-1) \\otimes \\mathcal{O}_X(2S_2),$$\nand $K_X$ is not a torsion element of $\\mathrm{Pic}(X)$, satisfying $H^0(X, K_X^{\\otimes 4k}) = 0$ for all $k \\ge 1$.", "deps": ["spec.manifold_gluing.CollarTransitionGluingReq"], "rdeps": ["spec.analytic_invariants.AnalyticInvariantsFeat", "spec.analytic_invariants.ChernNumbersRiemannRochReq"], "loc": "unknown"}, {"ref": "spec.analytic_invariants.ChernNumbersRiemannRochReq", "name": "ChernNumbersRiemannRochReq", "module": "spec.analytic_invariants", "wave": 13, "is_template": false, "docstring": "In Theorem 9.1(7), the Chern classes satisfy $c_1(X) = c_2(X) = 0$ in $H^*(X; \\mathbb{Z})$,\nthe Chern numbers are $c_1 c_2 = 0$ and $c_3(X) = 2$, and Hirzebruch-Riemann-Roch yields $\\chi(X, TX) = 1$.", "deps": ["spec.analytic_invariants.CanonicalBundleNonTorsionReq"], "rdeps": ["spec.analytic_invariants.AnalyticInvariantsFeat"], "loc": "unknown"}, {"ref": "spec.analytic_invariants.DirectImageSheavesReq", "name": "DirectImageSheavesReq", "module": "spec.analytic_invariants", "wave": 12, "is_template": false, "docstring": "In Proposition 9.13 and Theorem 9.1(6), the higher direct image sheaves of the structure sheaf are:\n$$f_* \\mathcal{O}_X \\cong \\mathcal{O}_{\\mathbb{P}^1}, \\quad\n  R^1 f_* \\mathcal{O}_X \\cong \\mathcal{O}_{\\mathbb{P}^1} \\oplus \\mathcal{O}_{\\mathbb{P}^1}(-1), \\quad\n  R^2 f_* \\mathcal{O}_X \\cong \\mathcal{O}_{\\mathbb{P}^1}(-1), \\quad\n  R^3 f_* \\mathcal{O}_X = 0.$$", "deps": ["spec.manifold_gluing.CollarTransitionGluingReq"], "rdeps": ["spec.analytic_invariants.AnalyticInvariantsFeat", "spec.analytic_invariants.HodgeNumbersReq"], "loc": "unknown"}, {"ref": "spec.analytic_invariants.FroelicherNonDegenerationReq", "name": "FroelicherNonDegenerationReq", "module": "spec.analytic_invariants", "wave": 14, "is_template": false, "docstring": "In Corollary 9.22, because the first Betti number vanishes while $h^{0,1}$ is positive:\n$$b_1(X) = 0 < 1 = h^{0,1}(X),$$\nthe Fr\u00f6licher spectral sequence $E_1^{p,q} = H^q(X, \\Omega_X^p) \\Rightarrow H^{p+q}_{\\mathrm{dR}}(X; \\mathbb{C})$\nstrictly does not degenerate at $E_1$.", "deps": ["spec.analytic_invariants.HodgeNumbersReq"], "rdeps": ["spec.analytic_invariants.AnalyticInvariantsFeat"], "loc": "unknown"}, {"ref": "spec.analytic_invariants.HodgeNumbersReq", "name": "HodgeNumbersReq", "module": "spec.analytic_invariants", "wave": 13, "is_template": false, "docstring": "In Theorem 9.1(6) and Proposition 9.20:\n$$h^{0,1}(X) = 1, \\quad h^{0,2}(X) = h^{0,3}(X) = 0, \\quad\n  h^{1,0}(X) = h^{2,0}(X) = h^{3,0}(X) = 0.$$\nConsequently $\\chi(\\mathcal{O}_X) = 0$, and $\\mathrm{Pic}(X) = \\mathrm{Pic}^0(X) \\cong H^1(X, \\mathcal{O}_X) \\cong \\mathbb{C}$.", "deps": ["spec.analytic_invariants.DirectImageSheavesReq"], "rdeps": ["spec.analytic_invariants.AnalyticInvariantsFeat", "spec.analytic_invariants.FroelicherNonDegenerationReq", "spec.analytic_invariants.NonKaehlernessReq"], "loc": "unknown"}, {"ref": "spec.analytic_invariants.NonKaehlernessReq", "name": "NonKaehlernessReq", "module": "spec.analytic_invariants", "wave": 14, "is_template": false, "docstring": "In Remark 1.2 and Section 9.8, because $b_2(X) = 0$, $X$ admits no K\u00e4hler metric, is not Moishezon,\nand does not belong to Fujiki's class $\\mathcal{C}$.", "deps": ["spec.analytic_invariants.HodgeNumbersReq"], "rdeps": ["spec.analytic_invariants.AnalyticInvariantsFeat"], "loc": "unknown"}, {"ref": "spec.analytic_invariants.VerticalAutomorphismGroupReq", "name": "VerticalAutomorphismGroupReq", "module": "spec.analytic_invariants", "wave": 12, "is_template": false, "docstring": "In Proposition 9.23 and 9.24, the space of holomorphic vector fields has dimension $h^0(X, TX) = 1$,\nand the identity component of the automorphism group is:\n$$\\mathrm{Aut}^0(X) \\cong \\mathbb{C}^*,$$\ngenerated by the vertical vector field $\\hat{\\delta}$ with fixed locus a single double curve $D_0 \\subset W$.", "deps": ["spec.toric_filling.DoubleLocusTriplePointsReq", "spec.manifold_gluing.CollarTransitionGluingReq"], "rdeps": ["spec.analytic_invariants.AnalyticInvariantsFeat"], "loc": "unknown"}, {"ref": "spec.cdp_divergence.CDPDivergenceFeat", "name": "CDPDivergenceFeat", "module": "spec.cdp_divergence", "wave": 13, "is_template": false, "docstring": "Feature encapsulating the refutation of CDP20, the non-normality analysis of W,\nand the proof of R\u00b2 f_*(T_X \u2297 L) \u2260 0.", "deps": ["spec.cdp_divergence.MayerVietorisNormalCrossingsReq", "spec.cdp_divergence.NonNormalConormalSectionReq", "spec.cdp_divergence.CDPHypothesisOneFailureReq", "spec.cdp_divergence.MonodromyLineRepairReq"], "rdeps": [], "loc": "unknown"}, {"ref": "spec.cdp_divergence.CDPHypothesisOneFailureReq", "name": "CDPHypothesisOneFailureReq", "module": "spec.cdp_divergence", "wave": 12, "is_template": false, "docstring": "In Theorem 10.5 and Corollary 10.6, by Serre-Grothendieck duality on $W$ and base change:\n$$R^2 f_*(TX \\otimes L) \\ne 0 \\quad \\text{for all } L \\in \\mathrm{Pic}(X).$$\nConsequently, Hypothesis (1) of Campana-Demailly-Peternell [CDP20, Prop 2.4, p. 680] holds for no $L$,\npinpointing the decisive breakdown in their non-existence argument.", "deps": ["spec.cdp_divergence.NonNormalConormalSectionReq", "spec.manifold_gluing.CollarTransitionGluingReq"], "rdeps": ["spec.cdp_divergence.CDPDivergenceFeat"], "loc": "unknown"}, {"ref": "spec.cdp_divergence.MayerVietorisNormalCrossingsReq", "name": "MayerVietorisNormalCrossingsReq", "module": "spec.cdp_divergence", "wave": 3, "is_template": false, "docstring": "In Definition 10.1 and Lemma 10.2, for the normal crossings central fibre $W$ with normalization\n$\\eta : \\tilde{W} \\to W$ where $\\tilde{W} \\cong dP_6$, the Mayer-Vietoris sequence of 1-forms\nrelates $\\Omega_X^1|_W$, the conormal bundle $\\mathcal{N}^*_{W/X}$, and the normalization.", "deps": ["spec.toric_filling.DelPezzoNormalizationReq"], "rdeps": ["spec.cdp_divergence.CDPDivergenceFeat", "spec.cdp_divergence.NonNormalConormalSectionReq"], "loc": "unknown"}, {"ref": "spec.cdp_divergence.MonodromyLineRepairReq", "name": "MonodromyLineRepairReq", "module": "spec.cdp_divergence", "wave": 5, "is_template": false, "docstring": "In Lemma 10.7 and Proposition 10.8, the deduction in [CDP20, Lemma 4.2] erroneously assumed trivial\nmonodromy on the general fibre; for $X$, the monodromy representation $\\rho_V : \\Delta \\to \\mathrm{SL}(V)$\nis non-trivial, and accounting for the coinvariant quotient repairs the homological count.", "deps": ["spec.lattice_monodromy.MonodromyInvariantsReq"], "rdeps": ["spec.cdp_divergence.CDPDivergenceFeat"], "loc": "unknown"}, {"ref": "spec.cdp_divergence.NonNormalConormalSectionReq", "name": "NonNormalConormalSectionReq", "module": "spec.cdp_divergence", "wave": 4, "is_template": false, "docstring": "In Lemma 10.3 and Theorem 10.5, for $A := (L^* \\otimes K_X)|_W$ with $\\theta$ trivialising $\\eta^* A$,\nthe differential $d(t_c \\circ f)|_W \\otimes \\theta$ vanishes on the double locus $D \\subset W$\nand descends to a non-zero section:\n$$0 \\ne \\sigma \\in H^0(W, \\Omega_X^1|_W \\otimes A)$$\nthat vanishes in the torsion-free quotient $\\tilde{\\Omega}_W^1 \\otimes A$.", "deps": ["spec.cdp_divergence.MayerVietorisNormalCrossingsReq"], "rdeps": ["spec.cdp_divergence.CDPDivergenceFeat", "spec.cdp_divergence.CDPHypothesisOneFailureReq"], "loc": "unknown"}, {"ref": "spec.err.BoilerPlate", "name": "BoilerPlate", "module": "spec.err", "wave": 1, "is_template": false, "docstring": "If you can see a way to reduce boiler plate, then do it.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.err.Err", "name": "Err", "module": "spec.err", "wave": 1, "is_template": false, "docstring": "It is important that error handling be done excellently.\n\nIf a function can fail, then it needs to do so in the most elegant way\npossible. Error reporting, handling, exceptions and all aspects of failure\nmust be taken to extreme. It should be possible to understand the program\nby reading the error messages.\n\nWhen an error occurs there should be a story about the failure at each step\nof the way. What went wrong and why.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.err.FunctionLines", "name": "FunctionLines", "module": "spec.err", "wave": 1, "is_template": false, "docstring": "Try to keep functions under 20 lines.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.err.GlobalMutableState", "name": "GlobalMutableState", "module": "spec.err", "wave": 1, "is_template": false, "docstring": "Broadly you should avoid global mutable state.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.err.Indentation", "name": "Indentation", "module": "spec.err", "wave": 1, "is_template": false, "docstring": "Try to keep indentation under 4 levels.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.err.PostCondition", "name": "PostCondition", "module": "spec.err", "wave": 1, "is_template": false, "docstring": "Before a function returns, it should verify postconditions to ensure\ninvariant properties hold true.\n\nRaise explicit, descriptive exceptions (such as RuntimeError or domain\nexceptions) rather than using `assert` statements to handle post-execution\nverification failures.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.err.PreCondition", "name": "PreCondition", "module": "spec.err", "wave": 1, "is_template": false, "docstring": "Functions should validate preconditions at their entry point.\n\nInstead of using `assert` statements (which can be disabled globally),\nraise explicit, descriptive exceptions (e.g., ValueError, TypeError, or\ncustom domain exceptions) to robustly reject malformed input.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.err.Refactor", "name": "Refactor", "module": "spec.err", "wave": 1, "is_template": false, "docstring": "Always keep an eye out for ways to generalize a function if it's utility\nmight be helpful to other functions.\n\nClasses should be implemented in their own files with filename being the\nclassname with correct naming convention", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.err.Robustness", "name": "Robustness", "module": "spec.err", "wave": 1, "is_template": false, "docstring": "Always prioritize library-provided constructors for complex objects. Ensure\nall components are fully initialized before calling any state- mutating\nmethods. Assume private internal state is uninitialized until the official\nconstructor has returned. When extending library components, prioritize\ncomposition (pointers) over embedding by value to avoid risky state-copying\nbugs.\n\nUse dependency injection for system level objects for composability and to\nmake testing easier.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.CollarNonHausdorffHazard", "name": "CollarNonHausdorffHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-GEOM-004\nTITLE: Collar Transition Non-Hausdorff Gluing\nCATEGORY: Complex Manifold Gluing\n\nDESCRIPTION:\nFailing to verify that the holomorphic gluing transition functions between the toric\nfilling N\u2080, the logarithmic fillings N\u2081, N\u2082, and the smooth family \ud835\udca5 \u2192 B\u00b0 are strictly\nHausdorff and satisfy the cocycle condition on triple intersections.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.ConormalSequenceNormalizationBypassHazard", "name": "ConormalSequenceNormalizationBypassHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-GEOM-008\nTITLE: Conormal Sequence Normalization Bypass (The CDP20 Flaw)\nCATEGORY: Deformation Theory & Sheaf Cohomology\n\nDESCRIPTION:\nThe decisive error in Campana-Demailly-Peternell (CDP20) is assuming that the conormal\nsequence of W can be pulled back to the normalization dP\u2086 to force H\u2070(W, \u03a9\u00b9_X|_W \u2297 A) = 0.\nBecause W is non-normal, the differential d(t_c \u2218 f)|_W \u2297 \u03b8 gives a non-zero section\n\u03c3 \u2208 H\u2070(W, \u03a9\u00b9_X|_W \u2297 A) that vanishes in the torsion-free quotient, proving that\nR\u00b2f_*(T_X \u2297 L) \u2260 0 for every line bundle L on X.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.CounterfactualProbeFailureHazard", "name": "CounterfactualProbeFailureHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-PROOF-007\nTITLE: Counterfactual Probe Failure\nCATEGORY: Robustness\n\nDESCRIPTION:\nA formalized theorem remains provable even after negating or mutating essential hypotheses\n(e.g., dropping the twist parameter relation |12\u2113\u2080 - 4\u2113\u2081 - 3\u2113\u2082| = 1), indicating that the\nformal proof is vacuous or flawed.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.DefinitionalDowngradeHazard", "name": "DefinitionalDowngradeHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-PROOF-004\nTITLE: Definitional Downgrade\nCATEGORY: Semantic Fidelity\n\nDESCRIPTION:\nSubstituting a deep mathematical definition (e.g., complex manifold, toric variety, or\nsmooth diffeomorphism) with a trivialized discrete or skeletal dummy structure (e.g.,\nempty type or discrete point set) to make lemmas trivially provable.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.ExoticSphereDiffeomorphismOmissionHazard", "name": "ExoticSphereDiffeomorphismOmissionHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-GEOM-009\nTITLE: Exotic Sphere Diffeomorphism Omission\nCATEGORY: Differential Topology\n\nDESCRIPTION:\nConcluding that X is diffeomorphic to S\u2076 solely from homotopy equivalence or homeomorphism.\nIn general dimensions n, homotopy spheres can be exotic. The deduction X \u2245_diff S\u2076 strictly\nrequires the Kervaire-Milnor plumbing theorem that the exotic sphere group \u0398\u2086 = 0.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.FaithfulnessGapHazard", "name": "FaithfulnessGapHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-PROOF-005\nTITLE: Faithfulness Gap\nCATEGORY: Semantic Fidelity\n\nDESCRIPTION:\nDivergence between the informal paper's mathematical definitions and the formalized Lean 4\nstatements, allowing theorems to be verified for unintended weaker hypotheses.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.FormalProofHazard", "name": "FormalProofHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "Base hazard class for formal proof soundness violations, cargo-cult formalization\npatterns, and mathematical verification failures in interactive theorem provers.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.FroelicherDegenerationFallacyHazard", "name": "FroelicherDegenerationFallacyHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-GEOM-006\nTITLE: Fr\u00f6licher Spectral Sequence E\u2081 Degeneration Fallacy\nCATEGORY: Hodge Theory & Non-K\u00e4hler Geometry\n\nDESCRIPTION:\nAssuming that the Fr\u00f6licher spectral sequence degenerates at E\u2081 (which holds only for K\u00e4hler\nor Fujiki class \ud835\udc9e manifolds). For the threefold X, b\u2081(X) = 0 while h^{0,1}(X) = 1, so the\nFr\u00f6licher spectral sequence strictly fails to degenerate at E\u2081.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.GeometricSoundnessHazard", "name": "GeometricSoundnessHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "Base hazard class for complex analytic geometry, differential topology, and\nmodular degeneration hazards.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.IndefinitePeriodPolarizationFallacyHazard", "name": "IndefinitePeriodPolarizationFallacyHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-GEOM-005\nTITLE: Indefinite Period Matrix Polarization Fallacy\nCATEGORY: Hodge Theory & Period Domains\n\nDESCRIPTION:\nAssuming that the 2-tori fibres F = \u2102\u00b2/\u03a0(z)\u039b admit an ample polarization (algebraic surface).\nThe Hodge form H_\u03b7 on F has signature (1, 1) and is indefinite; the very general fibre\nhas algebraic dimension a(F) = 0 and NS(F) = \u2124\u03b7. Assuming positivity violates the paper's\nfundamental construction.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.KaehlerAssumptionLeakageHazard", "name": "KaehlerAssumptionLeakageHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-GEOM-007\nTITLE: K\u00e4hler Assumption Leakage\nCATEGORY: Complex Differential Geometry\n\nDESCRIPTION:\nImplicitly invoking the dd\u1d9c-lemma, Hodge symmetry (h^{p,q} = h^{q,p}), or Kodaira vanishing\ntheorems on X. Because b\u2082(X) = 0, X carries no K\u00e4hler metric, is not Moishezon, and has\nPic(X) \u2245 \u2102 with non-torsion canonical bundle K_X.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.MonodromyTwistTorsionMismatchHazard", "name": "MonodromyTwistTorsionMismatchHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-GEOM-002\nTITLE: Monodromy Twist Torsion Mismatch\nCATEGORY: Fundamental Group Computation\n\nDESCRIPTION:\nSelecting gluing translation sections v\u2c7c whose invariant integers (\u2113\u2080, \u2113\u2081, \u2113\u2082) fail the\nprimitivity condition |12\u2113\u2080 - 4\u2113\u2081 - 3\u2113\u2082| = 1.\nIf this condition fails, \u03c0\u2081(X) \u2245 \u2124/|12\u2113\u2080 - 4\u2113\u2081 - 3\u2113\u2082| has non-trivial torsion, and X is\nneither simply connected nor diffeomorphic to S\u2076.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.NonNormalBoundaryVanishingHazard", "name": "NonNormalBoundaryVanishingHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-GEOM-010\nTITLE: Non-Normal Boundary Vanishing Cycle Omission\nCATEGORY: Homology of Singular Fibres\n\nDESCRIPTION:\nOmitting the identification of the vanishing cycle sublattice \u039b_tor = \u27e8w\u0302, \u03b4\u0302\u27e9 under the\nunipotent monodromy M\u2080 - I = (T\u2080\u207b\u00b9)\u1d57 - I at the cusp, leading to an incorrect computation\nof the local homology of the degeneration N\u2080.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.ProofDependencyParityHazard", "name": "ProofDependencyParityHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-PROOF-006\nTITLE: Proof Dependency Parity Mismatch\nCATEGORY: Structural Verification\n\nDESCRIPTION:\nFailing to mirror the logical dependency DAG of the paper, introducing circular dependencies\nor bypassing foundational lemmas by assuming downstream conclusions.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.SeifertSignFlippingHazard", "name": "SeifertSignFlippingHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-GEOM-003\nTITLE: Seifert Fibration Sign Flipping\nCATEGORY: Topological Invariants\n\nDESCRIPTION:\nMisaligning the orientation signs \u03b5\u2c7c \u2208 {\u00b11} in the Seifert-van Kampen calculation\n(Lemma 7.16). A sign error in the translation vector action s\u2c7c \u2218 g\u2c7c = e^{-2\u03c0i/m\u2c7c} s\u2c7c\nreplaces 12\u2113\u2080 - 4\u2113\u2081 - 3\u2113\u2082 with an incorrect linear combination, destroying topological recognition.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.hazards.ToricSingularityDowngradeHazard", "name": "ToricSingularityDowngradeHazard", "module": "spec.hazards", "wave": 1, "is_template": false, "docstring": "HAZARD-ID: HAZ-GEOM-001\nTITLE: Toric Singularity Downgrade to Normalization\nCATEGORY: Toric Degeneration\n\nDESCRIPTION:\nConfusing the non-normal singular central fibre W with its smooth normalization dP\u2086.\nThe fibre W is a del Pezzo surface of degree 6 with opposite sides of its anticanonical\nhexagon identified in pairs, producing a double curve locus and two triple points.\nTreating W as smooth or normal masks the crucial conormal sections that refute CDP20.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.infoview_util.DiagnosticStreamCaptureReq", "name": "DiagnosticStreamCaptureReq", "module": "spec.infoview_util", "wave": 3, "is_template": false, "docstring": "The utility must asynchronously capture and parse `textDocument/publishDiagnostics` notifications\nfrom the Lean server, extracting error ranges, severity levels, and tactic failure messages.", "deps": ["spec.infoview_util.LeanLspServerReq"], "rdeps": ["spec.infoview_util.InfoViewUtilFeat", "spec.infoview_util.InteractiveBabyStepReplReq"], "loc": "unknown"}, {"ref": "spec.infoview_util.IncrementalBufferSyncReq", "name": "IncrementalBufferSyncReq", "module": "spec.infoview_util", "wave": 3, "is_template": false, "docstring": "The utility must support virtual in-memory file buffers (`textDocument/didOpen`) and incremental\ntext updates (`textDocument/didChange`) so that candidate tactics can be tested in sub-30ms\nwithout touching disk I/O.", "deps": ["spec.infoview_util.LeanLspServerReq"], "rdeps": ["spec.infoview_util.InfoViewUtilFeat", "spec.infoview_util.InteractiveBabyStepReplReq"], "loc": "unknown"}, {"ref": "spec.infoview_util.InfoViewGoalExtractionReq", "name": "InfoViewGoalExtractionReq", "module": "spec.infoview_util", "wave": 3, "is_template": false, "docstring": "The utility must provide an API to query the Lean InfoView tactic state (`$/lean/plainGoal`)\nat arbitrary line and column coordinates, returning formatted goal text, local hypotheses,\nand target types.", "deps": ["spec.infoview_util.LeanLspServerReq"], "rdeps": ["spec.infoview_util.InfoViewUtilFeat", "spec.infoview_util.InteractiveBabyStepReplReq"], "loc": "unknown"}, {"ref": "spec.infoview_util.InfoViewUtilFeat", "name": "InfoViewUtilFeat", "module": "spec.infoview_util", "wave": 5, "is_template": false, "docstring": "Feature providing the in-memory Lean 4 Language Server Protocol daemon, InfoView goal extractor,\nand interactive baby-step tactic exploration environment in `./util`.", "deps": ["spec.infoview_util.LeanLspServerReq", "spec.infoview_util.IncrementalBufferSyncReq", "spec.infoview_util.InfoViewGoalExtractionReq", "spec.infoview_util.DiagnosticStreamCaptureReq", "spec.infoview_util.InteractiveBabyStepReplReq"], "rdeps": [], "loc": "unknown"}, {"ref": "spec.infoview_util.InteractiveBabyStepReplReq", "name": "InteractiveBabyStepReplReq", "module": "spec.infoview_util", "wave": 4, "is_template": false, "docstring": "The utility must expose a fast CLI tool (`./util/infoview`) allowing developers and agents to\ninspect goals, test candidate tactics line-by-line (`util/infoview try ...`), and inspect live\ndiagnostics with sub-second feedback.", "deps": ["spec.infoview_util.IncrementalBufferSyncReq", "spec.infoview_util.InfoViewGoalExtractionReq", "spec.infoview_util.DiagnosticStreamCaptureReq"], "rdeps": ["spec.infoview_util.InfoViewUtilFeat"], "loc": "unknown"}, {"ref": "spec.infoview_util.LeanLspServerReq", "name": "LeanLspServerReq", "module": "spec.infoview_util", "wave": 2, "is_template": false, "docstring": "The utility must spawn and manage a persistent background `lake serve` process in `HopfProblem/`,\ncommunicating via standard LSP JSON-RPC 2.0 (Content-Length header framing) to keep Mathlib\npre-elaborated in memory.", "deps": ["spec.lean_project.Lean4ProjectReq"], "rdeps": ["spec.infoview_util.DiagnosticStreamCaptureReq", "spec.infoview_util.IncrementalBufferSyncReq", "spec.infoview_util.InfoViewGoalExtractionReq", "spec.infoview_util.InfoViewUtilFeat"], "loc": "unknown"}, {"ref": "spec.lattice_monodromy.DualMonodromyMatricesReq", "name": "DualMonodromyMatricesReq", "module": "spec.lattice_monodromy", "wave": 3, "is_template": false, "docstring": "In Definition 2.3 and Lemma 2.4, the dual representation on $\\Lambda$ is given by $A_j := (T_j^{-1})^t$\nfor $j \\in \\{1, 2\\}$, and $M_0 := (T_0^{-1})^t = I - N^t$.\nThe system must formalize the anti-homomorphism $T \\mapsto (T^{-1})^t$ and verify $M_0 = (T_0^{-1})^t$.", "deps": ["spec.lattice_monodromy.MonodromyGeneratorsReq"], "rdeps": ["spec.lattice_monodromy.LatticeMonodromyFeat", "spec.lattice_monodromy.MonodromyInvariantsReq", "spec.lattice_monodromy.ToricSublatticeReq"], "loc": "unknown"}, {"ref": "spec.lattice_monodromy.InvariantAlternatingFormReq", "name": "InvariantAlternatingFormReq", "module": "spec.lattice_monodromy", "wave": 3, "is_template": false, "docstring": "In Lemma 2.8, the group of $G$-invariant alternating bilinear forms on $V$ is infinite cyclic,\ngenerated by $Q_0$ where:\n$$Q_0(\\gamma, u) = 0, \\quad Q_0(\\gamma, w) = 0, \\quad Q_0(\\gamma, \\delta) = 1, \\quad\n  Q_0(u, w) = 6, \\quad Q_0(u, \\delta) = 0, \\quad Q_0(w, \\delta) = 0.$$\nThe system must formalize $Q_0 \\in \\bigwedge^2 \\Lambda$ and prove $T_j^t Q_0 T_j = Q_0$ for $j \\in \\{1, 2\\}$.", "deps": ["spec.lattice_monodromy.MonodromyGeneratorsReq"], "rdeps": ["spec.lattice_monodromy.LatticeMonodromyFeat"], "loc": "unknown"}, {"ref": "spec.lattice_monodromy.LatticeBasisReq", "name": "LatticeBasisReq", "module": "spec.lattice_monodromy", "wave": 1, "is_template": false, "docstring": "In Section 2.1 of the paper, the lattice $V \\cong \\mathbb{Z}^4$ has basis $(\\gamma, u, w, \\delta)$,\nand its dual lattice $\\Lambda = V^* = \\mathrm{Hom}(V, \\mathbb{Z})$ has dual basis\n$(\\hat{\\gamma}, \\hat{u}, \\hat{w}, \\hat{\\delta})$ with pairings $\\langle \\hat{\\alpha}, \\beta \\rangle = \\delta_{\\alpha,\\beta}$.\nThe system must formalize `V` and `Lambda` as free $\\mathbb{Z}$-modules of rank 4 with canonical dual pairings.", "deps": [], "rdeps": ["spec.lattice_monodromy.LatticeMonodromyFeat", "spec.lattice_monodromy.MonodromyGeneratorsReq"], "loc": "unknown"}, {"ref": "spec.lattice_monodromy.LatticeMonodromyFeat", "name": "LatticeMonodromyFeat", "module": "spec.lattice_monodromy", "wave": 5, "is_template": false, "docstring": "Feature encapsulating the $\\mathrm{SL}_4(\\mathbb{Z})$ lattice monodromy representation,\ndistinguished sublattices, and triangle group uniformisation data of Section 2.", "deps": ["spec.lattice_monodromy.LatticeBasisReq", "spec.lattice_monodromy.MonodromyGeneratorsReq", "spec.lattice_monodromy.UnipotentCuspMonodromyReq", "spec.lattice_monodromy.DualMonodromyMatricesReq", "spec.lattice_monodromy.ToricSublatticeReq", "spec.lattice_monodromy.MonodromyInvariantsReq", "spec.lattice_monodromy.InvariantAlternatingFormReq", "spec.lattice_monodromy.TriangleGroupOrbifoldReq"], "rdeps": [], "loc": "unknown"}, {"ref": "spec.lattice_monodromy.MonodromyGeneratorsReq", "name": "MonodromyGeneratorsReq", "module": "spec.lattice_monodromy", "wave": 2, "is_template": false, "docstring": "In Definition 2.1 and Lemma 2.2, the automorphisms $T_1, T_2 \\in \\mathrm{Aut}(V)$ are given by:\n$$T_1 = \\begin{pmatrix} 1 & 0 & -6 & 2 \\\\ 0 & -1 & 1 & 1 \\\\ 0 & -1 & 0 & 1 \\\\ 0 & 0 & 0 & 1 \\end{pmatrix}, \\quad\n  T_2 = \\begin{pmatrix} 1 & 6 & 0 & -3 \\\\ 0 & 0 & -1 & 1 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 0 & 1 \\end{pmatrix}.$$\nThe system must formalize $T_1, T_2$, prove $\\det(T_1) = \\det(T_2) = 1$, and verify orders:\n$T_1^3 = I$ and $T_2^4 = I$.", "deps": ["spec.lattice_monodromy.LatticeBasisReq"], "rdeps": ["spec.lattice_monodromy.DualMonodromyMatricesReq", "spec.lattice_monodromy.InvariantAlternatingFormReq", "spec.lattice_monodromy.LatticeMonodromyFeat", "spec.lattice_monodromy.MonodromyInvariantsReq", "spec.lattice_monodromy.TriangleGroupOrbifoldReq", "spec.lattice_monodromy.UnipotentCuspMonodromyReq", "spec.logarithmic_transforms.FixedPointFreenessReq", "spec.period_family.PeriodMatrixReq"], "loc": "unknown"}, {"ref": "spec.lattice_monodromy.MonodromyInvariantsReq", "name": "MonodromyInvariantsReq", "module": "spec.lattice_monodromy", "wave": 4, "is_template": false, "docstring": "In Lemma 2.7, under the group $G = \\langle T_1, T_2 \\rangle$:\n1. The invariant submodule $V^G = \\mathbb{Q}\\gamma \\cap V = \\mathbb{Z}\\gamma$ is of rank 1.\n2. The coinvariant quotient of $\\Lambda$ is $\\Lambda / \\ker\\gamma \\cong \\mathbb{Z}$, detected by $\\gamma$ alone.\n3. The vector $\\varepsilon := \\hat{\\gamma} + 2\\hat{u} - 4\\hat{w}$ is fixed by $A_1$.\n4. The vector $\\varepsilon' := \\hat{\\gamma} + 3\\hat{u} - 3\\hat{w}$ is fixed by $A_2$.\nThe system must formalize and machine-check these invariant vectors and coinvariant projections.", "deps": ["spec.lattice_monodromy.MonodromyGeneratorsReq", "spec.lattice_monodromy.DualMonodromyMatricesReq"], "rdeps": ["spec.cdp_divergence.MonodromyLineRepairReq", "spec.lattice_monodromy.LatticeMonodromyFeat"], "loc": "unknown"}, {"ref": "spec.lattice_monodromy.ToricSublatticeReq", "name": "ToricSublatticeReq", "module": "spec.lattice_monodromy", "wave": 4, "is_template": false, "docstring": "In Definition 2.5 and Lemma 2.6, the toric vanishing sublattice is:\n$$\\Lambda_{\\mathrm{tor}} := \\ker(M_0 - I) = \\mathrm{im}(M_0 - I) = \\langle \\hat{w}, \\hat{\\delta} \\rangle \\subset \\Lambda,$$\nand the quotient $\\bar{\\Lambda} := \\Lambda / \\Lambda_{\\mathrm{tor}} \\cong \\mathbb{Z}^2$ has basis $(\\bar{\\hat{\\gamma}}, \\bar{\\hat{u}})$.\nThe operator $M_0 - I$ induces a unimodular $\\mathbb{Z}$-linear isomorphism:\n$$B_0 : \\bar{\\Lambda} \\xrightarrow{\\sim} \\Lambda_{\\mathrm{tor}}, \\quad \\bar{\\hat{\\gamma}} \\mapsto -\\hat{\\delta}, \\quad \\bar{\\hat{u}} \\mapsto \\hat{w}.$$\nThe system must formalize $\\Lambda_{\\mathrm{tor}}$, $\\bar{\\Lambda}$, and the isomorphism $B_0$.", "deps": ["spec.lattice_monodromy.UnipotentCuspMonodromyReq", "spec.lattice_monodromy.DualMonodromyMatricesReq"], "rdeps": ["spec.lattice_monodromy.LatticeMonodromyFeat", "spec.toric_filling.ToricDeckActionReq", "spec.toric_filling.VanishingCyclesCollapseReq"], "loc": "unknown"}, {"ref": "spec.lattice_monodromy.TriangleGroupOrbifoldReq", "name": "TriangleGroupOrbifoldReq", "module": "spec.lattice_monodromy", "wave": 3, "is_template": false, "docstring": "In Proposition 2.11 and Definition 2.15, the triangle group\n$\\Delta = \\Delta(3, 4, \\infty) = \\langle g_1, g_2 \\mid g_1^3 = g_2^4 = 1 \\rangle \\subset \\mathrm{PSL}_2(\\mathbb{R})$\nacts on the upper half plane $\\mathfrak{h}_z$ uniformising the orbifold $B = \\mathbb{P}^1$ with orbifold points\n$p_1 = 0$ (order 3), $p_2 = 1$ (order 4), and cusp $p_0 = \\infty$.\nThe representation $\\rho_V : \\Delta \\to \\mathrm{SL}(V)$ maps $g_j \\mapsto T_j$ and $g_0 \\mapsto T_0$.", "deps": ["spec.lattice_monodromy.MonodromyGeneratorsReq"], "rdeps": ["spec.lattice_monodromy.LatticeMonodromyFeat", "spec.period_family.MuTorsorReq", "spec.period_family.UniformisingTauReq"], "loc": "unknown"}, {"ref": "spec.lattice_monodromy.UnipotentCuspMonodromyReq", "name": "UnipotentCuspMonodromyReq", "module": "spec.lattice_monodromy", "wave": 3, "is_template": false, "docstring": "In Definition 2.1 and Lemma 2.2(iii), the parabolic cusp monodromy is $T_0 := (T_1 T_2)^{-1} = I + N$,\nwhere the nilpotent matrix $N = T_0 - I$ satisfies:\n$$N^2 = 0, \\quad N\\gamma = 0, \\quad Nu = 0, \\quad Nw = -u, \\quad N\\delta = \\gamma.$$\nThe system must formalize $T_0$ and $N$, proving $N^2 = 0$ and Jordan rank 2.", "deps": ["spec.lattice_monodromy.MonodromyGeneratorsReq"], "rdeps": ["spec.lattice_monodromy.LatticeMonodromyFeat", "spec.lattice_monodromy.ToricSublatticeReq"], "loc": "unknown"}, {"ref": "spec.lean_project.Lean4ProjectReq", "name": "Lean4ProjectReq", "module": "spec.lean_project", "wave": 1, "is_template": false, "docstring": "The formalization must be hosted in a standalone Lean 4 project configured\nwith Lake (`HopfProblem/lakefile.toml`), tracking the `leanprover/lean4:v4.33.1` toolchain\nand pulling `mathlib4` as a managed dependency.", "deps": [], "rdeps": ["spec.infoview_util.LeanLspServerReq", "spec.lean_project.LeanBuildVerificationReq", "spec.lean_project.LeanProjectFeat"], "loc": "unknown"}, {"ref": "spec.lean_project.LeanBuildVerificationReq", "name": "LeanBuildVerificationReq", "module": "spec.lean_project", "wave": 2, "is_template": false, "docstring": "All formalized definitions, matrices, complex structures, lemmas, and theorems\nmust be verified by the Lean 4 kernel with zero `sorry` placeholders\nand zero compilation errors during `lake build`.", "deps": ["spec.lean_project.Lean4ProjectReq"], "rdeps": ["spec.lean_project.LeanProjectFeat"], "loc": "unknown"}, {"ref": "spec.lean_project.LeanProjectFeat", "name": "LeanProjectFeat", "module": "spec.lean_project", "wave": 3, "is_template": false, "docstring": "Feature managing the interactive theorem proving environment and\nverification pipeline for the Hopf problem complex structure on S\u2076.", "deps": ["spec.lean_project.Lean4ProjectReq", "spec.lean_project.LeanBuildVerificationReq"], "rdeps": [], "loc": "unknown"}, {"ref": "spec.logarithmic_transforms.BiellipticReductionReq", "name": "BiellipticReductionReq", "module": "spec.logarithmic_transforms", "wave": 4, "is_template": false, "docstring": "In Theorem 5.4 and Lemma 5.7(ii), each reduced fibre $S_j$ is a smooth bielliptic surface:\n$$S_j \\cong (E_j \\times F_j) / G_j,$$\nwhere $E_j, F_j$ are elliptic curves and $G_j$ is a finite group acting by translations on $E_j$\nwith $F_j / G_j \\cong \\mathbb{P}^1$.", "deps": ["spec.logarithmic_transforms.FixedPointFreenessReq"], "rdeps": ["spec.logarithmic_transforms.LogarithmicTransformsFeat", "spec.logarithmic_transforms.NormalBundleTorsionReq", "spec.topology_homology.BiellipticFibreHomologyReq"], "loc": "unknown"}, {"ref": "spec.logarithmic_transforms.FixedPointFreenessReq", "name": "FixedPointFreenessReq", "module": "spec.logarithmic_transforms", "wave": 3, "is_template": false, "docstring": "In Lemma 5.2, 5.5, and Proposition 5.6, the generator $g_j \\in \\mathbb{Z}/m_j$ acts on $D_{\\epsilon_j} \\times T^4$ by:\n$$(s_j, x) \\mapsto (e^{-2\\pi i / m_j} s_j, \\, A_j x + v_j),$$\nwhere $v_j \\in \\Lambda \\otimes \\mathbb{Q}$ is an admissible translation section with $m_j v_j \\in \\Lambda$.\nThe action is fixed-point free on the boundary collar $D_{\\epsilon_j}^* \\times T^4$, ensuring $N_j$ is a smooth complex manifold.", "deps": ["spec.lattice_monodromy.MonodromyGeneratorsReq"], "rdeps": ["spec.logarithmic_transforms.BiellipticReductionReq", "spec.logarithmic_transforms.LogarithmicTransformsFeat", "spec.logarithmic_transforms.MultipleFibreOrdersReq"], "loc": "unknown"}, {"ref": "spec.logarithmic_transforms.KodairaLogTransformReq", "name": "KodairaLogTransformReq", "module": "spec.logarithmic_transforms", "wave": 6, "is_template": false, "docstring": "In Definition 5.1 and Theorem 5.4, for each elliptic point $p_j \\in \\{p_1, p_2\\}$ of order $m_j \\in \\{3, 4\\}$,\nthe local filling is constructed via Kodaira's logarithmic transformation:\n$$N_j := (D_{\\epsilon_j} \\times T^4) / (\\mathbb{Z}/m_j),$$\nwhere $T^4 = \\mathbb{C}^2 / \\Pi(z_j)\\Lambda$ is the central smooth torus fibre.", "deps": ["spec.logarithmic_transforms.NormalBundleTorsionReq"], "rdeps": ["spec.logarithmic_transforms.LogarithmicTransformsFeat", "spec.manifold_gluing.CollarTransitionGluingReq", "spec.manifold_gluing.HolomorphicCocycleCompatibilityReq"], "loc": "unknown"}, {"ref": "spec.logarithmic_transforms.LogarithmicTransformsFeat", "name": "LogarithmicTransformsFeat", "module": "spec.logarithmic_transforms", "wave": 7, "is_template": false, "docstring": "Feature encapsulating the Kodaira logarithmic transformations at p\u2081 and p\u2082,\nmultiple fibre multiplicities 3 and 4, and smooth bielliptic reductions.", "deps": ["spec.logarithmic_transforms.FixedPointFreenessReq", "spec.logarithmic_transforms.MultipleFibreOrdersReq", "spec.logarithmic_transforms.BiellipticReductionReq", "spec.logarithmic_transforms.NormalBundleTorsionReq", "spec.logarithmic_transforms.KodairaLogTransformReq"], "rdeps": [], "loc": "unknown"}, {"ref": "spec.logarithmic_transforms.MultipleFibreOrdersReq", "name": "MultipleFibreOrdersReq", "module": "spec.logarithmic_transforms", "wave": 4, "is_template": false, "docstring": "In Theorem 5.4 and Lemma 5.7, the divisors over the special points are multiple fibres:\n$$f^*(p_1) = 3\\, S_1, \\quad f^*(p_2) = 4\\, S_2,$$\nwhere $S_j = (f^{-1}(p_j))_{\\mathrm{red}}$ is the reduced central surface.", "deps": ["spec.logarithmic_transforms.FixedPointFreenessReq"], "rdeps": ["spec.logarithmic_transforms.LogarithmicTransformsFeat", "spec.logarithmic_transforms.NormalBundleTorsionReq"], "loc": "unknown"}, {"ref": "spec.logarithmic_transforms.NormalBundleTorsionReq", "name": "NormalBundleTorsionReq", "module": "spec.logarithmic_transforms", "wave": 5, "is_template": false, "docstring": "In Theorem 5.4, the normal bundle $\\mathcal{O}_X(S_j)|_{S_j}$ is a torsion line bundle\nof exact order $m_j$ in $\\mathrm{Pic}(S_j)$:\n$$(\\mathcal{O}_X(S_j)|_{S_j})^{\\otimes m_j} \\cong \\mathcal{O}_{S_j}, \\quad\n  (\\mathcal{O}_X(S_j)|_{S_j})^{\\otimes k} \\not\\cong \\mathcal{O}_{S_j} \\text{ for } 1 \\le k < m_j.$$", "deps": ["spec.logarithmic_transforms.MultipleFibreOrdersReq", "spec.logarithmic_transforms.BiellipticReductionReq"], "rdeps": ["spec.logarithmic_transforms.KodairaLogTransformReq", "spec.logarithmic_transforms.LogarithmicTransformsFeat"], "loc": "unknown"}, {"ref": "spec.manifold_gluing.CollarTransitionGluingReq", "name": "CollarTransitionGluingReq", "module": "spec.manifold_gluing", "wave": 11, "is_template": false, "docstring": "In Construction 6.1 and Theorem 6.2, the compact manifold $X$ is obtained by gluing the toric filling $N_0$\nand logarithmic fillings $N_1, N_2$ to the smooth family $\\mathcal{J} \\to B^\\circ$ along punctured collars:\n$$X := N_0 \\cup_{\\phi_0} \\mathcal{J} \\cup_{\\phi_1} N_1 \\cup_{\\phi_2} N_2.$$\nThe system must formalize the open cover and prove that $X$ is a connected compact Hausdorff complex 3-manifold.", "deps": ["spec.toric_filling.ToricFillingManifoldReq", "spec.logarithmic_transforms.KodairaLogTransformReq", "spec.period_family.SmoothTorusFamilyReq", "spec.manifold_gluing.SectionTranslationModuliReq"], "rdeps": ["spec.analytic_invariants.AlgebraicDimensionReq", "spec.analytic_invariants.CanonicalBundleNonTorsionReq", "spec.analytic_invariants.DirectImageSheavesReq", "spec.analytic_invariants.VerticalAutomorphismGroupReq", "spec.cdp_divergence.CDPHypothesisOneFailureReq", "spec.manifold_gluing.ManifoldGluingFeat", "spec.sphere_recognition.IntegrableComplexStructureOnS6Req"], "loc": "unknown"}, {"ref": "spec.manifold_gluing.HolomorphicCocycleCompatibilityReq", "name": "HolomorphicCocycleCompatibilityReq", "module": "spec.manifold_gluing", "wave": 8, "is_template": false, "docstring": "In Theorem 6.2, the transition biholomorphisms $\\phi_j : N_j^\\times \\to \\mathcal{J}|_{U_j^\\times}$\nare fibre-preserving holomorphic isomorphisms satisfying the cocycle condition on all triple intersections.", "deps": ["spec.toric_filling.ToricFillingManifoldReq", "spec.logarithmic_transforms.KodairaLogTransformReq", "spec.period_family.SmoothTorusFamilyReq"], "rdeps": ["spec.manifold_gluing.ManifoldGluingFeat", "spec.manifold_gluing.ZeroSectionRigidityReq"], "loc": "unknown"}, {"ref": "spec.manifold_gluing.ManifoldGluingFeat", "name": "ManifoldGluingFeat", "module": "spec.manifold_gluing", "wave": 12, "is_template": false, "docstring": "Feature encapsulating the global complex manifold gluing of Section 6,\nholomorphic collar transition cocycles, and discrete section parameters (\u2113\u2080, \u2113\u2081, \u2113\u2082).", "deps": ["spec.manifold_gluing.HolomorphicCocycleCompatibilityReq", "spec.manifold_gluing.ZeroSectionRigidityReq", "spec.manifold_gluing.SectionTranslationModuliReq", "spec.manifold_gluing.CollarTransitionGluingReq"], "rdeps": [], "loc": "unknown"}, {"ref": "spec.manifold_gluing.SectionTranslationModuliReq", "name": "SectionTranslationModuliReq", "module": "spec.manifold_gluing", "wave": 10, "is_template": false, "docstring": "In Proposition 6.3 and Definition 6.6, the gluing data can be reglued by translations by local sections:\n$$s_j \\in H^0(D^*_{\\epsilon_j}, \\mathcal{J}),$$\nand the topological isomorphism class of the resulting manifold depends solely on three integers:\n$$\\ell_0 = \\gamma(v_0) \\in \\mathbb{Z} \\quad (\\text{at cusp } p_0), \\quad\n  \\ell_1 = \\gamma(v_1) \\in \\mathbb{Z} \\quad (\\text{at } p_1), \\quad\n  \\ell_2 = \\gamma(v_2) \\in \\mathbb{Z} \\quad (\\text{at } p_2),$$\nwhere $\\gamma \\in V$ is the primitive monodromy-invariant dual coordinate.", "deps": ["spec.manifold_gluing.ZeroSectionRigidityReq"], "rdeps": ["spec.manifold_gluing.CollarTransitionGluingReq", "spec.manifold_gluing.ManifoldGluingFeat", "spec.topology_homology.FundamentalGroupPresentationReq", "spec.topology_homology.SignLemmaSeifertInvariantsReq"], "loc": "unknown"}, {"ref": "spec.manifold_gluing.ZeroSectionRigidityReq", "name": "ZeroSectionRigidityReq", "module": "spec.manifold_gluing", "wave": 9, "is_template": false, "docstring": "In Proposition 6.3, Lemma 6.5, and Proposition 6.7, varying the continuous choices of local trivializations\nor smooth collar radii yields biholomorphic complex manifolds $X$, so that $X$ depends up to isomorphism\nonly on the discrete triple $(\\ell_0, \\ell_1, \\ell_2)$.", "deps": ["spec.manifold_gluing.HolomorphicCocycleCompatibilityReq"], "rdeps": ["spec.manifold_gluing.ManifoldGluingFeat", "spec.manifold_gluing.SectionTranslationModuliReq"], "loc": "unknown"}, {"ref": "spec.period_family.BetaPeriodReq", "name": "BetaPeriodReq", "module": "spec.period_family", "wave": 5, "is_template": false, "docstring": "In Proposition 3.13 and Lemma 3.14, the holomorphic function $\\beta : \\mathfrak{h}_z \\to \\mathbb{C}$\nsatisfies the non-degeneracy condition for all $z \\in \\mathfrak{h}_z$:\n$$\\Im\\tau(z) \\, \\Im\\beta(z) - 6\\, (\\Im\\mu(z))^2 > 0,$$\nensuring that the four column vectors of $\\Pi(z)$ are $\\mathbb{R}$-linearly independent in $\\mathbb{C}^2 \\cong \\mathbb{R}^4$.", "deps": ["spec.period_family.UniformisingTauReq", "spec.period_family.MuTorsorReq"], "rdeps": ["spec.period_family.IndefiniteHodgeSignatureReq", "spec.period_family.PeriodFamilyFeat"], "loc": "unknown"}, {"ref": "spec.period_family.IndefiniteHodgeSignatureReq", "name": "IndefiniteHodgeSignatureReq", "module": "spec.period_family", "wave": 6, "is_template": false, "docstring": "In Lemma 3.14 and Lemma 9.4, the Hodge form $H(z)$ on the fibre torus $F_z = \\mathbb{C}^2 / \\Pi(z)\\Lambda$\nhas signature $(1, 1)$, strictly indefinite.\nConsequently, the very general fibre carries no positive line bundle, has algebraic dimension $a(F) = 0$,\nand has N\u00e9ron-Severi group $\\mathrm{NS}(F) \\cong \\mathbb{Z}\\eta$ generated by a single indefinite class $\\eta$.", "deps": ["spec.period_family.PeriodMatrixReq", "spec.period_family.BetaPeriodReq"], "rdeps": ["spec.period_family.PeriodFamilyFeat", "spec.period_family.SmoothTorusFamilyReq"], "loc": "unknown"}, {"ref": "spec.period_family.ModularEquivarianceReq", "name": "ModularEquivarianceReq", "module": "spec.period_family", "wave": 5, "is_template": false, "docstring": "In Proposition 3.16 and 3.19, the period matrix satisfies the modular equivariance:\n$$\\Pi(g z) = J_g(z) \\, \\Pi(z) \\, M_g^{-1} \\quad \\text{for all } g \\in \\Delta,$$\nwhere $J_g(z) \\in \\mathrm{GL}_2(\\mathbb{C})$ is the holomorphic automorphy matrix and $M_g = \\rho_V(g)^t$.", "deps": ["spec.period_family.PeriodMatrixReq", "spec.period_family.UniformisingTauReq", "spec.period_family.MuTorsorReq"], "rdeps": ["spec.period_family.PeriodFamilyFeat", "spec.period_family.SmoothTorusFamilyReq"], "loc": "unknown"}, {"ref": "spec.period_family.MuTorsorReq", "name": "MuTorsorReq", "module": "spec.period_family", "wave": 4, "is_template": false, "docstring": "In Proposition 3.11 and Lemma 3.10, the holomorphic function $\\mu : \\mathfrak{h}_z \\to \\mathbb{C}$\nsatisfies the 1-cocycle automorphy relation under $\\Delta$, defining a torsor under the line bundle:\n$$\\mathcal{L} \\cong \\mathcal{O}_{\\mathbb{P}^1}(-p_0) \\cong \\mathcal{O}_{\\mathbb{P}^1}(-1),$$\nwith $H^0(\\mathbb{P}^1, \\mathcal{L}) = H^1(\\mathbb{P}^1, \\mathcal{L}) = 0$.", "deps": ["spec.lattice_monodromy.TriangleGroupOrbifoldReq"], "rdeps": ["spec.period_family.BetaPeriodReq", "spec.period_family.ModularEquivarianceReq", "spec.period_family.PeriodFamilyFeat"], "loc": "unknown"}, {"ref": "spec.period_family.PeriodFamilyFeat", "name": "PeriodFamilyFeat", "module": "spec.period_family", "wave": 8, "is_template": false, "docstring": "Feature encapsulating the modular period family, uniformising functions,\nindefinite Hodge signature, and torus fibration over the thrice-punctured sphere.", "deps": ["spec.period_family.PeriodMatrixReq", "spec.period_family.UniformisingTauReq", "spec.period_family.MuTorsorReq", "spec.period_family.BetaPeriodReq", "spec.period_family.ModularEquivarianceReq", "spec.period_family.IndefiniteHodgeSignatureReq", "spec.period_family.SmoothTorusFamilyReq"], "rdeps": [], "loc": "unknown"}, {"ref": "spec.period_family.PeriodMatrixReq", "name": "PeriodMatrixReq", "module": "spec.period_family", "wave": 3, "is_template": false, "docstring": "In Definition 3.3 and Theorem 3.4, the period matrix $\\Pi(z) \\in M_{2 \\times 4}(\\mathbb{C})$\nover $z \\in \\mathfrak{h}_z$ is given in the dual basis $(\\hat{\\gamma}, \\hat{u}, \\hat{w}, \\hat{\\delta})$ by:\n$$\\Pi(z) = \\begin{pmatrix} 6\\mu(z) & \\tau(z) & 1 & 0 \\\\ \\beta(z) & \\mu(z) & 0 & 1 \\end{pmatrix}.$$\nThe system must formalize $\\Pi(z)$ as a $\\mathbb{C}$-linear map $\\Lambda \\otimes \\mathbb{R} \\to \\mathbb{C}^2$.", "deps": ["spec.lattice_monodromy.MonodromyGeneratorsReq"], "rdeps": ["spec.period_family.IndefiniteHodgeSignatureReq", "spec.period_family.ModularEquivarianceReq", "spec.period_family.PeriodFamilyFeat"], "loc": "unknown"}, {"ref": "spec.period_family.SmoothTorusFamilyReq", "name": "SmoothTorusFamilyReq", "module": "spec.period_family", "wave": 7, "is_template": false, "docstring": "In Theorem 3.4, the quotient:\n$$\\mathcal{J} := (\\mathfrak{h}_z \\times \\mathbb{C}^2) / (\\Delta \\ltimes \\Lambda) \\to B^\\circ$$\nis a holomorphic submersion whose fibres over $B^\\circ = \\mathbb{P}^1 \\setminus \\{p_0, p_1, p_2\\}$\nare smooth complex 2-tori.", "deps": ["spec.period_family.ModularEquivarianceReq", "spec.period_family.IndefiniteHodgeSignatureReq"], "rdeps": ["spec.manifold_gluing.CollarTransitionGluingReq", "spec.manifold_gluing.HolomorphicCocycleCompatibilityReq", "spec.period_family.PeriodFamilyFeat"], "loc": "unknown"}, {"ref": "spec.period_family.UniformisingTauReq", "name": "UniformisingTauReq", "module": "spec.period_family", "wave": 4, "is_template": false, "docstring": "In Proposition 3.6 and Lemma 3.5, the holomorphic function $\\tau : \\mathfrak{h}_z \\to \\mathfrak{h}$\nsatisfies the modular equation:\n$$j(\\tau(z)) = 1728\\, (t \\circ \\pi)(z)$$\nidentifying $\\tau$ with the modular uniformisation of $B = \\mathbb{P}^1$ punctured at $\\{p_0, p_1, p_2\\}$.", "deps": ["spec.lattice_monodromy.TriangleGroupOrbifoldReq"], "rdeps": ["spec.period_family.BetaPeriodReq", "spec.period_family.ModularEquivarianceReq", "spec.period_family.PeriodFamilyFeat"], "loc": "unknown"}, {"ref": "spec.proof.DeformationObstructionProof", "name": "DeformationObstructionProof", "module": "spec.proof", "wave": 1, "is_template": false, "docstring": "Guarded proof archetype for conormal exact sequences, non-vanishing theorems\nR\u00b2 f_*(T_X \u2297 L) \u2260 0, and the decisive refutation of CDP20.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.proof.DifferentialRecognitionProof", "name": "DifferentialRecognitionProof", "module": "spec.proof", "wave": 1, "is_template": false, "docstring": "Guarded proof archetype for Smale's h-cobordism theorem, Barden-Wall classification,\nand diffeomorphism recognition of S\u2076.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.proof.LatticeMonodromyProof", "name": "LatticeMonodromyProof", "module": "spec.proof", "wave": 1, "is_template": false, "docstring": "Guarded proof archetype for integer lattices, triangle monodromy representations,\ninvariant symplectic forms, and unipotent Jordan blocks.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.proof.LogarithmicTransformProof", "name": "LogarithmicTransformProof", "module": "spec.proof", "wave": 1, "is_template": false, "docstring": "Guarded proof archetype for Kodaira logarithmic transformations, free torus quotients,\nand multiple bielliptic fibres.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.proof.ManifoldGluingProof", "name": "ManifoldGluingProof", "module": "spec.proof", "wave": 1, "is_template": false, "docstring": "Guarded proof archetype for complex manifold collar gluings, holomorphic transition\ncocycles, and section translation parameterizations.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.proof.MayerVietorisTopologyProof", "name": "MayerVietorisTopologyProof", "module": "spec.proof", "wave": 1, "is_template": false, "docstring": "Guarded proof archetype for Seifert-van Kampen fundamental group computations,\nMayer-Vietoris sequences, and integral Leray spectral sequences.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.proof.ModularPeriodProof", "name": "ModularPeriodProof", "module": "spec.proof", "wave": 1, "is_template": false, "docstring": "Guarded proof archetype for period maps, uniformising modular functions,\nline bundle torsors, and indefinite Hodge forms.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.proof.Proof", "name": "Proof", "module": "spec.proof", "wave": 1, "is_template": false, "docstring": "Base specification class for all mathematical proofs and lemmas.\nInherits from `FormalProofHazard`, `FaithfulnessGapHazard`, and `Requirement`\nto bind formal verification acceptance criteria directly to semantic fidelity guards.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.proof.ProofSoundnessGuard", "name": "ProofSoundnessGuard", "module": "spec.proof", "wave": 1, "is_template": false, "docstring": "Context mixin enforcing the 5-Stage Semantic Fidelity Protocol:\n1. Stage 1: Premise Alignment (aligning Lean types with Mathlib algebraic and manifold definitions).\n2. Stage 2: Dual-Artifact Blueprint Parity (enforcing bijective DAG alignment with paper theorems).\n3. Stage 3: Construction-Verification Separation (explicit constructive definitions before proofs).\n4. Stage 4: Deterministic Mechanical Gates (#print axioms inspection, zero sorry, active linters).\n5. Stage 5: Provability Fingerprinting & Counterfactual Probe Robustness (testing against hypothesis drift).", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.proof.SheafCohomologyProof", "name": "SheafCohomologyProof", "module": "spec.proof", "wave": 1, "is_template": false, "docstring": "Guarded proof archetype for direct image sheaves R^q f_* \ud835\udcaa_X, non-torsion canonical bundles,\nand Fr\u00f6licher non-degeneration.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.proof.ToricDegenerationProof", "name": "ToricDegenerationProof", "module": "spec.proof", "wave": 1, "is_template": false, "docstring": "Guarded proof archetype for Mumford toric degenerations, A\u2082 triangulations,\ndel Pezzo dP\u2086 normalizations, and self-glued singular central fibres.", "deps": [], "rdeps": [], "loc": "unknown"}, {"ref": "spec.sphere_recognition.DiffeomorphismToS6Req", "name": "DiffeomorphismToS6Req", "module": "spec.sphere_recognition", "wave": 15, "is_template": false, "docstring": "In Theorem 8.1, combining $\\pi_1(X) = 0$ (Theorem 7.17), $H_*(X; \\mathbb{Z}) \\cong H_*(S^6; \\mathbb{Z})$\n(Theorem 7.22), Smale's $h$-cobordism theorem, and $\\Theta_6 = 0$ proves that $X$ is diffeomorphic to $S^6$:\n$$X \\cong_{\\mathrm{diff}} S^6.$$", "deps": ["spec.sphere_recognition.HomotopySphereRecognitionReq", "spec.sphere_recognition.ExoticSphereVanishingReq", "spec.topology_homology.SimpleConnectivityReq", "spec.topology_homology.IntegralHomologyMayerVietorisReq"], "rdeps": ["spec.sphere_recognition.IntegrableComplexStructureOnS6Req", "spec.sphere_recognition.SphereRecognitionFeat"], "loc": "unknown"}, {"ref": "spec.sphere_recognition.ExoticSphereVanishingReq", "name": "ExoticSphereVanishingReq", "module": "spec.sphere_recognition", "wave": 1, "is_template": false, "docstring": "In Lemma 8.2, by the Kervaire-Milnor classification of homotopy spheres via plumbing\nand stable homotopy groups of spheres:\n$$\\Theta_6 = 0.$$\nEvery smooth homotopy 6-sphere is diffeomorphic to the standard Euclidean sphere $S^6$.", "deps": [], "rdeps": ["spec.sphere_recognition.DiffeomorphismToS6Req", "spec.sphere_recognition.SphereRecognitionFeat"], "loc": "unknown"}, {"ref": "spec.sphere_recognition.HomotopySphereRecognitionReq", "name": "HomotopySphereRecognitionReq", "module": "spec.sphere_recognition", "wave": 1, "is_template": false, "docstring": "In Lemma 8.2 and Theorem 8.1, any closed, smooth, simply connected 6-manifold $X$ satisfying\n$\\tilde{H}_k(X; \\mathbb{Z}) = 0$ for $k < 6$ and $H_6(X; \\mathbb{Z}) \\cong \\mathbb{Z}$\nis a homotopy 6-sphere by the Hurewicz and Whitehead theorems.", "deps": [], "rdeps": ["spec.sphere_recognition.DiffeomorphismToS6Req", "spec.sphere_recognition.SphereRecognitionFeat"], "loc": "unknown"}, {"ref": "spec.sphere_recognition.IntegrableComplexStructureOnS6Req", "name": "IntegrableComplexStructureOnS6Req", "module": "spec.sphere_recognition", "wave": 16, "is_template": false, "docstring": "In Corollary 1.1, transporting the integrable complex structure tensor $J \\in \\Gamma(\\mathrm{End}(TX))$\nfrom the complex 3-manifold $X$ along a diffeomorphism $\\Phi : X \\xrightarrow{\\sim} S^6$\nendows the standard 6-sphere $S^6$ with an integrable complex structure, solving the Hopf problem.", "deps": ["spec.sphere_recognition.DiffeomorphismToS6Req", "spec.manifold_gluing.CollarTransitionGluingReq"], "rdeps": ["spec.sphere_recognition.SphereRecognitionFeat"], "loc": "unknown"}, {"ref": "spec.sphere_recognition.SphereRecognitionFeat", "name": "SphereRecognitionFeat", "module": "spec.sphere_recognition", "wave": 17, "is_template": false, "docstring": "Feature encapsulating the differential recognition of X as S\u2076, the vanishing of \u0398\u2086,\nand the construction of the integrable complex structure on the six-sphere.", "deps": ["spec.sphere_recognition.HomotopySphereRecognitionReq", "spec.sphere_recognition.ExoticSphereVanishingReq", "spec.sphere_recognition.DiffeomorphismToS6Req", "spec.sphere_recognition.IntegrableComplexStructureOnS6Req"], "rdeps": [], "loc": "unknown"}, {"ref": "spec.topology_homology.BiellipticFibreHomologyReq", "name": "BiellipticFibreHomologyReq", "module": "spec.topology_homology", "wave": 5, "is_template": false, "docstring": "In Proposition 7.14, for the $m_j$-fold coverings $\\pi_j : F \\to S_j$, the induced homology sublattices\n$\\pi_{j*} H_1(F)$ and $\\pi_{j*} H_2(F)$ are:\n$$H_1(S_1; \\mathbb{Z}) \\cong \\mathbb{Z}^2, \\quad H_1(S_2; \\mathbb{Z}) \\cong \\mathbb{Z}^2,$$\nand the torsion submodules in $H^*(S_j; \\mathbb{Z})$ are annihilated in the global quotient $X$.", "deps": ["spec.logarithmic_transforms.BiellipticReductionReq"], "rdeps": ["spec.topology_homology.IntegralHomologyMayerVietorisReq", "spec.topology_homology.TopologyHomologyFeat"], "loc": "unknown"}, {"ref": "spec.topology_homology.EulerCharacteristicLocalisationReq", "name": "EulerCharacteristicLocalisationReq", "module": "spec.topology_homology", "wave": 4, "is_template": false, "docstring": "In Theorem 7.22 and Corollary 8.5, since all smooth torus fibres have Euler characteristic $e(T^4) = 0$\nand multiple bielliptic fibres have $e(S_j) = 0$, the Euler characteristic localises entirely at the cusp:\n$$e(X) = e(W) = 2.$$", "deps": ["spec.topology_homology.SingularFibreHomologyReq"], "rdeps": ["spec.topology_homology.TopologyHomologyFeat"], "loc": "unknown"}, {"ref": "spec.topology_homology.FundamentalGroupPresentationReq", "name": "FundamentalGroupPresentationReq", "module": "spec.topology_homology", "wave": 12, "is_template": false, "docstring": "In Theorem 7.17, applying the Seifert-van Kampen theorem to the decomposition $X = N_0 \\cup N_1 \\cup N_2 \\cup X^\\circ$\nyields the fundamental group:\n$$\\pi_1(X) \\cong \\mathbb{Z} / |12\\ell_0 - 4\\ell_1 - 3\\ell_2|.$$", "deps": ["spec.topology_homology.SignLemmaSeifertInvariantsReq", "spec.manifold_gluing.SectionTranslationModuliReq"], "rdeps": ["spec.topology_homology.SimpleConnectivityReq", "spec.topology_homology.TopologyHomologyFeat"], "loc": "unknown"}, {"ref": "spec.topology_homology.IntegralHomologyMayerVietorisReq", "name": "IntegralHomologyMayerVietorisReq", "module": "spec.topology_homology", "wave": 14, "is_template": false, "docstring": "In Theorem 7.22, Mayer-Vietoris sequence computations with the twist triple $(\\ell_0, \\ell_1, \\ell_2) = (0, 1, -1)$\nprove that all intermediate homology vanishes:\n$$H_1(X; \\mathbb{Z}) = H_2(X; \\mathbb{Z}) = H_3(X; \\mathbb{Z}) = H_4(X; \\mathbb{Z}) = H_5(X; \\mathbb{Z}) = 0,$$\nand $H_0(X; \\mathbb{Z}) \\cong H_6(X; \\mathbb{Z}) \\cong \\mathbb{Z}$, matching $H_*(S^6; \\mathbb{Z})$.", "deps": ["spec.topology_homology.SingularFibreHomologyReq", "spec.topology_homology.BiellipticFibreHomologyReq", "spec.topology_homology.RetractionOntoWReq", "spec.topology_homology.SpecialisationMapReq", "spec.topology_homology.SimpleConnectivityReq"], "rdeps": ["spec.sphere_recognition.DiffeomorphismToS6Req", "spec.topology_homology.IntegralLeraySpectralSequenceReq", "spec.topology_homology.TopologyHomologyFeat"], "loc": "unknown"}, {"ref": "spec.topology_homology.IntegralLeraySpectralSequenceReq", "name": "IntegralLeraySpectralSequenceReq", "module": "spec.topology_homology", "wave": 15, "is_template": false, "docstring": "In Proposition 7.26, 7.27, and Corollary 7.29, an independent calculation via the integral Leray\nspectral sequence $E_2^{p,q} = H^p(B, R^q f_* \\mathbb{Z}) \\Rightarrow H^{p+q}(X; \\mathbb{Z})$\nconfirms $E_2^{p,q} = 0$ for all $p + q \\in \\{1, 2, 3, 4, 5\\}$.", "deps": ["spec.topology_homology.IntegralHomologyMayerVietorisReq"], "rdeps": ["spec.topology_homology.TopologyHomologyFeat"], "loc": "unknown"}, {"ref": "spec.topology_homology.RetractionOntoWReq", "name": "RetractionOntoWReq", "module": "spec.topology_homology", "wave": 8, "is_template": false, "docstring": "In Proposition 7.2 and Lemmas 7.5\u20137.10, there exists a continuous family of deformation retractions\nof the collar neighborhood $N_0 \\setminus W$ onto the central fibre $W$, structured by the polar decomposition\nof the toric model and the periodic honeycomb cell structure.", "deps": ["spec.toric_filling.ToricFillingManifoldReq"], "rdeps": ["spec.topology_homology.IntegralHomologyMayerVietorisReq", "spec.topology_homology.TopologyHomologyFeat"], "loc": "unknown"}, {"ref": "spec.topology_homology.SignLemmaSeifertInvariantsReq", "name": "SignLemmaSeifertInvariantsReq", "module": "spec.topology_homology", "wave": 11, "is_template": false, "docstring": "In Lemma 7.16 (the Sign Lemma), the orientation signs $\\varepsilon_j \\in \\{\\pm 1\\}$ of the translation\nsections satisfy $s_j \\circ g_j = e^{-2\\pi i / m_j} s_j$, identifying the boundary 3-manifold with\nthe $(3, 4)$ Seifert fibred space over $S^2(3, 4)$ with obstruction invariant $e_0 = \\ell_0$ and coefficients $b_j = -\\ell_j$.", "deps": ["spec.manifold_gluing.SectionTranslationModuliReq"], "rdeps": ["spec.topology_homology.FundamentalGroupPresentationReq", "spec.topology_homology.TopologyHomologyFeat"], "loc": "unknown"}, {"ref": "spec.topology_homology.SimpleConnectivityReq", "name": "SimpleConnectivityReq", "module": "spec.topology_homology", "wave": 13, "is_template": false, "docstring": "In Theorem 7.17, selecting the admissible twist triple $(\\ell_0, \\ell_1, \\ell_2) = (0, 1, -1)$ yields:\n$$|12(0) - 4(1) - 3(-1)| = |-4 + 3| = 1 \\implies \\pi_1(X) \\cong 0.$$\nThe system must machine-check that $X$ is simply connected under this choice.", "deps": ["spec.topology_homology.FundamentalGroupPresentationReq"], "rdeps": ["spec.sphere_recognition.DiffeomorphismToS6Req", "spec.topology_homology.IntegralHomologyMayerVietorisReq", "spec.topology_homology.TopologyHomologyFeat"], "loc": "unknown"}, {"ref": "spec.topology_homology.SingularFibreHomologyReq", "name": "SingularFibreHomologyReq", "module": "spec.topology_homology", "wave": 3, "is_template": false, "docstring": "In Proposition 7.11, the integral homology groups of the self-glued del Pezzo central fibre $W$ are:\n$$H_*(W; \\mathbb{Z}) \\cong (\\mathbb{Z}, \\, \\mathbb{Z}^2, \\, \\mathbb{Z}^4, \\, \\mathbb{Z}^2, \\, \\mathbb{Z}),$$\nall torsion-free, with $H_2(W) = \\langle [\\bar{C}_1], [\\bar{C}_2], [\\bar{C}_3], [\\bar{F}] \\rangle$.", "deps": ["spec.toric_filling.DelPezzoNormalizationReq"], "rdeps": ["spec.topology_homology.EulerCharacteristicLocalisationReq", "spec.topology_homology.IntegralHomologyMayerVietorisReq", "spec.topology_homology.TopologyHomologyFeat"], "loc": "unknown"}, {"ref": "spec.topology_homology.SpecialisationMapReq", "name": "SpecialisationMapReq", "module": "spec.topology_homology", "wave": 7, "is_template": false, "docstring": "In Proposition 7.12, for every degree $q$, the cycle specialization map:\n$$c_* : H^q(F) \\to H^q(W)$$\nis surjective, and its kernel is spanned by the vanishing cycles $\\Lambda_{\\mathrm{tor}} = \\langle \\hat{w}, \\hat{\\delta} \\rangle$.", "deps": ["spec.toric_filling.VanishingCyclesCollapseReq"], "rdeps": ["spec.topology_homology.IntegralHomologyMayerVietorisReq", "spec.topology_homology.TopologyHomologyFeat"], "loc": "unknown"}, {"ref": "spec.topology_homology.TopologyHomologyFeat", "name": "TopologyHomologyFeat", "module": "spec.topology_homology", "wave": 16, "is_template": false, "docstring": "Feature encapsulating the fundamental group calculation, simple connectivity criterion,\nintegral homology determination, and Euler characteristic localization of Section 7.", "deps": ["spec.topology_homology.RetractionOntoWReq", "spec.topology_homology.SingularFibreHomologyReq", "spec.topology_homology.BiellipticFibreHomologyReq", "spec.topology_homology.SpecialisationMapReq", "spec.topology_homology.SignLemmaSeifertInvariantsReq", "spec.topology_homology.FundamentalGroupPresentationReq", "spec.topology_homology.SimpleConnectivityReq", "spec.topology_homology.IntegralHomologyMayerVietorisReq", "spec.topology_homology.IntegralLeraySpectralSequenceReq", "spec.topology_homology.EulerCharacteristicLocalisationReq"], "rdeps": [], "loc": "unknown"}, {"ref": "spec.toric_filling.A2TriangulationFanReq", "name": "A2TriangulationFanReq", "module": "spec.toric_filling", "wave": 1, "is_template": false, "docstring": "In Lemma 4.2 of the paper, $\\mathcal{F}$ is a fan of strongly convex rational polyhedral cones\nin $N' \\otimes \\mathbb{R} \\cong \\mathbb{R}^2 \\times \\mathbb{R}$ supported on the upper half-space,\nwhose cross-section at height 1 is the standard periodic $A_2$ triangulation of $\\mathbb{R}^2$.\nThe system must formalize the fan $\\mathcal{F}$ and the smooth infinite toric 3-fold $Y = Y_{\\mathcal{F}}$.", "deps": [], "rdeps": ["spec.toric_filling.DelPezzoNormalizationReq", "spec.toric_filling.ToricDeckActionReq", "spec.toric_filling.ToricFillingFeat"], "loc": "unknown"}, {"ref": "spec.toric_filling.DelPezzoNormalizationReq", "name": "DelPezzoNormalizationReq", "module": "spec.toric_filling", "wave": 2, "is_template": false, "docstring": "In Proposition 4.6 and Theorem 4.5, the central fibre $W = f^{-1}(p_0)$ is a reduced, irreducible,\nnormal crossings divisor in $N_0$.\nIts normalization $\\tilde{W} \\to W$ is the degree-6 del Pezzo surface $dP_6$ (the blow-up of $\\mathbb{P}^2$\nat three non-collinear points), and $W$ is obtained from $dP_6$ by identifying the three pairs\nof opposite sides of its anticanonical hexagon of $(-1)$-curves.", "deps": ["spec.toric_filling.A2TriangulationFanReq"], "rdeps": ["spec.cdp_divergence.MayerVietorisNormalCrossingsReq", "spec.topology_homology.SingularFibreHomologyReq", "spec.toric_filling.DoubleLocusTriplePointsReq", "spec.toric_filling.ToricFillingFeat", "spec.toric_filling.ToricFillingManifoldReq"], "loc": "unknown"}, {"ref": "spec.toric_filling.DoubleLocusTriplePointsReq", "name": "DoubleLocusTriplePointsReq", "module": "spec.toric_filling", "wave": 3, "is_template": false, "docstring": "In Proposition 4.6 and Theorem 4.5(d), the double locus $D \\subset W$ consists of three smooth rational\ncurves intersecting pairwise transversally at two triple points.\nThe Euler characteristic of the central fibre satisfies:\n$$e(W) = e(dP_6) - 3\\, e(\\mathbb{P}^1) + 2\\, e(*) = 6 - 3(2) + 2(1) = 2.$$\nThe system must formalize and machine-check $e(W) = 2$.", "deps": ["spec.toric_filling.DelPezzoNormalizationReq"], "rdeps": ["spec.analytic_invariants.VerticalAutomorphismGroupReq", "spec.toric_filling.ToricFillingFeat", "spec.toric_filling.ToricFillingManifoldReq"], "loc": "unknown"}, {"ref": "spec.toric_filling.ToricDeckActionReq", "name": "ToricDeckActionReq", "module": "spec.toric_filling", "wave": 5, "is_template": false, "docstring": "In Lemma 4.3, for each $\\bar{\\lambda} \\in \\bar{\\Lambda} \\cong \\mathbb{Z}^2$, the deck transformation:\n$$\\phi_{\\bar{\\lambda}}(y, y_3) = (y + y_3 B_0 \\bar{\\lambda}, y_3)$$\nacts equivariantly on the fan $\\mathcal{F}$, lifting to biholomorphisms $\\Psi_{\\bar{\\lambda}} \\in \\mathrm{Aut}(Y_{\\mathcal{F}})$.", "deps": ["spec.toric_filling.A2TriangulationFanReq", "spec.lattice_monodromy.ToricSublatticeReq"], "rdeps": ["spec.toric_filling.ToricFillingFeat", "spec.toric_filling.ToricFillingManifoldReq", "spec.toric_filling.VanishingCyclesCollapseReq"], "loc": "unknown"}, {"ref": "spec.toric_filling.ToricFillingFeat", "name": "ToricFillingFeat", "module": "spec.toric_filling", "wave": 8, "is_template": false, "docstring": "Feature encapsulating the Mumford toric degeneration at p\u2080, the central fibre W,\nthe del Pezzo normalization, and vanishing cycle collapse.", "deps": ["spec.toric_filling.A2TriangulationFanReq", "spec.toric_filling.ToricDeckActionReq", "spec.toric_filling.DelPezzoNormalizationReq", "spec.toric_filling.DoubleLocusTriplePointsReq", "spec.toric_filling.VanishingCyclesCollapseReq", "spec.toric_filling.ToricFillingManifoldReq"], "rdeps": [], "loc": "unknown"}, {"ref": "spec.toric_filling.ToricFillingManifoldReq", "name": "ToricFillingManifoldReq", "module": "spec.toric_filling", "wave": 7, "is_template": false, "docstring": "In Theorem 4.5, the quotient space:\n$$N_0 := Y_\\epsilon / \\bar{\\Lambda}$$\nover the punctured disc $D_\\epsilon^*$ is biholomorphic to the modular torus family $\\mathcal{J}$\nrestricted to the collar $U_\\epsilon(p_0)$, and $N_0$ is a smooth complex 3-manifold.", "deps": ["spec.toric_filling.ToricDeckActionReq", "spec.toric_filling.DelPezzoNormalizationReq", "spec.toric_filling.DoubleLocusTriplePointsReq", "spec.toric_filling.VanishingCyclesCollapseReq"], "rdeps": ["spec.manifold_gluing.CollarTransitionGluingReq", "spec.manifold_gluing.HolomorphicCocycleCompatibilityReq", "spec.topology_homology.RetractionOntoWReq", "spec.toric_filling.ToricFillingFeat"], "loc": "unknown"}, {"ref": "spec.toric_filling.VanishingCyclesCollapseReq", "name": "VanishingCyclesCollapseReq", "module": "spec.toric_filling", "wave": 6, "is_template": false, "docstring": "In Proposition 4.7 and Corollary 4.8, the vanishing cycles $\\Lambda_{\\mathrm{tor}} = \\langle \\hat{w}, \\hat{\\delta} \\rangle$\nare collapsed in $W$ and die in $\\pi_1(N_0)$.\nThe projection $\\mathrm{pr} : Y_\\epsilon \\to N_0$ is the universal covering with deck group $\\bar{\\Lambda} \\cong \\mathbb{Z}^2$,\nproving $\\pi_1(N_0) \\cong \\bar{\\Lambda} \\cong \\mathbb{Z}^2$.", "deps": ["spec.lattice_monodromy.ToricSublatticeReq", "spec.toric_filling.ToricDeckActionReq"], "rdeps": ["spec.topology_homology.SpecialisationMapReq", "spec.toric_filling.ToricFillingFeat", "spec.toric_filling.ToricFillingManifoldReq"], "loc": "unknown"}], "edges": [{"from": "spec.analytic_invariants.AlgebraicDimensionReq", "to": "spec.manifold_gluing.CollarTransitionGluingReq"}, {"from": "spec.analytic_invariants.AnalyticInvariantsFeat", "to": "spec.analytic_invariants.AlgebraicDimensionReq"}, {"from": "spec.analytic_invariants.AnalyticInvariantsFeat", "to": "spec.analytic_invariants.DirectImageSheavesReq"}, {"from": "spec.analytic_invariants.AnalyticInvariantsFeat", "to": "spec.analytic_invariants.HodgeNumbersReq"}, {"from": "spec.analytic_invariants.AnalyticInvariantsFeat", "to": "spec.analytic_invariants.FroelicherNonDegenerationReq"}, {"from": "spec.analytic_invariants.AnalyticInvariantsFeat", "to": "spec.analytic_invariants.CanonicalBundleNonTorsionReq"}, {"from": "spec.analytic_invariants.AnalyticInvariantsFeat", "to": "spec.analytic_invariants.ChernNumbersRiemannRochReq"}, {"from": "spec.analytic_invariants.AnalyticInvariantsFeat", "to": "spec.analytic_invariants.VerticalAutomorphismGroupReq"}, {"from": "spec.analytic_invariants.AnalyticInvariantsFeat", "to": "spec.analytic_invariants.NonKaehlernessReq"}, {"from": "spec.analytic_invariants.CanonicalBundleNonTorsionReq", "to": "spec.manifold_gluing.CollarTransitionGluingReq"}, {"from": "spec.analytic_invariants.ChernNumbersRiemannRochReq", "to": "spec.analytic_invariants.CanonicalBundleNonTorsionReq"}, {"from": "spec.analytic_invariants.DirectImageSheavesReq", "to": "spec.manifold_gluing.CollarTransitionGluingReq"}, {"from": "spec.analytic_invariants.FroelicherNonDegenerationReq", "to": "spec.analytic_invariants.HodgeNumbersReq"}, {"from": "spec.analytic_invariants.HodgeNumbersReq", "to": "spec.analytic_invariants.DirectImageSheavesReq"}, {"from": "spec.analytic_invariants.NonKaehlernessReq", "to": "spec.analytic_invariants.HodgeNumbersReq"}, {"from": "spec.analytic_invariants.VerticalAutomorphismGroupReq", "to": "spec.toric_filling.DoubleLocusTriplePointsReq"}, {"from": "spec.analytic_invariants.VerticalAutomorphismGroupReq", "to": "spec.manifold_gluing.CollarTransitionGluingReq"}, {"from": "spec.cdp_divergence.CDPDivergenceFeat", "to": "spec.cdp_divergence.MayerVietorisNormalCrossingsReq"}, {"from": "spec.cdp_divergence.CDPDivergenceFeat", "to": "spec.cdp_divergence.NonNormalConormalSectionReq"}, {"from": "spec.cdp_divergence.CDPDivergenceFeat", "to": "spec.cdp_divergence.CDPHypothesisOneFailureReq"}, {"from": "spec.cdp_divergence.CDPDivergenceFeat", "to": "spec.cdp_divergence.MonodromyLineRepairReq"}, {"from": "spec.cdp_divergence.CDPHypothesisOneFailureReq", "to": "spec.cdp_divergence.NonNormalConormalSectionReq"}, {"from": "spec.cdp_divergence.CDPHypothesisOneFailureReq", "to": "spec.manifold_gluing.CollarTransitionGluingReq"}, {"from": "spec.cdp_divergence.MayerVietorisNormalCrossingsReq", "to": "spec.toric_filling.DelPezzoNormalizationReq"}, {"from": "spec.cdp_divergence.MonodromyLineRepairReq", "to": "spec.lattice_monodromy.MonodromyInvariantsReq"}, {"from": "spec.cdp_divergence.NonNormalConormalSectionReq", "to": "spec.cdp_divergence.MayerVietorisNormalCrossingsReq"}, {"from": "spec.infoview_util.DiagnosticStreamCaptureReq", "to": "spec.infoview_util.LeanLspServerReq"}, {"from": "spec.infoview_util.IncrementalBufferSyncReq", "to": "spec.infoview_util.LeanLspServerReq"}, {"from": "spec.infoview_util.InfoViewGoalExtractionReq", "to": "spec.infoview_util.LeanLspServerReq"}, {"from": "spec.infoview_util.InfoViewUtilFeat", "to": "spec.infoview_util.LeanLspServerReq"}, {"from": "spec.infoview_util.InfoViewUtilFeat", "to": "spec.infoview_util.IncrementalBufferSyncReq"}, {"from": "spec.infoview_util.InfoViewUtilFeat", "to": "spec.infoview_util.InfoViewGoalExtractionReq"}, {"from": "spec.infoview_util.InfoViewUtilFeat", "to": "spec.infoview_util.DiagnosticStreamCaptureReq"}, {"from": "spec.infoview_util.InfoViewUtilFeat", "to": "spec.infoview_util.InteractiveBabyStepReplReq"}, {"from": "spec.infoview_util.InteractiveBabyStepReplReq", "to": "spec.infoview_util.IncrementalBufferSyncReq"}, {"from": "spec.infoview_util.InteractiveBabyStepReplReq", "to": "spec.infoview_util.InfoViewGoalExtractionReq"}, {"from": "spec.infoview_util.InteractiveBabyStepReplReq", "to": "spec.infoview_util.DiagnosticStreamCaptureReq"}, {"from": "spec.infoview_util.LeanLspServerReq", "to": "spec.lean_project.Lean4ProjectReq"}, {"from": "spec.lattice_monodromy.DualMonodromyMatricesReq", "to": "spec.lattice_monodromy.MonodromyGeneratorsReq"}, {"from": "spec.lattice_monodromy.InvariantAlternatingFormReq", "to": "spec.lattice_monodromy.MonodromyGeneratorsReq"}, {"from": "spec.lattice_monodromy.LatticeMonodromyFeat", "to": "spec.lattice_monodromy.LatticeBasisReq"}, {"from": "spec.lattice_monodromy.LatticeMonodromyFeat", "to": "spec.lattice_monodromy.MonodromyGeneratorsReq"}, {"from": "spec.lattice_monodromy.LatticeMonodromyFeat", "to": "spec.lattice_monodromy.UnipotentCuspMonodromyReq"}, {"from": "spec.lattice_monodromy.LatticeMonodromyFeat", "to": "spec.lattice_monodromy.DualMonodromyMatricesReq"}, {"from": "spec.lattice_monodromy.LatticeMonodromyFeat", "to": "spec.lattice_monodromy.ToricSublatticeReq"}, {"from": "spec.lattice_monodromy.LatticeMonodromyFeat", "to": "spec.lattice_monodromy.MonodromyInvariantsReq"}, {"from": "spec.lattice_monodromy.LatticeMonodromyFeat", "to": "spec.lattice_monodromy.InvariantAlternatingFormReq"}, {"from": "spec.lattice_monodromy.LatticeMonodromyFeat", "to": "spec.lattice_monodromy.TriangleGroupOrbifoldReq"}, {"from": "spec.lattice_monodromy.MonodromyGeneratorsReq", "to": "spec.lattice_monodromy.LatticeBasisReq"}, {"from": "spec.lattice_monodromy.MonodromyInvariantsReq", "to": "spec.lattice_monodromy.MonodromyGeneratorsReq"}, {"from": "spec.lattice_monodromy.MonodromyInvariantsReq", "to": "spec.lattice_monodromy.DualMonodromyMatricesReq"}, {"from": "spec.lattice_monodromy.ToricSublatticeReq", "to": "spec.lattice_monodromy.UnipotentCuspMonodromyReq"}, {"from": "spec.lattice_monodromy.ToricSublatticeReq", "to": "spec.lattice_monodromy.DualMonodromyMatricesReq"}, {"from": "spec.lattice_monodromy.TriangleGroupOrbifoldReq", "to": "spec.lattice_monodromy.MonodromyGeneratorsReq"}, {"from": "spec.lattice_monodromy.UnipotentCuspMonodromyReq", "to": "spec.lattice_monodromy.MonodromyGeneratorsReq"}, {"from": "spec.lean_project.LeanBuildVerificationReq", "to": "spec.lean_project.Lean4ProjectReq"}, {"from": "spec.lean_project.LeanProjectFeat", "to": "spec.lean_project.Lean4ProjectReq"}, {"from": "spec.lean_project.LeanProjectFeat", "to": "spec.lean_project.LeanBuildVerificationReq"}, {"from": "spec.logarithmic_transforms.BiellipticReductionReq", "to": "spec.logarithmic_transforms.FixedPointFreenessReq"}, {"from": "spec.logarithmic_transforms.FixedPointFreenessReq", "to": "spec.lattice_monodromy.MonodromyGeneratorsReq"}, {"from": "spec.logarithmic_transforms.KodairaLogTransformReq", "to": "spec.logarithmic_transforms.NormalBundleTorsionReq"}, {"from": "spec.logarithmic_transforms.LogarithmicTransformsFeat", "to": "spec.logarithmic_transforms.FixedPointFreenessReq"}, {"from": "spec.logarithmic_transforms.LogarithmicTransformsFeat", "to": "spec.logarithmic_transforms.MultipleFibreOrdersReq"}, {"from": "spec.logarithmic_transforms.LogarithmicTransformsFeat", "to": "spec.logarithmic_transforms.BiellipticReductionReq"}, {"from": "spec.logarithmic_transforms.LogarithmicTransformsFeat", "to": "spec.logarithmic_transforms.NormalBundleTorsionReq"}, {"from": "spec.logarithmic_transforms.LogarithmicTransformsFeat", "to": "spec.logarithmic_transforms.KodairaLogTransformReq"}, {"from": "spec.logarithmic_transforms.MultipleFibreOrdersReq", "to": "spec.logarithmic_transforms.FixedPointFreenessReq"}, {"from": "spec.logarithmic_transforms.NormalBundleTorsionReq", "to": "spec.logarithmic_transforms.MultipleFibreOrdersReq"}, {"from": "spec.logarithmic_transforms.NormalBundleTorsionReq", "to": "spec.logarithmic_transforms.BiellipticReductionReq"}, {"from": "spec.manifold_gluing.CollarTransitionGluingReq", "to": "spec.toric_filling.ToricFillingManifoldReq"}, {"from": "spec.manifold_gluing.CollarTransitionGluingReq", "to": "spec.logarithmic_transforms.KodairaLogTransformReq"}, {"from": "spec.manifold_gluing.CollarTransitionGluingReq", "to": "spec.period_family.SmoothTorusFamilyReq"}, {"from": "spec.manifold_gluing.CollarTransitionGluingReq", "to": "spec.manifold_gluing.SectionTranslationModuliReq"}, {"from": "spec.manifold_gluing.HolomorphicCocycleCompatibilityReq", "to": "spec.toric_filling.ToricFillingManifoldReq"}, {"from": "spec.manifold_gluing.HolomorphicCocycleCompatibilityReq", "to": "spec.logarithmic_transforms.KodairaLogTransformReq"}, {"from": "spec.manifold_gluing.HolomorphicCocycleCompatibilityReq", "to": "spec.period_family.SmoothTorusFamilyReq"}, {"from": "spec.manifold_gluing.ManifoldGluingFeat", "to": "spec.manifold_gluing.HolomorphicCocycleCompatibilityReq"}, {"from": "spec.manifold_gluing.ManifoldGluingFeat", "to": "spec.manifold_gluing.ZeroSectionRigidityReq"}, {"from": "spec.manifold_gluing.ManifoldGluingFeat", "to": "spec.manifold_gluing.SectionTranslationModuliReq"}, {"from": "spec.manifold_gluing.ManifoldGluingFeat", "to": "spec.manifold_gluing.CollarTransitionGluingReq"}, {"from": "spec.manifold_gluing.SectionTranslationModuliReq", "to": "spec.manifold_gluing.ZeroSectionRigidityReq"}, {"from": "spec.manifold_gluing.ZeroSectionRigidityReq", "to": "spec.manifold_gluing.HolomorphicCocycleCompatibilityReq"}, {"from": "spec.period_family.BetaPeriodReq", "to": "spec.period_family.UniformisingTauReq"}, {"from": "spec.period_family.BetaPeriodReq", "to": "spec.period_family.MuTorsorReq"}, {"from": "spec.period_family.IndefiniteHodgeSignatureReq", "to": "spec.period_family.PeriodMatrixReq"}, {"from": "spec.period_family.IndefiniteHodgeSignatureReq", "to": "spec.period_family.BetaPeriodReq"}, {"from": "spec.period_family.ModularEquivarianceReq", "to": "spec.period_family.PeriodMatrixReq"}, {"from": "spec.period_family.ModularEquivarianceReq", "to": "spec.period_family.UniformisingTauReq"}, {"from": "spec.period_family.ModularEquivarianceReq", "to": "spec.period_family.MuTorsorReq"}, {"from": "spec.period_family.MuTorsorReq", "to": "spec.lattice_monodromy.TriangleGroupOrbifoldReq"}, {"from": "spec.period_family.PeriodFamilyFeat", "to": "spec.period_family.PeriodMatrixReq"}, {"from": "spec.period_family.PeriodFamilyFeat", "to": "spec.period_family.UniformisingTauReq"}, {"from": "spec.period_family.PeriodFamilyFeat", "to": "spec.period_family.MuTorsorReq"}, {"from": "spec.period_family.PeriodFamilyFeat", "to": "spec.period_family.BetaPeriodReq"}, {"from": "spec.period_family.PeriodFamilyFeat", "to": "spec.period_family.ModularEquivarianceReq"}, {"from": "spec.period_family.PeriodFamilyFeat", "to": "spec.period_family.IndefiniteHodgeSignatureReq"}, {"from": "spec.period_family.PeriodFamilyFeat", "to": "spec.period_family.SmoothTorusFamilyReq"}, {"from": "spec.period_family.PeriodMatrixReq", "to": "spec.lattice_monodromy.MonodromyGeneratorsReq"}, {"from": "spec.period_family.SmoothTorusFamilyReq", "to": "spec.period_family.ModularEquivarianceReq"}, {"from": "spec.period_family.SmoothTorusFamilyReq", "to": "spec.period_family.IndefiniteHodgeSignatureReq"}, {"from": "spec.period_family.UniformisingTauReq", "to": "spec.lattice_monodromy.TriangleGroupOrbifoldReq"}, {"from": "spec.sphere_recognition.DiffeomorphismToS6Req", "to": "spec.sphere_recognition.HomotopySphereRecognitionReq"}, {"from": "spec.sphere_recognition.DiffeomorphismToS6Req", "to": "spec.sphere_recognition.ExoticSphereVanishingReq"}, {"from": "spec.sphere_recognition.DiffeomorphismToS6Req", "to": "spec.topology_homology.SimpleConnectivityReq"}, {"from": "spec.sphere_recognition.DiffeomorphismToS6Req", "to": "spec.topology_homology.IntegralHomologyMayerVietorisReq"}, {"from": "spec.sphere_recognition.IntegrableComplexStructureOnS6Req", "to": "spec.sphere_recognition.DiffeomorphismToS6Req"}, {"from": "spec.sphere_recognition.IntegrableComplexStructureOnS6Req", "to": "spec.manifold_gluing.CollarTransitionGluingReq"}, {"from": "spec.sphere_recognition.SphereRecognitionFeat", "to": "spec.sphere_recognition.HomotopySphereRecognitionReq"}, {"from": "spec.sphere_recognition.SphereRecognitionFeat", "to": "spec.sphere_recognition.ExoticSphereVanishingReq"}, {"from": "spec.sphere_recognition.SphereRecognitionFeat", "to": "spec.sphere_recognition.DiffeomorphismToS6Req"}, {"from": "spec.sphere_recognition.SphereRecognitionFeat", "to": "spec.sphere_recognition.IntegrableComplexStructureOnS6Req"}, {"from": "spec.topology_homology.BiellipticFibreHomologyReq", "to": "spec.logarithmic_transforms.BiellipticReductionReq"}, {"from": "spec.topology_homology.EulerCharacteristicLocalisationReq", "to": "spec.topology_homology.SingularFibreHomologyReq"}, {"from": "spec.topology_homology.FundamentalGroupPresentationReq", "to": "spec.topology_homology.SignLemmaSeifertInvariantsReq"}, {"from": "spec.topology_homology.FundamentalGroupPresentationReq", "to": "spec.manifold_gluing.SectionTranslationModuliReq"}, {"from": "spec.topology_homology.IntegralHomologyMayerVietorisReq", "to": "spec.topology_homology.SingularFibreHomologyReq"}, {"from": "spec.topology_homology.IntegralHomologyMayerVietorisReq", "to": "spec.topology_homology.BiellipticFibreHomologyReq"}, {"from": "spec.topology_homology.IntegralHomologyMayerVietorisReq", "to": "spec.topology_homology.RetractionOntoWReq"}, {"from": "spec.topology_homology.IntegralHomologyMayerVietorisReq", "to": "spec.topology_homology.SpecialisationMapReq"}, {"from": "spec.topology_homology.IntegralHomologyMayerVietorisReq", "to": "spec.topology_homology.SimpleConnectivityReq"}, {"from": "spec.topology_homology.IntegralLeraySpectralSequenceReq", "to": "spec.topology_homology.IntegralHomologyMayerVietorisReq"}, {"from": "spec.topology_homology.RetractionOntoWReq", "to": "spec.toric_filling.ToricFillingManifoldReq"}, {"from": "spec.topology_homology.SignLemmaSeifertInvariantsReq", "to": "spec.manifold_gluing.SectionTranslationModuliReq"}, {"from": "spec.topology_homology.SimpleConnectivityReq", "to": "spec.topology_homology.FundamentalGroupPresentationReq"}, {"from": "spec.topology_homology.SingularFibreHomologyReq", "to": "spec.toric_filling.DelPezzoNormalizationReq"}, {"from": "spec.topology_homology.SpecialisationMapReq", "to": "spec.toric_filling.VanishingCyclesCollapseReq"}, {"from": "spec.topology_homology.TopologyHomologyFeat", "to": "spec.topology_homology.RetractionOntoWReq"}, {"from": "spec.topology_homology.TopologyHomologyFeat", "to": "spec.topology_homology.SingularFibreHomologyReq"}, {"from": "spec.topology_homology.TopologyHomologyFeat", "to": "spec.topology_homology.BiellipticFibreHomologyReq"}, {"from": "spec.topology_homology.TopologyHomologyFeat", "to": "spec.topology_homology.SpecialisationMapReq"}, {"from": "spec.topology_homology.TopologyHomologyFeat", "to": "spec.topology_homology.SignLemmaSeifertInvariantsReq"}, {"from": "spec.topology_homology.TopologyHomologyFeat", "to": "spec.topology_homology.FundamentalGroupPresentationReq"}, {"from": "spec.topology_homology.TopologyHomologyFeat", "to": "spec.topology_homology.SimpleConnectivityReq"}, {"from": "spec.topology_homology.TopologyHomologyFeat", "to": "spec.topology_homology.IntegralHomologyMayerVietorisReq"}, {"from": "spec.topology_homology.TopologyHomologyFeat", "to": "spec.topology_homology.IntegralLeraySpectralSequenceReq"}, {"from": "spec.topology_homology.TopologyHomologyFeat", "to": "spec.topology_homology.EulerCharacteristicLocalisationReq"}, {"from": "spec.toric_filling.DelPezzoNormalizationReq", "to": "spec.toric_filling.A2TriangulationFanReq"}, {"from": "spec.toric_filling.DoubleLocusTriplePointsReq", "to": "spec.toric_filling.DelPezzoNormalizationReq"}, {"from": "spec.toric_filling.ToricDeckActionReq", "to": "spec.toric_filling.A2TriangulationFanReq"}, {"from": "spec.toric_filling.ToricDeckActionReq", "to": "spec.lattice_monodromy.ToricSublatticeReq"}, {"from": "spec.toric_filling.ToricFillingFeat", "to": "spec.toric_filling.A2TriangulationFanReq"}, {"from": "spec.toric_filling.ToricFillingFeat", "to": "spec.toric_filling.ToricDeckActionReq"}, {"from": "spec.toric_filling.ToricFillingFeat", "to": "spec.toric_filling.DelPezzoNormalizationReq"}, {"from": "spec.toric_filling.ToricFillingFeat", "to": "spec.toric_filling.DoubleLocusTriplePointsReq"}, {"from": "spec.toric_filling.ToricFillingFeat", "to": "spec.toric_filling.VanishingCyclesCollapseReq"}, {"from": "spec.toric_filling.ToricFillingFeat", "to": "spec.toric_filling.ToricFillingManifoldReq"}, {"from": "spec.toric_filling.ToricFillingManifoldReq", "to": "spec.toric_filling.ToricDeckActionReq"}, {"from": "spec.toric_filling.ToricFillingManifoldReq", "to": "spec.toric_filling.DelPezzoNormalizationReq"}, {"from": "spec.toric_filling.ToricFillingManifoldReq", "to": "spec.toric_filling.DoubleLocusTriplePointsReq"}, {"from": "spec.toric_filling.ToricFillingManifoldReq", "to": "spec.toric_filling.VanishingCyclesCollapseReq"}, {"from": "spec.toric_filling.VanishingCyclesCollapseReq", "to": "spec.lattice_monodromy.ToricSublatticeReq"}, {"from": "spec.toric_filling.VanishingCyclesCollapseReq", "to": "spec.toric_filling.ToricDeckActionReq"}], "total_waves": 17, "initial_target": "", "initial_rdeps": false}
+  </script>
+
+  <script>
+    const data = JSON.parse(document.getElementById('dag-data').textContent);
+    const svg = document.getElementById('dag-svg');
+    const content = document.getElementById('canvas-content');
+    const inspector = document.getElementById('inspector');
+    const searchInput = document.getElementById('search-input');
+
+    // Canvas pan/zoom state
+    let transform = { x: 40, y: 40, scale: 1 };
+    let isPanning = false;
+    let startPoint = { x: 0, y: 0 };
+    let selectedRef = null;
+
+    const compMap = new Map();
+    data.components.forEach(c => compMap.set(c.ref, c));
+
+    // Layout calculations
+    const waveWidth = 280;
+    const waveGap = 80;
+    const nodeWidth = 240;
+    const nodeHeight = 54;
+    const nodeGap = 20;
+    const headerHeight = 40;
+
+    // Group components by wave
+    const waveGroups = new Map();
+    for (let i = 1; i <= data.total_waves; i++) waveGroups.set(i, []);
+    data.components.forEach(c => {
+      const list = waveGroups.get(c.wave) || [];
+      list.push(c);
+      waveGroups.set(c.wave, list);
+    });
+
+    // Calculate node coordinates
+    const nodeCoords = new Map();
+    let maxWaveY = 0;
+
+    waveGroups.forEach((comps, waveIdx) => {
+      const x = (waveIdx - 1) * (waveWidth + waveGap) + 40;
+      comps.forEach((c, idx) => {
+        const y = 60 + idx * (nodeHeight + nodeGap);
+        nodeCoords.set(c.ref, { x: x + 20, y: y, w: nodeWidth, h: nodeHeight, cx: x + 20 + nodeWidth/2, cy: y + nodeHeight/2 });
+        if (y + nodeHeight > maxWaveY) maxWaveY = y + nodeHeight;
+      });
+    });
+
+    function updateTransform() {
+      content.setAttribute('transform', `translate(${transform.x}, ${transform.y}) scale(${transform.scale})`);
+    }
+
+    function renderDAG() {
+      content.innerHTML = '';
+
+      // Draw Wave Swimlanes
+      waveGroups.forEach((comps, waveIdx) => {
+        const x = (waveIdx - 1) * (waveWidth + waveGap) + 40;
+        const colHeight = Math.max(maxWaveY + 40, 600);
+
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('class', 'wave-column');
+        rect.setAttribute('x', x);
+        rect.setAttribute('y', 20);
+        rect.setAttribute('width', waveWidth);
+        rect.setAttribute('height', colHeight);
+        content.appendChild(rect);
+
+        const label = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        label.setAttribute('class', 'wave-label');
+        label.setAttribute('x', x + waveWidth / 2);
+        label.setAttribute('y', 45);
+        label.textContent = `WAVE ${waveIdx} (${comps.length})`;
+        content.appendChild(label);
+      });
+
+      // Draw Edges (Path connecting dependent to prerequisite)
+      const edgesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      edgesGroup.setAttribute('id', 'edges-layer');
+
+      data.edges.forEach(edge => {
+        const src = nodeCoords.get(edge.from);
+        const tgt = nodeCoords.get(edge.to);
+        if (!src || !tgt) return;
+
+        // Draw bezier curve from right/left of node
+        const x1 = src.x;
+        const y1 = src.cy;
+        const x2 = tgt.x + tgt.w;
+        const y2 = tgt.cy;
+        const dx = Math.abs(x1 - x2) * 0.5;
+
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('class', 'edge-line');
+        path.setAttribute('d', `M ${x1} ${y1} C ${x1 - dx} ${y1}, ${x2 + dx} ${y2}, ${x2} ${y2}`);
+        path.setAttribute('data-from', edge.from);
+        path.setAttribute('data-to', edge.to);
+        path.setAttribute('marker-end', 'url(#arrow-default)');
+        edgesGroup.appendChild(path);
+      });
+      content.appendChild(edgesGroup);
+
+      // Draw Nodes
+      const nodesGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+      nodesGroup.setAttribute('id', 'nodes-layer');
+
+      data.components.forEach(c => {
+        const pos = nodeCoords.get(c.ref);
+        if (!pos) return;
+
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('class', 'comp-node');
+        g.setAttribute('data-ref', c.ref);
+        g.setAttribute('transform', `translate(${pos.x}, ${pos.y})`);
+
+        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+        rect.setAttribute('width', pos.w);
+        rect.setAttribute('height', pos.h);
+        g.appendChild(rect);
+
+        const title = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        title.setAttribute('class', 'node-title');
+        title.setAttribute('x', 12);
+        title.setAttribute('y', 22);
+        title.textContent = c.name;
+        g.appendChild(title);
+
+        const sub = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        sub.setAttribute('class', 'node-sub');
+        sub.setAttribute('x', 12);
+        sub.setAttribute('y', 40);
+        sub.textContent = `${c.module} • deps:${c.deps.length} | rdeps:${c.rdeps.length}`;
+        g.appendChild(sub);
+
+        g.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectComponent(c.ref);
+        });
+
+        nodesGroup.appendChild(g);
+      });
+      content.appendChild(nodesGroup);
+
+      updateTransform();
+    }
+
+    function selectComponent(ref) {
+      selectedRef = ref;
+      const comp = compMap.get(ref);
+      if (!comp) return;
+
+      // Update node styles
+      const prereqs = new Set(comp.deps);
+      const rdeps = new Set(comp.rdeps);
+
+      document.querySelectorAll('.comp-node').forEach(node => {
+        const r = node.getAttribute('data-ref');
+        node.classList.remove('selected', 'is-prereq', 'is-rdep', 'dimmed');
+        if (r === ref) {
+          node.classList.add('selected');
+        } else if (prereqs.has(r)) {
+          node.classList.add('is-prereq');
+        } else if (rdeps.has(r)) {
+          node.classList.add('is-rdep');
+        } else {
+          node.classList.add('dimmed');
+        }
+      });
+
+      // Update edge styles
+      document.querySelectorAll('.edge-line').forEach(edge => {
+        const from = edge.getAttribute('data-from');
+        const to = edge.getAttribute('data-to');
+        edge.classList.remove('active-prereq', 'active-rdep', 'dimmed');
+
+        if (from === ref) {
+          edge.classList.add('active-prereq');
+          edge.setAttribute('marker-end', 'url(#arrow-prereq)');
+        } else if (to === ref) {
+          edge.classList.add('active-rdep');
+          edge.setAttribute('marker-end', 'url(#arrow-rdep)');
+        } else {
+          edge.classList.add('dimmed');
+          edge.setAttribute('marker-end', 'url(#arrow-default)');
+        }
+      });
+
+      // Populate Inspector
+      document.getElementById('insp-name').textContent = comp.name;
+      document.getElementById('insp-ref').textContent = comp.ref;
+      document.getElementById('insp-wave').textContent = `Wave ${comp.wave}`;
+      document.getElementById('insp-loc').textContent = comp.loc;
+      document.getElementById('insp-doc').textContent = comp.docstring || '(No docstring recorded)';
+
+      const depsList = document.getElementById('insp-deps-list');
+      depsList.innerHTML = '';
+      document.getElementById('insp-deps-count').textContent = comp.deps.length;
+      comp.deps.forEach(d => {
+        const item = document.createElement('div');
+        item.className = 'link-item';
+        item.textContent = d;
+        item.onclick = () => selectComponent(d);
+        depsList.appendChild(item);
+      });
+
+      const rdepsList = document.getElementById('insp-rdeps-list');
+      rdepsList.innerHTML = '';
+      document.getElementById('insp-rdeps-count').textContent = comp.rdeps.length;
+      comp.rdeps.forEach(d => {
+        const item = document.createElement('div');
+        item.className = 'link-item';
+        item.textContent = d;
+        item.onclick = () => selectComponent(d);
+        rdepsList.appendChild(item);
+      });
+
+      inspector.classList.remove('hidden');
+    }
+
+    function clearSelection() {
+      selectedRef = null;
+      document.querySelectorAll('.comp-node').forEach(n => n.classList.remove('selected', 'is-prereq', 'is-rdep', 'dimmed'));
+      document.querySelectorAll('.edge-line').forEach(e => {
+        e.classList.remove('active-prereq', 'active-rdep', 'dimmed');
+        e.setAttribute('marker-end', 'url(#arrow-default)');
+      });
+      inspector.classList.add('hidden');
+    }
+
+    // Pan and Zoom
+    svg.addEventListener('mousedown', (e) => {
+      isPanning = true;
+      startPoint = { x: e.clientX - transform.x, y: e.clientY - transform.y };
+    });
+    window.addEventListener('mousemove', (e) => {
+      if (!isPanning) return;
+      transform.x = e.clientX - startPoint.x;
+      transform.y = e.clientY - startPoint.y;
+      updateTransform();
+    });
+    window.addEventListener('mouseup', () => isPanning = false);
+    svg.addEventListener('wheel', (e) => {
+      e.preventDefault();
+      const zoomFactor = e.deltaY < 0 ? 1.1 : 0.9;
+      transform.scale = Math.min(Math.max(transform.scale * zoomFactor, 0.2), 3);
+      updateTransform();
+    });
+
+    // Controls
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      transform = { x: 40, y: 40, scale: 1 };
+      updateTransform();
+    });
+    document.getElementById('btn-clear-selection').addEventListener('click', clearSelection);
+    document.getElementById('btn-close-insp').addEventListener('click', () => inspector.classList.add('hidden'));
+    svg.addEventListener('click', clearSelection);
+
+    // Search filter
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      if (!q) {
+        clearSelection();
+        return;
+      }
+      document.querySelectorAll('.comp-node').forEach(node => {
+        const ref = node.getAttribute('data-ref').toLowerCase();
+        if (ref.includes(q)) {
+          node.classList.remove('dimmed');
+        } else {
+          node.classList.add('dimmed');
+        }
+      });
+    });
+
+    renderDAG();
+    if (data.initial_target) {
+      selectComponent(data.initial_target);
+    }
+  </script>
+</body>
+</html>

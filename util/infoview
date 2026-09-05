@@ -1,0 +1,190 @@
+#!/usr/bin/env python3
+"""
+Fast CLI client for the persistent Lean LSP Daemon.
+Queries InfoView goals, tests baby-step tactics, and inspects live diagnostics in < 30ms.
+Auto-spawns the daemon in the background if not already active.
+"""
+
+import json
+import os
+import pathlib
+import socket
+import subprocess
+import sys
+import time
+
+WORKSPACE_ROOT = pathlib.Path(__file__).resolve().parent.parent
+SOCKET_PATH = WORKSPACE_ROOT / "util" / ".lean_lsp.sock"
+PID_FILE = WORKSPACE_ROOT / "util" / ".lean_daemon.pid"
+DAEMON_SCRIPT = WORKSPACE_ROOT / "util" / "lean_daemon.py"
+
+
+def is_daemon_running() -> bool:
+    if not SOCKET_PATH.exists() or not PID_FILE.exists():
+        return False
+    try:
+        pid = int(PID_FILE.read_text().strip())
+        os.kill(pid, 0)
+        return True
+    except Exception:
+        return False
+
+
+def start_daemon_if_needed():
+    if is_daemon_running():
+        return
+
+    print("⚡ Starting persistent Lean LSP Daemon in background...")
+    subprocess.Popen(
+        [sys.executable, str(DAEMON_SCRIPT)],
+        cwd=str(WORKSPACE_ROOT),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        start_new_session=True,
+    )
+
+    # Wait for socket to become ready
+    for _ in range(50):
+        time.sleep(0.1)
+        if SOCKET_PATH.exists():
+            break
+
+    # Give Lean a moment to initialize
+    time.sleep(1.0)
+    print("✔ Lean LSP Daemon is hot and ready.")
+
+
+def query_daemon(payload: dict, timeout: float = 10.0) -> dict:
+    start_daemon_if_needed()
+
+    client = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
+    client.settimeout(timeout)
+    client.connect(str(SOCKET_PATH))
+    try:
+        client.sendall(json.dumps(payload).encode("utf-8"))
+        raw = client.recv(65536).decode("utf-8")
+        return json.loads(raw)
+    finally:
+        client.close()
+
+
+def print_help():
+    print("""
+Lean 4 Fast InfoView Client (Persistent In-Memory Daemon)
+
+Usage:
+  util/infoview <file> <line> [col=1]         - Show InfoView goal state at line/col
+  util/infoview try <file> <line> "<tactic>"  - Test candidate tactic in-memory and show goal
+  util/infoview diag <file>                   - Show compiler diagnostics/errors for file
+  util/infoview reload <file>                 - Reload file into daemon cache
+  util/infoview status                        - Check daemon status & PID
+  util/infoview stop                          - Stop the daemon
+""")
+
+
+def main():
+    if len(sys.argv) < 2 or sys.argv[1] in ("-h", "--help", "help"):
+        print_help()
+        sys.exit(0)
+
+    cmd = sys.argv[1]
+
+    if cmd == "status":
+        if is_daemon_running():
+            res = query_daemon({"cmd": "ping"})
+            print(f"✔ Daemon is RUNNING (PID {res.get('pid')})")
+        else:
+            print("Daemon is STOPPED.")
+    elif cmd == "start":
+        start_daemon_if_needed()
+    elif cmd == "stop":
+        if is_daemon_running():
+            res = query_daemon({"cmd": "stop"})
+            print(f"✔ {res.get('msg')}")
+        else:
+            print("Daemon is not running.")
+    elif cmd == "try":
+        if len(sys.argv) < 5:
+            print("Usage: util/infoview try <file> <line> '<tactic>'")
+            sys.exit(1)
+        file_path = sys.argv[2]
+        line_num = int(sys.argv[3])
+        tactic_text = sys.argv[4]
+        res = query_daemon({"cmd": "try", "file": file_path, "line": line_num, "tactic": tactic_text})
+        if res.get("status") == "ok":
+            goals = res.get("goal", [])
+            print(f"\n--- InfoView Result after `{tactic_text}` at line {line_num} ---")
+            if goals:
+                for g in goals:
+                    print(g)
+            else:
+                print("✔ Goal closed or no remaining goals!")
+            print("------------------------------------------------------------\n")
+        else:
+            print(f"Error: {res.get('error')}")
+    elif cmd in ("diag", "diags"):
+        if len(sys.argv) < 3:
+            print("Usage: util/infoview diags <file>")
+            sys.exit(1)
+        file_path = sys.argv[2]
+        res = query_daemon({"cmd": "diag", "file": file_path})
+        diags = res.get("diagnostics", [])
+        if not diags:
+            print("✔ Zero diagnostics (clean compilation).")
+        else:
+            print(f"\n--- Diagnostics ({len(diags)}) for {file_path} ---")
+            for d in diags:
+                sev = d.get("severity", 1)
+                sev_str = "ERROR" if sev == 1 else "WARNING" if sev == 2 else "INFO"
+                r = d.get("range", {}).get("start", {})
+                l = r.get("line", 0) + 1
+                c = r.get("character", 0) + 1
+                print(f"[{sev_str}] Line {l}:{c} -> {d.get('message')}")
+            print("--------------------------------------------------\n")
+    elif cmd == "reload":
+        if len(sys.argv) < 3:
+            print("Usage: util/infoview reload <file>")
+            sys.exit(1)
+        file_path = sys.argv[2]
+        res = query_daemon({"cmd": "reload", "file": file_path})
+        print(f"✔ {res.get('msg')}")
+    elif cmd in ("goal", "goals"):
+        if len(sys.argv) < 3:
+            print("Usage: util/infoview goal <file> [line] [col]")
+            sys.exit(1)
+        file_path = sys.argv[2]
+        line_num = int(sys.argv[3]) if len(sys.argv) > 3 else 1
+        col_num = int(sys.argv[4]) if len(sys.argv) > 4 else 1
+        res = query_daemon({"cmd": "goal", "file": file_path, "line": line_num, "col": col_num})
+        if res.get("status") == "ok":
+            goals = res.get("goals", [])
+            print(f"\n--- InfoView Tactic State ({file_path}:{line_num}:{col_num}) ---")
+            if goals:
+                for g in goals:
+                    print(g)
+            else:
+                print(res.get("msg", "No active goal."))
+            print("----------------------------------------------------\n")
+        else:
+            print(f"Error: {res.get('error')}")
+    else:
+        # Default: goal query
+        file_path = sys.argv[1]
+        line_num = int(sys.argv[2]) if len(sys.argv) > 2 else 1
+        col_num = int(sys.argv[3]) if len(sys.argv) > 3 else 1
+        res = query_daemon({"cmd": "goal", "file": file_path, "line": line_num, "col": col_num})
+        if res.get("status") == "ok":
+            goals = res.get("goals", [])
+            print(f"\n--- InfoView Tactic State ({file_path}:{line_num}:{col_num}) ---")
+            if goals:
+                for g in goals:
+                    print(g)
+            else:
+                print(res.get("msg", "No active goal."))
+            print("----------------------------------------------------\n")
+        else:
+            print(f"Error: {res.get('error')}")
+
+
+if __name__ == "__main__":
+    main()
