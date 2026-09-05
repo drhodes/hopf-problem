@@ -23,6 +23,40 @@ def UpperHalfPlane := {τ : ℂ // τ.im > 0}
 /-- The imaginary part of any parameter in the upper half plane is strictly positive. -/
 theorem tau_im_pos (τ : UpperHalfPlane) : τ.val.im > 0 := τ.property
 
+/-- Standard generator S = [[0, -1], [1, 0]] of SL(2, ℤ) representing τ ↦ -1/τ. -/
+def S_mod : Matrix (Fin 2) (Fin 2) ℤ :=
+  !![ 0, -1;
+      1,  0]
+
+/-- Standard generator T = [[1, 1], [0, 1]] of SL(2, ℤ) representing τ ↦ τ + 1. -/
+def T_mod : Matrix (Fin 2) (Fin 2) ℤ :=
+  !![ 1, 1;
+      0, 1]
+
+/-- S has determinant 1 (belongs to SL(2, ℤ)). -/
+theorem S_det : S_mod.det = 1 := by
+  decide
+
+/-- T has determinant 1 (belongs to SL(2, ℤ)). -/
+theorem T_det : T_mod.det = 1 := by
+  decide
+
+/-- S² = -I in SL(2, ℤ) (central involution). -/
+theorem S_sq : S_mod ^ 2 = -1 := by
+  decide
+
+/-- S⁴ = I in SL(2, ℤ). -/
+theorem S_fourth : S_mod ^ 4 = 1 := by
+  decide
+
+/-- (ST)³ = -I in SL(2, ℤ). -/
+theorem ST_cubed : (S_mod * T_mod) ^ 3 = -1 := by
+  decide
+
+/-- (ST)⁶ = I in SL(2, ℤ). -/
+theorem ST_sixth : (S_mod * T_mod) ^ 6 = 1 := by
+  decide
+
 /-- The punctured base curve B° = ℂP¹ \ {p₁, p₂, p₀}. -/
 structure BaseOrbifold where
   carrier : Type

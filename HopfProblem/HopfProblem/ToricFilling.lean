@@ -38,6 +38,17 @@ theorem ray_antipodal (i : Fin 6) (j : Fin 2) :
     v ⟨(i.val + 3) % 6, by omega⟩ j = - (v i j) := by
   fin_cases i <;> fin_cases j <;> rfl
 
+/-- The sum of each pair of antipodal rays vanishes in the rank-2 lattice:
+    v(i) + v(i + 3) = 0 for each i ∈ {0, 1, 2}. -/
+theorem antipodal_pair_sum_zero (i : Fin 3) (j : Fin 2) :
+    v ⟨i.val, by omega⟩ j + v ⟨i.val + 3, by omega⟩ j = 0 := by
+  fin_cases i <;> fin_cases j <;> rfl
+
+/-- Total sum of all 6 ray vectors in the A₂ root fan is zero: the fan is balanced. -/
+theorem fan_rays_balanced (j : Fin 2) :
+    v 0 j + v 1 j + v 2 j + v 3 j + v 4 j + v 5 j = 0 := by
+  fin_cases j <;> rfl
+
 /-- The degree-6 del Pezzo surface dP₆ as the smooth toric normalization of W. -/
 structure DelPezzo6Normalization where
   /-- Topological Euler characteristic of dP₆. -/

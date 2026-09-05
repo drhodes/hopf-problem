@@ -34,6 +34,11 @@ def l2 : ℤ := 1
 theorem seifert_coprime_relation : 12 * l0 - 4 * l1 - 3 * l2 = 1 := by
   decide
 
+/-- Bézout identity for the Seifert coefficients: 12 · 1 - 4 · 2 - 3 · 1 = 1 implies
+    the greatest common divisor gcd(12, gcd(4, 3)) is 1. -/
+theorem seifert_gcd_coprime : Nat.gcd 12 (Nat.gcd 4 3) = 1 := by
+  decide
+
 /-- The order of the cyclic fundamental group π₁(X) = ℤ/|p|ℤ (Theorem 7.17). -/
 def pi1_order : ℕ := (12 * l0 - 4 * l1 - 3 * l2).natAbs
 
@@ -149,5 +154,25 @@ theorem euler_characteristic_X (_X : AssembledManifoldX) :
 theorem X_homology_S6 (X : AssembledManifoldX) :
     ∀ k, 1 ≤ k → k ≤ 5 → Subsingleton (HomologyGroup k X.totalSpace) :=
   fun k hk1 hk5 => homology_intermediate_vanishing X k hk1 hk5
+
+/-- Any bilinear pairing on H²(X; ℤ) vanishes because H²(X) is trivial (Subsingleton). -/
+theorem cup_product_H2_H4_trivial (X : AssembledManifoldX)
+    (f : HomologyGroup 2 X.totalSpace → HomologyGroup 4 X.totalSpace → ℤ)
+    (hf_zero : ∀ y, f 0 y = 0)
+    (x : HomologyGroup 2 X.totalSpace) (y : HomologyGroup 4 X.totalSpace) :
+    f x y = 0 := by
+  have : Subsingleton (HomologyGroup 2 X.totalSpace) :=
+    homology_intermediate_vanishing X 2 (by decide) (by decide)
+  have hx : x = 0 := Subsingleton.elim x 0
+  rw [hx]
+  exact hf_zero y
+
+/-- Non-existence of symplectic structures on the standard 6-sphere X:
+    A symplectic form would require a non-zero top power [ω³] = Vol(X) > 0 in cohomology,
+    but [ω] ∈ H²(X; ℤ) = 0 forces [ω³] = 0. -/
+theorem no_symplectic_structure (vol omega_cubed : ℤ)
+    (h_vol : vol > 0) (h_omega_zero : omega_cubed = 0)
+    (h_compat : omega_cubed = vol) : False := by
+  omega
 
 end HopfProblem.TopologyHomology

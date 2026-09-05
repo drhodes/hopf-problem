@@ -61,6 +61,19 @@ theorem deck_action_fixed_point_free {T4 : Type} (ζ : ℂ) (hζ : ζ ≠ 1)
   intro heq
   exact rotation_action_fixed_point_free ζ hζ s hs (congrArg Prod.fst heq)
 
+/-- Iterated rotation by an m-th root of unity: if ζ^m = 1, then ζ^m * s = s. -/
+theorem rotation_action_order_m (ζ s : ℂ) (m : ℕ) (hζ : ζ ^ m = 1) :
+    (ζ ^ m) * s = s := by
+  rw [hζ, one_mul]
+
+/-- Seifert coprime invariant: gcd(m₁, ℓ₁) = gcd(3, 2) = 1. -/
+theorem seifert_coprime_m1_l1 : Nat.gcd 3 2 = 1 := by
+  decide
+
+/-- Seifert coprime invariant: gcd(m₂, ℓ₂) = gcd(4, 1) = 1. -/
+theorem seifert_coprime_m2_l2 : Nat.gcd 4 1 = 1 := by
+  decide
+
 /-- Normal bundle torsion: the reduced fibre has order m ≥ 2. -/
 theorem normal_bundle_torsion (m : ℕ) (N : LogTransformManifold m) : m ≥ 2 :=
   N.reducedFibre.order

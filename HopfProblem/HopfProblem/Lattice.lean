@@ -69,6 +69,21 @@ theorem T2_fourth : T2 ^ 4 = 1 := by
 theorem T0_unipotent : (T0 - 1) ^ 2 = 0 := by
   decide
 
+/-- The nilpotent monodromy matrix N := T₀ - I around the cusp p₀. -/
+def N_cusp : Matrix (Fin 4) (Fin 4) ℤ := T0 - 1
+
+/-- N is nilpotent of degree 2: N² = 0. -/
+theorem N_cusp_sq : N_cusp ^ 2 = 0 := by
+  decide
+
+/-- N is non-zero: the cusp monodromy is not the identity. -/
+theorem N_cusp_nonzero : N_cusp ≠ 0 := by
+  decide
+
+/-- N has exact nilpotency index 2: N ≠ 0 and N² = 0. -/
+theorem N_cusp_index_two : N_cusp ≠ 0 ∧ N_cusp ^ 2 = 0 :=
+  ⟨N_cusp_nonzero, N_cusp_sq⟩
+
 /-- The monodromy relation around the sphere: T₁ * T₂ * T₀ = 1. -/
 theorem monodromy_relation : T1 * T2 * T0 = 1 := by
   decide
@@ -104,6 +119,15 @@ theorem Q0_invariant_T0 : T0.transpose * Q0 * T0 = Q0 := by
 /-- The invariant basis vector γ = (1, 0, 0, 0)ᵀ generating V^G (Lemma 2.7). -/
 def gamma_vec : Fin 4 → ℤ := ![1, 0, 0, 0]
 
+/-- Basis vector u = (0, 1, 0, 0)ᵀ. -/
+def u_vec : Fin 4 → ℤ := ![0, 1, 0, 0]
+
+/-- Basis vector w = (0, 0, 1, 0)ᵀ. -/
+def w_vec : Fin 4 → ℤ := ![0, 0, 1, 0]
+
+/-- Basis vector δ = (0, 0, 0, 1)ᵀ. -/
+def delta_vec : Fin 4 → ℤ := ![0, 0, 0, 1]
+
 /-- T₁ fixes γ. -/
 theorem T1_fixes_gamma : mulVec T1 gamma_vec = gamma_vec := by
   decide
@@ -114,6 +138,22 @@ theorem T2_fixes_gamma : mulVec T2 gamma_vec = gamma_vec := by
 
 /-- T₀ fixes γ. -/
 theorem T0_fixes_gamma : mulVec T0 gamma_vec = gamma_vec := by
+  decide
+
+/-- Picard-Lefschetz action of N on δ: N(δ) = γ (Theorem 2.9). -/
+theorem N_cusp_mul_delta : mulVec N_cusp delta_vec = gamma_vec := by
+  decide
+
+/-- Picard-Lefschetz action of N on w: N(w) = -u (Theorem 2.9). -/
+theorem N_cusp_mul_w : mulVec N_cusp w_vec = -u_vec := by
+  decide
+
+/-- N annihilates the invariant vector γ: N(γ) = 0. -/
+theorem N_cusp_mul_gamma : mulVec N_cusp gamma_vec = 0 := by
+  decide
+
+/-- N annihilates u: N(u) = 0. -/
+theorem N_cusp_mul_u : mulVec N_cusp u_vec = 0 := by
   decide
 
 /-- Dual action A₁ := (T₁⁻¹)ᵗ fixes ε := γ̂ + 2û - 4ŵ = (1, 2, -4, 0)ᵗ. -/
