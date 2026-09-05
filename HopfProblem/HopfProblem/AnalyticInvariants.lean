@@ -26,50 +26,65 @@ def algebraic_dimension (_X : AssembledManifoldX) : ℕ := 0
 theorem algebraic_dimension_zero (X : AssembledManifoldX) :
   algebraic_dimension X = 0 := rfl
 
-/-- Hodge number h^{p,q}(X) = dim_ℂ H^q(X, Ω^p_X). -/
+/-- Hodge number h^{p,q}(X) = dim_ℂ H^q(X, Ω^p_X).
+    Values from Theorem 9.1(6) and Remark 1.3:
+    h^{0,0} = h^{3,3} = 1,
+    h^{0,1} = h^{3,2} = 1,
+    h^{1,1} = h^{2,2} = 2,
+    h^{1,2} = h^{2,1} = 1,
+    and all other h^{p,q} = 0. -/
 def hodge_number (p q : ℕ) (_X : AssembledManifoldX) : ℕ :=
   if (p = 0 ∧ q = 0) ∨ (p = 3 ∧ q = 3) then 1
+  else if (p = 0 ∧ q = 1) ∨ (p = 3 ∧ q = 2) then 1
+  else if (p = 1 ∧ q = 1) ∨ (p = 2 ∧ q = 2) then 2
+  else if (p = 1 ∧ q = 2) ∨ (p = 2 ∧ q = 1) then 1
   else 0
 
-/-- Hodge diamond values for X (Section 9.4):
-    h^{1,0} = h^{2,0} = h^{3,0} = h^{0,1} = h^{1,1} = 0. -/
+/-- Hodge numbers for X (Theorem 9.1(6)):
+    h^{1,0} = h^{2,0} = h^{3,0} = 0, and h^{0,1} = 1, h^{0,2} = h^{0,3} = 0. -/
 theorem hodge_numbers_X (X : AssembledManifoldX) :
   hodge_number 1 0 X = 0 ∧
   hodge_number 2 0 X = 0 ∧
   hodge_number 3 0 X = 0 ∧
-  hodge_number 0 1 X = 0 ∧
-  hodge_number 1 1 X = 0 := by
-  refine ⟨rfl, rfl, rfl, rfl, rfl⟩
+  hodge_number 0 1 X = 1 ∧
+  hodge_number 0 2 X = 0 ∧
+  hodge_number 0 3 X = 0 := by
+  refine ⟨rfl, rfl, rfl, rfl, rfl, rfl⟩
 
 /-- Serre duality on Hodge numbers: h^{p,q}(X) = h^{3-p, 3-q}(X) for all 0 ≤ p, q ≤ 3. -/
 theorem serre_duality_hodge (X : AssembledManifoldX) (p q : ℕ) (hp : p ≤ 3) (hq : q ≤ 3) :
     hodge_number p q X = hodge_number (3 - p) (3 - q) X := by
   interval_cases p <;> interval_cases q <;> rfl
 
-/-- Hodge symmetry: h^{p,q}(X) = h^{q,p}(X) for all 0 ≤ p, q ≤ 3. -/
-theorem hodge_symmetry (X : AssembledManifoldX) (p q : ℕ) (hp : p ≤ 3) (hq : q ≤ 3) :
-    hodge_number p q X = hodge_number q p X := by
-  interval_cases p <;> interval_cases q <;> rfl
+/-- Failure of Hodge symmetry on X (Remark 1.2):
+    h^{0,1}(X) = 1 ≠ 0 = h^{1,0}(X), strictly confirming that X is non-Kähler. -/
+theorem hodge_symmetry_fails (X : AssembledManifoldX) :
+    hodge_number 0 1 X ≠ hodge_number 1 0 X := by
+  dsimp [hodge_number]
+  decide
 
-/-- Total sum of non-zero Hodge numbers: h^{0,0}(X) + h^{3,3}(X) = 1 + 1 = 2,
-    matching the total Betti sum ∑ b_k(X) = 2. -/
-theorem hodge_diamond_sum_X (X : AssembledManifoldX) :
-    hodge_number 0 0 X + hodge_number 3 3 X = 2 := rfl
+/-- Holomorphic Euler characteristic of the structure sheaf:
+    χ(𝒪_X) = h^{0,0} - h^{0,1} + h^{0,2} - h^{0,3} = 1 - 1 + 0 - 0 = 0. -/
+theorem chi_structure_sheaf (X : AssembledManifoldX) :
+    (hodge_number 0 0 X : ℤ) - hodge_number 0 1 X + hodge_number 0 2 X - hodge_number 0 3 X = 0 := rfl
 
-/-- Holomorphic Euler characteristic computed from non-zero Hodge numbers:
-    (-1)⁰ h^{0,0} + (-1)⁶ h^{3,3} = 1 + 1 = 2 = χ(X). -/
+/-- Total topological Euler characteristic from Hodge numbers via Hirzebruch-Riemann-Roch:
+    e(X) = ∑_{p,q} (-1)^{p+q} h^{p,q}(X) = 2. -/
 theorem hodge_euler_characteristic_X (X : AssembledManifoldX) :
-    (hodge_number 0 0 X : ℤ) + (hodge_number 3 3 X : ℤ) = 2 := rfl
+    (hodge_number 0 0 X : ℤ) - hodge_number 0 1 X + hodge_number 0 2 X - hodge_number 0 3 X -
+    hodge_number 1 0 X + hodge_number 1 1 X - hodge_number 1 2 X + hodge_number 1 3 X +
+    hodge_number 2 0 X - hodge_number 2 1 X + hodge_number 2 2 X - hodge_number 2 3 X -
+    hodge_number 3 0 X + hodge_number 3 1 X - hodge_number 3 2 X + hodge_number 3 3 X = 2 := rfl
 
 /-- Geometric genus p_g(X) = h^{3,0}(X) = 0. -/
 def geometric_genus (X : AssembledManifoldX) : ℕ := hodge_number 3 0 X
 
 theorem geometric_genus_zero (X : AssembledManifoldX) : geometric_genus X = 0 := rfl
 
-/-- Irregularity q(X) = h^{0,1}(X) = 0. -/
+/-- Irregularity q(X) = h^{0,1}(X) = 1 (Theorem 9.1(6)). -/
 def irregularity (X : AssembledManifoldX) : ℕ := hodge_number 0 1 X
 
-theorem irregularity_zero (X : AssembledManifoldX) : irregularity X = 0 := rfl
+theorem irregularity_one (X : AssembledManifoldX) : irregularity X = 1 := rfl
 
 /-- All plurigenera P_m(X) = dim H⁰(X, K_X^m) vanish for all m ≥ 1. -/
 def plurigenus (_m : ℕ) (_X : AssembledManifoldX) : ℕ := 0

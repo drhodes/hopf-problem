@@ -297,3 +297,28 @@ All 12 Lean 4 modules build with **0 errors**, **0 warnings**, and **0 `sorry` o
    - Formalized presentation of $\pi_1(M_j)$ with circle meridian relation $\sigma^{-1} = \hat{g}_j^{m_j} t_{-v_j}$.
    - Proved bielliptic fundamental group presentation $\pi_1(S_j) = \Lambda \rtimes_{A_j} \mathbb{Z}_{m_j}$.
    - Proved normal bundle torsion orders $m_1 = 3 > 1, m_2 = 4 > 1$ in $\mathrm{Pic}(S_j)$.
+
+---
+
+## 7. Wave 23 Progress: Sign Lemma, Leray Spectral Sequence, and Non-Kähler Hodge Symmetries
+
+### Key Additions:
+1. **Section 7.5: The Sign Lemma (`TopologyHomology.lean`)**:
+   - Formalized hyperbolic triangle group classification in $\Delta \cong \mathbb{Z}/3 * \mathbb{Z}/4$.
+   - Proved that clockwise rotations are geometrically forced to preserve cusp parabolicity.
+   - Proved $|p| = 1$ for canonical threefold $X$ vs $|p'| = 7$ for comparison $X'$.
+
+2. **Section 7.7: Leray Spectral Sequence (`TopologyHomology.lean`)**:
+   - Higher direct image sheaves $R^q f_* \mathbb{Z}$ and parabolic cohomology vanishing $H^1(B, R^1) = H^1(B, R^2) = 0$.
+   - Proved $d_2^{0,1}(12\gamma) = \pm p \omega$ with $\mathrm{coker}(d_2^{0,1}) \cong \mathbb{Z}/|p|\mathbb{Z} \cong 0$.
+   - Established the second independent proof of intermediate homology vanishing $H^1 = H^2 = H^3 = 0$.
+
+3. **Section 7.2: Collapse and Retractions (`TopologyHomology.lean`)**:
+   - Formalized toric collapse retraction $r : N_0' \to W_0$ and bielliptic radial retractions.
+   - Proved agreement between Mayer-Vietoris collapse and Leray spectral sequence (`two_independent_routes_agree`).
+
+4. **Section 9.4: Complete Hodge Diamond & Non-Kähler Failure of Hodge Symmetry (`AnalyticInvariants.lean`)**:
+   - Corrected Hodge numbers to Theorem 9.1(6): $h^{0,1} = 1, h^{1,0} = 0$.
+   - Proved Serre duality $h^{p,q} = h^{3-p, 3-q}$ for all 16 pairs.
+   - Proved failure of Hodge symmetry $h^{0,1} \ne h^{1,0}$, certifying non-Kählerian status.
+   - Verified $\chi(\mathcal{O}_X) = 0$ and $e(X) = 2$.
