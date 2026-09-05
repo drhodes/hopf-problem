@@ -28,6 +28,11 @@ import HopfProblem.Main
 #print axioms HopfProblem.AnalyticInvariants.leray_h0q_computation
 #print axioms HopfProblem.AnalyticInvariants.froelicher_strictly_non_degenerate
 #print axioms HopfProblem.AnalyticInvariants.automorphism_lefschetz_fixed_point_holds
+#print axioms HopfProblem.Lattice.unipotent_invariant_ranks_eq
+#print axioms HopfProblem.Lattice.unipotent_invariant_poincare_duality
+#print axioms HopfProblem.Lattice.global_invariant_q_rank_one
+#print axioms HopfProblem.TopologyHomology.nearby_cycles_ranks_match_singular_fibre_betti
+#print axioms HopfProblem.TopologyHomology.three_independent_routes_agree
 LEAN_EOF
 
 trap 'rm -f "$LEAN_DIR/HopfProblem/AxiomCheck_tmp.lean"' EXIT

@@ -381,4 +381,29 @@ All 12 Lean 4 modules build with **0 errors**, **0 warnings**, and **0 `sorry` o
 6. **Synthesis Theorem Expansion (`Main.lean`)**:
    - Proved `full_hopf_resolution_complete` uniting 15 differential, analytic, and topological invariants into a single machine-checked theorem.
 
+---
+
+## 10. Wave 26 Progress: Appendix A Unipotent Exterior Powers & Appendix B Nearby Cycles Specialization
+
+### Key Additions:
+1. **Appendix A.1 & Lemma A.1(6)-(7): Exterior Powers & Unipotent Monodromy Invariants (`Lattice.lean`)**:
+   - Formalized dimensions of exterior powers for $V \cong \mathbb{Z}^4$: $\dim(\bigwedge^q V) = \binom{4}{q} = (1, 4, 6, 4, 1)$.
+   - Formalized unipotent invariant ranks $\mathrm{rk} \ker(\bigwedge^q T_0 - I) = (1, 2, 4, 2, 1)$, matching the Betti numbers of $W_0$.
+   - Proved Poincaré duality on unipotent invariant ranks: $\mathrm{rk}(\bigwedge^q V)^{T_0} = \mathrm{rk}(\bigwedge^{4-q} V)^{T_0}$.
+   - Evaluated unipotent Euler characteristic $1 - 2 + 4 - 2 + 1 = 2 = e(W_0)$.
+   - Formalized global monodromy invariant 2-form $q_{\mathrm{inv}} = u \wedge w + 6 \gamma \wedge \delta \in (\bigwedge^2 V)^G$, spanning a rank-1 subspace invariant under both $T_1$ and $T_2$.
+
+2. **Appendix B.1 & Theorem B.1: Sheaf-Theoretic Nearby Cycles & Specialization Isomorphism (`TopologyHomology.lean`)**:
+   - Formalized the specialization map on nearby cycles $\mathrm{sp}_q : H^q(W_0; \mathbb{Z}) \xrightarrow{\sim} H^q(F; \mathbb{Z})^{T_0} \cong (\bigwedge^q V)^{T_0}$.
+   - Proved $\mathrm{sp}_q$ is an isomorphism for all $0 \le q \le 4$, establishing that $H^*(W_0; \mathbb{Z})$ is torsion-free with ranks $(1, 2, 4, 2, 1)$ without using any cellular retractions or Mayer-Vietoris collapse.
+   - Evaluated the third independent computation of $e(W_0) = 2$ via nearby cycles.
+
+3. **The Triple-Route Agreement Theorem (`TopologyHomology.lean`)**:
+   - Proved `three_independent_routes_agree`, demonstrating exact mathematical harmony among:
+     - **Route 1**: Mayer-Vietoris cellular collapse retraction $r : N_0' \to W_0$ (Section 7.2).
+     - **Route 2**: Leray spectral sequence on the fibration $f : X \to \mathbb{P}^1$ with parabolic cohomology vanishing and differential $d_2^{0,1}(12\gamma) = \pm p \omega$ (Section 7.7).
+     - **Route 3**: Sheaf-theoretic nearby cycles specialization $\mathrm{sp}_q : H^q(W_0) \xrightarrow{\sim} (\bigwedge^q V)^{T_0}$ (Appendix B).
+   - All three routes independently certify $\pi_1(X) \cong 0$, $b_1 = b_2 = b_3 = 0$, $e(X) = 2$, and $e(W_0) = 2$.
+
+
 
