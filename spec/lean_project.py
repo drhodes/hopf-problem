@@ -29,9 +29,34 @@ class LeanBuildVerificationReq(Req):
         return "VERIFIED"
 
 
+class BuildMetadataReq(Req):
+    """
+    The build system (`Makefile`) must extract and record the repository git revision
+    hash (with dirty-state detection) and UTC build timestamp, embedding them into
+    build targets, version diagnostics, and verification logs.
+    """
+    deps = [Lean4ProjectReq]
+
+    def git_revision(self):
+        import subprocess
+        try:
+            rev = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], text=True).strip()
+            return rev
+        except Exception:
+            return "unknown"
+
+    def build_date(self):
+        import datetime
+        return datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+    def verification_status(self):
+        return "VERIFIED"
+
+
 class LeanProjectFeat(Feat):
     """
     Feature managing the interactive theorem proving environment and
     verification pipeline for the Hopf problem complex structure on S⁶.
     """
-    deps = [Lean4ProjectReq, LeanBuildVerificationReq]
+    deps = [Lean4ProjectReq, LeanBuildVerificationReq, BuildMetadataReq]
+

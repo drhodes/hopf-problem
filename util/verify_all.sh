@@ -22,7 +22,11 @@ RESET="\033[0m"
 echo -e "${BOLD}${CYAN}==============================================================================${RESET}"
 echo -e "${BOLD}${CYAN} HOPF PROBLEM FORMAL VERIFICATION: INTEGRABLE COMPLEX STRUCTURE ON S⁶${RESET}"
 echo -e "${BOLD}${CYAN}==============================================================================${RESET}"
+GIT_REV="${GIT_REV:-$(git rev-parse --short HEAD 2>/dev/null || echo 'unknown')}"
+BUILD_DATE="${BUILD_DATE:-$(date -u +"%Y-%m-%d %H:%M:%S UTC")}"
+echo -e "Revision: ${YELLOW}${GIT_REV}${RESET} | Build Date: ${YELLOW}${BUILD_DATE}${RESET}"
 echo ""
+
 
 # Step 1: Lean 4 Compilation
 echo -e "${BOLD}${BLUE}[1/5] Compiling Lean 4 Formalization (lake build)...${RESET}"
