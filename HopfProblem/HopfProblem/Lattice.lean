@@ -73,6 +73,18 @@ theorem T0_unipotent : (T0 - 1) ^ 2 = 0 := by
 theorem monodromy_relation : T1 * T2 * T0 = 1 := by
   decide
 
+/-- T₁ has determinant 1 (belongs to SL(4, ℤ)). -/
+theorem T1_det : T1.det = 1 := by
+  decide
+
+/-- T₂ has determinant 1 (belongs to SL(4, ℤ)). -/
+theorem T2_det : T2.det = 1 := by
+  decide
+
+/-- T₀ has determinant 1 (belongs to SL(4, ℤ)). -/
+theorem T0_det : T0.det = 1 := by
+  decide
+
 /-- Q₀ is skew-symmetric: Q₀ᵀ = -Q₀. -/
 theorem Q0_skew_symmetric : Q0.transpose = -Q0 := by
   decide

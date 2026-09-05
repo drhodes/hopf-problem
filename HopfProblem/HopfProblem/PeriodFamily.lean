@@ -20,6 +20,9 @@ open HopfProblem.Lattice
 /-- The upper half plane ℍ = {τ ∈ ℂ | Im(τ) > 0}. -/
 def UpperHalfPlane := {τ : ℂ // τ.im > 0}
 
+/-- The imaginary part of any parameter in the upper half plane is strictly positive. -/
+theorem tau_im_pos (τ : UpperHalfPlane) : τ.val.im > 0 := τ.property
+
 /-- The punctured base curve B° = ℂP¹ \ {p₁, p₂, p₀}. -/
 structure BaseOrbifold where
   carrier : Type

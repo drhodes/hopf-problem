@@ -32,7 +32,7 @@ The project is structured into five sequential verification waves:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                     EIGHT-WAVE FORMALIZATION PIPELINE                  │
+│                      NINE-WAVE FORMALIZATION PIPELINE                  │
 ├─────────┬──────────────────────────────┬───────────────────────────────┤
 │ Wave 1  │ Architecture & Scaffolding   │ Complete Lean 4 AST skeleton   │
 │         │                              │ across 12 modules; lake builds│
@@ -57,6 +57,9 @@ The project is structured into five sequential verification waves:
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
 │ Wave 8  │ Complete Zero-Stub Milestone │ All ': True' fields eliminated│
 │         │                              │ 0 trivial tactics, pure kernel│
+├─────────┼──────────────────────────────┼───────────────────────────────┤
+│ Wave 9  │ SL(4, ℤ) & Orbifold Rigidity │ det(T_j) = 1 in SL(4, ℤ),     │
+│         │ Foundations                  │ 12·χ_orb = -5 < 0, 2·m = n    │
 └─────────┴──────────────────────────────┴───────────────────────────────┘
 ```
 
