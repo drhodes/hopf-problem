@@ -6,7 +6,7 @@ fixed-point-free quotient actions, multiple fibres, and bielliptic surface reduc
 
 from .err import Feat
 from .proof import LogarithmicTransformProof
-from .lattice_monodromy import MonodromyGeneratorsReq
+from .lattice_monodromy import LatticeMonodromyFeat, MonodromyGeneratorsReq
 
 
 class FixedPointFreenessReq(LogarithmicTransformProof):
@@ -94,6 +94,7 @@ class LogarithmicTransformsFeat(Feat):
     multiple fibre multiplicities 3 and 4, and smooth bielliptic reductions.
     """
     deps = [
+        LatticeMonodromyFeat,
         FixedPointFreenessReq,
         MultipleFibreOrdersReq,
         BiellipticReductionReq,

@@ -6,7 +6,7 @@ the diffeomorphism X ≅_diff S⁶, and the resulting integrable complex structu
 
 from .err import Feat
 from .proof import DifferentialRecognitionProof
-from .topology_homology import SimpleConnectivityReq, IntegralHomologyMayerVietorisReq
+from .topology_homology import TopologyHomologyFeat, SimpleConnectivityReq, IntegralHomologyMayerVietorisReq
 from .manifold_gluing import CollarTransitionGluingReq
 
 
@@ -77,6 +77,7 @@ class SphereRecognitionFeat(Feat):
     and the construction of the integrable complex structure on the six-sphere.
     """
     deps = [
+        TopologyHomologyFeat,
         HomotopySphereRecognitionReq,
         ExoticSphereVanishingReq,
         DiffeomorphismToS6Req,

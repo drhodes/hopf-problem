@@ -6,7 +6,7 @@ normal crossings central fibre W, double locus, triple points, and vanishing cyc
 
 from .err import Feat
 from .proof import ToricDegenerationProof
-from .lattice_monodromy import ToricSublatticeReq
+from .lattice_monodromy import LatticeMonodromyFeat, ToricSublatticeReq
 
 
 class A2TriangulationFanReq(ToricDegenerationProof):
@@ -112,6 +112,7 @@ class ToricFillingFeat(Feat):
     the del Pezzo normalization, and vanishing cycle collapse.
     """
     deps = [
+        LatticeMonodromyFeat,
         A2TriangulationFanReq,
         ToricDeckActionReq,
         DelPezzoNormalizationReq,

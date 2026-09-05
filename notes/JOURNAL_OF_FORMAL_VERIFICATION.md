@@ -28,11 +28,11 @@ By gluing these local models to a smooth modular family $\mathcal{J} \to B^\circ
 
 ## 2. Formalization Pipeline & Wave Status
 
-The project is structured into four sequential verification waves:
+The project is structured into five sequential verification waves:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                      FOUR-WAVE FORMALIZATION PIPELINE                  │
+│                      FIVE-WAVE FORMALIZATION PIPELINE                  │
 ├─────────┬──────────────────────────────┬───────────────────────────────┤
 │ Wave 1  │ Architecture & Scaffolding   │ Complete Lean 4 AST skeleton   │
 │         │                              │ across 12 modules; lake builds│
@@ -43,8 +43,11 @@ The project is structured into four sequential verification waves:
 │ Wave 3  │ Topological & Sheaf Bridges  │ Homology, Betti numbers,      │
 │         │                              │ Euler char, 0 sorries achieved│
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
-│ Wave 4  │ Forensic Audit & Critique    │ Axiom traces, 50-hazard check,│
+│ Wave 4  │ Forensic Audit & Ledger      │ Axiom traces, 50-hazard check,│
 │         │                              │ critique.md & journal sync    │
+├─────────┼──────────────────────────────┼───────────────────────────────┤
+│ Wave 5  │ De-Axiomatization & Apex     │ Quotient manifold gluing,     │
+│         │ Synthesis                    │ Diffeomorphism equiv, apex DAG│
 └─────────┴──────────────────────────────┴───────────────────────────────┘
 ```
 

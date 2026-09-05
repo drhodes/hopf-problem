@@ -8,6 +8,7 @@ from .err import Feat
 from .proof import SheafCohomologyProof
 from .manifold_gluing import CollarTransitionGluingReq
 from .toric_filling import DoubleLocusTriplePointsReq
+from .sphere_recognition import SphereRecognitionFeat
 
 
 class AlgebraicDimensionReq(SheafCohomologyProof):
@@ -140,6 +141,7 @@ class AnalyticInvariantsFeat(Feat):
     non-torsion canonical bundle, and Frölicher non-degeneration.
     """
     deps = [
+        SphereRecognitionFeat,
         AlgebraicDimensionReq,
         DirectImageSheavesReq,
         HodgeNumbersReq,

@@ -6,9 +6,9 @@ smooth family 𝒥 along collars, and regluing by local sections (ℓ₀, ℓ₁
 
 from .err import Feat
 from .proof import ManifoldGluingProof
-from .toric_filling import ToricFillingManifoldReq
-from .logarithmic_transforms import KodairaLogTransformReq
-from .period_family import SmoothTorusFamilyReq
+from .toric_filling import ToricFillingFeat, ToricFillingManifoldReq
+from .logarithmic_transforms import LogarithmicTransformsFeat, KodairaLogTransformReq
+from .period_family import PeriodFamilyFeat, SmoothTorusFamilyReq
 
 
 class HolomorphicCocycleCompatibilityReq(ManifoldGluingProof):
@@ -81,6 +81,9 @@ class ManifoldGluingFeat(Feat):
     holomorphic collar transition cocycles, and discrete section parameters (ℓ₀, ℓ₁, ℓ₂).
     """
     deps = [
+        PeriodFamilyFeat,
+        ToricFillingFeat,
+        LogarithmicTransformsFeat,
         HolomorphicCocycleCompatibilityReq,
         ZeroSectionRigidityReq,
         SectionTranslationModuliReq,

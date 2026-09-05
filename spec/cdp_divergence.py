@@ -6,8 +6,8 @@ of the central fibre W and the non-vanishing theorem R² f_*(T_X ⊗ L) ≠ 0.
 
 from .err import Feat
 from .proof import DeformationObstructionProof
-from .toric_filling import DelPezzoNormalizationReq
-from .manifold_gluing import CollarTransitionGluingReq
+from .toric_filling import ToricFillingFeat, DelPezzoNormalizationReq
+from .manifold_gluing import ManifoldGluingFeat, CollarTransitionGluingReq
 from .lattice_monodromy import MonodromyInvariantsReq
 
 
@@ -80,6 +80,8 @@ class CDPDivergenceFeat(Feat):
     and the proof of R² f_*(T_X ⊗ L) ≠ 0.
     """
     deps = [
+        ToricFillingFeat,
+        ManifoldGluingFeat,
         MayerVietorisNormalCrossingsReq,
         NonNormalConormalSectionReq,
         CDPHypothesisOneFailureReq,

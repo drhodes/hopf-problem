@@ -6,7 +6,11 @@ indefinite Hodge signature (1, 1), and smooth family of complex 2-tori.
 
 from .err import Feat
 from .proof import ModularPeriodProof
-from .lattice_monodromy import MonodromyGeneratorsReq, TriangleGroupOrbifoldReq
+from .lattice_monodromy import (
+    LatticeMonodromyFeat,
+    MonodromyGeneratorsReq,
+    TriangleGroupOrbifoldReq,
+)
 
 
 class PeriodMatrixReq(ModularPeriodProof):
@@ -126,6 +130,7 @@ class PeriodFamilyFeat(Feat):
     indefinite Hodge signature, and torus fibration over the thrice-punctured sphere.
     """
     deps = [
+        LatticeMonodromyFeat,
         PeriodMatrixReq,
         UniformisingTauReq,
         MuTorsorReq,

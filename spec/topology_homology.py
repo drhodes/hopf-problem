@@ -8,7 +8,7 @@ from .err import Feat
 from .proof import MayerVietorisTopologyProof
 from .toric_filling import DelPezzoNormalizationReq, VanishingCyclesCollapseReq, ToricFillingManifoldReq
 from .logarithmic_transforms import BiellipticReductionReq
-from .manifold_gluing import SectionTranslationModuliReq
+from .manifold_gluing import ManifoldGluingFeat, SectionTranslationModuliReq
 
 
 class RetractionOntoWReq(MayerVietorisTopologyProof):
@@ -169,6 +169,7 @@ class TopologyHomologyFeat(Feat):
     integral homology determination, and Euler characteristic localization of Section 7.
     """
     deps = [
+        ManifoldGluingFeat,
         RetractionOntoWReq,
         SingularFibreHomologyReq,
         BiellipticFibreHomologyReq,
