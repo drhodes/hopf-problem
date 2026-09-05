@@ -83,9 +83,46 @@ theorem S_mul_e2 : Matrix.mulVec S_mod e2_vec = -e1_vec := by
 theorem T_mul_e2 : Matrix.mulVec T_mod e2_vec = e1_vec + e2_vec := by
   decide
 
+/-- T maps basis vector e₁ to e₁: T(e₁) = e₁. -/
+theorem T_mul_e1 : Matrix.mulVec T_mod e1_vec = e1_vec := by
+  decide
+
 /-- Trace of a 2x2 integer matrix. -/
 def tr2 (M : Matrix (Fin 2) (Fin 2) ℤ) : ℤ :=
   M 0 0 + M 1 1
+
+/-- The modular generators S and T do not commute: ST ≠ TS. -/
+theorem ST_noncommutative : S_mod * T_mod ≠ T_mod * S_mod := by
+  decide
+
+/-- Tr(TS) = 1 (elliptic element of order 6). -/
+theorem TS_trace : tr2 (T_mod * S_mod) = 1 := by
+  decide
+
+/-- (TS)³ = -I in SL(2, ℤ). -/
+theorem TS_cubed : (T_mod * S_mod) ^ 3 = -1 := by
+  decide
+
+/-- (TS)⁶ = I in SL(2, ℤ). -/
+theorem TS_sixth : (T_mod * S_mod) ^ 6 = 1 := by
+  decide
+
+/-- The modular translation inverse matrix T⁻¹ = [[1, -1], [0, 1]]. -/
+def T_inv_mod : Matrix (Fin 2) (Fin 2) ℤ :=
+  !![ 1, -1;
+      0,  1]
+
+/-- T⁻¹ has determinant 1 (belongs to SL(2, ℤ)). -/
+theorem T_inv_det : T_inv_mod.det = 1 := by
+  decide
+
+/-- T * T⁻¹ = I in SL(2, ℤ). -/
+theorem T_mul_T_inv : T_mod * T_inv_mod = 1 := by
+  decide
+
+/-- T⁻¹ * T = I in SL(2, ℤ). -/
+theorem T_inv_mul_T : T_inv_mod * T_mod = 1 := by
+  decide
 
 /-- Tr(S) = 0 (elliptic element of order 4). -/
 theorem S_trace : tr2 S_mod = 0 := rfl

@@ -180,4 +180,14 @@ theorem poincare_duality_betti (k : ℕ) (hk : k ≤ 6) :
     bettiX k = bettiX (6 - k) := by
   interval_cases k <;> rfl
 
+/-- Total sum of Betti numbers of X is 2: ∑_{k=0}^6 b_k(X) = 1 + 0 + 0 + 0 + 0 + 0 + 1 = 2. -/
+theorem total_betti_sum_X :
+    bettiX 0 + bettiX 1 + bettiX 2 + bettiX 3 + bettiX 4 + bettiX 5 + bettiX 6 = 2 := rfl
+
+/-- Total sum of Betti numbers of the singular central fibre W₀:
+    ∑_{k=0}^4 b_k(W₀) = 1 + 2 + 4 + 2 + 1 = 10. -/
+theorem total_betti_sum_W0 :
+    singularFibreBetti 0 + singularFibreBetti 1 + singularFibreBetti 2 +
+    singularFibreBetti 3 + singularFibreBetti 4 = 10 := rfl
+
 end HopfProblem.TopologyHomology

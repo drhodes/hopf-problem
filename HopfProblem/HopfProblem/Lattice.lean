@@ -263,4 +263,48 @@ theorem lambda_tor_rank_eq_two :
 theorem B0_iso (a b : ℤ) (h : a • w_hat + b • delta_hat = 0) : a = 0 ∧ b = 0 :=
   w_delta_linearly_independent a b h
 
+/-- T₀ fixes the basis vector u: T₀(u) = u. -/
+theorem T0_fixes_u : mulVec T0 u_vec = u_vec := by
+  decide
+
+/-- The invariant vectors γ and u generating the T₀-fixed space are linearly independent over ℤ. -/
+theorem gamma_u_linearly_independent (a b : ℤ) (h : a • gamma_vec + b • u_vec = 0) :
+    a = 0 ∧ b = 0 := by
+  have h0 : (a • gamma_vec + b • u_vec) 0 = 0 := congrFun h 0
+  have h1 : (a • gamma_vec + b • u_vec) 1 = 0 := congrFun h 1
+  dsimp [gamma_vec, u_vec] at h0 h1
+  constructor <;> omega
+
+/-- The fixed vectors γ and ε of the order-3 monodromy are linearly independent over ℤ. -/
+theorem gamma_eps_linearly_independent (a b : ℤ) (h : a • gamma_vec + b • eps = 0) :
+    a = 0 ∧ b = 0 := by
+  have h0 : (a • gamma_vec + b • eps) 0 = 0 := congrFun h 0
+  have h1 : (a • gamma_vec + b • eps) 1 = 0 := congrFun h 1
+  dsimp [gamma_vec, eps] at h0 h1
+  constructor <;> omega
+
+/-- The fixed vectors γ and ε' of the order-4 monodromy are linearly independent over ℤ. -/
+theorem gamma_eps_prime_linearly_independent (a b : ℤ) (h : a • gamma_vec + b • eps_prime = 0) :
+    a = 0 ∧ b = 0 := by
+  have h0 : (a • gamma_vec + b • eps_prime) 0 = 0 := congrFun h 0
+  have h1 : (a • gamma_vec + b • eps_prime) 1 = 0 := congrFun h 1
+  dsimp [gamma_vec, eps_prime] at h0 h1
+  constructor <;> omega
+
+/-- Cyclotomic factorization for T₁: (T₁ - I)(T₁² + T₁ + I) = T₁³ - I = 0. -/
+theorem T1_cyclotomic : (T1 - 1) * (T1 ^ 2 + T1 + 1) = 0 := by
+  decide
+
+/-- Factorization for T₂: (T₂² - I)(T₂² + I) = T₂⁴ - I = 0. -/
+theorem T2_cyclotomic : (T2 ^ 2 - 1) * (T2 ^ 2 + 1) = 0 := by
+  decide
+
+/-- The inverse of the unipotent cusp matrix T₀ = I + N is I - N. -/
+theorem T0_mul_inv_N : T0 * (1 - N_cusp) = 1 := by
+  decide
+
+/-- Left unipotent inverse identity: (I - N) T₀ = I. -/
+theorem inv_N_mul_T0 : (1 - N_cusp) * T0 = 1 := by
+  decide
+
 end HopfProblem.Lattice

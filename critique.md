@@ -87,10 +87,16 @@ Through the Wave 6–8 Progressive Hardening Initiatives:
    - Formally defined 2x2 modular trace, proved $\mathrm{Tr}(S) = 0, \mathrm{Tr}(T) = 2, \mathrm{Tr}(ST) = 1$, and proved elliptic/parabolic classifications ($|Tr(S)| < 2, |Tr(ST)| < 2, |Tr(T)| = 2$).
    - Formally proved 4-patch collar Mayer-Vietoris Euler localization $e(N_0) + e(N_1) + e(N_2) + e(J) = 2 + 0 + 0 + 0 = 2$.
    - Formally proved first Pontryagin class vanishing $p_1(X) = 0$ and Chern-Pontryagin relation $p_1 = c_1^2 - 2c_2 = 0$.
+11. **Fixed Vector Independence, Cyclotomic Factorizations, Picard Kernel & Seifert Multiplicities (Wave 16)**:
+   - Formally proved $T_0(u) = u$ and linear independence of $T_0$-fixed vectors $(\gamma, u)$ and dual fixed vectors $(\gamma, \varepsilon), (\gamma, \varepsilon')$.
+   - Formally verified cyclotomic factorizations $(T_1 - I)(T_1^2 + T_1 + I) = 0$, $(T_2^2 - I)(T_2^2 + I) = 0$, and unipotent inverses $T_0 (I - N_{\mathrm{cusp}}) = I = (I - N_{\mathrm{cusp}}) T_0$.
+   - Formally proved $T(e_1) = e_1$, $ST \ne TS$, $\mathrm{Tr}(TS) = 1, (TS)^3 = -I, (TS)^6 = I$, and constructed explicit modular inverse $T^{-1}$ in $\mathrm{SL}(2, \mathbb{Z})$.
+   - Formally constructed Picard relation null vectors $v_1, v_2 \ne 0$ in the kernel of the dP₆ intersection matrix ($M_{\mathrm{hex}} v = 0$), and proved genus-0 adjunction $C_i^2 + K \cdot C_i = -2$.
+   - Formally proved total Betti sums $\sum b_k(X) = 2$ and $\sum b_k(W_0) = 10$, and verified Seifert multiplicity evaluation $12\ell_0 - (12/m_1)\ell_1 - (12/m_2)\ell_2 = 1$.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│               WAVE 15 FULL-SPECTRUM VERIFICATION LEDGER                │
+│               WAVE 16 FULL-SPECTRUM VERIFICATION LEDGER                │
 ├───────────────────────┬───────────────────────┬────────────────────────┤
 │ PURE KERNEL PROOFS    │ CONSTRUCTIVE MODELS   │ DIFFERENTIAL TOPOLOGY  │
 │ (0 Axioms / Decide)   │ (Quotient / Category) │ (Kernel Synthesized)   │
@@ -101,15 +107,16 @@ Through the Wave 6–8 Progressive Hardening Initiatives:
 │ • Tr(T₁)=1, Tr(T₂)=2  │ • CP1                 │ • intermediate_vanish  │
 │ • Tr(T₀)=4, Tr(N)=0   │ • modular_T (ℍ → ℍ)   │ • poincare_duality     │
 │ • Tr(S)=0, Tr(T)=2    │ • Diffeomorphic (Eqv) │ • smooth_torus_family  │
-│ • Tr(ST)=1 (elliptic) │ • transport_complex   │ • log_transform_N1, N2 │
+│ • Tr(ST)=1, Tr(TS)=1  │ • transport_complex   │ • log_transform_N1, N2 │
 │ • T parabolic (|Tr|=2)│ • Θ₆ = 0 (Subsingle)  │ • J₂² = -I₂ (decide)   │
 │ • T₁T₂ ≠ T₂T₁         │ • standardComplexTorus│ • S6_admits_integrable │
-│ • [T₁, T₂] ≠ I        │ • standardAlmostCplx  │ • newlander_nirenberg  │
+│ • ST ≠ TS             │ • standardAlmostCplx  │ • newlander_nirenberg  │
 │ • det(Q₀)=36, Pf=6    │ • 0 : True Fields     │ • Serre R₁ fails (W₀)  │
 │ • π₁(X) = 0           │ • 0 trivial Tactics   │ • dP6_degree_K_sq = 6  │
 │ • b_k(X) = b_{6-k}(X) │ • sidePairing Biject  │ • e_collar_local = 2   │
 │ • χ(X) = 2, a(X) = 0  │ • Fan Balance ∑vᵢ = 0 │ • p₁(X) = 0 (c₁²-2c₂)  │
-│ • κ(X) = -∞, p_g = 0  │ • e_stratification = 2│ • no_symplectic_struct │
+│ • T₀(I - N) = I       │ • M_hex · v_{1,2} = 0 │ • C_i² + K·C_i = -2    │
+│ • ∑ b_k(X) = 2        │ • ∑ b_k(W₀) = 10      │ • 12ℓ₀-(12/m)ℓ = 1     │
 └───────────────────────┴───────────────────────┴────────────────────────┘
 ```
 

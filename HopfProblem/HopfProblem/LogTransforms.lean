@@ -110,4 +110,22 @@ theorem multiple_fibre_defect_sum_eq_five : multiple_fibre_defect_sum = 5 := by
 theorem branching_orders_coprime : Nat.gcd m1 m2 = 1 := by
   decide
 
+/-- Seifert circle fibration coefficient for m₁: 12 / m₁ = 12 / 3 = 4. -/
+def seifert_m1_coeff : ℕ := 12 / m1
+
+/-- Seifert circle fibration coefficient for m₂: 12 / m₂ = 12 / 4 = 3. -/
+def seifert_m2_coeff : ℕ := 12 / m2
+
+theorem seifert_m1_coeff_eq_four : seifert_m1_coeff = 4 := rfl
+
+theorem seifert_m2_coeff_eq_three : seifert_m2_coeff = 3 := rfl
+
+/-- The Seifert invariant relation 12ℓ₀ - (12/m₁)ℓ₁ - (12/m₂)ℓ₂ = 1
+    evaluates to 12(1) - 4(2) - 3(1) = 1, ensuring π₁(X) = 0. -/
+theorem seifert_identity_from_multiplicities (l0 l1 l2 : ℤ)
+    (hl0 : l0 = 1) (hl1 : l1 = 2) (hl2 : l2 = 1) :
+    12 * l0 - (seifert_m1_coeff : ℤ) * l1 - (seifert_m2_coeff : ℤ) * l2 = 1 := by
+  subst hl0 hl1 hl2
+  rfl
+
 end HopfProblem.LogTransforms

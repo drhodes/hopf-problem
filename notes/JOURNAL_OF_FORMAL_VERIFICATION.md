@@ -32,7 +32,7 @@ The project is structured into five sequential verification waves:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                    FIFTEEN-WAVE FORMALIZATION PIPELINE                 │
+│                    SIXTEEN-WAVE FORMALIZATION PIPELINE                 │
 ├─────────┬──────────────────────────────┬───────────────────────────────┤
 │ Wave 1  │ Architecture & Scaffolding   │ Complete Lean 4 AST skeleton   │
 │         │                              │ across 12 modules; lake builds│
@@ -81,6 +81,9 @@ The project is structured into five sequential verification waves:
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
 │ Wave 15 │ Matrix Traces & Collar Euler │ Tr(T_j), elliptic/parabolic,  │
 │         │ Localization                 │ e_collar_local = 2, p₁(X) = 0 │
+├─────────┼──────────────────────────────┼───────────────────────────────┤
+│ Wave 16 │ Fixed Subspaces, Cyclotomic  │ Indep (γ, u), T₀(I-N)=I, M·v=0│
+│         │ Factorizations & Seifert     │ Adj g=0, ∑b_k=2, 12-(12/m)ℓ=1 │
 └─────────┴──────────────────────────────┴───────────────────────────────┘
 ```
 

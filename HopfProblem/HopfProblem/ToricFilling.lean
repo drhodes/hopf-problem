@@ -100,6 +100,37 @@ theorem dP6_degree_K_sq :
     dP6_row_sum 3 + dP6_row_sum 4 + dP6_row_sum 5 = 6 := by
   rfl
 
+/-- First canonical Picard relation vector on dP₆: 2C₀ + C₁ - C₂ - 2C₃ - C₄ + C₅ = 0. -/
+def dP6_picard_relation_1 : Fin 6 → ℤ := ![2, 1, -1, -2, -1, 1]
+
+/-- The vector dP6_picard_relation_1 is non-zero. -/
+theorem dP6_picard_relation_1_ne_zero : dP6_picard_relation_1 ≠ 0 := by
+  decide
+
+/-- The vector dP6_picard_relation_1 lies in the kernel of the intersection matrix:
+    Picard relations on dP₆ give non-trivial null vectors of the intersection matrix. -/
+theorem dP6_picard_relation_1_in_ker :
+    mulVec dP6_intersection_matrix dP6_picard_relation_1 = 0 := by
+  decide
+
+/-- Second canonical Picard relation vector on dP₆: C₁ + C₂ - C₄ - C₅ = 0. -/
+def dP6_picard_relation_2 : Fin 6 → ℤ := ![0, 1, 1, 0, -1, -1]
+
+/-- The vector dP6_picard_relation_2 is non-zero. -/
+theorem dP6_picard_relation_2_ne_zero : dP6_picard_relation_2 ≠ 0 := by
+  decide
+
+/-- The vector dP6_picard_relation_2 lies in the kernel of the intersection matrix. -/
+theorem dP6_picard_relation_2_in_ker :
+    mulVec dP6_intersection_matrix dP6_picard_relation_2 = 0 := by
+  decide
+
+/-- Genus-0 adjunction formula for each (-1)-curve on dP₆:
+    2g(C_i) - 2 = C_i² + K · C_i = -1 + (-1) = -2, verifying g(C_i) = 0. -/
+theorem dP6_adjunction_genus_zero (i : Fin 6) :
+    dP6_intersection_matrix i i + (- dP6_row_sum i) = -2 := by
+  fin_cases i <;> rfl
+
 /-- The side-pairing identification involution on the 6 boundary (-1)-curves: i ↦ (i + 3) % 6. -/
 def sidePairing (i : Fin 6) : Fin 6 :=
   ⟨(i.val + 3) % 6, by omega⟩
