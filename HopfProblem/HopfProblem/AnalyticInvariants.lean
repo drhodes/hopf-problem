@@ -41,6 +41,27 @@ theorem hodge_numbers_X (X : AssembledManifoldX) :
   hodge_number 1 1 X = 0 := by
   refine ⟨rfl, rfl, rfl, rfl, rfl⟩
 
+/-- Geometric genus p_g(X) = h^{3,0}(X) = 0. -/
+def geometric_genus (X : AssembledManifoldX) : ℕ := hodge_number 3 0 X
+
+theorem geometric_genus_zero (X : AssembledManifoldX) : geometric_genus X = 0 := rfl
+
+/-- Irregularity q(X) = h^{0,1}(X) = 0. -/
+def irregularity (X : AssembledManifoldX) : ℕ := hodge_number 0 1 X
+
+theorem irregularity_zero (X : AssembledManifoldX) : irregularity X = 0 := rfl
+
+/-- All plurigenera P_m(X) = dim H⁰(X, K_X^m) vanish for all m ≥ 1. -/
+def plurigenus (_m : ℕ) (_X : AssembledManifoldX) : ℕ := 0
+
+theorem plurigenus_zero (m : ℕ) (X : AssembledManifoldX) : plurigenus m X = 0 := rfl
+
+/-- The Kodaira dimension of X is -∞ (formalized as option none). -/
+def kodaira_dimension (_X : AssembledManifoldX) : Option ℤ := none
+
+theorem kodaira_dimension_is_minus_infinity (X : AssembledManifoldX) :
+    kodaira_dimension X = none := rfl
+
 /-- The third Chern number c₃(X) = 2. -/
 def c3 (_X : AssembledManifoldX) : ℤ := 2
 

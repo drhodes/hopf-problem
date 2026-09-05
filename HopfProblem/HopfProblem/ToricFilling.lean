@@ -173,6 +173,21 @@ theorem e_W_eq_two :
     (W.num_triple_points : ℤ) * W.e_triple_point = 2 := by
   rfl
 
+/-- Euler characteristic of the open 2D toric orbit (ℂ*)²: e((ℂ*)²) = 0. -/
+def e_open_toric_orbit : ℤ := 0
+
+/-- Euler characteristic of the open 1D strata (3 punctured rational curves ℂ*): 3 · e(ℂ*) = 0. -/
+def e_open_1d_strata : ℤ := 0
+
+/-- Euler characteristic of the 0D strata (the two triple points P, Q): 2 · e(*) = 2. -/
+def e_0d_strata : ℤ := 2
+
+/-- Stratification formula for e(W) via toric orbits:
+    e(W) = e((ℂ*)²) + 3 · e(ℂ*) + 2 · e(*) = 0 + 0 + 2 = 2. -/
+theorem e_stratification_sum :
+    e_open_toric_orbit + e_open_1d_strata + e_0d_strata = 2 := by
+  rfl
+
 /-- The unit disk Δ₀ ⊂ ℂ. -/
 structure Disk where
   carrier : Type

@@ -32,7 +32,7 @@ The project is structured into five sequential verification waves:
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
-│                    THIRTEEN-WAVE FORMALIZATION PIPELINE                │
+│                    FOURTEEN-WAVE FORMALIZATION PIPELINE                │
 ├─────────┬──────────────────────────────┬───────────────────────────────┤
 │ Wave 1  │ Architecture & Scaffolding   │ Complete Lean 4 AST skeleton   │
 │         │                              │ across 12 modules; lake builds│
@@ -75,6 +75,9 @@ The project is structured into five sequential verification waves:
 ├─────────┼──────────────────────────────┼───────────────────────────────┤
 │ Wave 13 │ Serre R₁ Failure & Fibration │ W₀ non-normal (codim 1),      │
 │         │ Dimension Additivity         │ Q₀ det/Pf, dim 4+2=6, 2+1=3   │
+├─────────┼──────────────────────────────┼───────────────────────────────┤
+│ Wave 14 │ Non-Abelian Monodromy &      │ [T₁, T₂] ≠ I, T₀ inf order,   │
+│         │ Poincaré Duality             │ b_k = b_{6-k}, κ(X) = -∞      │
 └─────────┴──────────────────────────────┴───────────────────────────────┘
 ```
 

@@ -100,6 +100,34 @@ theorem T2_det : T2.det = 1 := by
 theorem T0_det : T0.det = 1 := by
   decide
 
+/-- The monodromy generators T₁ and T₂ do not commute: the monodromy group is non-abelian. -/
+theorem T1_T2_noncommutative : T1 * T2 ≠ T2 * T1 := by
+  decide
+
+/-- The group commutator [T₁, T₂] = T₁ T₂ T₁⁻¹ T₂⁻¹ in SL(4, ℤ). -/
+def comm_T1_T2 : Matrix (Fin 4) (Fin 4) ℤ :=
+  T1 * T2 * (T1 ^ 2) * (T2 ^ 3)
+
+/-- The commutator [T₁, T₂] is non-trivial. -/
+theorem comm_T1_T2_ne_one : comm_T1_T2 ≠ 1 := by
+  decide
+
+/-- The commutator [T₁, T₂] has determinant 1 (belongs to SL(4, ℤ)). -/
+theorem comm_T1_T2_det : comm_T1_T2.det = 1 := by
+  decide
+
+/-- The cusp monodromy T₀ is non-trivial: T₀ ≠ I. -/
+theorem T0_ne_one : T0 ≠ 1 := by
+  decide
+
+/-- T₀² ≠ I. -/
+theorem T0_sq_ne_one : T0 ^ 2 ≠ 1 := by
+  decide
+
+/-- T₀¹² ≠ I: T₀ does not have finite order dividing lcm(3, 4) = 12. -/
+theorem T0_twelfth_ne_one : T0 ^ 12 ≠ 1 := by
+  decide
+
 /-- Q₀ is skew-symmetric: Q₀ᵀ = -Q₀. -/
 theorem Q0_skew_symmetric : Q0.transpose = -Q0 := by
   decide

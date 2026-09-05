@@ -175,4 +175,9 @@ theorem no_symplectic_structure (vol omega_cubed : ℤ)
     (h_compat : omega_cubed = vol) : False := by
   omega
 
+/-- Poincaré duality on Betti numbers: b_k(X) = b_{6-k}(X) for all 0 ≤ k ≤ 6. -/
+theorem poincare_duality_betti (k : ℕ) (hk : k ≤ 6) :
+    bettiX k = bettiX (6 - k) := by
+  interval_cases k <;> rfl
+
 end HopfProblem.TopologyHomology
