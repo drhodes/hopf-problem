@@ -224,13 +224,27 @@ class LeanSourcePaperDeepLinkingReq(Req):
         ]
 
 
+class AuditDocumentGitHubDeepLinkingReq(Req):
+    r"""
+    The landscape audit document (`audit_landscape.tex` / `audit_landscape.pdf`)
+    must incorporate direct, active hyperlinks into the public GitHub repository
+    (https://github.com/drhodes/hopf-problem), including the title block header,
+    Mathlib frontier interface boundaries, and comparative block source references.
+    """
+    deps = [CleanAcademicTypographyReq, CoupledTwoColumnLayoutReq]
+
+    def github_repo_url(self):
+        return "https://github.com/drhodes/hopf-problem"
+
+
 class AuditDocumentFeat(Feat):
     r"""
     Synthesis feature specifying the Side-by-Side Landscape Audit Document
     for the machine-checked resolution of the Hopf Problem on S^6.
     Unifies standard mathematical nomenclature, unadorned academic typography,
     Haynes Miller's algebraic topology perspective, row-by-row coupled layout,
-    complete LaTeX transcription parity, and canonical paper deep-linking to https://alpo.ge/s6.pdf.
+    complete LaTeX transcription parity, canonical paper deep-linking to https://alpo.ge/s6.pdf,
+    and direct repository hyperlinks to https://github.com/drhodes/hopf-problem.
     """
     deps = [
         StandardMathematicalLanguageReq,
@@ -241,6 +255,7 @@ class AuditDocumentFeat(Feat):
         PaperTranscriptionParityReq,
         PaperUrlDeepLinkingReq,
         LeanSourcePaperDeepLinkingReq,
+        AuditDocumentGitHubDeepLinkingReq,
     ]
 
     def document_title(self):
@@ -248,3 +263,4 @@ class AuditDocumentFeat(Feat):
 
     def target_output(self):
         return "audit_landscape.pdf"
+

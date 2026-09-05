@@ -5,6 +5,7 @@ from . import (
     analytic_invariants,
     audit_document,
     cdp_divergence,
+    github_pages,
     infoview_util,
     lattice_monodromy,
     lean_project,
@@ -23,7 +24,7 @@ class HopfProblemResolutionFeat(Feat):
     Apex synthesis feature verifying the resolution of the Hopf Problem (1947):
     the construction of an integrable, almost-complex structure on the 6-sphere S⁶
     via the (3, 4, ∞) modular family of 2-tori completed at its three special points.
-    Unifies all 11 foundational, topological, analytic, and differential features.
+    Unifies all foundational, topological, analytic, differential, and dissemination features.
     """
     deps = [
         lean_project.LeanProjectFeat,
@@ -37,6 +38,7 @@ class HopfProblemResolutionFeat(Feat):
         sphere_recognition.SphereRecognitionFeat,
         analytic_invariants.AnalyticInvariantsFeat,
         cdp_divergence.CDPDivergenceFeat,
+        github_pages.GitHubPagesFeat,
     ]
 
     def lean_declaration(self):
@@ -63,4 +65,6 @@ class MainSpec(Spec):
             cdp_divergence,
             audit_document,
             mathlib_interface,
+            github_pages,
         ]
+

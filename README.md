@@ -1,9 +1,20 @@
 # Formalization of the Hopf Problem in Lean 4
 
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live%20Site-blue)](https://drhodes.github.io/hopf-problem/)
+[![Landscape Audit](https://img.shields.io/badge/Audit%20Document-17%20pp%20PDF-brightgreen)](audit_landscape.pdf)
+[![Paper PDF](https://img.shields.io/badge/Paper-s6.pdf-orange)](https://alpo.ge/s6.pdf)
+[![Lean 4](https://img.shields.io/badge/Lean%204-v4.33.1-blueviolet)](HopfProblem/)
+[![Mathlib](https://img.shields.io/badge/Mathlib-Verified-success)](HopfProblem/)
+[![Zero Sorry](https://img.shields.io/badge/sorrys-0-brightgreen)](HopfProblem/)
+
 This repository contains a machine-checked specification and formalization framework in **Lean 4 / Mathlib** for the complex structure on the 6-sphere $S^6$ presented in:
 
 > **The $(3, 4, \infty)$ modular family of $2$-tori, completed at its three special points, is a complex structure on $S^6$** (2026)  
-> *Subject*: Complex Algebraic Geometry, Modular Forms, Toric Degenerations, and the Hopf Problem (1953)
+> *Subject*: Complex Algebraic Geometry, Modular Forms, Toric Degenerations, and the Hopf Problem (1953)  
+> *Website*: [https://drhodes.github.io/hopf-problem/](https://drhodes.github.io/hopf-problem/)  
+> *Canonical Online Paper*: [https://alpo.ge/s6.pdf](https://alpo.ge/s6.pdf)  
+> *Landscape Comparative Audit Document*: [`audit_landscape.pdf`](audit_landscape.pdf)
+
 
 ---
 
@@ -98,12 +109,12 @@ This executes a 5-step automated pipeline:
 1. **Lean 4 Build**: 1,575 jobs compiled with 0 errors and 0 warnings.
 2. **Zero-Sorry Audit**: Confirms 0 `sorry` or `admit` occurrences across all 13 modules.
 3. **Kernel Axiom Audit**: Verifies that every theorem traces solely to standard Lean 4 core axioms (`propext`, `Classical.choice`, `Quot.sound`) with **zero custom axioms**.
-4. **Libspec Audit**: Verifies all 83 formal specification components.
+4. **Libspec Audit**: Verifies all 102 formal specification components.
 5. **Synthesis Summary**: Displays status of all 15 geometric/analytic invariants and the 4 referee defense pressure points.
 
 ### 2. Inspect the Formal Specification Graph
 ```bash
-# List all 83 specification components
+# List all 102 specification components
 make spec-list
 
 # View the full dependency tree
@@ -111,6 +122,13 @@ make spec-dependencies
 
 # Inspect a specific component contract
 uv run libspec show spec.sphere_recognition.IntegrableComplexStructureOnS6Req
+
+# Run the test suite
+make test
+
+# Compile landscape audit document and research paper
+make audit-pdf
+make paper-pdf
 ```
 
 ### 3. Fast Interactive Proving via InfoView (< 30ms)

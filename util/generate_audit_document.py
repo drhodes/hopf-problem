@@ -80,9 +80,12 @@ def build_latex_document():
 \newcommand{\paperref}[2]{\href{https://alpo.ge/s6.pdf\hashchar page=#1}{#2}}
 \newcommand{\paperpage}[1]{\href{https://alpo.ge/s6.pdf\hashchar page=#1}{p.~#1}}
 
+% GitHub repository deep-linking macros
+\newcommand{\githubrepo}[1]{\href{https://github.com/drhodes/hopf-problem}{#1}}
+\newcommand{\githublean}[2]{\href{https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/#1}{#2}}
 
-% Clean, unadorned comparative block with canonical paper deep link
-\newtcolorbox{comparativeblock}[3]{
+% Clean, unadorned comparative block with canonical paper & GitHub deep links
+\newtcolorbox{comparativeblock}[4]{
     enhanced,
     breakable,
     sidebyside,
@@ -99,7 +102,7 @@ def build_latex_document():
     right=2.5mm,
     before skip=2.5mm,
     after skip=2.5mm,
-    title={\small\textbf{#1} \hfill \paperref{#3}{\textbf{[s6.pdf, p.~#3]}} \hfill \texttt{\footnotesize\detokenize{#2}}},
+    title={\small\textbf{#1} \hfill \paperref{#3}{\textbf{[s6.pdf, p.~#3]}} \hfill \githublean{#4}{\textbf{[GitHub: HopfProblem/#4]}}},
     coltitle=black!90,
     colbacktitle=black!5,
     attach boxed title to top left={xshift=2mm, yshift=-2mm},
@@ -114,7 +117,8 @@ def build_latex_document():
 \begin{center}
     {\LARGE\bfseries The $(3,4,\infty)$ Modular Family of 2-Tori Completed at its Three Special Points}\\[0.3em]
     {\Large\bfseries is a Complex Structure on $S^6$: A Side-by-Side Comparative Audit}\\[0.8em]
-    {\normalsize\scshape A Machine-Checked Mathematical Formalization and Comparative Exposition}
+    {\normalsize\scshape A Machine-Checked Mathematical Formalization and Comparative Exposition}\\[0.5em]
+    {\small\githubrepo{\textbf{GitHub Repository: \texttt{https://github.com/drhodes/hopf-problem}}} \quad $\vert$ \quad \href{https://drhodes.github.io/hopf-problem/}{\textbf{Project Website: \texttt{https://drhodes.github.io/hopf-problem/}}}}
 \end{center}
 
 \vspace{0.5em}
@@ -152,21 +156,21 @@ Every theorem, lemma, and proposition in the left column is formally machine-che
 \toprule
 \textbf{Invariant} & \textbf{Mathematical Symbol} & \textbf{Value on $X$} & \textbf{Value on $S^6$} & \textbf{Paper} & \textbf{Lean 4 Formal Verification Identifier} \\
 \midrule
-Fundamental Group & $\pi_1(X)$ & $0$ & $0$ & \paperpage{55} & \texttt{\detokenize{HopfProblem.TopologyHomology.simple_connectivity}} \\
-Integral Homology & $H_k(X; \dbZ)$ & $(\dbZ, 0, 0, 0, 0, 0, \dbZ)$ & $(\dbZ, 0, 0, 0, 0, 0, \dbZ)$ & \paperpage{60} & \texttt{\detokenize{HopfProblem.TopologyHomology.integral_homology_S6}} \\
-Euler Characteristic & $e(X)$ & $2$ & $2$ & \paperpage{40} & \texttt{\detokenize{HopfProblem.TopologyHomology.euler_characteristic_X}} \\
-Differentiable Type & $[X] \in \Theta_6$ & Standard $S^6$ & Standard $S^6$ & \paperpage{63} & \texttt{\detokenize{HopfProblem.SphereRecognition.X_diffeomorphic_to_StandardS6}} \\
-Algebraic Dimension & $a(X)$ & $1$ & --- & \paperpage{64} & \texttt{\detokenize{HopfProblem.AnalyticInvariants.algebraic_dimension_threefold_eq_one}} \\
-Fiber Algebraic Dim & $a(F_b)$ (general fiber) & $0$ & --- & \paperpage{64} & \texttt{\detokenize{HopfProblem.AnalyticInvariants.fibre_algebraic_dimension_eq_zero}} \\
-Kodaira Dimension & $\kappa(X)$ & $-\infty$ & --- & \paperpage{64} & \texttt{\detokenize{HopfProblem.AnalyticInvariants.kodaira_dimension_is_minus_infinity}} \\
-Third Chern Class & $c_3(X) = \langle c_3(TX), [X]\rangle$ & $2$ & $2$ & \paperpage{4} & \texttt{\detokenize{HopfProblem.AnalyticInvariants.c3_eq_two}} \\
-Second Chern Number & $c_1(X)c_2(X)$ & $0$ & $0$ & \paperpage{4} & \texttt{\detokenize{HopfProblem.AnalyticInvariants.c1_c2_eq_zero}} \\
-Cubic Chern Number & $c_1^3(X)$ & $0$ & $0$ & \paperpage{4} & \texttt{\detokenize{HopfProblem.AnalyticInvariants.c1_cubed_eq_zero}} \\
-Tangent Bundle Index & $\chi(X, TX)$ & $1$ & --- & \paperpage{4} & \texttt{\detokenize{HopfProblem.AnalyticInvariants.chi_TX_eq_one}} \\
-Second Betti Number & $b_2(X)$ & $0$ & $0$ & \paperpage{4} & \texttt{\detokenize{HopfProblem.AnalyticInvariants.non_kaehlerian}} \\
-Structure Direct Image & $R^1 f_*\cO_X$ & $\cO_B \oplus \cO_B(-1)$ & --- & \paperpage{64} & \texttt{\detokenize{HopfProblem.AnalyticInvariants.R1_f_pushforward_OX}} \\
-Automorphism Algebra & $h^0(X, TX), \Aut^0(X)$ & $1, \; \dbC^*$ & --- & \paperpage{71} & \texttt{\detokenize{HopfProblem.AnalyticInvariants.h0_TX_eq_one}} \\
-Frölicher Degeneration & $E_1 \implies E_\infty$ & Non-degenerate at $E_1$ & --- & \paperpage{71} & \texttt{\detokenize{HopfProblem.AnalyticInvariants.froelicher_non_degeneration}} \\
+Fundamental Group & $\pi_1(X)$ & $0$ & $0$ & \paperpage{55} & \githublean{TopologyHomology.lean}{\texttt{\detokenize{HopfProblem.TopologyHomology.simple_connectivity}}} \\
+Integral Homology & $H_k(X; \dbZ)$ & $(\dbZ, 0, 0, 0, 0, 0, \dbZ)$ & $(\dbZ, 0, 0, 0, 0, 0, \dbZ)$ & \paperpage{60} & \githublean{TopologyHomology.lean}{\texttt{\detokenize{HopfProblem.TopologyHomology.integral_homology_S6}}} \\
+Euler Characteristic & $e(X)$ & $2$ & $2$ & \paperpage{40} & \githublean{TopologyHomology.lean}{\texttt{\detokenize{HopfProblem.TopologyHomology.euler_characteristic_X}}} \\
+Differentiable Type & $[X] \in \Theta_6$ & Standard $S^6$ & Standard $S^6$ & \paperpage{63} & \githublean{SphereRecognition.lean}{\texttt{\detokenize{HopfProblem.SphereRecognition.X_diffeomorphic_to_StandardS6}}} \\
+Algebraic Dimension & $a(X)$ & $1$ & --- & \paperpage{64} & \githublean{AnalyticInvariants.lean}{\texttt{\detokenize{HopfProblem.AnalyticInvariants.algebraic_dimension_threefold_eq_one}}} \\
+Fiber Algebraic Dim & $a(F_b)$ (general fiber) & $0$ & --- & \paperpage{64} & \githublean{AnalyticInvariants.lean}{\texttt{\detokenize{HopfProblem.AnalyticInvariants.fibre_algebraic_dimension_eq_zero}}} \\
+Kodaira Dimension & $\kappa(X)$ & $-\infty$ & --- & \paperpage{64} & \githublean{AnalyticInvariants.lean}{\texttt{\detokenize{HopfProblem.AnalyticInvariants.kodaira_dimension_is_minus_infinity}}} \\
+Third Chern Class & $c_3(X) = \langle c_3(TX), [X]\rangle$ & $2$ & $2$ & \paperpage{4} & \githublean{AnalyticInvariants.lean}{\texttt{\detokenize{HopfProblem.AnalyticInvariants.c3_eq_two}}} \\
+Second Chern Number & $c_1(X)c_2(X)$ & $0$ & $0$ & \paperpage{4} & \githublean{AnalyticInvariants.lean}{\texttt{\detokenize{HopfProblem.AnalyticInvariants.c1_c2_eq_zero}}} \\
+Cubic Chern Number & $c_1^3(X)$ & $0$ & $0$ & \paperpage{4} & \githublean{AnalyticInvariants.lean}{\texttt{\detokenize{HopfProblem.AnalyticInvariants.c1_cubed_eq_zero}}} \\
+Tangent Bundle Index & $\chi(X, TX)$ & $1$ & --- & \paperpage{4} & \githublean{AnalyticInvariants.lean}{\texttt{\detokenize{HopfProblem.AnalyticInvariants.chi_TX_eq_one}}} \\
+Second Betti Number & $b_2(X)$ & $0$ & $0$ & \paperpage{4} & \githublean{AnalyticInvariants.lean}{\texttt{\detokenize{HopfProblem.AnalyticInvariants.non_kaehlerian}}} \\
+Structure Direct Image & $R^1 f_*\cO_X$ & $\cO_B \oplus \cO_B(-1)$ & --- & \paperpage{64} & \githublean{AnalyticInvariants.lean}{\texttt{\detokenize{HopfProblem.AnalyticInvariants.R1_f_pushforward_OX}}} \\
+Automorphism Algebra & $h^0(X, TX), \Aut^0(X)$ & $1, \; \dbC^*$ & --- & \paperpage{71} & \githublean{AnalyticInvariants.lean}{\texttt{\detokenize{HopfProblem.AnalyticInvariants.h0_TX_eq_one}}} \\
+Frölicher Degeneration & $E_1 \implies E_\infty$ & Non-degenerate at $E_1$ & --- & \paperpage{71} & \githublean{AnalyticInvariants.lean}{\texttt{\detokenize{HopfProblem.AnalyticInvariants.froelicher_non_degeneration}}} \\
 \bottomrule
 \end{tabular*}
 \end{center}
@@ -216,31 +220,31 @@ Frölicher Degeneration & $E_1 \implies E_\infty$ & Non-degenerate at $E_1$ & --
 \node[interface, below=2.5mm of b1] (i1) {
     \textbf{Typed Interface Boundary:}\\
     \texttt{\detokenize{ExternalTheories.lean}}\\
-    \texttt{\detokenize{SphereRecognition.lean}}\\
+    \githublean{SphereRecognition.lean}{\textbf{\color{blue!70!black}\texttt{SphereRecognition.lean}}}\\
     \href{https://alpo.ge/s6.pdf#page=63}{\textbf{\color{blue!70!black}\S8 Smale--Kervaire--Milnor [p.~63]}}\\
     \texttt{\detokenize{X_diffeomorphic_to_StandardS6}}
 };
 
 \node[interface, below=2.5mm of b2] (i2) {
     \textbf{Typed Interface Boundary:}\\
-    \texttt{\detokenize{LogTransforms.lean}}\\
-    \texttt{\detokenize{ToricFilling.lean}}\\
+    \githublean{LogTransforms.lean}{\textbf{\color{blue!70!black}\texttt{LogTransforms.lean}}}\\
+    \githublean{ToricFilling.lean}{\textbf{\color{blue!70!black}\texttt{ToricFilling.lean}}}\\
     \href{https://alpo.ge/s6.pdf#page=31}{\textbf{\color{blue!70!black}\S5 Log Transforms [p.~31]}}\\
     \href{https://alpo.ge/s6.pdf#page=24}{\textbf{\color{blue!70!black}\S4 Toric Cusp Filling [p.~24]}}
 };
 
 \node[interface, below=2.5mm of b3] (i3) {
     \textbf{Typed Interface Boundary:}\\
-    \texttt{\detokenize{TopologyHomology.lean}}\\
-    \texttt{\detokenize{Lattice.lean}}\\
+    \githublean{TopologyHomology.lean}{\textbf{\color{blue!70!black}\texttt{TopologyHomology.lean}}}\\
+    \githublean{Lattice.lean}{\textbf{\color{blue!70!black}\texttt{Lattice.lean}}}\\
     \href{https://alpo.ge/s6.pdf#page=40}{\textbf{\color{blue!70!black}\S7 Leray Spectral Sequence [p.~40]}}\\
     \href{https://alpo.ge/s6.pdf#page=55}{\textbf{\color{blue!70!black}\S7 Sign Lemma Seifert [p.~55]}}
 };
 
 \node[interface, below=2.5mm of b4] (i4) {
     \textbf{Typed Interface Boundary:}\\
-    \texttt{\detokenize{CDPDivergence.lean}}\\
-    \texttt{\detokenize{AnalyticInvariants.lean}}\\
+    \githublean{CDPDivergence.lean}{\textbf{\color{blue!70!black}\texttt{CDPDivergence.lean}}}\\
+    \githublean{AnalyticInvariants.lean}{\textbf{\color{blue!70!black}\texttt{AnalyticInvariants.lean}}}\\
     \href{https://alpo.ge/s6.pdf#page=84}{\textbf{\color{blue!70!black}\S10 Conductor Sheaf [p.~84]}}\\
     \href{https://alpo.ge/s6.pdf#page=84}{\textbf{\color{blue!70!black}\S10 CDP Reconciliation [p.~84]}}
 };
@@ -392,12 +396,13 @@ Frölicher Degeneration & $E_1 \implies E_\infty$ & Non-degenerate at $E_1$ & --
 % ==============================================================================
 \section{The Main Theorems and Global Synthesis}
 
-\begin{comparativeblock}{Theorem 1.1: Complex Structure on the 6-Sphere}{HopfProblem.Main.hopf_complex_structure_on_S6}{3}
+\begin{comparativeblock}{Theorem 1.1: Complex Structure on the 6-Sphere}{HopfProblem.Main.hopf_complex_structure_on_S6}{3}{Main.lean}
 \begin{verbatim}
 -- Module: HopfProblem.Main
 -- Declaration: hopf_complex_structure_on_S6
 -- Location: HopfProblem/Main.lean:31-33
 -- Paper: https://alpo.ge/s6.pdf#page=3
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Main.lean#L31-L33
 
 def hopf_complex_structure_on_S6 :
   IntegrableComplexStructure StandardS6 := by
@@ -429,12 +434,13 @@ By Smale's $h$-cobordism theorem and the Kervaire--Milnor classification ($\Thet
 \end{proof}
 \end{comparativeblock}
 
-\begin{comparativeblock}{Theorem 1.2: The System of 15 Topological and Complex-Analytic Invariants}{HopfProblem.Main.full_hopf_resolution_complete}{4}
+\begin{comparativeblock}{Theorem 1.2: The System of 15 Topological and Complex-Analytic Invariants}{HopfProblem.Main.full_hopf_resolution_complete}{4}{Main.lean}
 \begin{verbatim}
 -- Module: HopfProblem.Main
 -- Declaration: full_hopf_resolution_complete
 -- Location: HopfProblem/Main.lean:134-168
 -- Paper: https://alpo.ge/s6.pdf#page=4
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Main.lean#L134-L168
 
 theorem full_hopf_resolution_complete :
   ∃ (X : AssembledManifoldX),
@@ -494,12 +500,13 @@ Let $X$ and $f\colon X \to \dbP^1$ be the compact complex $3$-manifold construct
 \end{theorem}
 \end{comparativeblock}
 
-\begin{comparativeblock}{Theorem 1.3: Reconciliation with the CDP20 Deformation Obstruction}{HopfProblem.Main.cdp_reconciliation_synthesis}{84}
+\begin{comparativeblock}{Theorem 1.3: Reconciliation with the CDP20 Deformation Obstruction}{HopfProblem.Main.cdp_reconciliation_synthesis}{84}{Main.lean}
 \begin{verbatim}
 -- Module: HopfProblem.Main
 -- Declaration: cdp_reconciliation_synthesis
 -- Location: HopfProblem/Main.lean:174-181
 -- Paper: https://alpo.ge/s6.pdf#page=84
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Main.lean#L174-L181
 
 theorem cdp_reconciliation_synthesis :
     (¬ (serre_grothendieck_duality.h2_fibre_dim = 0)) ∧
@@ -522,12 +529,13 @@ The existence of $X$ does not contradict the mathematical core of Campana--Demai
 \end{theorem}
 \end{comparativeblock}
 
-\begin{comparativeblock}{Theorem 1.4: Triple-Route Homology Consensus}{HopfProblem.Main.triple_route_homology_synthesis}{40}
+\begin{comparativeblock}{Theorem 1.4: Triple-Route Homology Consensus}{HopfProblem.Main.triple_route_homology_synthesis}{40}{Main.lean}
 \begin{verbatim}
 -- Module: HopfProblem.Main
 -- Declaration: triple_route_homology_synthesis
 -- Location: HopfProblem/Main.lean:186-196
 -- Paper: https://alpo.ge/s6.pdf#page=40
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Main.lean#L186-L196
 
 theorem triple_route_homology_synthesis :
     ThreeRoutesAgree assembled_X_exists ∧
@@ -563,12 +571,13 @@ All three routes agree that $b_1 = b_2 = b_3 = b_4 = b_5 = 0$ and $b_0 = b_6 = 1
 % ==============================================================================
 \section{The Monodromy Lattice and Symplectic Representation}
 
-\begin{comparativeblock}{Definition 2.1: The Lattices $V$ and $\Lambda$}{HopfProblem.Lattice.V_rank4}{8}
+\begin{comparativeblock}{Definition 2.1: The Lattices $V$ and $\Lambda$}{HopfProblem.Lattice.V_rank4}{8}{Lattice.lean}
 \begin{verbatim}
 -- Module: HopfProblem.Lattice
 -- Declaration: V_rank4, Lambda_rank4
 -- Location: HopfProblem/Lattice.lean:24-38
 -- Paper: https://alpo.ge/s6.pdf#page=8
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Lattice.lean#L24-L38
 
 def V := Fin 4 → ℤ
 def Lambda := Fin 4 → ℤ
@@ -593,12 +602,13 @@ For $T \in \GL(V)$, the contragredient action on the dual lattice $\Lambda$ is d
 \end{definition}
 \end{comparativeblock}
 
-\begin{comparativeblock}{Proposition 2.5: Monodromy Generators $T_1, T_2, T_0 \in \Sp(4,\dbZ)$}{HopfProblem.Lattice.T1_matrix}{8}
+\begin{comparativeblock}{Proposition 2.5: Monodromy Generators $T_1, T_2, T_0 \in \Sp(4,\dbZ)$}{HopfProblem.Lattice.T1_matrix}{8}{Lattice.lean}
 \begin{verbatim}
 -- Module: HopfProblem.Lattice
 -- Declaration: T1_matrix, T2_matrix, T0_matrix
 -- Location: HopfProblem/Lattice.lean:45-72
 -- Paper: https://alpo.ge/s6.pdf#page=8
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Lattice.lean#L45-L72
 
 def T1 : Matrix (Fin 4) (Fin 4) ℤ :=
   !![1,  0, -6,  2;
@@ -635,12 +645,13 @@ These matrices satisfy:
 \end{proposition}
 \end{comparativeblock}
 
-\begin{comparativeblock}{Proposition 2.9: Invariant Alternating Form $Q_0$}{HopfProblem.Lattice.Q0_matrix}{11}
+\begin{comparativeblock}{Proposition 2.9: Invariant Alternating Form $Q_0$}{HopfProblem.Lattice.Q0_matrix}{11}{Lattice.lean}
 \begin{verbatim}
 -- Module: HopfProblem.Lattice
 -- Declaration: Q0_matrix, Q0_symplectic
 -- Location: HopfProblem/Lattice.lean:85-104
 -- Paper: https://alpo.ge/s6.pdf#page=11
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Lattice.lean#L85-L104
 
 def Q0 : Matrix (Fin 4) (Fin 4) ℤ :=
   !![ 0,  0,  0,  1;
@@ -675,12 +686,13 @@ Consequently, the monodromy representation takes values in the integral symplect
 % ==============================================================================
 \section{The \texorpdfstring{$(3,4,\infty)$}{(3,4,infty)} Modular Period Family}
 
-\begin{comparativeblock}{Definition 3.1 \& Proposition 3.4: The Period Matrix $\Pi(z)$}{HopfProblem.PeriodFamily.period_matrix_Pi}{13}
+\begin{comparativeblock}{Definition 3.1 \& Proposition 3.4: The Period Matrix $\Pi(z)$}{HopfProblem.PeriodFamily.period_matrix_Pi}{13}{PeriodFamily.lean}
 \begin{verbatim}
 -- Module: HopfProblem.PeriodFamily
 -- Declaration: period_matrix_Pi, tau_uniformising
 -- Location: HopfProblem/PeriodFamily.lean:40-68
 -- Paper: https://alpo.ge/s6.pdf#page=13
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/PeriodFamily.lean#L40-L68
 
 def period_matrix (τ μ β : ℂ) : Matrix (Fin 2) (Fin 4) ℂ :=
   !![6 * μ, τ, 1, 0;
@@ -706,12 +718,13 @@ The nondegeneracy condition $D(z) := \operatorname{Im}\beta - \frac{6(\operatorn
 \end{definition}
 \end{comparativeblock}
 
-\begin{comparativeblock}{Theorem 3.8: Indefinite Hodge Signature $(1,1)$}{HopfProblem.PeriodFamily.indefinite_hodge_signature}{15}
+\begin{comparativeblock}{Theorem 3.8: Indefinite Hodge Signature $(1,1)$}{HopfProblem.PeriodFamily.indefinite_hodge_signature}{15}{PeriodFamily.lean}
 \begin{verbatim}
 -- Module: HopfProblem.PeriodFamily
 -- Declaration: indefinite_hodge_signature
 -- Location: HopfProblem/PeriodFamily.lean:80-98
 -- Paper: https://alpo.ge/s6.pdf#page=15
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/PeriodFamily.lean#L80-L98
 
 theorem indefinite_hodge_signature (τ μ β : ℂ) (hτ : τ.im > 0)
     (hD : β.im - 6 * (μ.im ^ 2) / τ.im < 0) :
@@ -738,12 +751,13 @@ Consequently, the general $2$-torus fiber carries no positive line bundle, and h
 % ==============================================================================
 \section{Toric Filling of the Cusp}
 
-\begin{comparativeblock}{Construction 4.1 \& Proposition 4.5: Anticanonical Hexagon of $dP_6$}{HopfProblem.ToricFilling.anticanonical_hexagon_dP6}{24}
+\begin{comparativeblock}{Construction 4.1 \& Proposition 4.5: Anticanonical Hexagon of $dP_6$}{HopfProblem.ToricFilling.anticanonical_hexagon_dP6}{24}{ToricFilling.lean}
 \begin{verbatim}
 -- Module: HopfProblem.ToricFilling
 -- Declaration: fan_Sigma, anticanonical_hexagon_dP6
 -- Location: HopfProblem/ToricFilling.lean:35-64
 -- Paper: https://alpo.ge/s6.pdf#page=24
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/ToricFilling.lean#L35-L64
 
 theorem anticanonical_hexagon_dP6 :
     DelPezzoDegree6Normalisation ∧
@@ -765,12 +779,13 @@ The double locus $D = \mathrm{Sing}(W_0)$ consists of three smooth rational curv
 \end{proposition}
 \end{comparativeblock}
 
-\begin{comparativeblock}{Theorem 4.9: Collapse of Vanishing Cycles Sublattice}{HopfProblem.ToricFilling.vanishing_cycles_collapse}{26}
+\begin{comparativeblock}{Theorem 4.9: Collapse of Vanishing Cycles Sublattice}{HopfProblem.ToricFilling.vanishing_cycles_collapse}{26}{ToricFilling.lean}
 \begin{verbatim}
 -- Module: HopfProblem.ToricFilling
 -- Declaration: vanishing_cycles_collapse
 -- Location: HopfProblem/ToricFilling.lean:75-92
 -- Paper: https://alpo.ge/s6.pdf#page=26
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/ToricFilling.lean#L75-L92
 
 theorem vanishing_cycles_collapse :
     VanishingSublatticeLambdaToric = Submodule.span ℤ {w_hat, delta_hat} ∧
@@ -797,12 +812,13 @@ Consequently, in the local fundamental group $\pi_1(N_0 \setminus W_0) \cong \La
 % ==============================================================================
 \section{Bielliptic Fibers and Logarithmic Transformations}
 
-\begin{comparativeblock}{Definition 5.1 \& Theorem 5.8: Multiple Fibers of Orders 3 and 4}{HopfProblem.LogTransforms.multiple_fibre_orders}{31}
+\begin{comparativeblock}{Definition 5.1 \& Theorem 5.8: Multiple Fibers of Orders 3 and 4}{HopfProblem.LogTransforms.multiple_fibre_orders}{31}{LogTransforms.lean}
 \begin{verbatim}
 -- Module: HopfProblem.LogTransforms
 -- Declaration: multiple_fibre_orders, normal_bundle_torsion
 -- Location: HopfProblem/LogTransforms.lean:30-58
 -- Paper: https://alpo.ge/s6.pdf#page=31
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/LogTransforms.lean#L30-L58
 
 def m1 : ℕ := 3
 def m2 : ℕ := 4
@@ -832,12 +848,13 @@ where $S_1, S_2$ are smooth bielliptic surfaces, and the normal bundle $\cO_X(S_
 % ==============================================================================
 \section{Construction of the Compact Complex 3-Manifold \texorpdfstring{$X$}{X}}
 
-\begin{comparativeblock}{Theorem 6.8: Assembled Complex 3-Manifold $X$}{HopfProblem.ManifoldGluing.assembled_X_exists}{36}
+\begin{comparativeblock}{Theorem 6.8: Assembled Complex 3-Manifold $X$}{HopfProblem.ManifoldGluing.assembled_X_exists}{36}{ManifoldGluing.lean}
 \begin{verbatim}
 -- Module: HopfProblem.ManifoldGluing
 -- Declaration: assembled_X_exists, section_regluing_triple
 -- Location: HopfProblem/ManifoldGluing.lean:45-78
 -- Paper: https://alpo.ge/s6.pdf#page=36
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/ManifoldGluing.lean#L45-L78
 
 def section_triple : ℤ × ℤ × ℤ := (0, 1, -1)
 
@@ -868,12 +885,13 @@ The surjective holomorphic map $f\colon X \to \dbP^1$ is proper, with connected 
 % ==============================================================================
 \section{Fundamental Group and Integral Homology}
 
-\begin{comparativeblock}{Lemma 7.16 \& Theorem 7.17: The Sign Lemma and Simple Connectivity}{HopfProblem.TopologyHomology.simple_connectivity}{55}
+\begin{comparativeblock}{Lemma 7.16 \& Theorem 7.17: The Sign Lemma and Simple Connectivity}{HopfProblem.TopologyHomology.simple_connectivity}{55}{TopologyHomology.lean}
 \begin{verbatim}
 -- Module: HopfProblem.TopologyHomology
 -- Declaration: sign_lemma_seifert, simple_connectivity
 -- Location: HopfProblem/TopologyHomology.lean:28-60
 -- Paper: https://alpo.ge/s6.pdf#page=55
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/TopologyHomology.lean#L28-L60
 
 theorem seifert_coprime_relation : 12 * l0 - 4 * l1 - 3 * l2 = 1 := by
   decide
@@ -904,12 +922,13 @@ Hence $|\pi_1(X)| = |-1| = 1$, and $X$ is \textbf{simply connected}: $\pi_1(X) \
 \end{theorem}
 \end{comparativeblock}
 
-\begin{comparativeblock}{Theorem 7.22: Integral Homology of the 6-Sphere}{HopfProblem.TopologyHomology.integral_homology_S6}{60}
+\begin{comparativeblock}{Theorem 7.22: Integral Homology of the 6-Sphere}{HopfProblem.TopologyHomology.integral_homology_S6}{60}{TopologyHomology.lean}
 \begin{verbatim}
 -- Module: HopfProblem.TopologyHomology
 -- Declaration: integral_homology_S6, euler_characteristic_X
 -- Location: HopfProblem/TopologyHomology.lean:70-105
 -- Paper: https://alpo.ge/s6.pdf#page=60
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/TopologyHomology.lean#L70-L105
 
 theorem integral_homology_S6 (k : ℕ) :
     bettiX k = if k = 0 ∨ k = 6 then 1 else 0 := by
@@ -937,12 +956,13 @@ In particular, $b_2(X) = b_3(X) = 0$, and the topological Euler characteristic e
 % ==============================================================================
 \section{Differentiable Recognition of the 6-Sphere}
 
-\begin{comparativeblock}{Theorem 8.3: Smooth Diffeomorphism $X \cong_{\mathrm{diff}} S^6$}{HopfProblem.SphereRecognition.X_diffeomorphic_to_StandardS6}{63}
+\begin{comparativeblock}{Theorem 8.3: Smooth Diffeomorphism $X \cong_{\mathrm{diff}} S^6$}{HopfProblem.SphereRecognition.X_diffeomorphic_to_StandardS6}{63}{SphereRecognition.lean}
 \begin{verbatim}
 -- Module: HopfProblem.SphereRecognition
 -- Declaration: X_diffeomorphic_to_StandardS6
 -- Location: HopfProblem/SphereRecognition.lean:22-33
 -- Paper: https://alpo.ge/s6.pdf#page=63
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/SphereRecognition.lean#L22-L33
 
 def X_is_homotopy_sphere (X : AssembledManifoldX) : HomotopySphere6 where
   toSmoothManifold := X.totalSpace
@@ -978,13 +998,14 @@ Therefore, $X$ is orientation-preservingly diffeomorphic to the standard $6$-sph
 % ==============================================================================
 \section{Complex-Analytic Invariants of \texorpdfstring{$X$}{X}}
 
-\begin{comparativeblock}{Theorem 9.1: Algebraic Dimension and Kodaira Dimension}{HopfProblem.AnalyticInvariants.algebraic_dimension_threefold_eq_one}{64}
+\begin{comparativeblock}{Theorem 9.1: Algebraic Dimension and Kodaira Dimension}{HopfProblem.AnalyticInvariants.algebraic_dimension_threefold_eq_one}{64}{AnalyticInvariants.lean}
 \begin{verbatim}
 -- Module: HopfProblem.AnalyticInvariants
 -- Declaration: algebraic_dimension_threefold_eq_one,
 --              kodaira_dimension_is_minus_infinity
 -- Location: HopfProblem/AnalyticInvariants.lean:35-62
 -- Paper: https://alpo.ge/s6.pdf#page=64
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/AnalyticInvariants.lean#L35-L62
 
 theorem algebraic_dimension_threefold_eq_one (X : AssembledManifoldX) :
     algebraic_dimension_threefold X = 1 := by
@@ -1009,12 +1030,13 @@ The complex $3$-manifold $X$ satisfies:
 \end{theorem}
 \end{comparativeblock}
 
-\begin{comparativeblock}{Theorem 9.7 \& 9.10: Direct Images and Automorphisms}{HopfProblem.AnalyticInvariants.froelicher_non_degeneration}{71}
+\begin{comparativeblock}{Theorem 9.7 \& 9.10: Direct Images and Automorphisms}{HopfProblem.AnalyticInvariants.froelicher_non_degeneration}{71}{AnalyticInvariants.lean}
 \begin{verbatim}
 -- Module: HopfProblem.AnalyticInvariants
 -- Declaration: froelicher_non_degeneration, vertical_automorphism_group
 -- Location: HopfProblem/AnalyticInvariants.lean:75-102
 -- Paper: https://alpo.ge/s6.pdf#page=71
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/AnalyticInvariants.lean#L75-L102
 
 theorem froelicher_non_degeneration (X : AssembledManifoldX) :
     bettiX 1 = 0 ∧ irregularity X = 1 := by
@@ -1039,12 +1061,13 @@ The Lie algebra of holomorphic vector fields has $h^0(X, TX) = 1$, generating a 
 % ==============================================================================
 \section{Reconciliation with Catanese--Debarre--Pinkham (CDP20)}
 
-\begin{comparativeblock}{Construction 10.1 \& Theorem 10.4: Conductor Sheaf and Hartogs Failure}{HopfProblem.CDPDivergence.conductor_sheaf_C}{84}
+\begin{comparativeblock}{Construction 10.1 \& Theorem 10.4: Conductor Sheaf and Hartogs Failure}{HopfProblem.CDPDivergence.conductor_sheaf_C}{84}{CDPDivergence.lean}
 \begin{verbatim}
 -- Module: HopfProblem.CDPDivergence
 -- Declaration: conductor_sheaf_C, hartogs_failure_codim1
 -- Location: HopfProblem/CDPDivergence.lean:25-58
 -- Paper: https://alpo.ge/s6.pdf#page=84
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/CDPDivergence.lean#L25-L58
 
 theorem conductor_section_nonvanishing :
     conductor_section_s ≠ 0 := by
@@ -1075,12 +1098,13 @@ This explains why the deformation obstruction of [CDP20, Prop.~2.4] does not app
 \appendix
 \section{Exterior Powers and Nearby Cycles Specialization}
 
-\begin{comparativeblock}{Appendix A: Exterior Powers of Unipotent Monodromy}{HopfProblem.Lattice.exterior_powers_unipotent}{10}
+\begin{comparativeblock}{Appendix A: Exterior Powers of Unipotent Monodromy}{HopfProblem.Lattice.exterior_powers_unipotent}{10}{Lattice.lean}
 \begin{verbatim}
 -- Module: HopfProblem.Lattice
 -- Declaration: exterior_powers_unipotent
 -- Location: HopfProblem/Lattice.lean:110-135
 -- Paper: https://alpo.ge/s6.pdf#page=10
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Lattice.lean#L110-L135
 
 theorem exterior_powers_unipotent (q : ℕ) :
     exterior_power_dim q = match q with
@@ -1103,12 +1127,13 @@ These ranks match the integral homology ranks $H_q(W_0; \dbZ) = (1, 2, 4, 2, 1)$
 \end{proposition}
 \end{comparativeblock}
 
-\begin{comparativeblock}{Appendix B: The Clemens--Schmid Specialization Map $\mathrm{sp}_q$}{HopfProblem.TopologyHomology.specialisation_map_sp}{59}
+\begin{comparativeblock}{Appendix B: The Clemens--Schmid Specialization Map $\mathrm{sp}_q$}{HopfProblem.TopologyHomology.specialisation_map_sp}{59}{TopologyHomology.lean}
 \begin{verbatim}
 -- Module: HopfProblem.TopologyHomology
 -- Declaration: specialisation_map_sp
 -- Location: HopfProblem/TopologyHomology.lean:115-142
 -- Paper: https://alpo.ge/s6.pdf#page=59
+-- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/TopologyHomology.lean#L115-L142
 
 theorem specialisation_map_isomorphism (q : ℕ) :
     SpecialisationMapRank q = unipotent_invariant_rank q := by
