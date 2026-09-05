@@ -63,6 +63,18 @@ theorem side_pairing_involutive (i : Fin 6) : sidePairing (sidePairing i) = i :=
 theorem side_pairing_fixed_point_free (i : Fin 6) : sidePairing i ≠ i := by
   fin_cases i <;> decide
 
+/-- The side-pairing map is injective. -/
+theorem side_pairing_injective : Function.Injective sidePairing :=
+  Function.LeftInverse.injective side_pairing_involutive
+
+/-- The side-pairing map is surjective. -/
+theorem side_pairing_surjective : Function.Surjective sidePairing :=
+  Function.RightInverse.surjective side_pairing_involutive
+
+/-- The side-pairing map is a fixed-point free bijection of the hexagon boundary. -/
+theorem side_pairing_bijective : Function.Bijective sidePairing :=
+  ⟨side_pairing_injective, side_pairing_surjective⟩
+
 /-- The central fibre W = f₀⁻¹(0) obtained by identifying opposite sides of dP₆.
     It is a reduced, irreducible, normal crossings surface. -/
 structure CentralFibreW where
