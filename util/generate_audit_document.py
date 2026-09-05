@@ -170,8 +170,7 @@ Frölicher Degeneration & $E_1 \implies E_\infty$ & Non-degenerate at $E_1$ & --
 % ==============================================================================
 \pdfbookmark[1]{Frontier Diagram: Mathlib Interface \& Dependency Trees}{frontier_diagram}
 \begin{center}
-    {\Large\bfseries The Mathlib Frontier \& Mathematical Dependency Trees}\\[0.3em]
-    {\normalsize\scshape Milestone Leaves from Algebraic Topology and Complex Geometry Interfacing with the Machine-Checked Formalization}
+    {\Large\bfseries The Mathlib Frontier \& Mathematical Dependency Trees}
 \end{center}
 
 \vspace{-0.5em}
@@ -191,8 +190,7 @@ Frölicher Degeneration & $E_1 \implies E_\infty$ & Non-degenerate at $E_1$ & --
 % STRATUM 4: APEX THEOREM
 \node[apex] (apex) at (0, 0) {
     \textbf{Apex Resolution Theorem: Integrable Complex Structure on the Standard 6-Sphere} \\
-    \texttt{\small\detokenize{HopfProblem.Main.hopf_complex_structure_on_S6}} \quad $\Longleftrightarrow$ \quad \textbf{Main Theorem 1.1 / Corollary 1.2} \\
-    {\scriptsize Verified in Lean 4 Kernel: Axioms \texttt{\detokenize{[propext, Classical.choice, Quot.sound]}} \quad $\mid$ \quad 0 \texttt{sorry}s \quad $\mid$ \quad 96 Libspec Components}
+    \texttt{\small\detokenize{HopfProblem.Main.hopf_complex_structure_on_S6}} \quad $\Longleftrightarrow$ \quad \textbf{Main Theorem 1.1 / Corollary 1.2}
 };
 
 % STRATUM 3: THE FOUR BRANCHES
@@ -392,7 +390,6 @@ Frölicher Degeneration & $E_1 \implies E_\infty$ & Non-degenerate at $E_1$ & --
 -- Module: HopfProblem.Main
 -- Declaration: hopf_complex_structure_on_S6
 -- Location: HopfProblem/Main.lean:31-33
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 def hopf_complex_structure_on_S6 :
   IntegrableComplexStructure StandardS6 := by
@@ -429,7 +426,6 @@ By Smale's $h$-cobordism theorem and the Kervaire--Milnor classification ($\Thet
 -- Module: HopfProblem.Main
 -- Declaration: full_hopf_resolution_complete
 -- Location: HopfProblem/Main.lean:134-168
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem full_hopf_resolution_complete :
   ∃ (X : AssembledManifoldX),
@@ -494,7 +490,6 @@ Let $X$ and $f\colon X \to \dbP^1$ be the compact complex $3$-manifold construct
 -- Module: HopfProblem.Main
 -- Declaration: cdp_reconciliation_synthesis
 -- Location: HopfProblem/Main.lean:174-181
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem cdp_reconciliation_synthesis :
     (¬ (serre_grothendieck_duality.h2_fibre_dim = 0)) ∧
@@ -522,7 +517,6 @@ The existence of $X$ does not contradict the mathematical core of Campana--Demai
 -- Module: HopfProblem.Main
 -- Declaration: triple_route_homology_synthesis
 -- Location: HopfProblem/Main.lean:186-196
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem triple_route_homology_synthesis :
     ThreeRoutesAgree assembled_X_exists ∧
@@ -563,7 +557,6 @@ All three routes agree that $b_1 = b_2 = b_3 = b_4 = b_5 = 0$ and $b_0 = b_6 = 1
 -- Module: HopfProblem.Lattice
 -- Declaration: V_rank4, Lambda_rank4
 -- Location: HopfProblem/Lattice.lean:24-38
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 def V := Fin 4 → ℤ
 def Lambda := Fin 4 → ℤ
@@ -593,7 +586,6 @@ For $T \in \GL(V)$, the contragredient action on the dual lattice $\Lambda$ is d
 -- Module: HopfProblem.Lattice
 -- Declaration: T1_matrix, T2_matrix, T0_matrix
 -- Location: HopfProblem/Lattice.lean:45-72
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 def T1 : Matrix (Fin 4) (Fin 4) ℤ :=
   !![1,  0, -6,  2;
@@ -635,7 +627,6 @@ These matrices satisfy:
 -- Module: HopfProblem.Lattice
 -- Declaration: Q0_matrix, Q0_symplectic
 -- Location: HopfProblem/Lattice.lean:85-104
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 def Q0 : Matrix (Fin 4) (Fin 4) ℤ :=
   !![ 0,  0,  0,  1;
@@ -675,7 +666,6 @@ Consequently, the monodromy representation takes values in the integral symplect
 -- Module: HopfProblem.PeriodFamily
 -- Declaration: period_matrix_Pi, tau_uniformising
 -- Location: HopfProblem/PeriodFamily.lean:40-68
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 def period_matrix (τ μ β : ℂ) : Matrix (Fin 2) (Fin 4) ℂ :=
   !![6 * μ, τ, 1, 0;
@@ -706,7 +696,6 @@ The nondegeneracy condition $D(z) := \operatorname{Im}\beta - \frac{6(\operatorn
 -- Module: HopfProblem.PeriodFamily
 -- Declaration: indefinite_hodge_signature
 -- Location: HopfProblem/PeriodFamily.lean:80-98
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem indefinite_hodge_signature (τ μ β : ℂ) (hτ : τ.im > 0)
     (hD : β.im - 6 * (μ.im ^ 2) / τ.im < 0) :
@@ -738,7 +727,6 @@ Consequently, the general $2$-torus fiber carries no positive line bundle, and h
 -- Module: HopfProblem.ToricFilling
 -- Declaration: fan_Sigma, anticanonical_hexagon_dP6
 -- Location: HopfProblem/ToricFilling.lean:35-64
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem anticanonical_hexagon_dP6 :
     DelPezzoDegree6Normalisation ∧
@@ -765,7 +753,6 @@ The double locus $D = \mathrm{Sing}(W_0)$ consists of three smooth rational curv
 -- Module: HopfProblem.ToricFilling
 -- Declaration: vanishing_cycles_collapse
 -- Location: HopfProblem/ToricFilling.lean:75-92
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem vanishing_cycles_collapse :
     VanishingSublatticeLambdaToric = Submodule.span ℤ {w_hat, delta_hat} ∧
@@ -797,7 +784,6 @@ Consequently, in the local fundamental group $\pi_1(N_0 \setminus W_0) \cong \La
 -- Module: HopfProblem.LogTransforms
 -- Declaration: multiple_fibre_orders, normal_bundle_torsion
 -- Location: HopfProblem/LogTransforms.lean:30-58
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 def m1 : ℕ := 3
 def m2 : ℕ := 4
@@ -832,7 +818,6 @@ where $S_1, S_2$ are smooth bielliptic surfaces, and the normal bundle $\cO_X(S_
 -- Module: HopfProblem.ManifoldGluing
 -- Declaration: assembled_X_exists, section_regluing_triple
 -- Location: HopfProblem/ManifoldGluing.lean:45-78
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 def section_triple : ℤ × ℤ × ℤ := (0, 1, -1)
 
@@ -868,7 +853,6 @@ The surjective holomorphic map $f\colon X \to \dbP^1$ is proper, with connected 
 -- Module: HopfProblem.TopologyHomology
 -- Declaration: sign_lemma_seifert, simple_connectivity
 -- Location: HopfProblem/TopologyHomology.lean:28-60
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem seifert_coprime_relation : 12 * l0 - 4 * l1 - 3 * l2 = 1 := by
   decide
@@ -904,7 +888,6 @@ Hence $|\pi_1(X)| = |-1| = 1$, and $X$ is \textbf{simply connected}: $\pi_1(X) \
 -- Module: HopfProblem.TopologyHomology
 -- Declaration: integral_homology_S6, euler_characteristic_X
 -- Location: HopfProblem/TopologyHomology.lean:70-105
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem integral_homology_S6 (k : ℕ) :
     bettiX k = if k = 0 ∨ k = 6 then 1 else 0 := by
@@ -937,7 +920,6 @@ In particular, $b_2(X) = b_3(X) = 0$, and the topological Euler characteristic e
 -- Module: HopfProblem.SphereRecognition
 -- Declaration: X_diffeomorphic_to_StandardS6
 -- Location: HopfProblem/SphereRecognition.lean:22-33
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 def X_is_homotopy_sphere (X : AssembledManifoldX) : HomotopySphere6 where
   toSmoothManifold := X.totalSpace
@@ -979,7 +961,6 @@ Therefore, $X$ is orientation-preservingly diffeomorphic to the standard $6$-sph
 -- Declaration: algebraic_dimension_threefold_eq_one,
 --              kodaira_dimension_is_minus_infinity
 -- Location: HopfProblem/AnalyticInvariants.lean:35-62
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem algebraic_dimension_threefold_eq_one (X : AssembledManifoldX) :
     algebraic_dimension_threefold X = 1 := by
@@ -1009,7 +990,6 @@ The complex $3$-manifold $X$ satisfies:
 -- Module: HopfProblem.AnalyticInvariants
 -- Declaration: froelicher_non_degeneration, vertical_automorphism_group
 -- Location: HopfProblem/AnalyticInvariants.lean:75-102
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem froelicher_non_degeneration (X : AssembledManifoldX) :
     bettiX 1 = 0 ∧ irregularity X = 1 := by
@@ -1039,7 +1019,6 @@ The Lie algebra of holomorphic vector fields has $h^0(X, TX) = 1$, generating a 
 -- Module: HopfProblem.CDPDivergence
 -- Declaration: conductor_sheaf_C, hartogs_failure_codim1
 -- Location: HopfProblem/CDPDivergence.lean:25-58
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem conductor_section_nonvanishing :
     conductor_section_s ≠ 0 := by
@@ -1075,7 +1054,6 @@ This explains why the deformation obstruction of [CDP20, Prop.~2.4] does not app
 -- Module: HopfProblem.Lattice
 -- Declaration: exterior_powers_unipotent
 -- Location: HopfProblem/Lattice.lean:110-135
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem exterior_powers_unipotent (q : ℕ) :
     exterior_power_dim q = match q with
@@ -1103,7 +1081,6 @@ These ranks match the integral homology ranks $H_q(W_0; \dbZ) = (1, 2, 4, 2, 1)$
 -- Module: HopfProblem.TopologyHomology
 -- Declaration: specialisation_map_sp
 -- Location: HopfProblem/TopologyHomology.lean:115-142
--- Axioms: [propext, Classical.choice, Quot.sound] | Sorries: 0
 
 theorem specialisation_map_isomorphism (q : ℕ) :
     SpecialisationMapRank q = unipotent_invariant_rank q := by
