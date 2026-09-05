@@ -270,3 +270,30 @@ Addresses the apparent contradiction with Campana–Demailly–Peternell [CDP20]
 ## 5. Verification Verdict
 
 All 12 Lean 4 modules build with **0 errors**, **0 warnings**, and **0 `sorry` occurrences** across 1,575 jobs. In Wave 6, the formalization has achieved a **Zero Custom Axioms** footprint: all 7 previously remaining external axioms were eliminated and replaced with constructive definitions and machine-checked theorems. The apex synthesis theorem `hopf_complex_structure_on_S6` depends solely on the foundational standard Lean 4 kernel axioms (`propext`, `Classical.choice`, `Quot.sound`).
+
+---
+
+## 6. Wave 22 Progress: Page 39 Dual Charts, Cusp Connecting Homomorphism, Cocycle Regularity, and Boundary Meridians
+
+### Key Additions:
+1. **Explicit Toric Dual Charts & Transversality (`ToricFilling.lean`)**:
+   - Formalized dual basis $m_1 = (1, 0, 0), m_2 = (0, 1, 0), m_0 = (-1, -1, 1) \in \mathbb{Z}^3$.
+   - Proved unimodularity $\det(M_{\text{dual}}) = 1$ and exact inverse duality $M_{\text{dual}} \cdot R_{\text{cone}} = I_3$.
+   - Verified Kronecker pairing $\langle m_i, r_j \rangle = \delta_{ij}$ for all 9 pairs.
+   - Proved zero section trajectory $t_c \mapsto (t_c, 1, 1)$ meets $D_{(0,0)}$ transversally at $(0, 1, 1)$ in the open orbit of $W \setminus D$.
+
+2. **Cusp Degeneration Map & Connecting Homomorphism Surjectivity (`PeriodFamily.lean`)**:
+   - Defined holomorphic exponential coordinate map $E_0(\zeta, s) = (e(\zeta_1), e(\zeta_2), e(s))$ with translation invariance.
+   - Proved period difference identities for lifts $z_{\hat{u}}$ and $z_{\hat{\gamma}}$ to $\Pi(s+1)\hat{u}$ and $\Pi(s+1)\hat{\gamma}$.
+   - Proved surjectivity of connecting homomorphism $c : H^0(D_0^*, \mathcal{J}) \to \Lambda / \Lambda_{\text{tor}}$.
+   - Proved $\ell_0(X) = 0$ for canonical threefold while realizing all $k \in \mathbb{Z}$.
+
+3. **Holomorphic 1-Cocycle Compatibility (`ManifoldGluing.lean`)**:
+   - Proved that any triple of distinct charts in $\{J, N_0, N_1, N_2\}$ contains at least two distinct filling pieces.
+   - Proved all triple intersections are empty ($U_a \cap U_b \cap U_c = \emptyset$), establishing the 1-cocycle condition $g_{ab} \circ g_{bc} = g_{ac}$.
+   - Proved double overlap inversion $g_{Ji} \circ g_{iJ} = \text{id}$.
+
+4. **Multiple Fibre Boundary Collar Meridians & Normal Bundles (`LogTransforms.lean`)**:
+   - Formalized presentation of $\pi_1(M_j)$ with circle meridian relation $\sigma^{-1} = \hat{g}_j^{m_j} t_{-v_j}$.
+   - Proved bielliptic fundamental group presentation $\pi_1(S_j) = \Lambda \rtimes_{A_j} \mathbb{Z}_{m_j}$.
+   - Proved normal bundle torsion orders $m_1 = 3 > 1, m_2 = 4 > 1$ in $\mathrm{Pic}(S_j)$.

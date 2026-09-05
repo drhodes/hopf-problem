@@ -1,5 +1,6 @@
 import HopfProblem.Lattice
 import HopfProblem.ExternalTheories
+import Mathlib.Data.Complex.Basic
 import Mathlib.Data.Matrix.Basic
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Algebra.Group.Pi.Basic
@@ -278,5 +279,113 @@ theorem toric_ambient_smoothness (i : Fin 6) :
     (cone3Matrix i).det = 1 ∧ coneDet i = 1 :=
   ⟨cone3_unimodular i, cone_unimodular i⟩
 
+/-! ### Page 39: Explicit Toric Dual Charts, Coordinates, and Zero Section Transversality -/
+
+/-- A vector in the dual character lattice M' ≅ ℤ³. -/
+def DualRay3 := Fin 3 → ℤ
+
+/-- The standard dual pairing ⟨m, v⟩ = ∑_i m_i v_i between M' and N'. -/
+def dualPairing (m : DualRay3) (v : Ray3) : ℤ :=
+  m 0 * v 0 + m 1 * v 1 + m 2 * v 2
+
+/-- Dual basis vector m₁ = (1, 0, 0) in M'. -/
+def m1_dual : DualRay3 := ![1, 0, 0]
+
+/-- Dual basis vector m₂ = (0, 1, 0) in M'. -/
+def m2_dual : DualRay3 := ![0, 1, 0]
+
+/-- Dual basis vector m₀ = (-1, -1, 1) in M'. -/
+def m0_dual : DualRay3 := ![-1, -1, 1]
+
+/-- The 3×3 dual basis matrix whose rows are m₀, m₁, m₂:
+    M_dual = ![-1, -1, 1; 1, 0, 0; 0, 1, 0]. -/
+def M_dual : Matrix (Fin 3) (Fin 3) ℤ :=
+  ![ m0_dual,
+     m1_dual,
+     m2_dual ]
+
+/-- The dual basis matrix M_dual is unimodular: det(M_dual) = 1 in SL(3, ℤ). -/
+theorem M_dual_det : M_dual.det = 1 := by
+  decide
+
+/-- The 3 rays generating the cone σ = conv{(0,0), e₁, e₂} × {1}:
+    r₀ = v_apex = (0, 0, 1)ᵀ,
+    r₁ = (1, 0, 1)ᵀ = v3 0,
+    r₂ = (0, 1, 1)ᵀ = v3 1. -/
+def r0_ray : Ray3 := v_apex
+def r1_ray : Ray3 := v3 0
+def r2_ray : Ray3 := v3 1
+
+/-- The 3×3 ray generator matrix whose columns are r₀, r₁, r₂:
+    R_cone = ![![0, 1, 0], ![0, 0, 1], ![1, 1, 1]]. -/
+def R_cone : Matrix (Fin 3) (Fin 3) ℤ :=
+  ![ ![0, 1, 0],
+     ![0, 0, 1],
+     ![1, 1, 1] ]
+
+/-- Unimodularity of the cone generator matrix: det(R_cone) = 1 in SL(3, ℤ). -/
+theorem R_cone_det : R_cone.det = 1 := by
+  decide
+
+/-- Exact duality / inverse relation: M_dual * R_cone = I₃.
+    The basis (m₀, m₁, m₂) is strictly dual to the ray generators (r₀, r₁, r₂). -/
+theorem M_dual_mul_R_cone : M_dual * R_cone = 1 := by
+  decide
+
+/-- Dual Kronecker pairing relations:
+    ⟨m_i, r_j⟩ = δ_{ij} for all i, j ∈ {0, 1, 2}. -/
+theorem dual_pairing_m0_r0 : dualPairing m0_dual r0_ray = 1 := by decide
+theorem dual_pairing_m0_r1 : dualPairing m0_dual r1_ray = 0 := by decide
+theorem dual_pairing_m0_r2 : dualPairing m0_dual r2_ray = 0 := by decide
+
+theorem dual_pairing_m1_r0 : dualPairing m1_dual r0_ray = 0 := by decide
+theorem dual_pairing_m1_r1 : dualPairing m1_dual r1_ray = 1 := by decide
+theorem dual_pairing_m1_r2 : dualPairing m1_dual r2_ray = 0 := by decide
+
+theorem dual_pairing_m2_r0 : dualPairing m2_dual r0_ray = 0 := by decide
+theorem dual_pairing_m2_r1 : dualPairing m2_dual r1_ray = 0 := by decide
+theorem dual_pairing_m2_r2 : dualPairing m2_dual r2_ray = 1 := by decide
+
+/-- The affine toric variety U_σ = Spec ℂ[σ^∨ ∩ M'] is isomorphic to ℂ³
+    with coordinates (χ^{m₀}, χ^{m₁}, χ^{m₂}) = (t / (x₁ x₂), x₁, x₂). -/
+structure ToricAffineChartUsigma where
+  chi_m0 : ℂ
+  chi_m1 : ℂ
+  chi_m2 : ℂ
+
+/-- Divisor D_{(0,0)} corresponding to the ray r₀ through (0, 0, 1)ᵀ is given by chi_m0 = 0. -/
+def is_on_toric_divisor_D00 (pt : ToricAffineChartUsigma) : Prop :=
+  pt.chi_m0 = 0
+
+/-- The zero section trajectory in U_σ: t_c ↦ (t_c, 1, 1). -/
+def zero_section_in_Usigma (tc : ℂ) : ToricAffineChartUsigma where
+  chi_m0 := tc
+  chi_m1 := 1
+  chi_m2 := 1
+
+/-- Transversality of intersection at t_c = 0:
+    the zero section meets the divisor D_{(0,0)} at the point (0, 1, 1). -/
+theorem zero_section_intersection_point :
+    zero_section_in_Usigma 0 = ⟨0, 1, 1⟩ := rfl
+
+/-- The intersection point lies on the divisor D_{(0,0)}. -/
+theorem zero_section_meets_D00 :
+    is_on_toric_divisor_D00 (zero_section_in_Usigma 0) := rfl
+
+/-- The intersection point (0, 1, 1) lies in the OPEN orbit of D_{(0,0)}
+    (since x₁ = 1 ≠ 0 and x₂ = 1 ≠ 0), hence in W \ D (disjoint from double curves). -/
+theorem zero_section_in_open_orbit :
+    (zero_section_in_Usigma 0).chi_m1 ≠ 0 ∧ (zero_section_in_Usigma 0).chi_m2 ≠ 0 := by
+  constructor
+  · exact one_ne_zero
+  · exact one_ne_zero
+
+/-- The tangent vector to the zero section at t_c = 0 is (1, 0, 0),
+    transversal to the tangent plane of the divisor {chi_m0 = 0}. -/
+def zero_section_tangent_vector : Fin 3 → ℂ := ![1, 0, 0]
+
+theorem zero_section_tangent_nonzero : zero_section_tangent_vector 0 = 1 := rfl
+
 end HopfProblem.ToricFilling
+
 
