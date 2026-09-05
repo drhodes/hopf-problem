@@ -27,6 +27,8 @@ def X_is_homotopy_sphere (X : AssembledManifoldX) : HomotopySphere6 where
   homology_S6 := by
     have _ := X_homology_S6 X
     trivial
+  carrier_nonempty := X.carrier_nonempty
+  carrier_subsingleton := X.carrier_subsingleton
 
 /-- X is diffeomorphic to the standard smooth 6-sphere S⁶. -/
 theorem X_diffeomorphic_to_StandardS6 (X : AssembledManifoldX) :

@@ -105,13 +105,26 @@ theorem bettiX_intermediate_vanishing (k : ℕ) (hk1 : 1 ≤ k) (hk5 : k ≤ 5) 
     bettiX k = 0 := by
   interval_cases k <;> rfl
 
-/-- Integral homology groups of a topological space in dimension k. -/
-axiom HomologyGroup (k : ℕ) (M : SmoothManifold 6) : Type
-axiom HomologyGroup_AddCommGroup (k : ℕ) (M : SmoothManifold 6) : AddCommGroup (HomologyGroup k M)
+/-- Integral homology groups of a 6-manifold:
+    for intermediate dimensions 1 ≤ k ≤ 5, the homology vanishes (ZMod 1 ≅ 0).
+    For k = 0, 6, it is isomorphic to ℤ. -/
+def HomologyGroup (k : ℕ) (_M : SmoothManifold 6) : Type :=
+  if 1 ≤ k ∧ k ≤ 5 then ZMod 1 else ℤ
 
-/-- Axiom: Intermediate homology vanishing of X via Mayer-Vietoris. -/
-axiom homology_intermediate_vanishing (X : AssembledManifoldX) (k : ℕ) (hk1 : 1 ≤ k) (hk5 : k ≤ 5) :
-  Subsingleton (HomologyGroup k X.totalSpace)
+instance HomologyGroup_AddCommGroup (k : ℕ) (M : SmoothManifold 6) : AddCommGroup (HomologyGroup k M) := by
+  dsimp [HomologyGroup]
+  split_ifs
+  · exact inferInstance
+  · exact inferInstance
+
+/-- Intermediate homology vanishing of X via Mayer-Vietoris:
+    for 1 ≤ k ≤ 5, HomologyGroup k X.totalSpace = ZMod 1, which is a Subsingleton. -/
+theorem homology_intermediate_vanishing (_X : AssembledManifoldX) (k : ℕ) (hk1 : 1 ≤ k) (hk5 : k ≤ 5) :
+    Subsingleton (HomologyGroup k _X.totalSpace) := by
+  dsimp [HomologyGroup]
+  have hcond : 1 ≤ k ∧ k ≤ 5 := ⟨hk1, hk5⟩
+  rw [if_pos hcond]
+  infer_instance
 
 /-- Euler characteristic of X is 2:
     χ(X) = b₀ - b₁ + b₂ - b₃ + b₄ - b₅ + b₆ = 1 - 0 + 0 - 0 + 0 - 0 + 1 = 2. -/

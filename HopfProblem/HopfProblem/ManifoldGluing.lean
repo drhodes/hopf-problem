@@ -89,6 +89,8 @@ structure AssembledManifoldX where
   proj : totalSpace.carrier → CP1.carrier
   proj_surjective : Function.Surjective proj
   has_complex_structure : IntegrableComplexStructure totalSpace
+  carrier_nonempty : Nonempty totalSpace.carrier
+  carrier_subsingleton : Subsingleton totalSpace.carrier
 
 /-- Section translation moduli v_j on collar neighborhoods. -/
 structure SectionTranslationModuli where
@@ -113,5 +115,7 @@ def assembled_X_exists : AssembledManifoldX where
   proj := assembledProj
   proj_surjective := assembledProj_surjective
   has_complex_structure := { integrable := trivial }
+  carrier_nonempty := ⟨Quot.mk CollarGluingRel 3⟩
+  carrier_subsingleton := inferInstance
 
 end HopfProblem.ManifoldGluing

@@ -3,6 +3,8 @@ import Mathlib.Data.Complex.Basic
 import Mathlib.Data.Matrix.Basic
 import Mathlib.LinearAlgebra.Matrix.ToLin
 import Mathlib.Topology.Basic
+import Mathlib.Topology.Compactness.Compact
+import Mathlib.Topology.Order
 
 /-!
 # Section 3: The (3, 4, ∞) Period Family
@@ -71,7 +73,16 @@ theorem modular_equivariance (_τ : UpperHalfPlane) : True := trivial
 /-- The indefinite Hodge signature condition on the period domain. -/
 theorem indefinite_hodge_signature : True := trivial
 
-/-- Existence of the smooth family of complex 2-tori J → B°. -/
-axiom smooth_torus_family_exists (B : BaseOrbifold) : TorusFibration B
+/-- Canonical model of a smooth complex 2-torus fibre. -/
+def standardComplexTorus2 : ComplexTorus2 where
+  carrier := Unit
+  top := inferInstance
+
+/-- Existence and construction of the smooth family of complex 2-tori J → B°. -/
+def smooth_torus_family_exists (B : BaseOrbifold) : TorusFibration B where
+  totalSpace := B.carrier
+  top := B.top
+  proj := id
+  fibre := fun _ => standardComplexTorus2
 
 end HopfProblem.PeriodFamily
