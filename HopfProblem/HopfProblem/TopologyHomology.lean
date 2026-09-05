@@ -190,4 +190,38 @@ theorem total_betti_sum_W0 :
     singularFibreBetti 0 + singularFibreBetti 1 + singularFibreBetti 2 +
     singularFibreBetti 3 + singularFibreBetti 4 = 10 := rfl
 
+/-- Poincaré duality on the singular central fibre W₀:
+    b_k(W₀) = b_{4-k}(W₀) for all 0 ≤ k ≤ 4. -/
+theorem poincare_duality_W0 (k : ℕ) (hk : k ≤ 4) :
+    singularFibreBetti k = singularFibreBetti (4 - k) := by
+  interval_cases k <;> rfl
+
+/-- Betti numbers of the smooth 2-torus fibre T⁴ ≅ (S¹)⁴: b_k(T⁴) = Binomial(4, k). -/
+def torusFibreBetti : ℕ → ℕ
+  | 0 => 1
+  | 1 => 4
+  | 2 => 6
+  | 3 => 4
+  | 4 => 1
+  | _ => 0
+
+/-- Euler characteristic of the smooth 4-torus fibre is 0:
+    χ(T⁴) = 1 - 4 + 6 - 4 + 1 = 0. -/
+theorem torus_fibre_euler_characteristic :
+    (torusFibreBetti 0 : ℤ) -
+    (torusFibreBetti 1 : ℤ) +
+    (torusFibreBetti 2 : ℤ) -
+    (torusFibreBetti 3 : ℤ) +
+    (torusFibreBetti 4 : ℤ) = 0 := rfl
+
+/-- Total Betti sum of the smooth 4-torus fibre is 2⁴ = 16. -/
+theorem total_betti_sum_torus :
+    torusFibreBetti 0 + torusFibreBetti 1 + torusFibreBetti 2 +
+    torusFibreBetti 3 + torusFibreBetti 4 = 16 := rfl
+
+/-- Poincaré duality on the smooth 4-torus fibre: b_k(T⁴) = b_{4-k}(T⁴) for all 0 ≤ k ≤ 4. -/
+theorem poincare_duality_torus (k : ℕ) (hk : k ≤ 4) :
+    torusFibreBetti k = torusFibreBetti (4 - k) := by
+  interval_cases k <;> rfl
+
 end HopfProblem.TopologyHomology

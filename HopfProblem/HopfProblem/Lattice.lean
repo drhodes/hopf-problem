@@ -100,6 +100,14 @@ theorem T2_det : T2.det = 1 := by
 theorem T0_det : T0.det = 1 := by
   decide
 
+/-- The central involution -I in SL(4, ℤ) has determinant (-1)⁴ = 1. -/
+theorem neg_one_det_4x4 : (- (1 : Matrix (Fin 4) (Fin 4) ℤ)).det = 1 := by
+  decide
+
+/-- The central involution in SL(4, ℤ) satisfies (-I)² = I. -/
+theorem neg_one_sq_4x4 : (- (1 : Matrix (Fin 4) (Fin 4) ℤ)) ^ 2 = 1 := by
+  decide
+
 /-- The monodromy generators T₁ and T₂ do not commute: the monodromy group is non-abelian. -/
 theorem T1_T2_noncommutative : T1 * T2 ≠ T2 * T1 := by
   decide

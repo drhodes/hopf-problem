@@ -63,6 +63,14 @@ theorem S_sq : S_mod ^ 2 = -1 := by
 theorem S_fourth : S_mod ^ 4 = 1 := by
   decide
 
+/-- The central involution -I in SL(2, ℤ) has determinant (-1)² = 1. -/
+theorem neg_one_det_2x2 : (- (1 : Matrix (Fin 2) (Fin 2) ℤ)).det = 1 := by
+  decide
+
+/-- The central involution satisfies (-I)² = I. -/
+theorem neg_one_sq_2x2 : (- (1 : Matrix (Fin 2) (Fin 2) ℤ)) ^ 2 = 1 := by
+  decide
+
 /-- (ST)³ = -I in SL(2, ℤ). -/
 theorem ST_cubed : (S_mod * T_mod) ^ 3 = -1 := by
   decide
