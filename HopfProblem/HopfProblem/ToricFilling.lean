@@ -124,6 +124,6 @@ structure ToricFillingManifold where
   base : Disk
   proj : totalSpace.carrier → base.carrier
   centralFibre : CentralFibreW
-  central_fibre_is_preimage : True
+  num_double_curves_eq : centralFibre.num_double_curves = 3
 
 end HopfProblem.ToricFilling

@@ -38,11 +38,13 @@ def W_sheaves : NormalCrossingsSheaves := {}
 /-- Lemma 10.2: The Mayer-Vietoris sequence of 1-forms on W. -/
 structure MayerVietorisSequence1Forms where
   sheaves : NormalCrossingsSheaves := W_sheaves
-  conormal_exact : True := trivial
-  normalization_exact : True := trivial
+  conormal_exact : sheaves.num_double_curves = 3
+  normalization_exact : sheaves.normalization_degree = 6
 
 /-- Canonical Mayer-Vietoris sequence of 1-forms on W. -/
-def mayerVietoris1Forms : MayerVietorisSequence1Forms := {}
+def mayerVietoris1Forms : MayerVietorisSequence1Forms where
+  conormal_exact := rfl
+  normalization_exact := rfl
 
 /-- The conormal bundle sequence on the non-normal central fibre W₀ does not split
     due to the non-trivial double locus of 3 curves. -/

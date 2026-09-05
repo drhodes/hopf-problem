@@ -33,7 +33,7 @@ structure LogTransformManifold (m : ℕ) where
   totalSpace : SmoothManifold 6
   reducedFibre : BiellipticSurface m
   multiplicity : ℕ := m
-  smooth_total_space : True
+  order_ge_two : m ≥ 2 := reducedFibre.order
 
 /-- Rotation action on ℂ: (ζ, s) ↦ ζ * s. -/
 def rotationAction (ζ s : ℂ) : ℂ := ζ * s
@@ -77,13 +77,13 @@ def log_transform_N1 : LogTransformManifold 3 where
   totalSpace := StandardS6
   reducedFibre := standardBiellipticSurface 3 (by decide)
   multiplicity := 3
-  smooth_total_space := trivial
+  order_ge_two := by decide
 
 /-- Construction of the logarithmic transformation manifold N₂ for m₂ = 4. -/
 def log_transform_N2 : LogTransformManifold 4 where
   totalSpace := StandardS6
   reducedFibre := standardBiellipticSurface 4 (by decide)
   multiplicity := 4
-  smooth_total_space := trivial
+  order_ge_two := by decide
 
 end HopfProblem.LogTransforms
