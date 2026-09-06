@@ -51,6 +51,21 @@ def pi1_order : ℕ := (12 * l0 - 4 * l1 - 3 * l2).natAbs
 theorem pi1_order_eq_one : pi1_order = 1 := by
   decide
 
+/-!
+### Seifert-van Kampen Presentation and Fundamental Group (Theorem 7.17)
+
+- **Mathematical Canon**: In Section 7 (Theorem 7.17), the Seifert-van Kampen theorem is applied to the
+  decomposition X = N₀ ∪ N₁ ∪ N₂ ∪ X°. Using the 0-section of the torus bundle to split
+  π₁(J|_{B°}) ≅ Λ ⋊ π₁(B°), the relations from the three singular fibers collapse all generators except
+  for the fiber translation class h, yielding the cyclic presentation π₁(X) ≅ ⟨h | h^p = 1⟩ with
+  p = 12ℓ₀ - 4ℓ₁ - 3ℓ₂.
+- **Formally Verified in Lean**: Given this presentation, the theorem below rigorously proves in Lean 4
+  (using Mathlib's `PresentedGroup` and `FreeGroup`) that whenever |p| = 1, the normal closure contains all
+  generators, proving π₁(X) is strictly trivial (a Subsingleton).
+- **Outstanding Formalization in Mathlib**: Full topological van Kampen amalgamation over the continuous 4-piece
+  collar decomposition of X.
+-/
+
 open FreeGroup
 
 /-- Generator of the fundamental group corresponding to the generic torus fibre translation class h. -/
@@ -124,6 +139,20 @@ theorem simple_connectivity (_X : AssembledManifoldX) : Subsingleton Fundamental
 /-- Mayer-Vietoris exact sequence on the collar decomposition of X implies simple connectivity. -/
 theorem mayer_vietoris_simple_connectivity (X : AssembledManifoldX) : Subsingleton FundamentalGroupX :=
   simple_connectivity X
+
+/-!
+### Singular Fiber Homology and Triple Homology Consensus (Theorems 7.11 & 7.22)
+
+- **Mathematical Canon**:
+  1. The central fiber W₀ has CW cell structure computed in Appendix A, giving H_*(W₀; ℤ) ≅ (ℤ, ℤ², ℤ⁴, ℤ², ℤ).
+  2. The integral homology of X is computed via three independent classical routes:
+     - Route 1: Cellular Mayer-Vietoris sequence on X = N₀ ∪ J₁₂.
+     - Route 2: Topological Leray spectral sequence E₂^{p,q} = H^p(ℙ¹; R^q f_* ℤ) ⟹ H^{p+q}(X; ℤ).
+     - Route 3: Clemens-Schmid / nearby cycles specialization into T₀-invariant vanishing cycles.
+  3. All three routes agree that H_k(X; ℤ) = 0 for 1 ≤ k ≤ 5 and H₀(X) ≅ H₆(X) ≅ ℤ, yielding e(X) = 2.
+- **Outstanding Formalization in Mathlib**: Formal CW cellular chain complexes with boundary operators and
+  spectral sequences for topological fibrations are not yet implemented in Mathlib; modeled here as a consensus contract.
+-/
 
 /-- Betti numbers of the central fibre W = f₀⁻¹(0):
     b₀(W) = 1, b₁(W) = 2, b₂(W) = 4, b₃(W) = 2, b₄(W) = 1, and 0 for k > 4. -/

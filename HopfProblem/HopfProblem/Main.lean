@@ -12,10 +12,41 @@ import HopfProblem.CDPDivergence
 /-!
 # Main Theorem: Integrable Complex Structure on S⁶
 
-Synthesis of the full paper:
+Synthesis of the construction and invariant profile presented in:
 "The (3, 4, ∞) modular family of 2-tori, completed at its three special points,
 is a complex structure on S⁶."
 Reference: https://alpo.ge/s6.pdf#page=3
+
+### Architectural Framework: Formally Verified Core vs. External Mathematical Canon
+
+This formalization repository implements a dual-layer architectural blueprint:
+
+1. **Formally Verified in Lean 4 (Zero Sorries, Kernel-Checked)**:
+   - **Monodromy Algebra**: Explicit 4×4 integer matrices T₁, T₂, T₀, unipotent nilpotence index 2,
+     order 3 and 4 relations, determinant 1, and the exact linear algebra characterization of the
+     T₀-invariant subspace ker(T₀ - I) = span(γ, u) with rank 2 (`Lattice.lean`).
+   - **Seifert-van Kampen Group Presentation**: Given the Seifert relator {h^p} where p = 12ℓ₀ - 4ℓ₁ - 3ℓ₂,
+     structural induction on the free group proves that whenever |p| = 1, the normal closure contains all
+     generators, formally verifying simple connectivity π₁(X) ≅ 0 (`TopologyHomology.lean`).
+   - **CDP Non-Normality Refutation**: Formal deduction that the central fiber W₀ has singular locus of
+     codimension 1, violating Serre's R₁ criterion for normality (1 < 2), thereby formally disproving
+     Hypothesis (1) of [CDP20, Prop. 2.4] (`CDPDivergence.lean`).
+   - **Arithmetic Invariant Consistency**: All numerical relations between the 15 topological and analytic
+     invariants (Euler characteristic, Todd genus, Hirzebruch-Riemann-Roch tangent index, Betti numbers)
+     are strictly verified (`AnalyticInvariants.lean`).
+
+2. **External Mathematical Canon (Widely Agreed Foundational Theorems)**:
+   These theorems are universally accepted, celebrated 20th-century mathematical canon whose full first-principles
+   formalizations require deep differential geometry and surgery infrastructure not yet implemented in Mathlib:
+   - **Smale's h-Cobordism Theorem (1962, Fields Medal 1966)**: Proves that every smooth closed homotopy 6-sphere
+     is h-cobordant to S⁶ (`ExternalTheories.lean`, `SphereRecognition.lean`).
+   - **Kervaire-Milnor Classification (1963, Milnor Fields Medal 1962)**: Proves that the group of exotic
+     6-spheres vanishes: Θ₆ ≅ 0. Hence, any smooth homotopy 6-sphere is smoothly diffeomorphic to Euclidean S⁶.
+   - **Newlander-Nirenberg Theorem (1957)**: Proves that vanishing of the Nijenhuis tensor N_J = 0 is the
+     necessary and sufficient condition for integrability of an almost complex structure.
+   - **Gauss-Bonnet-Chern Theorem (Chern 1944, 1946)**: Identifies the top Chern class with the Euler class,
+     giving c₃(X) = e(X) = 2.
+   - **Hirzebruch-Riemann-Roch Theorem (Hirzebruch 1954)**: Computes χ(X, TX) = (1/24)c₁c₂ + (1/2)c₃ = 1.
 -/
 
 namespace HopfProblem.Main

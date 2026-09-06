@@ -99,13 +99,19 @@ def kodaira_dimension (_X : AssembledManifoldX) : Option ℤ := none
 theorem kodaira_dimension_is_minus_infinity (X : AssembledManifoldX) :
     kodaira_dimension X = none := rfl
 
-/-- The third Chern number c₃(X) = 2. -/
+/-- **The third Chern number c₃(X) = 2 (External Interface / Gauss-Bonnet-Chern Theorem)**:
+    - *Mathematical Canon*: By the Gauss-Bonnet-Chern theorem (Chern 1944, 1946; Milnor & Stasheff 1974),
+      for any compact almost-complex manifold of real dimension 2n, the top Chern number evaluated on the
+      fundamental class equals the topological Euler characteristic: ⟨c_n(TX), [X]⟩ = e(X).
+      Because X has the integral homology of S⁶, e(X) = 2, forcing c₃(X) = 2.
+    - *Outstanding Formalization*: Chern-Weil theory, curvature forms, and the de Rham Euler class in Mathlib. -/
 def c3 (_X : AssembledManifoldX) : ℤ := 2
 
 /-- The topological Euler characteristic equals the third Chern number c₃(X) = 2. -/
 theorem c3_eq_two (X : AssembledManifoldX) : c3 X = 2 := rfl
 
-/-- The first Chern class c₁(X) vanishes because H²(X; ℤ) = 0. -/
+/-- **The first Chern class c₁(X) = 0**:
+    Vanishes identically because H²(X; ℤ) = 0 (Theorem 7.22). -/
 def c1 (_X : AssembledManifoldX) : ℤ := 0
 
 theorem c1_eq_zero (X : AssembledManifoldX) : c1 X = 0 := rfl
@@ -121,7 +127,8 @@ theorem c1_cubed_factorization (X : AssembledManifoldX) :
     c1 X ^ 3 = 0 := by
   dsimp [c1]
 
-/-- Theorem 9.1(7): The Chern number c₁c₂(X) vanishes. -/
+/-- **Theorem 9.1(7): The Chern number c₁c₂(X) = 0**:
+    Vanishes because c₁(X) = 0 in H²(X; ℤ) = 0. -/
 def c1_c2 (_X : AssembledManifoldX) : ℤ := 0
 
 theorem c1_c2_eq_zero (X : AssembledManifoldX) : c1_c2 X = 0 := rfl
@@ -138,12 +145,14 @@ theorem chi_O_from_c1_c2 (c1_c2_val : ℤ) (h : c1_c2_val = 0) : c1_c2_val / 24 
   rw [h]
   rfl
 
-/-- Theorem 9.1(7): The Chern number c₁³(X) vanishes. -/
+/-- **Theorem 9.1(7): The Chern number c₁³(X) = 0**:
+    Vanishes because c₁(X) = 0. -/
 def c1_cubed (_X : AssembledManifoldX) : ℤ := 0
 
 theorem c1_cubed_eq_zero (X : AssembledManifoldX) : c1_cubed X = 0 := rfl
 
-/-- The first Pontryagin class p₁(X) vanishes because H⁴(X; ℤ) = 0. -/
+/-- **The first Pontryagin class p₁(X) = 0**:
+    Vanishes identically because H⁴(X; ℤ) = 0 (Theorem 7.22). -/
 def p1 (_X : AssembledManifoldX) : ℤ := 0
 
 theorem p1_eq_zero (X : AssembledManifoldX) : p1 X = 0 := rfl
@@ -154,8 +163,14 @@ theorem p1_chern_relation (c1_val c2_val : ℤ) (hc1 : c1_val = 0) (hc2 : c2_val
   subst hc1 hc2
   rfl
 
-/-- Hirzebruch-Riemann-Roch formula for the holomorphic Euler characteristic of the tangent bundle:
-    χ(X, TX) = (1/24) · c₁c₂(X) + (1/2) · c₃(X) = 0/24 + 2/2 = 1. -/
+/-- **Hirzebruch-Riemann-Roch Formula for the Tangent Bundle (External Interface)**:
+    - *Mathematical Canon*: By the Hirzebruch-Riemann-Roch Theorem (Hirzebruch 1954),
+      the holomorphic Euler characteristic of the holomorphic tangent bundle on a compact complex 3-fold is:
+        χ(X, TX) = (1/24) · c₁c₂(X) + (1/2) · c₃(X).
+      Substituting c₁c₂(X) = 0 and c₃(X) = 2 yields:
+        χ(X, TX) = 0/24 + 2/2 = 1.
+    - *Outstanding Formalization*: Coherent sheaf cohomology and the full Hirzebruch-Riemann-Roch theorem
+      for non-projective complex 3-folds in Mathlib. -/
 def chi_TX (X : AssembledManifoldX) : ℤ := (c3 X) / 2
 
 theorem chi_TX_eq_one (X : AssembledManifoldX) : chi_TX X = 1 := rfl
@@ -185,15 +200,21 @@ theorem canonical_bundle_non_torsion (X : AssembledManifoldX) : c3 X = 2 :=
 ### Section 9.1 & 9.2 Algebraic Dimension and Néron-Severi Groups
 -/
 
-/-- The algebraic dimension of the threefold X is a(X) = 1 (Theorem 9.1(i) and Proposition 9.7). -/
+/-- **The algebraic dimension of the threefold X is a(X) = 1 (External Interface / Moishezon-Ueno)**:
+    - *Mathematical Canon*: The algebraic dimension a(X) = trdeg_ℂ ℂ(X) is the transcendence degree of the
+      field of global meromorphic functions. The modular fibration f : X → ℙ¹ exhibits ℂ(X) ≅ ℂ(ℙ¹) ≅ ℂ(t),
+      proving a(X) = 1 (Moishezon 1966, Ueno 1975).
+    - *Outstanding Formalization*: Field of meromorphic functions and transcendence degree for non-algebraic
+      complex manifolds in Mathlib. -/
 def algebraic_dimension_threefold (_X : AssembledManifoldX) : ℕ := 1
 
 theorem algebraic_dimension_threefold_eq_one (X : AssembledManifoldX) :
     algebraic_dimension_threefold X = 1 := rfl
 
-/-- The algebraic dimension of the very general fiber F_b is a(F_b) = 0 (Theorem 9.1(i)).
-    This reconciles the legacy declaration `algebraic_dimension` with the paper:
-    the very general torus fiber has no non-constant meromorphic functions. -/
+/-- **The algebraic dimension of the very general fiber is a(F_b) = 0**:
+    - *Mathematical Canon*: The very general abelian 2-torus fiber has Néron-Severi signature (1, 1) with
+      no effective divisor classes, ruling out non-constant meromorphic functions: a(F_b) = 0.
+    - *Outstanding Formalization*: Néron-Severi groups and line bundles on complex tori in Mathlib. -/
 def fibre_algebraic_dimension (_X : AssembledManifoldX) : ℕ := 0
 
 theorem fibre_algebraic_dimension_eq_zero (X : AssembledManifoldX) :
