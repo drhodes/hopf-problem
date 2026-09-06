@@ -102,7 +102,7 @@ def build_latex_document():
     right=2.5mm,
     before skip=2.5mm,
     after skip=2.5mm,
-    title={\small\textbf{#1} \hfill \paperref{#3}{\textbf{[s6.pdf, p.~#3]}} \hfill \githublean{#4}{\textbf{[GitHub: HopfProblem/#4]}}},
+    title={\small\textbf{#1} \hfill \paperref{#3}{\textbf{[s6.pdf, p.~#3]}} \hfill \githublean{#4}{\textbf{[GitHub: #4]}}},
     coltitle=black!90,
     colbacktitle=black!5,
     attach boxed title to top left={xshift=2mm, yshift=-2mm},
@@ -402,7 +402,7 @@ Frölicher Degeneration & $E_1 \implies E_\infty$ & Non-degenerate at $E_1$ & --
 -- Declaration: hopf_complex_structure_on_S6
 -- Location: HopfProblem/Main.lean:31-33
 -- Paper: https://alpo.ge/s6.pdf#page=3
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Main.lean#L31-L33
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 def hopf_complex_structure_on_S6 :
   IntegrableComplexStructure StandardS6 := by
@@ -440,7 +440,7 @@ By Smale's $h$-cobordism theorem and the Kervaire--Milnor classification ($\Thet
 -- Declaration: full_hopf_resolution_complete
 -- Location: HopfProblem/Main.lean:134-168
 -- Paper: https://alpo.ge/s6.pdf#page=4
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Main.lean#L134-L168
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem full_hopf_resolution_complete :
   ∃ (X : AssembledManifoldX),
@@ -506,7 +506,7 @@ Let $X$ and $f\colon X \to \dbP^1$ be the compact complex $3$-manifold construct
 -- Declaration: cdp_reconciliation_synthesis
 -- Location: HopfProblem/Main.lean:174-181
 -- Paper: https://alpo.ge/s6.pdf#page=84
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Main.lean#L174-L181
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem cdp_reconciliation_synthesis :
     (¬ (serre_grothendieck_duality.h2_fibre_dim = 0)) ∧
@@ -535,7 +535,7 @@ The existence of $X$ does not contradict the mathematical core of Campana--Demai
 -- Declaration: triple_route_homology_synthesis
 -- Location: HopfProblem/Main.lean:186-196
 -- Paper: https://alpo.ge/s6.pdf#page=40
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Main.lean#L186-L196
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem triple_route_homology_synthesis :
     ThreeRoutesAgree assembled_X_exists ∧
@@ -577,7 +577,7 @@ All three routes agree that $b_1 = b_2 = b_3 = b_4 = b_5 = 0$ and $b_0 = b_6 = 1
 -- Declaration: V_rank4, Lambda_rank4
 -- Location: HopfProblem/Lattice.lean:24-38
 -- Paper: https://alpo.ge/s6.pdf#page=8
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Lattice.lean#L24-L38
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 def V := Fin 4 → ℤ
 def Lambda := Fin 4 → ℤ
@@ -608,7 +608,7 @@ For $T \in \GL(V)$, the contragredient action on the dual lattice $\Lambda$ is d
 -- Declaration: T1_matrix, T2_matrix, T0_matrix
 -- Location: HopfProblem/Lattice.lean:45-72
 -- Paper: https://alpo.ge/s6.pdf#page=8
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Lattice.lean#L45-L72
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 def T1 : Matrix (Fin 4) (Fin 4) ℤ :=
   !![1,  0, -6,  2;
@@ -651,7 +651,7 @@ These matrices satisfy:
 -- Declaration: Q0_matrix, Q0_symplectic
 -- Location: HopfProblem/Lattice.lean:85-104
 -- Paper: https://alpo.ge/s6.pdf#page=11
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Lattice.lean#L85-L104
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 def Q0 : Matrix (Fin 4) (Fin 4) ℤ :=
   !![ 0,  0,  0,  1;
@@ -692,7 +692,7 @@ Consequently, the monodromy representation takes values in the integral symplect
 -- Declaration: period_matrix_Pi, tau_uniformising
 -- Location: HopfProblem/PeriodFamily.lean:40-68
 -- Paper: https://alpo.ge/s6.pdf#page=13
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/PeriodFamily.lean#L40-L68
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 def period_matrix (τ μ β : ℂ) : Matrix (Fin 2) (Fin 4) ℂ :=
   !![6 * μ, τ, 1, 0;
@@ -724,7 +724,7 @@ The nondegeneracy condition $D(z) := \operatorname{Im}\beta - \frac{6(\operatorn
 -- Declaration: indefinite_hodge_signature
 -- Location: HopfProblem/PeriodFamily.lean:80-98
 -- Paper: https://alpo.ge/s6.pdf#page=15
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/PeriodFamily.lean#L80-L98
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem indefinite_hodge_signature (τ μ β : ℂ) (hτ : τ.im > 0)
     (hD : β.im - 6 * (μ.im ^ 2) / τ.im < 0) :
@@ -757,7 +757,7 @@ Consequently, the general $2$-torus fiber carries no positive line bundle, and h
 -- Declaration: fan_Sigma, anticanonical_hexagon_dP6
 -- Location: HopfProblem/ToricFilling.lean:35-64
 -- Paper: https://alpo.ge/s6.pdf#page=24
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/ToricFilling.lean#L35-L64
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem anticanonical_hexagon_dP6 :
     DelPezzoDegree6Normalisation ∧
@@ -785,7 +785,7 @@ The double locus $D = \mathrm{Sing}(W_0)$ consists of three smooth rational curv
 -- Declaration: vanishing_cycles_collapse
 -- Location: HopfProblem/ToricFilling.lean:75-92
 -- Paper: https://alpo.ge/s6.pdf#page=26
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/ToricFilling.lean#L75-L92
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem vanishing_cycles_collapse :
     VanishingSublatticeLambdaToric = Submodule.span ℤ {w_hat, delta_hat} ∧
@@ -818,7 +818,7 @@ Consequently, in the local fundamental group $\pi_1(N_0 \setminus W_0) \cong \La
 -- Declaration: multiple_fibre_orders, normal_bundle_torsion
 -- Location: HopfProblem/LogTransforms.lean:30-58
 -- Paper: https://alpo.ge/s6.pdf#page=31
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/LogTransforms.lean#L30-L58
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 def m1 : ℕ := 3
 def m2 : ℕ := 4
@@ -854,7 +854,7 @@ where $S_1, S_2$ are smooth bielliptic surfaces, and the normal bundle $\cO_X(S_
 -- Declaration: assembled_X_exists, section_regluing_triple
 -- Location: HopfProblem/ManifoldGluing.lean:45-78
 -- Paper: https://alpo.ge/s6.pdf#page=36
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/ManifoldGluing.lean#L45-L78
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 def section_triple : ℤ × ℤ × ℤ := (0, 1, -1)
 
@@ -891,7 +891,7 @@ The surjective holomorphic map $f\colon X \to \dbP^1$ is proper, with connected 
 -- Declaration: sign_lemma_seifert, simple_connectivity
 -- Location: HopfProblem/TopologyHomology.lean:28-60
 -- Paper: https://alpo.ge/s6.pdf#page=55
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/TopologyHomology.lean#L28-L60
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem seifert_coprime_relation : 12 * l0 - 4 * l1 - 3 * l2 = 1 := by
   decide
@@ -928,7 +928,7 @@ Hence $|\pi_1(X)| = |-1| = 1$, and $X$ is \textbf{simply connected}: $\pi_1(X) \
 -- Declaration: integral_homology_S6, euler_characteristic_X
 -- Location: HopfProblem/TopologyHomology.lean:70-105
 -- Paper: https://alpo.ge/s6.pdf#page=60
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/TopologyHomology.lean#L70-L105
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem integral_homology_S6 (k : ℕ) :
     bettiX k = if k = 0 ∨ k = 6 then 1 else 0 := by
@@ -962,7 +962,7 @@ In particular, $b_2(X) = b_3(X) = 0$, and the topological Euler characteristic e
 -- Declaration: X_diffeomorphic_to_StandardS6
 -- Location: HopfProblem/SphereRecognition.lean:22-33
 -- Paper: https://alpo.ge/s6.pdf#page=63
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/SphereRecognition.lean#L22-L33
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 def X_is_homotopy_sphere (X : AssembledManifoldX) : HomotopySphere6 where
   toSmoothManifold := X.totalSpace
@@ -1005,7 +1005,7 @@ Therefore, $X$ is orientation-preservingly diffeomorphic to the standard $6$-sph
 --              kodaira_dimension_is_minus_infinity
 -- Location: HopfProblem/AnalyticInvariants.lean:35-62
 -- Paper: https://alpo.ge/s6.pdf#page=64
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/AnalyticInvariants.lean#L35-L62
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem algebraic_dimension_threefold_eq_one (X : AssembledManifoldX) :
     algebraic_dimension_threefold X = 1 := by
@@ -1036,7 +1036,7 @@ The complex $3$-manifold $X$ satisfies:
 -- Declaration: froelicher_non_degeneration, vertical_automorphism_group
 -- Location: HopfProblem/AnalyticInvariants.lean:75-102
 -- Paper: https://alpo.ge/s6.pdf#page=71
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/AnalyticInvariants.lean#L75-L102
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem froelicher_non_degeneration (X : AssembledManifoldX) :
     bettiX 1 = 0 ∧ irregularity X = 1 := by
@@ -1067,7 +1067,7 @@ The Lie algebra of holomorphic vector fields has $h^0(X, TX) = 1$, generating a 
 -- Declaration: conductor_sheaf_C, hartogs_failure_codim1
 -- Location: HopfProblem/CDPDivergence.lean:25-58
 -- Paper: https://alpo.ge/s6.pdf#page=84
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/CDPDivergence.lean#L25-L58
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem conductor_section_nonvanishing :
     conductor_section_s ≠ 0 := by
@@ -1104,7 +1104,7 @@ This explains why the deformation obstruction of [CDP20, Prop.~2.4] does not app
 -- Declaration: exterior_powers_unipotent
 -- Location: HopfProblem/Lattice.lean:110-135
 -- Paper: https://alpo.ge/s6.pdf#page=10
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/Lattice.lean#L110-L135
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem exterior_powers_unipotent (q : ℕ) :
     exterior_power_dim q = match q with
@@ -1133,7 +1133,7 @@ These ranks match the integral homology ranks $H_q(W_0; \dbZ) = (1, 2, 4, 2, 1)$
 -- Declaration: specialisation_map_sp
 -- Location: HopfProblem/TopologyHomology.lean:115-142
 -- Paper: https://alpo.ge/s6.pdf#page=59
--- GitHub: https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/TopologyHomology.lean#L115-L142
+-- GitHub: https://github.com/drhodes/hopf-problem
 
 theorem specialisation_map_isomorphism (q : ℕ) :
     SpecialisationMapRank q = unipotent_invariant_rank q := by

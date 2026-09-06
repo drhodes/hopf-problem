@@ -71,12 +71,13 @@ class TestGitHubIntegration(unittest.TestCase):
         # Check repository link
         self.assertIn("github.com/drhodes/hopf-problem", tex)
 
-        # Check source links into the repo
-        source_links = re.findall(r"github\.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/\w+\.lean", tex)
+        # Check source links into the repo via \githublean definition and usages
+        self.assertIn(r"\newcommand{\githublean}[2]{\href{https://github.com/drhodes/hopf-problem/blob/main/HopfProblem/HopfProblem/#1}{#2}}", tex)
+        macro_usages = re.findall(r"\\githublean\{(\w+\.lean)\}", tex)
         self.assertGreater(
-            len(source_links),
+            len(macro_usages),
             10,
-            f"Expected at least 10 Lean source links into GitHub repo, found {len(source_links)}"
+            f"Expected at least 10 Lean source link macro usages into GitHub repo, found {len(macro_usages)}"
         )
 
 
