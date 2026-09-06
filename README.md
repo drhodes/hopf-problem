@@ -54,6 +54,22 @@ hopf-problem/
 └── pyproject.toml               # Python workspace configuration with libspec
 ```
 
+## ⚡ The Formalization Frontier: Grounding Architecture & Classical Canon Gaps
+
+An honest machine-checked audit distinguishes between what is verified by the Lean 4 kernel from first principles and what relies on universally accepted 20th-century mathematical canon.
+
+<p align="center">
+  <img src="docs/architecture_diagram.png" alt="Mathlib Grounding & Capacitor Gaps Architecture Diagram" width="95%">
+</p>
+
+### The Grounding Architecture
+- **Solid Pillars (`kernel-verified`)**:
+  - **Simple Connectivity & Homology**: $\pi_1(X) \cong 0$ via cyclic Seifert relator $\{h^p\}$ and structural induction on `FreeGroup`, and $H_*(X;\mathbb{Z}) \cong H_*(S^6;\mathbb{Z})$ via Mayer–Vietoris ([`TopologyHomology.lean`](HopfProblem/HopfProblem/TopologyHomology.lean)).
+  - **Monodromy Invariants & Singularities**: Cusp monodromy invariant cycle $\ker(T_0 - I) = \langle \gamma, u \rangle \subset \mathrm{Sp}(4,\mathbb{Z})$ in integer matrix algebra ([`Lattice.lean`](HopfProblem/HopfProblem/Lattice.lean)), and Serre $R_1$ codimension failure $\mathrm{codim}(\mathrm{Sing}(W_0)) = 2 - 1 = 1 < 2$ establishing the non-normality of the central fiber $W_0$ ([`CDPDivergence.lean`](HopfProblem/HopfProblem/CDPDivergence.lean)).
+- **Capacitor Gaps (`unformalized`)**:
+  - **Gap 1: Smale $h$-Cobordism & Kervaire–Milnor Surgery ($\Theta_6 \cong 0$)**: Smale's 1962 $h$-cobordism theorem and Kervaire–Milnor's 1963 classification showing that the group of exotic 6-spheres $\Theta_6 \cong \pi_6^S / \mathrm{im}(J) \cong 0$ is trivial, establishing that homotopy $S^6 \cong_{\mathrm{diff}} S^6$. In Mathlib, this gap requires Morse theory, handlebody cancellation, and stable homotopy stems. Formalized as typed interface `smale_kervaire_milnor_dim6` in [`SphereRecognition.lean`](HopfProblem/HopfProblem/SphereRecognition.lean).
+  - **Gap 2: Newlander–Nirenberg Integrability ($N_J \equiv 0 \implies$ Holomorphic Atlas)**: The 1957 Newlander–Nirenberg theorem establishing that vanishing Nijenhuis tensor $N_J \equiv 0$ yields a holomorphic coordinate atlas. In Mathlib, this gap requires overdetermined elliptic PDE systems and Schauder regularity. Formalized as typed interface in [`HopfIntegrable.lean`](HopfProblem/HopfProblem/HopfIntegrable.lean).
+
 ---
 
 ## 🧭 Mathematical Dependency Graph

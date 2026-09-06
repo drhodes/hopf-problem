@@ -147,7 +147,9 @@ audit-pdf: ## Generate and compile landscape audit document (audit_landscape.pdf
 	@echo -e "$(COLOR_BLUE)==> Compiling audit_landscape.pdf [Git: $(GIT_REV)$(GIT_DIRTY), Date: $(BUILD_DATE)]...$(COLOR_RESET)"
 	python3 $(UTIL_DIR)/generate_audit_document.py
 	xelatex -interaction=nonstopmode $(WORKSPACE_ROOT)/audit_landscape.tex > /dev/null
-	@echo -e "$(COLOR_GREEN)✔ audit_landscape.pdf compiled successfully.$(COLOR_RESET)"
+	xelatex -interaction=nonstopmode $(WORKSPACE_ROOT)/audit_landscape.tex > /dev/null
+	cp $(WORKSPACE_ROOT)/audit_landscape.pdf $(WORKSPACE_ROOT)/docs/audit_landscape.pdf
+	@echo -e "$(COLOR_GREEN)✔ audit_landscape.pdf compiled successfully (2 passes + docs sync).$(COLOR_RESET)"
 
 .PHONY: paper-pdf
 paper-pdf: ## Compile research paper (paper/main.pdf)
