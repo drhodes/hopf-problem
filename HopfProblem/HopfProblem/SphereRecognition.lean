@@ -23,7 +23,7 @@ open HopfProblem.TopologyHomology
 /-- X is a homotopy 6-sphere. -/
 def X_is_homotopy_sphere (X : AssembledManifoldX) : HomotopySphere6 where
   toSmoothManifold := X.totalSpace
-  simply_connected := simple_connectivity X
+  simply_connected := inferInstance
   euler_char_two := rfl
   carrier_nonempty := X.carrier_nonempty
   carrier_subsingleton := X.carrier_subsingleton

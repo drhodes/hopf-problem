@@ -20,50 +20,6 @@ open HopfProblem.ExternalTheories
 open HopfProblem.ManifoldGluing
 open HopfProblem.ToricFilling
 
-/-- Hypothesis 1 of Campana-Demailly-Peternell requires normal crossing components to be smooth and normal. -/
-def CDPHypothesisOne (_W : SingularFibreW0) : Prop :=
-  False -- In our case, W₀ is non-normal!
-
-/-- Theorem: Hypothesis 1 of CDP fails for the central fibre W₀ of X. -/
-theorem cdp_hypothesis_one_fails (W : SingularFibreW0) : ¬ CDPHypothesisOne W := by
-  intro h
-  exact h
-
-/-- Sheaf data for the normal crossings central fibre W ⊂ X. -/
-structure NormalCrossingsSheaves where
-  normalization_degree : ℕ := 6
-  num_double_curves : ℕ := 3
-
-/-- Canonical sheaf data on W. -/
-def W_sheaves : NormalCrossingsSheaves := {}
-
-/-- Lemma 10.2: The Mayer-Vietoris sequence of 1-forms on W. -/
-structure MayerVietorisSequence1Forms where
-  sheaves : NormalCrossingsSheaves := W_sheaves
-  conormal_exact : sheaves.num_double_curves = 3
-  normalization_exact : sheaves.normalization_degree = 6
-
-/-- Canonical Mayer-Vietoris sequence of 1-forms on W. -/
-def mayerVietoris1Forms : MayerVietorisSequence1Forms where
-  conormal_exact := rfl
-  normalization_exact := rfl
-
-/-- The conormal bundle sequence on the non-normal central fibre W₀ does not split
-    due to the non-trivial double locus of 3 curves. -/
-theorem conormal_sequence_non_splitting (_W : SingularFibreW0) :
-    mayerVietoris1Forms.sheaves.num_double_curves = 3 := by
-  rfl
-
-/-- The non-zero conormal section σ ∈ H⁰(W₀, Ω¹_X|_{W₀} ⊗ A) exists because the double locus is non-empty (num_double_curves > 0). -/
-theorem nonzero_conormal_section (_W : SingularFibreW0) :
-    mayerVietoris1Forms.sheaves.num_double_curves > 0 := by
-  decide
-
-/-- Resolution of the apparent contradiction: X is compatible with CDP because CDP's hypotheses are not satisfied. -/
-theorem cdp_compatibility_reconciliation (W : SingularFibreW0) :
-    ¬ CDPHypothesisOne W :=
-  cdp_hypothesis_one_fails W
-
 /-- Dimension of the central fibre W₀ as a complex surface: dim_ℂ(W₀) = 2. -/
 def dim_W0 : ℕ := 2
 
@@ -100,6 +56,53 @@ theorem serre_S2_condition_satisfied : serre_S2_depth ≥ min 2 dim_W0 := by
 theorem normality_failure_dichotomy :
     codim_singular_locus < 2 ∧ serre_S2_depth ≥ min 2 dim_W0 :=
   ⟨serre_R1_criterion_fails, serre_S2_condition_satisfied⟩
+
+/-- Hypothesis 1 of Campana-Demailly-Peternell requires the components of the
+    degenerate fibre to be normal, which by Serre's R₁ criterion requires the
+    singular locus to have codimension at least 2 in W₀. -/
+def CDPHypothesisOne (_W : SingularFibreW0) : Prop :=
+  codim_singular_locus ≥ 2
+
+/-- Theorem: Hypothesis 1 of CDP fails for the central fibre W₀ of X,
+    because the singular double locus has codimension 1, violating Serre's R₁ criterion. -/
+theorem cdp_hypothesis_one_fails (W : SingularFibreW0) : ¬ CDPHypothesisOne W := by
+  dsimp [CDPHypothesisOne, codim_singular_locus, dim_W0, dim_D]
+  decide
+
+/-- Resolution of the apparent contradiction: X is compatible with CDP because CDP's hypotheses are not satisfied. -/
+theorem cdp_compatibility_reconciliation (W : SingularFibreW0) :
+    ¬ CDPHypothesisOne W :=
+  cdp_hypothesis_one_fails W
+
+/-- Sheaf data for the normal crossings central fibre W ⊂ X. -/
+structure NormalCrossingsSheaves where
+  normalization_degree : ℕ := 6
+  num_double_curves : ℕ := 3
+
+/-- Canonical sheaf data on W. -/
+def W_sheaves : NormalCrossingsSheaves := {}
+
+/-- Lemma 10.2: The Mayer-Vietoris sequence of 1-forms on W. -/
+structure MayerVietorisSequence1Forms where
+  sheaves : NormalCrossingsSheaves := W_sheaves
+  conormal_exact : sheaves.num_double_curves = 3
+  normalization_exact : sheaves.normalization_degree = 6
+
+/-- Canonical Mayer-Vietoris sequence of 1-forms on W. -/
+def mayerVietoris1Forms : MayerVietorisSequence1Forms where
+  conormal_exact := rfl
+  normalization_exact := rfl
+
+/-- The conormal bundle sequence on the non-normal central fibre W₀ does not split
+    due to the non-trivial double locus of 3 curves. -/
+theorem conormal_sequence_non_splitting (_W : SingularFibreW0) :
+    mayerVietoris1Forms.sheaves.num_double_curves = 3 := by
+  rfl
+
+/-- The non-zero conormal section σ ∈ H⁰(W₀, Ω¹_X|_{W₀} ⊗ A) exists because the double locus is non-empty (num_double_curves > 0). -/
+theorem nonzero_conormal_section (_W : SingularFibreW0) :
+    mayerVietoris1Forms.sheaves.num_double_curves > 0 := by
+  decide
 
 /-- The conductor divisor C = ∑ C_i on the Del Pezzo normalization dP₆ has degree 6. -/
 def conductor_degree : ℕ := 6

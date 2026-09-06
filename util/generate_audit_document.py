@@ -898,10 +898,10 @@ theorem seifert_coprime_relation : 12 * l0 - 4 * l1 - 3 * l2 = 1 := by
 
 theorem pi1_order_eq_one : pi1_order = 1 := by
   decide
-
-theorem fundamental_group_trivial : Subsingleton FundamentalGroupX := by
-  change Subsingleton (ZMod 1)
-  infer_instance
+theorem fundamental_group_trivial :
+    Subsingleton FundamentalGroupX :=
+  presented_group_cyclic_of_natAbs_one_subsingleton
+    (12 * l0 - 4 * l1 - 3 * l2) pi1_order_eq_one
 
 theorem simple_connectivity (_X : AssembledManifoldX) :
     Subsingleton FundamentalGroupX :=

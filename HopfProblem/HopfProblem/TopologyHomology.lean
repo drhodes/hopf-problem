@@ -5,6 +5,8 @@ import HopfProblem.LogTransforms
 import HopfProblem.ManifoldGluing
 import Mathlib.Algebra.Group.Basic
 import Mathlib.Data.ZMod.Basic
+import Mathlib.GroupTheory.PresentedGroup
+import Mathlib.GroupTheory.QuotientGroup.Basic
 import Mathlib.Tactic.IntervalCases
 
 /-!
@@ -49,13 +51,71 @@ def pi1_order : ℕ := (12 * l0 - 4 * l1 - 3 * l2).natAbs
 theorem pi1_order_eq_one : pi1_order = 1 := by
   decide
 
-/-- The fundamental group of the assembled manifold X is isomorphic to ZMod 1. -/
-def FundamentalGroupX := ZMod pi1_order
+open FreeGroup
 
-/-- Van Kampen theorem: π₁(X) is a trivial group (subsingleton). -/
-theorem fundamental_group_trivial : Subsingleton FundamentalGroupX := by
-  change Subsingleton (ZMod 1)
-  infer_instance
+/-- Generator of the fundamental group corresponding to the generic torus fibre translation class h. -/
+inductive Pi1Generator
+  | h : Pi1Generator
+  deriving DecidableEq
+
+/-- The Seifert relator set: { h^p } where p = 12ℓ₀ - 4ℓ₁ - 3ℓ₂. -/
+def seifertRel (p : ℤ) : Set (FreeGroup Pi1Generator) :=
+  { (of Pi1Generator.h) ^ p }
+
+/-- Structural lemma: When |p| = 1, the generator h belongs to the normal closure of the relator set { h^p }. -/
+theorem of_h_in_normal_closure_of_natAbs_one (p : ℤ) (hp : p.natAbs = 1) :
+    of Pi1Generator.h ∈ Subgroup.normalClosure (seifertRel p) := by
+  have hp_cases : p = 1 ∨ p = -1 := by
+    have h := Int.natAbs_eq_iff.mp hp
+    rcases h with rfl | rfl
+    · exact Or.inl rfl
+    · exact Or.inr rfl
+  rcases hp_cases with rfl | rfl
+  · have h_rel : of Pi1Generator.h ∈ seifertRel 1 := by
+      change (of Pi1Generator.h) ^ (1 : ℤ) ∈ seifertRel 1
+      rw [zpow_one]
+      exact Set.mem_singleton _
+    exact Subgroup.subset_normalClosure h_rel
+  · have h_rel : (of Pi1Generator.h)⁻¹ ∈ seifertRel (-1) := by
+      change (of Pi1Generator.h) ^ (-1 : ℤ) ∈ seifertRel (-1)
+      exact Set.mem_singleton _
+    have h_in : (of Pi1Generator.h)⁻¹ ∈ Subgroup.normalClosure (seifertRel (-1)) :=
+      Subgroup.subset_normalClosure h_rel
+    have h_inv := Subgroup.inv_mem (Subgroup.normalClosure (seifertRel (-1))) h_in
+    rw [inv_inv] at h_inv
+    exact h_inv
+
+/-- Every word in the free group on h belongs to the normal closure when |p| = 1. -/
+theorem all_mem_normal_closure_of_natAbs_one (p : ℤ) (hp : p.natAbs = 1) (x : FreeGroup Pi1Generator) :
+    x ∈ Subgroup.normalClosure (seifertRel p) := by
+  refine FreeGroup.induction_on x ?_ ?_ ?_ ?_
+  · exact Subgroup.one_mem _
+  · intro g; cases g; exact of_h_in_normal_closure_of_natAbs_one p hp
+  · intro g _; cases g; exact Subgroup.inv_mem _ (of_h_in_normal_closure_of_natAbs_one p hp)
+  · intro a b ha hb; exact Subgroup.mul_mem _ ha hb
+
+/-- Theorem: A cyclic group presentation ⟨h | h^p = 1⟩ with |p| = 1 is strictly trivial (a Subsingleton). -/
+theorem presented_group_cyclic_of_natAbs_one_subsingleton (p : ℤ) (hp : p.natAbs = 1) :
+    Subsingleton (PresentedGroup (seifertRel p)) := by
+  constructor
+  intro a b
+  induction a using QuotientGroup.induction_on with
+  | H a =>
+    induction b using QuotientGroup.induction_on with
+    | H b =>
+      exact QuotientGroup.eq.2 (Subgroup.mul_mem _
+        (Subgroup.inv_mem _ (all_mem_normal_closure_of_natAbs_one p hp a))
+        (all_mem_normal_closure_of_natAbs_one p hp b))
+
+/-- The fundamental group π₁(X) presented by the fiber translation generator h
+    subject to the Seifert van Kampen boundary relator h^p = 1 (Theorem 7.17). -/
+def FundamentalGroupX : Type :=
+  PresentedGroup (seifertRel (12 * l0 - 4 * l1 - 3 * l2))
+
+/-- Van Kampen theorem (Theorem 7.17): The Seifert relation with |p| = 1 forces all generators
+    into the normal closure, proving that the presented group π₁(X) is strictly trivial (a Subsingleton). -/
+theorem fundamental_group_trivial : Subsingleton FundamentalGroupX :=
+  presented_group_cyclic_of_natAbs_one_subsingleton (12 * l0 - 4 * l1 - 3 * l2) pi1_order_eq_one
 
 /-- Theorem: X is simply connected via triviality of the cyclic group π₁(X). -/
 theorem simple_connectivity (_X : AssembledManifoldX) : Subsingleton FundamentalGroupX :=

@@ -2,6 +2,7 @@ import Mathlib.Data.Matrix.Basic
 import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Algebra.Module.Submodule.Basic
 import Mathlib.Data.Int.Basic
+import Mathlib.Tactic.FinCases
 import Mathlib.Tactic.IntervalCases
 
 /-!
@@ -368,6 +369,46 @@ theorem gamma_u_linearly_independent (a b : ℤ) (h : a • gamma_vec + b • u_
   have h1 : (a • gamma_vec + b • u_vec) 1 = 0 := congrFun h 1
   dsimp [gamma_vec, u_vec] at h0 h1
   constructor <;> omega
+
+theorem mulVec_N_row0 (v : Fin 4 → ℤ) : (mulVec N_cusp v) 0 = v 3 := by
+  simp [mulVec, dotProduct, Fin.sum_univ_four, N_cusp, T0]
+
+theorem mulVec_N_row1 (v : Fin 4 → ℤ) : (mulVec N_cusp v) 1 = - v 2 := by
+  simp [mulVec, dotProduct, Fin.sum_univ_four, N_cusp, T0]
+
+theorem mulVec_N_row2 (v : Fin 4 → ℤ) : (mulVec N_cusp v) 2 = 0 := by
+  simp [mulVec, dotProduct, Fin.sum_univ_four, N_cusp, T0]
+
+theorem mulVec_N_row3 (v : Fin 4 → ℤ) : (mulVec N_cusp v) 3 = 0 := by
+  simp [mulVec, dotProduct, Fin.sum_univ_four, N_cusp, T0]
+
+/-- The kernel of N_cusp = T₀ - I consists precisely of vectors with v₂ = 0 and v₃ = 0. -/
+theorem kernel_N_characterization (v : Fin 4 → ℤ) :
+    mulVec N_cusp v = 0 ↔ v 2 = 0 ∧ v 3 = 0 := by
+  constructor
+  · intro h
+    have h0 : (mulVec N_cusp v) 0 = 0 := congrFun h 0
+    have h1 : (mulVec N_cusp v) 1 = 0 := congrFun h 1
+    rw [mulVec_N_row0] at h0
+    rw [mulVec_N_row1] at h1
+    constructor <;> omega
+  · rintro ⟨h2, h3⟩
+    ext i
+    fin_cases i <;> simp [mulVec, dotProduct, Fin.sum_univ_four, N_cusp, T0, h2, h3]
+
+/-- The T₀-invariant submodule ker(T₀ - I) is precisely the ℤ-span of the linearly independent vectors γ and u. -/
+theorem kernel_N_spanned_by_gamma_u (v : Fin 4 → ℤ) :
+    mulVec N_cusp v = 0 ↔ ∃ (a b : ℤ), v = a • gamma_vec + b • u_vec := by
+  rw [kernel_N_characterization]
+  constructor
+  · rintro ⟨h2, h3⟩
+    use v 0, v 1
+    ext i
+    fin_cases i <;> simp [gamma_vec, u_vec, h2, h3]
+  · rintro ⟨a, b, rfl⟩
+    constructor
+    · simp [gamma_vec, u_vec]
+    · simp [gamma_vec, u_vec]
 
 /-- The fixed vectors γ and ε of the order-3 monodromy are linearly independent over ℤ. -/
 theorem gamma_eps_linearly_independent (a b : ℤ) (h : a • gamma_vec + b • eps = 0) :
