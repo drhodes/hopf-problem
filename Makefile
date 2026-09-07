@@ -155,6 +155,8 @@ audit-pdf: ## Generate and compile landscape audit document (audit_landscape.pdf
 paper-pdf: ## Compile research paper (paper/main.pdf)
 	@echo -e "$(COLOR_BLUE)==> Compiling paper/main.pdf [Git: $(GIT_REV)$(GIT_DIRTY), Date: $(BUILD_DATE)]...$(COLOR_RESET)"
 	cd $(WORKSPACE_ROOT)/paper && xelatex -interaction=nonstopmode main.tex > /dev/null
-	@echo -e "$(COLOR_GREEN)✔ paper/main.pdf compiled successfully.$(COLOR_RESET)"
+	cd $(WORKSPACE_ROOT)/paper && xelatex -interaction=nonstopmode main.tex > /dev/null
+	cp $(WORKSPACE_ROOT)/paper/main.pdf $(WORKSPACE_ROOT)/docs/paper.pdf
+	@echo -e "$(COLOR_GREEN)✔ paper/main.pdf compiled successfully (2 passes + docs sync).$(COLOR_RESET)"
 
 
